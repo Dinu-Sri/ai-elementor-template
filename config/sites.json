@@ -1,0 +1,14 @@
+{
+    "sites": {
+        "example-site": {
+            "url": "https://your-wordpress-site.com",
+            "api_key": "PASTE_YOUR_API_KEY_HERE",
+            "description": "Example Site"
+        }
+    },
+    "_instructions": {
+        "how_to_add_site": "Copy the 'example-site' block, change the key name, URL, and API key",
+        "where_to_find_api_key": "WordPress Admin → Settings → AI Elementor Sync → Copy API Key",
+        "url_format": "Use the full URL without trailing slash, e.g., https://mysite.com"
+    }
+}

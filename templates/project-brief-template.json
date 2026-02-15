@@ -1,0 +1,127 @@
+{
+    "_instructions": "Fill this out for every new website project. This becomes the single source of truth the AI uses to generate all pages. Save as: projects/<project-name>/brief.json",
+
+    "project": {
+        "name": "Example Business Name",
+        "domain": "https://example.com",
+        "tagline": "Short tagline or slogan",
+        "description": "2-3 sentence description of the business. What do they do? Who do they serve?",
+        "industry": "e.g., Restaurant, Law Firm, SaaS, E-commerce, Real Estate, Medical, Education",
+        "target_audience": "Who visits this site? e.g., Small business owners aged 30-50 in Sri Lanka",
+        "competitors": ["https://competitor1.com", "https://competitor2.com"],
+        "tone": "professional | friendly | luxury | playful | bold | minimal | corporate",
+        "language": "English"
+    },
+
+    "branding": {
+        "has_existing_brand": false,
+        "logo_url": "",
+        "primary_color": "#6C63FF",
+        "secondary_color": "#3B82F6",
+        "accent_color": "#10B981",
+        "dark_color": "#0A0F1C",
+        "light_color": "#F8F9FF",
+        "heading_font": "Poppins",
+        "body_font": "Inter",
+        "notes": "Any specific branding requirements or preferences"
+    },
+
+    "site_structure": {
+        "pages": [
+            {
+                "name": "Home",
+                "slug": "home",
+                "is_front_page": true,
+                "priority": 1,
+                "description": "Main landing page with hero, services overview, testimonials, CTA",
+                "sections": ["hero", "stats", "services_overview", "about_preview", "testimonials", "cta", "footer"]
+            },
+            {
+                "name": "About Us",
+                "slug": "about",
+                "is_front_page": false,
+                "priority": 2,
+                "description": "Company story, team members, mission/vision, timeline",
+                "sections": ["page_hero", "story", "mission_vision", "team_grid", "timeline", "cta", "footer"]
+            },
+            {
+                "name": "Services",
+                "slug": "services",
+                "is_front_page": false,
+                "priority": 3,
+                "description": "Detailed service listings with descriptions and pricing",
+                "sections": ["page_hero", "services_grid", "process", "faq", "cta", "footer"]
+            },
+            {
+                "name": "Contact",
+                "slug": "contact",
+                "is_front_page": false,
+                "priority": 4,
+                "description": "Contact form, map, office details, social links",
+                "sections": ["page_hero", "contact_form_map", "office_details", "footer"]
+            }
+        ],
+        "shared_elements": {
+            "header": "Handled by theme/Elementor theme builder",
+            "footer": "Include in every page OR build as Elementor theme part",
+            "cta_section": "Reuse same CTA across pages for consistency"
+        }
+    },
+
+    "content": {
+        "has_content_ready": false,
+        "content_source": "ai_generated | client_provided | mixed",
+        "sample_content": {
+            "services": [
+                {"name": "Service 1", "description": "Brief description"},
+                {"name": "Service 2", "description": "Brief description"}
+            ],
+            "testimonials": [
+                {"name": "Client Name", "role": "CEO, Company", "quote": "Testimonial text"},
+                {"name": "Client Name", "role": "Manager, Company", "quote": "Testimonial text"}
+            ],
+            "team_members": [
+                {"name": "Name", "role": "Position", "photo_url": ""}
+            ],
+            "stats": [
+                {"number": "100+", "label": "Happy Clients"},
+                {"number": "5+", "label": "Years Experience"}
+            ],
+            "contact": {
+                "address": "123 Street, City",
+                "phone": "+94 77 XXX XXXX",
+                "email": "info@example.com",
+                "hours": "Mon-Fri 9AM-5PM"
+            },
+            "social_media": {
+                "facebook": "",
+                "instagram": "",
+                "linkedin": "",
+                "twitter": ""
+            }
+        },
+        "photo_style": "realistic | illustration | abstract | minimal | lifestyle",
+        "use_stock_photos": true,
+        "stock_photo_source": "unsplash"
+    },
+
+    "technical": {
+        "wordpress_url": "https://example.com",
+        "api_key": "YOUR_API_KEY_HERE",
+        "elementor_pro": true,
+        "woocommerce": false,
+        "multilingual": false,
+        "forms_plugin": "elementor_pro | contact_form_7 | wpforms",
+        "seo_plugin": "yoast | rankmath | none"
+    },
+
+    "preferences": {
+        "animation_style": "subtle | moderate | dynamic | none",
+        "layout_density": "spacious | balanced | compact",
+        "image_shape": "rounded_corners | square | circle_crop",
+        "button_style": "rounded | pill | square",
+        "section_dividers": true,
+        "dark_mode_sections": true,
+        "parallax_effects": false
+    }
+}

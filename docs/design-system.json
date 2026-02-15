@@ -1,0 +1,362 @@
+{
+  "_description": "AI Elementor Design System Framework — Consistent rules for generating professional templates",
+  "_version": "1.0",
+  "_last_updated": "2026-02-15",
+  "_based_on": ["8-point grid system", "Material Design spacing", "Modular type scale (1.25 ratio)", "WCAG 2.1 AA contrast"],
+
+  "structure": {
+    "_note": "ALWAYS use container-based (modern) layout. NEVER use section/column (legacy).",
+    "layout_method": "container",
+    "legacy_avoid": ["section", "column"],
+    "container_pattern": {
+      "full_width_section": {
+        "elType": "container",
+        "isInner": false,
+        "settings": {
+          "content_width": "full",
+          "flex_direction": "column",
+          "flex_wrap": "nowrap",
+          "html_tag": "section"
+        },
+        "_description": "Top-level page section — full viewport width, vertical stacking"
+      },
+      "boxed_content": {
+        "elType": "container",
+        "isInner": true,
+        "settings": {
+          "content_width": "boxed",
+          "boxed_width": {"unit": "px", "size": 1200, "sizes": []},
+          "flex_direction": "column"
+        },
+        "_description": "Inner container capping content at max-width for readability"
+      },
+      "row_layout": {
+        "elType": "container",
+        "isInner": true,
+        "settings": {
+          "flex_direction": "row",
+          "flex_wrap": "wrap",
+          "flex_gap": {"column": "24", "row": "24", "unit": "px", "isLinked": true}
+        },
+        "_description": "Horizontal row for side-by-side elements (cards, columns)"
+      },
+      "card": {
+        "elType": "container",
+        "isInner": true,
+        "settings": {
+          "flex_direction": "column",
+          "background_background": "classic",
+          "background_color": "#FFFFFF",
+          "border_radius": {"unit": "px", "top": "12", "right": "12", "bottom": "12", "left": "12", "isLinked": true},
+          "box_shadow_box_shadow": {"horizontal": 0, "vertical": 4, "blur": 20, "spread": 0, "color": "rgba(0,0,0,0.08)"},
+          "padding": {"unit": "px", "top": "32", "right": "32", "bottom": "32", "left": "32", "isLinked": true}
+        },
+        "_description": "Card component with shadow, border-radius, and padding"
+      }
+    },
+    "nesting_rules": [
+      "Top-level: container (full_width_section) — one per logical page section",
+      "Level 2: container (boxed_content) — caps width inside the full-width section",
+      "Level 3: container (row_layout) — horizontal layout for multi-column content",
+      "Level 4: container (card) or widget — final content elements",
+      "Max nesting depth: 4 levels",
+      "Every widget must be inside a container, never directly at top level"
+    ]
+  },
+
+  "spacing": {
+    "_note": "Based on 8-point grid. All spacing values must be multiples of 8.",
+    "base_unit": 8,
+    "scale": {
+      "xs": 8,
+      "sm": 16,
+      "md": 24,
+      "lg": 32,
+      "xl": 48,
+      "2xl": 64,
+      "3xl": 80,
+      "4xl": 96,
+      "5xl": 120
+    },
+    "section_padding": {
+      "standard": {"unit": "px", "top": "80", "right": "24", "bottom": "80", "left": "24", "isLinked": false},
+      "hero": {"unit": "px", "top": "120", "right": "24", "bottom": "120", "left": "24", "isLinked": false},
+      "compact": {"unit": "px", "top": "48", "right": "24", "bottom": "48", "left": "24", "isLinked": false},
+      "cta": {"unit": "px", "top": "64", "right": "24", "bottom": "64", "left": "24", "isLinked": false}
+    },
+    "section_padding_mobile": {
+      "standard": {"unit": "px", "top": "48", "right": "16", "bottom": "48", "left": "16", "isLinked": false},
+      "hero": {"unit": "px", "top": "80", "right": "16", "bottom": "80", "left": "16", "isLinked": false}
+    },
+    "element_gap": {
+      "tight": {"column": "16", "row": "16", "unit": "px"},
+      "standard": {"column": "24", "row": "24", "unit": "px"},
+      "loose": {"column": "32", "row": "32", "unit": "px"},
+      "wide": {"column": "48", "row": "48", "unit": "px"}
+    },
+    "widget_margin_bottom": {
+      "heading": {"unit": "px", "top": "0", "right": "0", "bottom": "16", "left": "0", "isLinked": false},
+      "subheading": {"unit": "px", "top": "0", "right": "0", "bottom": "24", "left": "0", "isLinked": false},
+      "paragraph": {"unit": "px", "top": "0", "right": "0", "bottom": "24", "left": "0", "isLinked": false},
+      "button": {"unit": "px", "top": "16", "right": "0", "bottom": "0", "left": "0", "isLinked": false}
+    },
+    "max_content_width": {
+      "wide": 1200,
+      "standard": 1140,
+      "narrow": 800,
+      "text_block": 680
+    }
+  },
+
+  "typography": {
+    "_note": "Modular scale ratio 1.25 (Major Third). Base size 16px. All headings use primary font, body uses secondary font.",
+    "font_stack": {
+      "primary": "Poppins",
+      "secondary": "Inter",
+      "monospace": "JetBrains Mono"
+    },
+    "scale": {
+      "display": {"unit": "px", "size": 56, "sizes": []},
+      "h1": {"unit": "px", "size": 44, "sizes": []},
+      "h2": {"unit": "px", "size": 36, "sizes": []},
+      "h3": {"unit": "px", "size": 28, "sizes": []},
+      "h4": {"unit": "px", "size": 22, "sizes": []},
+      "h5": {"unit": "px", "size": 18, "sizes": []},
+      "body_large": {"unit": "px", "size": 18, "sizes": []},
+      "body": {"unit": "px", "size": 16, "sizes": []},
+      "body_small": {"unit": "px", "size": 14, "sizes": []},
+      "caption": {"unit": "px", "size": 12, "sizes": []}
+    },
+    "scale_tablet": {
+      "display": {"unit": "px", "size": 42, "sizes": []},
+      "h1": {"unit": "px", "size": 36, "sizes": []},
+      "h2": {"unit": "px", "size": 30, "sizes": []},
+      "h3": {"unit": "px", "size": 24, "sizes": []}
+    },
+    "scale_mobile": {
+      "display": {"unit": "px", "size": 32, "sizes": []},
+      "h1": {"unit": "px", "size": 28, "sizes": []},
+      "h2": {"unit": "px", "size": 24, "sizes": []},
+      "h3": {"unit": "px", "size": 20, "sizes": []}
+    },
+    "line_heights": {
+      "heading": {"unit": "em", "size": 1.2, "sizes": []},
+      "subheading": {"unit": "em", "size": 1.3, "sizes": []},
+      "body": {"unit": "em", "size": 1.6, "sizes": []},
+      "body_relaxed": {"unit": "em", "size": 1.8, "sizes": []}
+    },
+    "weights": {
+      "regular": "400",
+      "medium": "500",
+      "semibold": "600",
+      "bold": "700",
+      "extrabold": "800"
+    },
+    "letter_spacing": {
+      "tight": "-0.5px",
+      "normal": "0px",
+      "wide": "0.5px",
+      "overline": "2px"
+    }
+  },
+
+  "colors": {
+    "_note": "Semantic color tokens. Every template should define these. Avoid hardcoded hex — reference these tokens.",
+    "tokens": {
+      "primary": "#6C63FF",
+      "primary_dark": "#5A52D5",
+      "primary_light": "#8B84FF",
+      "secondary": "#3B82F6",
+      "accent": "#10B981",
+      "dark": "#0A0F1C",
+      "dark_medium": "#1A1F2E",
+      "dark_light": "#2A2F3E",
+      "text_primary": "#1A1A2E",
+      "text_secondary": "#6B7280",
+      "text_muted": "#9CA3AF",
+      "text_on_dark": "#FFFFFF",
+      "text_on_dark_muted": "#B0BEC5",
+      "bg_white": "#FFFFFF",
+      "bg_light": "#F8F9FF",
+      "bg_subtle": "#F1F5F9",
+      "border_light": "#E5E7EB",
+      "border_medium": "#D1D5DB",
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "error": "#EF4444"
+    },
+    "gradients": {
+      "primary": "linear-gradient(135deg, #6C63FF, #3B82F6)",
+      "dark": "linear-gradient(180deg, #0A0F1C, #1A1F2E)",
+      "accent": "linear-gradient(135deg, #10B981, #3B82F6)"
+    },
+    "contrast_rules": [
+      "Text on dark bg: minimum #B0BEC5 (4.7:1 contrast ratio)",
+      "Text on light bg: minimum #6B7280 for secondary, #1A1A2E for primary",
+      "Buttons: primary color bg with white text",
+      "Never use pure black (#000000) for text — use #1A1A2E instead",
+      "Never use pure white (#FFFFFF) for bg text areas with lots of content — use #F8F9FF"
+    ]
+  },
+
+  "components": {
+    "_note": "Reusable component patterns with consistent settings",
+
+    "section_heading": {
+      "_description": "Standard section heading with overline + title + subtitle",
+      "overline": {
+        "widgetType": "heading",
+        "settings": {
+          "header_size": "h6",
+          "title_color": "__primary__",
+          "typography_typography": "custom",
+          "typography_font_family": "__primary_font__",
+          "typography_font_size": {"unit": "px", "size": 14, "sizes": []},
+          "typography_font_weight": "600",
+          "typography_letter_spacing": {"unit": "px", "size": 2, "sizes": []},
+          "typography_text_transform": "uppercase"
+        }
+      },
+      "title": {
+        "widgetType": "heading",
+        "settings": {
+          "header_size": "h2",
+          "title_color": "__text_primary__",
+          "typography_typography": "custom",
+          "typography_font_family": "__primary_font__",
+          "typography_font_size": "__h2__",
+          "typography_font_weight": "700",
+          "typography_line_height": "__heading_line_height__"
+        }
+      },
+      "subtitle": {
+        "widgetType": "text-editor",
+        "settings": {
+          "text_color": "__text_secondary__",
+          "typography_typography": "custom",
+          "typography_font_family": "__secondary_font__",
+          "typography_font_size": "__body_large__",
+          "typography_line_height": "__body_relaxed_line_height__"
+        }
+      }
+    },
+
+    "cta_button": {
+      "primary": {
+        "widgetType": "button",
+        "settings": {
+          "button_type": "default",
+          "size": "lg",
+          "background_color": "__primary__",
+          "button_text_color": "#FFFFFF",
+          "border_radius": {"unit": "px", "top": "8", "right": "8", "bottom": "8", "left": "8", "isLinked": true},
+          "button_padding": {"unit": "px", "top": "16", "right": "32", "bottom": "16", "left": "32", "isLinked": false},
+          "typography_typography": "custom",
+          "typography_font_weight": "600"
+        }
+      },
+      "secondary": {
+        "widgetType": "button",
+        "settings": {
+          "button_type": "default",
+          "size": "lg",
+          "background_color": "transparent",
+          "button_text_color": "__primary__",
+          "border_border": "solid",
+          "border_width": {"unit": "px", "top": "2", "right": "2", "bottom": "2", "left": "2", "isLinked": true},
+          "border_color": "__primary__",
+          "border_radius": {"unit": "px", "top": "8", "right": "8", "bottom": "8", "left": "8", "isLinked": true}
+        }
+      }
+    },
+
+    "stat_counter": {
+      "_description": "Animated number counter (e.g., 150+, 98%)",
+      "widgetType": "counter",
+      "settings": {
+        "title_color": "__text_primary__",
+        "number_color": "__primary__",
+        "typography_typography": "custom",
+        "typography_font_size": {"unit": "px", "size": 48, "sizes": []},
+        "typography_font_weight": "700"
+      }
+    }
+  },
+
+  "animation": {
+    "_note": "Consistent entrance animations. Keep subtle — avoid flashy effects.",
+    "rules": [
+      "Use fadeInUp as the DEFAULT entrance animation for all content",
+      "Stagger delays by 100-200ms between sibling elements",
+      "Maximum animation delay: 800ms",
+      "Use fadeInLeft/fadeInRight ONLY for split-layout columns",
+      "Duration: always 'normal' (400ms) — never 'slow' for loading content",
+      "Hero section heading: fadeInUp with 0ms delay",
+      "Hero subtitle: fadeInUp with 200ms delay",
+      "Hero CTA buttons: fadeInUp with 400ms delay",
+      "Cards in a row: all fadeInUp, stagger 100ms each (0, 100, 200, 300...)",
+      "Section headings: fadeInUp with 0ms delay",
+      "NEVER animate backgrounds or containers — only content widgets"
+    ],
+    "defaults": {
+      "standard": {"_animation": "fadeInUp", "_animation_delay": 0},
+      "delayed_1": {"_animation": "fadeInUp", "_animation_delay": 100},
+      "delayed_2": {"_animation": "fadeInUp", "_animation_delay": 200},
+      "delayed_3": {"_animation": "fadeInUp", "_animation_delay": 300},
+      "from_left": {"_animation": "fadeInLeft", "_animation_delay": 0},
+      "from_right": {"_animation": "fadeInRight", "_animation_delay": 0}
+    }
+  },
+
+  "responsive": {
+    "_note": "Elementor breakpoints: mobile < 767px, tablet 768-1024px, desktop > 1024px",
+    "rules": [
+      "ALWAYS set _tablet and _mobile font sizes for h1, h2, display headings",
+      "Container flex_direction: row on desktop → column on tablet/mobile",
+      "Section padding: reduce by ~40% on mobile",
+      "Card grid: 3 columns desktop → 2 tablet → 1 mobile (use flex_wrap + width %)",
+      "Hide decorative elements on mobile using _element_visibility",
+      "Maximum image width on mobile: 100%",
+      "Button width on mobile: 100% (stretch)"
+    ],
+    "breakpoint_suffixes": {
+      "tablet": "_tablet",
+      "mobile": "_mobile"
+    }
+  },
+
+  "html_content_rules": [
+    "NEVER use inline style= attributes with double quotes — they create backslash issues in JSON",
+    "Use Elementor native controls (title_color, typography_*) instead of inline CSS whenever possible",
+    "For badge/pill labels, use a heading widget with custom typography + background color instead of HTML",
+    "If HTML is unavoidable, use single quotes for attributes: style='color: red'",
+    "Prefer Elementor widgets over raw HTML at all times",
+    "Use text-editor widget only for simple paragraph text, not for complex styled elements"
+  ],
+
+  "section_patterns": {
+    "_note": "Standard section layouts that produce consistent results",
+    "hero": "Full-width container → boxed inner → row(2 cols: text left 55% + image/visual right 45%)",
+    "stats_bar": "Full-width container → boxed inner → row(3-4 equal counter widgets)",
+    "services_grid": "Full-width container → boxed inner → heading group + row(3 cols of cards)",
+    "split_content": "Full-width container → boxed inner → row(2 cols: image 50% + text 50%)",
+    "testimonials": "Full-width container → boxed inner → heading group + row(3 testimonial cards)",
+    "cta_banner": "Full-width container (gradient bg) → boxed inner → centered heading + button row",
+    "footer": "Full-width container (dark bg) → boxed inner → row(3-4 cols of text/links)",
+    "faq": "Full-width container → boxed inner (narrow) → heading group + accordion widget"
+  },
+
+  "quality_checklist": [
+    "All containers use flexbox (flex_direction set)",
+    "All sections have consistent padding from spacing.section_padding",
+    "All text has responsive font sizes (_tablet, _mobile)",
+    "No orphaned widgets outside containers",
+    "No inline style= with double quotes in HTML",
+    "Section backgrounds alternate between light/dark for visual rhythm",
+    "Maximum content width capped at 1200px via boxed container",
+    "All heading hierarchies correct (h1 once, h2 per section, h3 for subsections)",
+    "Buttons have hover states (if supported)",
+    "Images have alt text",
+    "Color contrast meets WCAG AA (4.5:1 for text, 3:1 for large text)"
+  ]
+}

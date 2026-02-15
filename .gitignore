@@ -1,0 +1,22 @@
+# Project-specific data (contains client content & API keys)
+projects/
+
+# Runtime data
+config/page-mapping.json
+
+# Secrets — never commit real API keys
+# config/sites.json is committed with placeholder values only
+
+# Generated artifacts
+plugin/ai-elementor-sync.zip
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Editor files
+.vscode/
+*.swp
+*.swo
+*~
