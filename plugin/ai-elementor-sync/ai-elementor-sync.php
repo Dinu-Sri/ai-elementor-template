@@ -2,23 +2,32 @@
 /**
  * Plugin Name: AI Elementor Sync
  * Plugin URI: https://github.com/ai-elementor-sync
- * Description: REST API bridge for AI-powered Elementor template management. Allows external tools to create, update, list, and delete Elementor pages/templates.
- * Version: 1.0.0
- * Author: AI Elementor Sync
+ * Description: REST API bridge for AI-powered Elementor template management. Now supports Iconify icons (Tabler, Material, Phosphor, etc.) in Elementor via a custom widget. Allows external tools to create, update, list, and delete Elementor pages/templates with premium icon support. Developed for Deshtech Global Pvt Ltd.
+ * Version: 1.2.0
+ * Author: Dr. Dinu Sri Madusanka
+ * Author URI: https://deshtech.co
  * License: GPL v2 or later
  * Requires PHP: 7.4
  * Requires at least: 5.6
  */
 
+
 if (!defined('ABSPATH')) {
     exit;
 }
 
-define('AI_ELEMENTOR_SYNC_VERSION', '1.0.0');
+// Load Iconify support (enqueue script)
+require_once __DIR__ . '/iconify-support.php';
+// Register Iconify Elementor widget
+require_once __DIR__ . '/iconify-elementor-widget.php';
+
+define('AI_ELEMENTOR_SYNC_VERSION', '1.2.0');
+define('AI_ELEMENTOR_SYNC_LOG_DIR', WP_CONTENT_DIR . '/ai-sync-logs');
 
 class AI_Elementor_Sync {
 
     private static $instance = null;
+    private $log_file;
 
     public static function get_instance() {
         if (null === self::$instance) {
@@ -28,10 +37,53 @@ class AI_Elementor_Sync {
     }
 
     private function __construct() {
+        // Ensure log directory exists
+        if (!file_exists(AI_ELEMENTOR_SYNC_LOG_DIR)) {
+            wp_mkdir_p(AI_ELEMENTOR_SYNC_LOG_DIR);
+            // Protect logs from web access
+            file_put_contents(AI_ELEMENTOR_SYNC_LOG_DIR . '/.htaccess', 'Deny from all');
+            file_put_contents(AI_ELEMENTOR_SYNC_LOG_DIR . '/index.php', '<?php // Silence is golden');
+        }
+        $this->log_file = AI_ELEMENTOR_SYNC_LOG_DIR . '/sync-' . date('Y-m-d') . '.log';
+
         add_action('rest_api_init', [$this, 'register_routes']);
         add_action('admin_menu', [$this, 'add_admin_menu']);
         add_action('admin_init', [$this, 'register_settings']);
         register_activation_hook(__FILE__, [$this, 'activate']);
+
+        // Register global error handler for REST API requests
+        add_filter('rest_request_before_callbacks', [$this, 'setup_error_capture'], 10, 3);
+    }
+
+    /**
+     * Log a message to the daily log file
+     */
+    private function log($level, $message, $context = []) {
+        $timestamp = date('Y-m-d H:i:s');
+        $context_str = !empty($context) ? ' | ' . wp_json_encode($context, JSON_UNESCAPED_SLASHES) : '';
+        $entry = "[{$timestamp}] [{$level}] {$message}{$context_str}\n";
+        error_log($entry, 3, $this->log_file);
+    }
+
+    /**
+     * Capture PHP errors during REST API execution
+     */
+    public function setup_error_capture($response, $handler, $request) {
+        // Only capture errors for our plugin's routes
+        if (strpos($request->get_route(), '/ai-elementor/') === false) {
+            return $response;
+        }
+
+        set_error_handler(function($errno, $errstr, $errfile, $errline) {
+            $this->log('PHP_ERROR', $errstr, [
+                'errno' => $errno,
+                'file'  => $errfile,
+                'line'  => $errline,
+            ]);
+            return false; // Let PHP handle it normally too
+        });
+
+        return $response;
     }
 
     /**
@@ -216,6 +268,81 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             'callback' => [$this, 'get_site_info'],
             'permission_callback' => [$this, 'permission_check'],
         ]);
+
+        // Diagnostics — full system health check
+        register_rest_route($namespace, '/diagnostics', [
+            'methods'  => 'GET',
+            'callback' => [$this, 'run_diagnostics'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Retrieve error logs
+        register_rest_route($namespace, '/logs', [
+            'methods'  => 'GET',
+            'callback' => [$this, 'get_logs'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Clear error logs
+        register_rest_route($namespace, '/logs', [
+            'methods'  => 'DELETE',
+            'callback' => [$this, 'clear_logs'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Test a specific operation without side effects
+        register_rest_route($namespace, '/test', [
+            'methods'  => 'POST',
+            'callback' => [$this, 'run_test'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Clear all Elementor caches (CSS, conditions)
+        register_rest_route($namespace, '/clear-cache', [
+            'methods'  => 'POST',
+            'callback' => [$this, 'clear_elementor_cache'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+    }
+
+    /**
+     * POST /clear-cache — Clear Elementor CSS and conditions caches
+     */
+    public function clear_elementor_cache($request) {
+        $this->log('INFO', 'Clearing all Elementor caches');
+        $results = [];
+
+        // Clear CSS cache
+        if (class_exists('\Elementor\Plugin')) {
+            \Elementor\Plugin::$instance->files_manager->clear_cache();
+            $results['css_cache'] = 'cleared';
+            $this->log('INFO', 'Elementor CSS cache cleared');
+        }
+
+        // Regenerate conditions cache
+        if (class_exists('\ElementorPro\Modules\ThemeBuilder\Module')) {
+            try {
+                $theme_builder = \ElementorPro\Modules\ThemeBuilder\Module::instance();
+                if (method_exists($theme_builder, 'get_conditions_manager')) {
+                    $theme_builder->get_conditions_manager()->get_cache()->regenerate();
+                    $results['conditions_cache'] = 'regenerated';
+                    $this->log('INFO', 'Elementor conditions cache regenerated');
+                }
+            } catch (\Exception $e) {
+                $results['conditions_cache'] = 'error: ' . $e->getMessage();
+                $this->log('WARN', 'Failed to regenerate conditions cache', ['error' => $e->getMessage()]);
+            }
+        }
+
+        // Clear WordPress object cache
+        wp_cache_flush();
+        $results['wp_object_cache'] = 'flushed';
+
+        return [
+            'success'   => true,
+            'timestamp' => date('Y-m-d H:i:s'),
+            'results'   => $results,
+        ];
     }
 
     /**
@@ -234,10 +361,13 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
         }
 
         foreach ($elements as &$element) {
+            if (!is_array($element)) {
+                continue;
+            }
             if (empty($element['id'])) {
                 $element['id'] = $this->generate_element_id();
             }
-            if (!empty($element['elements'])) {
+            if (!empty($element['elements']) && is_array($element['elements'])) {
                 $element['elements'] = $this->assign_element_ids($element['elements']);
             }
         }
@@ -283,51 +413,89 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             return new WP_Error('missing_title', 'Page title is required', ['status' => 400]);
         }
 
-        $elementor_data = $data['elementor_data'] ?? [];
-        $elementor_data = $this->assign_element_ids($elementor_data);
+        $this->log('INFO', 'Creating page', ['title' => $data['title']]);
 
-        $post_args = [
-            'post_title'   => sanitize_text_field($data['title']),
-            'post_status'  => sanitize_text_field($data['status'] ?? 'draft'),
-            'post_type'    => 'page',
-        ];
+        try {
+            $elementor_data = $data['elementor_data'] ?? [];
 
-        if (!empty($data['slug'])) {
-            $post_args['post_name'] = sanitize_title($data['slug']);
+            // If elementor_data was sent as a JSON string, decode it
+            if (is_string($elementor_data)) {
+                $elementor_data = json_decode($elementor_data, true);
+            }
+
+            // Ensure it's a sequential array (not an associative object)
+            if (is_array($elementor_data) && !isset($elementor_data[0]) && !empty($elementor_data)) {
+                $elementor_data = [$elementor_data];
+            }
+            if (is_array($elementor_data)) {
+                $elementor_data = array_values($elementor_data);
+            }
+
+            $elementor_data = $this->assign_element_ids($elementor_data);
+
+            $post_args = [
+                'post_title'   => sanitize_text_field($data['title']),
+                'post_status'  => sanitize_text_field($data['status'] ?? 'draft'),
+                'post_type'    => 'page',
+            ];
+
+            if (!empty($data['slug'])) {
+                $post_args['post_name'] = sanitize_title($data['slug']);
+            }
+
+            $post_id = wp_insert_post($post_args, true);
+
+            if (is_wp_error($post_id)) {
+                $this->log('ERROR', 'wp_insert_post failed', ['error' => $post_id->get_error_message()]);
+                return new WP_Error('create_failed', $post_id->get_error_message(), ['status' => 500]);
+            }
+
+            $this->log('INFO', 'Post created', ['post_id' => $post_id]);
+
+            // Set Elementor metadata
+            // CRITICAL: array_values ensures wp_json_encode produces [...] not {...}
+            update_post_meta($post_id, '_elementor_data', wp_slash(wp_json_encode(array_values($elementor_data))));
+            update_post_meta($post_id, '_elementor_edit_mode', 'builder');
+            update_post_meta($post_id, '_elementor_template_type', 'wp-page');
+            update_post_meta($post_id, '_elementor_version', '3.0.0');
+
+            $template = sanitize_text_field($data['template'] ?? 'elementor_canvas');
+            update_post_meta($post_id, '_wp_page_template', $template);
+
+            // Page settings
+            if (!empty($data['page_settings'])) {
+                update_post_meta($post_id, '_elementor_page_settings', $data['page_settings']);
+            }
+
+            // Regenerate Elementor CSS for this post
+            if (class_exists('\Elementor\Plugin')) {
+                \Elementor\Plugin::$instance->files_manager->clear_cache();
+                // Generate per-page CSS file (critical for frontend rendering)
+                if (class_exists('\Elementor\Core\Files\CSS\Post')) {
+                    $css_file = new \Elementor\Core\Files\CSS\Post($post_id);
+                    $css_file->update();
+                    $this->log('INFO', 'Post CSS regenerated', ['post_id' => $post_id]);
+                }
+            }
+
+            $this->log('INFO', 'Page created successfully', ['post_id' => $post_id, 'title' => get_the_title($post_id)]);
+
+            return [
+                'success'  => true,
+                'post_id'  => $post_id,
+                'title'    => get_the_title($post_id),
+                'url'      => get_permalink($post_id),
+                'edit_url' => admin_url("post.php?post={$post_id}&action=elementor"),
+            ];
+        } catch (\Throwable $e) {
+            $this->log('FATAL', 'Exception in create_page', [
+                'message' => $e->getMessage(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine(),
+                'trace'   => array_slice(explode("\n", $e->getTraceAsString()), 0, 10),
+            ]);
+            return new WP_Error('create_exception', $e->getMessage(), ['status' => 500]);
         }
-
-        $post_id = wp_insert_post($post_args, true);
-
-        if (is_wp_error($post_id)) {
-            return new WP_Error('create_failed', $post_id->get_error_message(), ['status' => 500]);
-        }
-
-        // Set Elementor metadata — wp_slash prevents WordPress from stripping backslashes in JSON
-        update_post_meta($post_id, '_elementor_data', wp_slash(wp_json_encode($elementor_data)));
-        update_post_meta($post_id, '_elementor_edit_mode', 'builder');
-        update_post_meta($post_id, '_elementor_template_type', 'wp-page');
-        update_post_meta($post_id, '_elementor_version', '3.0.0');
-
-        $template = sanitize_text_field($data['template'] ?? 'elementor_canvas');
-        update_post_meta($post_id, '_wp_page_template', $template);
-
-        // Page settings
-        if (!empty($data['page_settings'])) {
-            update_post_meta($post_id, '_elementor_page_settings', $data['page_settings']);
-        }
-
-        // Clear Elementor CSS cache for this post
-        if (class_exists('\Elementor\Plugin')) {
-            \Elementor\Plugin::$instance->files_manager->clear_cache();
-        }
-
-        return [
-            'success'  => true,
-            'post_id'  => $post_id,
-            'title'    => get_the_title($post_id),
-            'url'      => get_permalink($post_id),
-            'edit_url' => admin_url("post.php?post={$post_id}&action=elementor"),
-        ];
     }
 
     /**
@@ -387,9 +555,18 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
                 $elementor_data = json_decode($elementor_data, true);
             }
 
+            // Ensure it's a sequential array (not an associative object)
+            if (is_array($elementor_data) && !isset($elementor_data[0]) && !empty($elementor_data)) {
+                $elementor_data = [$elementor_data];
+            }
+            if (is_array($elementor_data)) {
+                $elementor_data = array_values($elementor_data);
+            }
+
             if (is_array($elementor_data)) {
                 $elementor_data = $this->assign_element_ids($elementor_data);
-                $json_str = wp_json_encode($elementor_data);
+                // CRITICAL: array_values ensures wp_json_encode produces [...] not {...}
+                $json_str = wp_json_encode(array_values($elementor_data));
                 update_post_meta($post_id, '_elementor_data', wp_slash($json_str));
                 update_post_meta($post_id, '_elementor_edit_mode', 'builder');
                 update_post_meta($post_id, '_elementor_template_type', 'wp-page');
@@ -408,9 +585,14 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             update_post_meta($post_id, '_elementor_page_settings', $data['page_settings']);
         }
 
-        // Clear Elementor CSS cache
+        // Regenerate Elementor CSS for this post
         if (class_exists('\Elementor\Plugin')) {
             \Elementor\Plugin::$instance->files_manager->clear_cache();
+            // Generate per-page CSS file (critical for frontend rendering)
+            if ($elementor_updated && class_exists('\Elementor\Core\Files\CSS\Post')) {
+                $css_file = new \Elementor\Core\Files\CSS\Post($post_id);
+                $css_file->update();
+            }
         }
 
         return [
@@ -494,7 +676,7 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
     }
 
     /**
-     * DELETE /pages/{id} — Delete a page
+     * DELETE /pages/{id} — Delete a page or template
      */
     public function delete_page($request) {
         $post_id = (int) $request['id'];
@@ -504,12 +686,42 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             return new WP_Error('not_found', 'Page not found', ['status' => 404]);
         }
 
+        // Check if this is an Elementor library template (header/footer/etc.)
+        $is_template = ($post->post_type === 'elementor_library');
+        $template_type = $is_template ? get_post_meta($post_id, '_elementor_template_type', true) : null;
+
+        // Remove display conditions BEFORE deleting
+        if ($is_template) {
+            delete_post_meta($post_id, '_elementor_conditions');
+            $this->log('INFO', 'Removed display conditions before delete', ['post_id' => $post_id, 'type' => $template_type]);
+        }
+
         $force = $request->get_param('force') === 'true';
         $result = wp_delete_post($post_id, $force);
 
         if (!$result) {
             return new WP_Error('delete_failed', 'Failed to delete page', ['status' => 500]);
         }
+
+        // Regenerate Elementor conditions cache after template deletion
+        if ($is_template && class_exists('\ElementorPro\Modules\ThemeBuilder\Module')) {
+            try {
+                $theme_builder = \ElementorPro\Modules\ThemeBuilder\Module::instance();
+                if (method_exists($theme_builder, 'get_conditions_manager')) {
+                    $theme_builder->get_conditions_manager()->get_cache()->regenerate();
+                    $this->log('INFO', 'Elementor conditions cache regenerated after delete');
+                }
+            } catch (\Exception $e) {
+                $this->log('WARN', 'Failed to regenerate conditions cache after delete', ['error' => $e->getMessage()]);
+            }
+        }
+
+        // Clear Elementor CSS cache
+        if (class_exists('\Elementor\Plugin')) {
+            \Elementor\Plugin::$instance->files_manager->clear_cache();
+        }
+
+        $this->log('INFO', 'Deleted post', ['post_id' => $post_id, 'type' => $template_type ?: 'page', 'action' => $force ? 'permanent' : 'trashed']);
 
         return [
             'success' => true,
@@ -563,35 +775,111 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
         $data = $request->get_json_params();
 
         $title = sanitize_text_field($data['title'] ?? 'AI Template');
-        $type = sanitize_text_field($data['type'] ?? 'page'); // page, section, header, footer
-        $elementor_data = $data['elementor_data'] ?? $data['content'] ?? [];
-        $elementor_data = $this->assign_element_ids($elementor_data);
+        $type = sanitize_text_field($data['type'] ?? 'page');
 
-        $post_id = wp_insert_post([
-            'post_title'  => $title,
-            'post_status' => 'publish',
-            'post_type'   => 'elementor_library',
-        ], true);
+        $this->log('INFO', 'Creating template', ['title' => $title, 'type' => $type]);
 
-        if (is_wp_error($post_id)) {
-            return new WP_Error('create_failed', $post_id->get_error_message(), ['status' => 500]);
+        try {
+            $elementor_data = $data['elementor_data'] ?? $data['content'] ?? [];
+
+            // If elementor_data was sent as a JSON string, decode it
+            if (is_string($elementor_data)) {
+                $elementor_data = json_decode($elementor_data, true);
+            }
+
+            // Ensure it's a sequential array (not an associative object)
+            // This fixes the bug where a single-element array gets decoded as an object
+            if (is_array($elementor_data) && !isset($elementor_data[0]) && !empty($elementor_data)) {
+                // It's an associative array (single element unwrapped) — wrap it back
+                $elementor_data = [$elementor_data];
+                $this->log('INFO', 'Wrapped single element into array');
+            }
+            if (is_array($elementor_data)) {
+                $elementor_data = array_values($elementor_data);
+            }
+
+            $element_count = is_array($elementor_data) ? count($elementor_data) : 0;
+            $this->log('INFO', 'Assigning element IDs', ['top_level_elements' => $element_count]);
+
+            $elementor_data = $this->assign_element_ids($elementor_data);
+
+            // Display conditions for header/footer templates
+            $conditions = $data['conditions'] ?? [];
+
+            $this->log('INFO', 'Inserting post into elementor_library');
+            $post_id = wp_insert_post([
+                'post_title'  => $title,
+                'post_status' => 'publish',
+                'post_type'   => 'elementor_library',
+            ], true);
+
+            if (is_wp_error($post_id)) {
+                $this->log('ERROR', 'wp_insert_post failed for template', ['error' => $post_id->get_error_message()]);
+                return new WP_Error('create_failed', $post_id->get_error_message(), ['status' => 500]);
+            }
+
+            $this->log('INFO', 'Template post created', ['post_id' => $post_id]);
+
+            // CRITICAL: array_values ensures wp_json_encode produces [...] not {...}
+            $json_data = wp_json_encode(array_values($elementor_data));
+            $this->log('INFO', 'Elementor data JSON size', ['bytes' => strlen($json_data)]);
+
+            update_post_meta($post_id, '_elementor_data', wp_slash($json_data));
+            update_post_meta($post_id, '_elementor_edit_mode', 'builder');
+            update_post_meta($post_id, '_elementor_template_type', $type);
+            update_post_meta($post_id, '_elementor_version', '3.0.0');
+
+            $this->log('INFO', 'Setting taxonomy terms', ['type' => $type]);
+            $term_result = wp_set_object_terms($post_id, $type, 'elementor_library_type');
+            if (is_wp_error($term_result)) {
+                $this->log('ERROR', 'wp_set_object_terms failed', ['error' => $term_result->get_error_message()]);
+            }
+
+            // Set display conditions for Theme Builder templates
+            if (!empty($conditions)) {
+                update_post_meta($post_id, '_elementor_conditions', $conditions);
+                $this->log('INFO', 'Set custom display conditions', ['conditions' => $conditions]);
+            } elseif (in_array($type, ['header', 'footer', 'single', 'archive', 'single-post', 'error-404'])) {
+                update_post_meta($post_id, '_elementor_conditions', ['include/general']);
+                $this->log('INFO', 'Set default display conditions', ['conditions' => ['include/general']]);
+            }
+
+            // Refresh Elementor conditions cache if available
+            if (class_exists('\ElementorPro\Modules\ThemeBuilder\Module')) {
+                try {
+                    $theme_builder = \ElementorPro\Modules\ThemeBuilder\Module::instance();
+                    if (method_exists($theme_builder, 'get_conditions_manager')) {
+                        $theme_builder->get_conditions_manager()->get_cache()->regenerate();
+                        $this->log('INFO', 'Elementor conditions cache regenerated');
+                    }
+                } catch (\Exception $e) {
+                    $this->log('WARN', 'Failed to regenerate conditions cache', ['error' => $e->getMessage()]);
+                }
+            }
+
+            // Clear Elementor CSS cache
+            if (class_exists('\Elementor\Plugin')) {
+                \Elementor\Plugin::$instance->files_manager->clear_cache();
+            }
+
+            $this->log('INFO', 'Template created successfully', ['template_id' => $post_id, 'type' => $type]);
+
+            return [
+                'success'     => true,
+                'template_id' => $post_id,
+                'title'       => $title,
+                'type'        => $type,
+                'edit_url'    => admin_url("post.php?post={$post_id}&action=elementor"),
+            ];
+        } catch (\Throwable $e) {
+            $this->log('FATAL', 'Exception in import_template', [
+                'message' => $e->getMessage(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine(),
+                'trace'   => array_slice(explode("\n", $e->getTraceAsString()), 0, 10),
+            ]);
+            return new WP_Error('template_exception', $e->getMessage(), ['status' => 500]);
         }
-
-        update_post_meta($post_id, '_elementor_data', wp_slash(wp_json_encode($elementor_data)));
-        update_post_meta($post_id, '_elementor_edit_mode', 'builder');
-        update_post_meta($post_id, '_elementor_template_type', $type);
-        update_post_meta($post_id, '_elementor_version', '3.0.0');
-
-        // Set template type taxonomy
-        wp_set_object_terms($post_id, $type, 'elementor_library_type');
-
-        return [
-            'success'     => true,
-            'template_id' => $post_id,
-            'title'       => $title,
-            'type'        => $type,
-            'edit_url'    => admin_url("post.php?post={$post_id}&action=elementor"),
-        ];
     }
 
     /**
@@ -666,6 +954,347 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             'memory_limit'  => ini_get('memory_limit'),
             'max_upload'    => size_format(wp_max_upload_size()),
         ];
+    }
+
+    /**
+     * GET /diagnostics — Full system health check for debugging
+     */
+    public function run_diagnostics($request) {
+        $this->log('INFO', 'Running diagnostics');
+        $checks = [];
+
+        // 1. PHP Environment
+        $checks['php'] = [
+            'version'         => phpversion(),
+            'memory_limit'    => ini_get('memory_limit'),
+            'memory_usage'    => size_format(memory_get_usage(true)),
+            'memory_peak'     => size_format(memory_get_peak_usage(true)),
+            'max_execution'   => ini_get('max_execution_time'),
+            'max_input_vars'  => ini_get('max_input_vars'),
+            'post_max_size'   => ini_get('post_max_size'),
+            'upload_max_size' => ini_get('upload_max_filesize'),
+            'error_reporting' => ini_get('error_reporting'),
+            'display_errors'  => ini_get('display_errors'),
+        ];
+
+        // 2. WordPress
+        global $wpdb;
+        $checks['wordpress'] = [
+            'version'      => get_bloginfo('version'),
+            'debug_mode'   => defined('WP_DEBUG') && WP_DEBUG,
+            'debug_log'    => defined('WP_DEBUG_LOG') && WP_DEBUG_LOG,
+            'site_url'     => get_site_url(),
+            'active_theme' => wp_get_theme()->get('Name'),
+            'db_prefix'    => $wpdb->prefix,
+            'is_multisite' => is_multisite(),
+        ];
+
+        // 3. Elementor
+        $elementor_ok = class_exists('\Elementor\Plugin');
+        $elementor_pro_ok = class_exists('\ElementorPro\Plugin');
+        $checks['elementor'] = [
+            'installed'     => $elementor_ok,
+            'pro_installed' => $elementor_pro_ok,
+            'version'       => $elementor_ok ? ELEMENTOR_VERSION : null,
+            'pro_version'   => $elementor_pro_ok && defined('ELEMENTOR_PRO_VERSION') ? ELEMENTOR_PRO_VERSION : null,
+        ];
+
+        // 4. Elementor Library taxonomy check
+        $taxonomy_exists = taxonomy_exists('elementor_library_type');
+        $checks['elementor_library'] = [
+            'taxonomy_registered' => $taxonomy_exists,
+            'post_type_exists'    => post_type_exists('elementor_library'),
+        ];
+
+        if ($taxonomy_exists) {
+            $terms = get_terms(['taxonomy' => 'elementor_library_type', 'hide_empty' => false]);
+            $checks['elementor_library']['registered_types'] = is_array($terms) ? array_map(function($t) { return $t->slug; }, $terms) : [];
+        }
+
+        // 5. Theme Builder check (Elementor Pro)
+        $checks['theme_builder'] = ['available' => false];
+        if ($elementor_pro_ok && class_exists('\ElementorPro\Modules\ThemeBuilder\Module')) {
+            $checks['theme_builder']['available'] = true;
+            try {
+                $theme_builder = \ElementorPro\Modules\ThemeBuilder\Module::instance();
+                $conditions_manager = $theme_builder->get_conditions_manager();
+                $checks['theme_builder']['conditions_manager'] = true;
+
+                // List active theme builder templates
+                $theme_templates = get_posts([
+                    'post_type'      => 'elementor_library',
+                    'posts_per_page' => -1,
+                    'post_status'    => 'publish',
+                    'meta_query'     => [
+                        ['key' => '_elementor_template_type', 'value' => ['header', 'footer', 'single', 'archive', 'error-404'], 'compare' => 'IN'],
+                    ],
+                ]);
+                $active_templates = [];
+                foreach ($theme_templates as $tmpl) {
+                    $conditions = get_post_meta($tmpl->ID, '_elementor_conditions', true);
+                    $active_templates[] = [
+                        'id'         => $tmpl->ID,
+                        'title'      => $tmpl->post_title,
+                        'type'       => get_post_meta($tmpl->ID, '_elementor_template_type', true),
+                        'conditions' => $conditions ?: 'none',
+                    ];
+                }
+                $checks['theme_builder']['active_templates'] = $active_templates;
+            } catch (\Throwable $e) {
+                $checks['theme_builder']['error'] = $e->getMessage();
+            }
+        }
+
+        // 6. WP Debug log (last 50 lines)
+        $wp_debug_log = WP_CONTENT_DIR . '/debug.log';
+        $checks['wp_debug_log'] = ['exists' => file_exists($wp_debug_log)];
+        if (file_exists($wp_debug_log)) {
+            $checks['wp_debug_log']['size'] = size_format(filesize($wp_debug_log));
+            $lines = file($wp_debug_log, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            $checks['wp_debug_log']['last_50_lines'] = array_slice($lines, -50);
+        }
+
+        // 7. Plugin sync logs
+        $checks['sync_logs'] = ['dir_exists' => file_exists(AI_ELEMENTOR_SYNC_LOG_DIR)];
+        if (file_exists(AI_ELEMENTOR_SYNC_LOG_DIR)) {
+            $log_files = glob(AI_ELEMENTOR_SYNC_LOG_DIR . '/sync-*.log');
+            $checks['sync_logs']['files'] = [];
+            foreach ($log_files as $lf) {
+                $checks['sync_logs']['files'][] = [
+                    'name' => basename($lf),
+                    'size' => size_format(filesize($lf)),
+                ];
+            }
+        }
+
+        // 8. Disk space
+        $checks['disk'] = [
+            'free_space'  => size_format(disk_free_space(ABSPATH)),
+            'uploads_dir' => [
+                'path'     => wp_upload_dir()['basedir'],
+                'writable' => is_writable(wp_upload_dir()['basedir']),
+            ],
+        ];
+
+        // 9. REST API health
+        $checks['rest_api'] = [
+            'url'    => rest_url('ai-elementor/v1/'),
+            'prefix' => rest_get_url_prefix(),
+        ];
+
+        $this->log('INFO', 'Diagnostics complete');
+
+        return [
+            'success'     => true,
+            'timestamp'   => date('Y-m-d H:i:s'),
+            'diagnostics' => $checks,
+        ];
+    }
+
+    /**
+     * GET /logs — Retrieve sync log entries
+     * Params: ?date=YYYY-MM-DD (default: today), ?lines=50 (default: 50), ?level=ERROR (filter by level)
+     */
+    public function get_logs($request) {
+        $date = $request->get_param('date') ?: date('Y-m-d');
+        $max_lines = (int) ($request->get_param('lines') ?: 50);
+        $level_filter = $request->get_param('level') ?: null;
+
+        $log_file = AI_ELEMENTOR_SYNC_LOG_DIR . '/sync-' . $date . '.log';
+
+        if (!file_exists($log_file)) {
+            // List available log files
+            $available = [];
+            $log_files = glob(AI_ELEMENTOR_SYNC_LOG_DIR . '/sync-*.log');
+            foreach ($log_files as $lf) {
+                $available[] = basename($lf, '.log');
+            }
+            return [
+                'success'   => false,
+                'message'   => "No log file found for date: {$date}",
+                'available' => $available,
+            ];
+        }
+
+        $lines = file($log_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+        // Filter by level if specified
+        if ($level_filter) {
+            $level_filter = strtoupper($level_filter);
+            $lines = array_values(array_filter($lines, function($line) use ($level_filter) {
+                return strpos($line, "[{$level_filter}]") !== false;
+            }));
+        }
+
+        // Return last N lines
+        $lines = array_slice($lines, -$max_lines);
+
+        return [
+            'success'  => true,
+            'date'     => $date,
+            'total'    => count($lines),
+            'entries'  => $lines,
+        ];
+    }
+
+    /**
+     * DELETE /logs — Clear all log files
+     */
+    public function clear_logs($request) {
+        $log_files = glob(AI_ELEMENTOR_SYNC_LOG_DIR . '/sync-*.log');
+        $cleared = 0;
+
+        foreach ($log_files as $lf) {
+            if (unlink($lf)) {
+                $cleared++;
+            }
+        }
+
+        $this->log('INFO', 'Logs cleared', ['files_deleted' => $cleared]);
+
+        return [
+            'success' => true,
+            'cleared' => $cleared,
+        ];
+    }
+
+    /**
+     * POST /test — Run a specific test to verify functionality
+     * Body: { "test": "template_create" | "elementor_check" | "memory" | "json_parse" }
+     */
+    public function run_test($request) {
+        $data = $request->get_json_params();
+        $test_name = $data['test'] ?? 'all';
+        $results = [];
+
+        $this->log('INFO', 'Running test', ['test' => $test_name]);
+
+        try {
+            // Test: Elementor environment
+            if ($test_name === 'all' || $test_name === 'elementor_check') {
+                $el = class_exists('\Elementor\Plugin');
+                $elp = class_exists('\ElementorPro\Plugin');
+                $lpt = post_type_exists('elementor_library');
+                $ltx = taxonomy_exists('elementor_library_type');
+                $results['elementor_check'] = [
+                    'success'              => $el && $lpt && $ltx,
+                    'elementor_loaded'     => $el,
+                    'elementor_pro_loaded' => $elp,
+                    'library_post_type'    => $lpt,
+                    'library_taxonomy'     => $ltx,
+                ];
+            }
+
+            // Test: Template creation (dry-run — creates and immediately deletes)
+            if ($test_name === 'all' || $test_name === 'template_create') {
+                $test_post_id = wp_insert_post([
+                    'post_title'  => '__ai_sync_test_' . time(),
+                    'post_status' => 'draft',
+                    'post_type'   => 'elementor_library',
+                ], true);
+
+                if (is_wp_error($test_post_id)) {
+                    $results['template_create'] = [
+                        'success' => false,
+                        'error'   => $test_post_id->get_error_message(),
+                    ];
+                } else {
+                    // Try setting meta and taxonomy
+                    $meta_ok = update_post_meta($test_post_id, '_elementor_template_type', 'section');
+                    $term_result = wp_set_object_terms($test_post_id, 'section', 'elementor_library_type');
+                    $term_ok = !is_wp_error($term_result);
+
+                    // Try setting conditions
+                    $conditions_ok = update_post_meta($test_post_id, '_elementor_conditions', ['include/general']);
+
+                    // Clean up
+                    wp_delete_post($test_post_id, true);
+
+                    $results['template_create'] = [
+                        'success'         => true,
+                        'post_created'    => true,
+                        'meta_saved'      => (bool) $meta_ok,
+                        'taxonomy_set'    => $term_ok,
+                        'taxonomy_error'  => is_wp_error($term_result) ? $term_result->get_error_message() : null,
+                        'conditions_set'  => (bool) $conditions_ok,
+                        'cleanup'         => true,
+                    ];
+                }
+            }
+
+            // Test: Memory available for large JSON
+            if ($test_name === 'all' || $test_name === 'memory') {
+                $before = memory_get_usage(true);
+                // Simulate a large JSON payload (~500KB)
+                $items = array_fill(0, 1000, '{"elType":"container","settings":{},"elements":[]}');
+                $test_data = '[' . implode(',', $items) . ']';
+                $parsed = json_decode($test_data, true);
+                $after = memory_get_usage(true);
+
+                $results['memory'] = [
+                    'success'          => $parsed !== null,
+                    'memory_before'    => size_format($before),
+                    'memory_after'     => size_format($after),
+                    'memory_used'      => size_format($after - $before),
+                    'memory_limit'     => ini_get('memory_limit'),
+                    'memory_remaining' => size_format($this->get_memory_limit_bytes() - $after),
+                ];
+                unset($test_data, $parsed);
+            }
+
+            // Test: JSON parsing from request body
+            if ($test_name === 'json_parse') {
+                $test_payload = $data['payload'] ?? null;
+                if ($test_payload) {
+                    $json_str = wp_json_encode($test_payload);
+                    $results['json_parse'] = [
+                        'success'       => true,
+                        'payload_size'  => strlen($json_str) . ' bytes',
+                        'element_count' => is_array($test_payload) ? count($test_payload) : 'not_array',
+                    ];
+                } else {
+                    $results['json_parse'] = [
+                        'success' => true,
+                        'note'    => 'No payload provided. Send {"test":"json_parse","payload":[...]} to test.',
+                    ];
+                }
+            }
+
+        } catch (\Throwable $e) {
+            $this->log('FATAL', 'Exception in run_test', [
+                'test'    => $test_name,
+                'message' => $e->getMessage(),
+                'file'    => $e->getFile(),
+                'line'    => $e->getLine(),
+            ]);
+            $results['exception'] = [
+                'message' => $e->getMessage(),
+                'file'    => basename($e->getFile()),
+                'line'    => $e->getLine(),
+            ];
+        }
+
+        return [
+            'success'   => true,
+            'timestamp' => date('Y-m-d H:i:s'),
+            'tests'     => $results,
+        ];
+    }
+
+    /**
+     * Get memory limit in bytes
+     */
+    private function get_memory_limit_bytes() {
+        $limit = ini_get('memory_limit');
+        if ($limit === '-1') return PHP_INT_MAX;
+        $value = (int) $limit;
+        $unit = strtolower(substr($limit, -1));
+        switch ($unit) {
+            case 'g': $value *= 1024;
+            case 'm': $value *= 1024;
+            case 'k': $value *= 1024;
+        }
+        return $value;
     }
 }
 

@@ -1,8 +1,9 @@
 {
   "_description": "AI Elementor Design System Framework — Consistent rules for generating professional templates",
-  "_version": "1.0",
+  "_version": "1.1",
   "_last_updated": "2026-02-15",
   "_based_on": ["8-point grid system", "Material Design spacing", "Modular type scale (1.25 ratio)", "WCAG 2.1 AA contrast"],
+  "_style_inspiration": "StudyIn (gostudyin.com) — Bold punchy headlines, generous white space, accent color shapes/blobs behind images, trust bars, list-style destination sections, large quotation marks on testimonials, modern minimal card designs, colored section blocks. Our color theme: Navy (#0B1D3A) / Gold (#C49A3C) / Teal (#2AADBD) from the Infinite Global Recruitment logo.",
 
   "structure": {
     "_note": "ALWAYS use container-based (modern) layout. NEVER use section/column (legacy).",
@@ -79,14 +80,16 @@
       "5xl": 120
     },
     "section_padding": {
-      "standard": {"unit": "px", "top": "80", "right": "24", "bottom": "80", "left": "24", "isLinked": false},
+      "standard": {"unit": "px", "top": "96", "right": "24", "bottom": "96", "left": "24", "isLinked": false},
       "hero": {"unit": "px", "top": "120", "right": "24", "bottom": "120", "left": "24", "isLinked": false},
-      "compact": {"unit": "px", "top": "48", "right": "24", "bottom": "48", "left": "24", "isLinked": false},
-      "cta": {"unit": "px", "top": "64", "right": "24", "bottom": "64", "left": "24", "isLinked": false}
+      "compact": {"unit": "px", "top": "64", "right": "24", "bottom": "64", "left": "24", "isLinked": false},
+      "cta": {"unit": "px", "top": "80", "right": "24", "bottom": "80", "left": "24", "isLinked": false},
+      "generous": {"unit": "px", "top": "120", "right": "24", "bottom": "120", "left": "24", "isLinked": false}
     },
     "section_padding_mobile": {
-      "standard": {"unit": "px", "top": "48", "right": "16", "bottom": "48", "left": "16", "isLinked": false},
-      "hero": {"unit": "px", "top": "80", "right": "16", "bottom": "80", "left": "16", "isLinked": false}
+      "standard": {"unit": "px", "top": "56", "right": "16", "bottom": "56", "left": "16", "isLinked": false},
+      "hero": {"unit": "px", "top": "80", "right": "16", "bottom": "80", "left": "16", "isLinked": false},
+      "generous": {"unit": "px", "top": "80", "right": "16", "bottom": "80", "left": "16", "isLinked": false}
     },
     "element_gap": {
       "tight": {"column": "16", "row": "16", "unit": "px"},
@@ -109,16 +112,16 @@
   },
 
   "typography": {
-    "_note": "Modular scale ratio 1.25 (Major Third). Base size 16px. All headings use primary font, body uses secondary font.",
+    "_note": "StudyIn-inspired bold typography. Larger display/H1 sizes for impact. All headings use Montserrat (bold/extrabold), body uses Open Sans.",
     "font_stack": {
-      "primary": "Poppins",
-      "secondary": "Inter",
+      "primary": "Montserrat",
+      "secondary": "Open Sans",
       "monospace": "JetBrains Mono"
     },
     "scale": {
-      "display": {"unit": "px", "size": 56, "sizes": []},
-      "h1": {"unit": "px", "size": 44, "sizes": []},
-      "h2": {"unit": "px", "size": 36, "sizes": []},
+      "display": {"unit": "px", "size": 64, "sizes": []},
+      "h1": {"unit": "px", "size": 52, "sizes": []},
+      "h2": {"unit": "px", "size": 40, "sizes": []},
       "h3": {"unit": "px", "size": 28, "sizes": []},
       "h4": {"unit": "px", "size": 22, "sizes": []},
       "h5": {"unit": "px", "size": 18, "sizes": []},
@@ -128,15 +131,15 @@
       "caption": {"unit": "px", "size": 12, "sizes": []}
     },
     "scale_tablet": {
-      "display": {"unit": "px", "size": 42, "sizes": []},
-      "h1": {"unit": "px", "size": 36, "sizes": []},
-      "h2": {"unit": "px", "size": 30, "sizes": []},
+      "display": {"unit": "px", "size": 48, "sizes": []},
+      "h1": {"unit": "px", "size": 40, "sizes": []},
+      "h2": {"unit": "px", "size": 32, "sizes": []},
       "h3": {"unit": "px", "size": 24, "sizes": []}
     },
     "scale_mobile": {
-      "display": {"unit": "px", "size": 32, "sizes": []},
-      "h1": {"unit": "px", "size": 28, "sizes": []},
-      "h2": {"unit": "px", "size": 24, "sizes": []},
+      "display": {"unit": "px", "size": 36, "sizes": []},
+      "h1": {"unit": "px", "size": 32, "sizes": []},
+      "h2": {"unit": "px", "size": 26, "sizes": []},
       "h3": {"unit": "px", "size": 20, "sizes": []}
     },
     "line_heights": {
@@ -335,15 +338,20 @@
   ],
 
   "section_patterns": {
-    "_note": "Standard section layouts that produce consistent results",
-    "hero": "Full-width container → boxed inner → row(2 cols: text left 55% + image/visual right 45%)",
-    "stats_bar": "Full-width container → boxed inner → row(3-4 equal counter widgets)",
-    "services_grid": "Full-width container → boxed inner → heading group + row(3 cols of cards)",
-    "split_content": "Full-width container → boxed inner → row(2 cols: image 50% + text 50%)",
-    "testimonials": "Full-width container → boxed inner → heading group + row(3 testimonial cards)",
-    "cta_banner": "Full-width container (gradient bg) → boxed inner → centered heading + button row",
-    "footer": "Full-width container (dark bg) → boxed inner → row(3-4 cols of text/links)",
-    "faq": "Full-width container → boxed inner (narrow) → heading group + accordion widget"
+    "_note": "StudyIn-inspired section layouts — bold, spacious, modern",
+    "hero": "Full-width container (dark navy bg) → boxed inner → row(2 cols: text left 55% + image right 45% with colored accent shape behind). Trust bar below: 4 inline stat badges.",
+    "trust_bar": "Full-width container (white/light bg, compact padding) → boxed inner → row(4 stat items inline: icon/number + label). Shows credibility immediately below hero.",
+    "two_pathway_cards": "Full-width container → boxed inner → heading + row(2 large cards, 48% each, with icon + title + text + CTA button, subtle shadow, rounded corners 16px)",
+    "stats_bar": "Full-width container (dark bg) → boxed inner → row(4 counter widgets, gold number color, white labels)",
+    "services_grid": "Full-width container → boxed inner → heading group + row(3 or 6 cards, clean minimal icons, generous padding 40px inside cards)",
+    "split_content": "Full-width container → boxed inner → row(2 cols: image 45% with accent color blob/shape behind + text 50% with heading + bullets/paragraphs)",
+    "destination_list": "Full-width container → boxed inner → row(text left 40% + destination list right 55%). Each destination is a full-width clickable row with country name, arrow icon, separated by subtle borders. StudyIn-style clean list layout.",
+    "testimonials": "Full-width container (colored bg — light teal or gold tint) → boxed inner → large quotation mark SVG decorative + single testimonial card with quote, name, program. Or 3-card grid with star ratings.",
+    "expert_counsellor": "Full-width container → boxed inner → row(2 cols: colored block with heading left + quote card with photo right). Accent color background blocks.",
+    "cta_banner": "Full-width container (dark navy bg with optional gold accent shape) → boxed inner (narrow 900px) → bold centered heading + subtext + prominent CTA button (gold)",
+    "footer": "Full-width container (very dark navy bg) → boxed inner → logo + tagline row + row(4 cols: about/social, destinations, quick links, contact) + bottom bar(copyright + legal links)",
+    "faq": "Full-width container → boxed inner → row(heading left 35% + FAQ list right 60%). Clean accordion with plus/minus icons.",
+    "partner_logos": "Full-width container (light bg, compact padding) → boxed inner → heading (counter number + text) + row of logo images"
   },
 
   "quality_checklist": [

@@ -15,7 +15,7 @@ param(
     [string]$Site,
 
     [Parameter(Mandatory = $true)]
-    [ValidateSet("status", "create", "update", "get", "list", "delete", "create-template", "list-templates", "bulk", "site-info")]
+    [ValidateSet("status", "create", "update", "get", "list", "delete", "create-template", "list-templates", "bulk", "site-info", "diagnostics", "logs", "clear-logs", "test")]
     [string]$Action,
 
     [string]$TemplateFile,
@@ -405,5 +405,152 @@ switch ($Action) {
             Write-Host "    - $($plugin.name) v$($plugin.version)" -ForegroundColor White
         }
         Write-Host ""
+    }
+
+    "diagnostics" {
+        Write-Host "Running diagnostics on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "diagnostics"
+        Write-Host ""
+        Write-Host "=== DIAGNOSTICS REPORT ===" -ForegroundColor Cyan
+        Write-Host "Timestamp: $($result.timestamp)" -ForegroundColor White
+        Write-Host ""
+
+        # PHP
+        $php = $result.diagnostics.php
+        Write-Host "[PHP]" -ForegroundColor Yellow
+        Write-Host "  Version:        $($php.version)" -ForegroundColor White
+        Write-Host "  Memory Limit:   $($php.memory_limit)" -ForegroundColor White
+        Write-Host "  Memory Usage:   $($php.memory_usage)" -ForegroundColor White
+        Write-Host "  Memory Peak:    $($php.memory_peak)" -ForegroundColor White
+        Write-Host "  Post Max Size:  $($php.post_max_size)" -ForegroundColor White
+        Write-Host ""
+
+        # Elementor
+        $el = $result.diagnostics.elementor
+        $elColor = if ($el.installed) { "Green" } else { "Red" }
+        $elProColor = if ($el.pro_installed) { "Green" } else { "Red" }
+        Write-Host "[Elementor]" -ForegroundColor Yellow
+        Write-Host "  Installed:      $($el.installed)" -ForegroundColor $elColor
+        Write-Host "  Pro Installed:  $($el.pro_installed)" -ForegroundColor $elProColor
+        Write-Host "  Version:        $($el.version)" -ForegroundColor White
+        Write-Host "  Pro Version:    $($el.pro_version)" -ForegroundColor White
+        Write-Host ""
+
+        # Elementor Library
+        $lib = $result.diagnostics.elementor_library
+        Write-Host "[Elementor Library]" -ForegroundColor Yellow
+        Write-Host "  Taxonomy:       $($lib.taxonomy_registered)" -ForegroundColor White
+        Write-Host "  Post Type:      $($lib.post_type_exists)" -ForegroundColor White
+        if ($lib.registered_types) {
+            Write-Host "  Types:          $($lib.registered_types -join ', ')" -ForegroundColor White
+        }
+        Write-Host ""
+
+        # Theme Builder
+        $tb = $result.diagnostics.theme_builder
+        Write-Host "[Theme Builder]" -ForegroundColor Yellow
+        Write-Host "  Available:      $($tb.available)" -ForegroundColor White
+        if ($tb.active_templates) {
+            foreach ($tmpl in $tb.active_templates) {
+                $condStr = if ($tmpl.conditions -is [array]) { $tmpl.conditions -join ', ' } else { $tmpl.conditions }
+                Write-Host "  [$($tmpl.id)] $($tmpl.title) ($($tmpl.type)) -> $condStr" -ForegroundColor White
+            }
+        }
+        Write-Host ""
+
+        # WP Debug Log
+        $dbg = $result.diagnostics.wp_debug_log
+        Write-Host "[WP Debug Log]" -ForegroundColor Yellow
+        Write-Host "  Exists:         $($dbg.exists)" -ForegroundColor White
+        if ($dbg.size) { Write-Host "  Size:           $($dbg.size)" -ForegroundColor White }
+        if ($dbg.last_20_lines) {
+            Write-Host "  Last entries:" -ForegroundColor White
+            foreach ($line in $dbg.last_20_lines) {
+                $color = "Gray"
+                if ($line -match "error|fatal|critical") { $color = "Red" }
+                elseif ($line -match "warning|notice") { $color = "Yellow" }
+                Write-Host "    $line" -ForegroundColor $color
+            }
+        }
+        Write-Host ""
+
+        # Sync Logs
+        $sl = $result.diagnostics.sync_logs
+        Write-Host "[Sync Logs]" -ForegroundColor Yellow
+        if ($sl.files) {
+            foreach ($f in $sl.files) {
+                Write-Host "  $($f.name) ($($f.size))" -ForegroundColor White
+            }
+        } else {
+            Write-Host "  No log files" -ForegroundColor Gray
+        }
+        Write-Host ""
+
+        # Disk
+        $disk = $result.diagnostics.disk
+        Write-Host "[Disk]" -ForegroundColor Yellow
+        Write-Host "  Free Space:     $($disk.free_space)" -ForegroundColor White
+        Write-Host "  Uploads Dir:    $($disk.uploads_dir.writable)" -ForegroundColor White
+        Write-Host ""
+    }
+
+    "logs" {
+        $endpoint = "logs"
+        if ($Title) { $endpoint += "?date=$Title" }
+        $result = Invoke-SyncApi -Endpoint $endpoint
+
+        if ($result.success) {
+            Write-Host ""
+            Write-Host "=== Sync Logs ($($result.date)) - $($result.total) entries ===" -ForegroundColor Cyan
+            Write-Host ""
+            foreach ($entry in $result.entries) {
+                $color = "White"
+                if ($entry -match "\[ERROR\]") { $color = "Red" }
+                elseif ($entry -match "\[FATAL\]") { $color = "Magenta" }
+                elseif ($entry -match "\[WARN\]") { $color = "Yellow" }
+                elseif ($entry -match "\[PHP_ERROR\]") { $color = "Red" }
+                Write-Host $entry -ForegroundColor $color
+            }
+            Write-Host ""
+        } else {
+            Write-Host "No logs for specified date." -ForegroundColor Yellow
+            if ($result.available) {
+                Write-Host "Available: $($result.available -join ', ')" -ForegroundColor White
+            }
+        }
+    }
+
+    "clear-logs" {
+        $result = Invoke-SyncApi -Endpoint "logs" -Method "DELETE"
+        Write-Success "Cleared $($result.cleared) log file(s)"
+    }
+
+    "test" {
+        $testName = if ($Title) { $Title } else { "all" }
+        Write-Host "Running test '$testName' on $Site..." -ForegroundColor Yellow
+
+        $body = @{ test = $testName }
+        $result = Invoke-SyncApi -Endpoint "test" -Method "POST" -Body $body
+
+        Write-Host ""
+        Write-Host "=== TEST RESULTS ===" -ForegroundColor Cyan
+        Write-Host "Timestamp: $($result.timestamp)" -ForegroundColor White
+        Write-Host ""
+
+        foreach ($key in $result.tests.PSObject.Properties.Name) {
+            $test = $result.tests.$key
+            $statusColor = if ($test.success) { "Green" } else { "Red" }
+            $statusIcon = if ($test.success) { "PASS" } else { "FAIL" }
+            Write-Host "  [$statusIcon] $key" -ForegroundColor $statusColor
+
+            foreach ($prop in $test.PSObject.Properties) {
+                if ($prop.Name -ne 'success') {
+                    $val = $prop.Value
+                    if ($val -is [array]) { $val = $val -join ', ' }
+                    Write-Host "    $($prop.Name): $val" -ForegroundColor White
+                }
+            }
+            Write-Host ""
+        }
     }
 }
