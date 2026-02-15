@@ -19,6 +19,8 @@ When you discover any of the following during a session, **immediately edit this
 | The API or sync.ps1 had a bug or quirk | Add to a Troubleshooting section |
 | User found a design pattern that works well | Add to Common Section Patterns |
 | New Font Awesome icons were needed | Add to the Available Icons list |
+| User asks to push updates to GitHub | Follow the "Syncing Project Learnings to GitHub" process in GitHub Workflow section |
+| Any system change is being pushed to GitHub | **ALWAYS update README.md** in the repo with new features, commands, and changelog |
 
 **How to update:** Edit this CLAUDE.md file directly. Add new entries to the relevant section. If no section fits, create a new one (e.g., "## Known Issues", "## Advanced Patterns"). Include the date of the change.
 
@@ -927,12 +929,17 @@ The log directory is protected with `.htaccess` (Deny from all) and `index.php`.
 | 2026-02-15 | Nav-menu dropdown settings documented | Learned via manual fix + export: `background_color_dropdown_item_hover`, `dropdown_top_distance_*`, `padding_*_dropdown_item_mobile`, `menu_space_between`, `menu_typography_text_transform`, `full_width`, `text_align`, `pointer`, `toggle_background_color` global |
 | 2026-02-15 | Counter widget dual typography groups | Counter has TWO typography groups: `typography_*` for the number, `typography_title_*` for the title. Also `title_horizontal_alignment_mobile` and `number_position_mobile` for mobile centering. Learned from manual fix + export |
 | 2026-02-15 | Added interlinking & responsive rules | New strict rules #12 (button/link interlinking), #13 (responsive priority: desktop > tablet > mobile), #14 (no Unicode). Updated checklist with 4 new items. Fixed broken `/about-us/` link in footer and `#consultation` anchor in homepage |
+| 2026-02-15 | Added GitHub sync workflow to CLAUDE.md | Full step-by-step process for syncing project learnings to the universal repo. Added README update as mandatory step. Updated README.md with v1.2.0 features, full command reference, changelog, and universal vision |
 
 ---
 
 ## GitHub Workflow
 
-This project is maintained on GitHub. The repo is the **single source of truth** for the system.
+This project is maintained on GitHub. The repo is the **single source of truth** for the universal system. Every website project contributes learnings back to this repo, making the AI smarter for the next project.
+
+### The Universal System Vision
+
+This repo is NOT a single-project tool — it's a **universal AI website builder** that improves with every site built. After building recruitment sites, ecommerce sites, booking sites, portfolios, SaaS tools, etc., the knowledge base (`CLAUDE.md`) will contain every Elementor property name, every layout pattern, and every responsive trick needed to build any type of website instantly.
 
 ### For Users Starting a New Project
 
@@ -948,11 +955,67 @@ During any session, if the AI fixes a bug, discovers a new pattern, or learns so
 2. User commits and pushes: `git add -A && git commit -m "AI learned: [what]" && git push`
 3. All future clones/pulls inherit the improvement
 
+### Syncing Project Learnings to GitHub (End-of-Project Workflow)
+
+When the user says **"push the latest updates to the universal setup in GitHub"** (or similar), follow this exact process:
+
+**Step 1 — Identify changed files.** Compare system files in the working directory against the `ai-elementor-template/` repo folder. Check these files:
+
+| Working Directory File | Repo Destination |
+|----------------------|-----------------|
+| `CLAUDE.md` | `ai-elementor-template/CLAUDE.md` |
+| `sync.ps1` | `ai-elementor-template/sync.ps1` |
+| `plugin/ai-elementor-sync/*.php` | `ai-elementor-template/plugin/ai-elementor-sync/` |
+| `docs/design-system.json` | `ai-elementor-template/docs/design-system.json` |
+| `README.md` (in repo) | `ai-elementor-template/README.md` (update directly) |
+| `init-project.ps1` | `ai-elementor-template/init-project.ps1` |
+| `templates/*.json` | `ai-elementor-template/templates/` |
+| `docs/*.md` | `ai-elementor-template/docs/` |
+
+**Step 2 — Copy changed files:**
+```powershell
+# Copy each changed file (only copy files that actually changed)
+Copy-Item "CLAUDE.md" -Destination "ai-elementor-template/CLAUDE.md" -Force
+Copy-Item "sync.ps1" -Destination "ai-elementor-template/sync.ps1" -Force
+Copy-Item "plugin/ai-elementor-sync/*.php" -Destination "ai-elementor-template/plugin/ai-elementor-sync/" -Force
+Copy-Item "docs/design-system.json" -Destination "ai-elementor-template/docs/design-system.json" -Force
+# Add any other changed files...
+```
+
+**Step 3 — Update README.md if features changed:**
+- Update the README.md in the repo with new features, commands, or version info
+- Keep the changelog section current
+
+**Step 4 — Clean up temp files:**
+```powershell
+# Remove any temp export files from the working directory
+Remove-Item "temp-*.json" -ErrorAction SilentlyContinue
+```
+
+**Step 5 — Commit and push:**
+```powershell
+Push-Location "ai-elementor-template"
+git add -A
+git status  # Review what's staged
+git commit -m "v<VERSION>: <brief list of improvements from this project>"
+git push origin master
+Pop-Location
+```
+
+**Step 6 — Confirm to user:** Report the commit hash, number of files changed, and insertions/deletions.
+
+**IMPORTANT — What NEVER gets synced:**
+- `projects/` folder (client-specific data)
+- `config/sites.json` with real API keys
+- `page-mapping.json` files
+- Temp export files (`temp-*.json`)
+- Any client content, images, or branding
+
 ### Keeping Up to Date
 
 ```powershell
 # Pull latest system improvements
-git pull origin main
+git pull origin master
 
 # Your projects/ folder is unaffected (gitignored)
 ```
@@ -964,6 +1027,7 @@ git pull origin main
 - `templates/` — Reference templates and project brief template
 - `docs/` — Design system, workflow guide, prompt templates
 - `config/sites.json` — With placeholder values only
+- `README.md` — Feature docs, command reference, changelog
 
 ### What Stays Local (gitignored)
 - `projects/` — Client-specific data, briefs, generated pages
