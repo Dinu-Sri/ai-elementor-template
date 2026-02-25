@@ -1,0 +1,100 @@
+{
+    "_description": "Design tokens extracted from the Trogen Facility Services project. Use as reference when building similar cleaning/service industry websites.",
+    "_project": "Trogen Facility Services — Melbourne Cleaning Company",
+    "_date": "2026-02-25",
+
+    "colors": {
+        "primary": "#2563EB",
+        "primary_note": "Trust blue — used for headings, borders, overlines, active nav items",
+        "dark": "#0F172A",
+        "dark_note": "Dark navy — used for hero bg, footer bg, dark sections, body text",
+        "accent": "#25D366",
+        "accent_note": "WhatsApp green — used for all primary CTA buttons (WhatsApp is main contact method)",
+        "light": "#EFF6FF",
+        "light_note": "Soft blue tint — used for alternating section backgrounds, card fills",
+        "yellow_cta": "#FACC15",
+        "yellow_cta_note": "Yellow — used for secondary CTAs (call-to-action buttons, quote form submit)",
+        "white": "#FFFFFF",
+        "white_note": "Default section background, card backgrounds, header background",
+        "text_body": "#334155",
+        "text_body_note": "Dark slate — used for body/paragraph text on light backgrounds",
+        "text_light": "#CBD5E1",
+        "text_light_note": "Light slate — used for body text on dark backgrounds",
+        "text_white": "#FFFFFF",
+        "text_white_note": "White text on dark sections",
+        "border_light": "#E2E8F0",
+        "border_light_note": "Light gray — used for card borders, dividers on light backgrounds"
+    },
+
+    "typography": {
+        "heading_font": "Figtree",
+        "heading_weight": 800,
+        "heading_note": "Extra bold Figtree for all headings — gives modern, strong feel",
+        "body_font": "Inter",
+        "body_weight": 400,
+        "body_note": "Clean Inter for all body text — excellent readability",
+        "scale": {
+            "display": { "desktop": "56px", "tablet": "42px", "mobile": "32px", "weight": 800, "line_height": "1.1em" },
+            "h1": { "desktop": "44px", "tablet": "36px", "mobile": "28px", "weight": 800, "line_height": "1.2em" },
+            "h2": { "desktop": "36px", "tablet": "30px", "mobile": "24px", "weight": 800, "line_height": "1.2em" },
+            "h3": { "desktop": "28px", "tablet": "24px", "mobile": "20px", "weight": 700, "line_height": "1.3em" },
+            "h4": { "desktop": "22px", "tablet": "20px", "mobile": "18px", "weight": 600, "line_height": "1.3em" },
+            "overline": { "desktop": "14px", "tablet": "14px", "mobile": "12px", "weight": 600, "line_height": "1.4em", "transform": "uppercase", "letter_spacing": "2px" },
+            "body_large": { "desktop": "18px", "tablet": "18px", "mobile": "16px", "weight": 400, "line_height": "1.8em" },
+            "body": { "desktop": "16px", "tablet": "16px", "mobile": "15px", "weight": 400, "line_height": "1.6em" }
+        }
+    },
+
+    "spacing": {
+        "grid": "8pt",
+        "section_padding": {
+            "standard": { "desktop": "80px", "tablet": "56px", "mobile": "40px" },
+            "compact": { "desktop": "48px", "tablet": "40px", "mobile": "32px" },
+            "spacious": { "desktop": "96px", "tablet": "64px", "mobile": "48px" }
+        },
+        "content_max_width": "1200px",
+        "card_padding": { "desktop": "32px", "mobile": "24px" },
+        "flex_gap": { "desktop": "32px", "tablet": "24px", "mobile": "16px" }
+    },
+
+    "components": {
+        "header": {
+            "height": "64px",
+            "background": "#FFFFFF",
+            "border_bottom": "3px solid #2563EB",
+            "sticky": true,
+            "elements": ["Logo (wordmark image)", "UPPERCASE nav (HOME, SERVICES, PRICING, REVIEWS, FAQ)", "Call CTA button", "WhatsApp CTA button"]
+        },
+        "footer": {
+            "background": "#0F172A",
+            "text_color": "#CBD5E1",
+            "columns": "3 (38% / 25% / 25%)",
+            "responsive": "col1 100% tablet, cols 2-3 47% tablet, all 100% mobile",
+            "elements": ["Brand description", "Contact icon-list", "Services checklist", "Copyright bar with links"]
+        },
+        "buttons": {
+            "primary_cta": { "bg": "#25D366", "text": "#FFFFFF", "hover_bg": "#1EB954", "border_radius": "8px", "padding": "14px 32px" },
+            "secondary_cta": { "bg": "#FACC15", "text": "#0F172A", "hover_bg": "#EAB308", "border_radius": "8px", "padding": "14px 32px" },
+            "outline": { "bg": "transparent", "text": "#FFFFFF", "border": "2px solid #FFFFFF", "border_radius": "8px" }
+        },
+        "cards": {
+            "background": "#FFFFFF",
+            "border": "1px solid #E2E8F0",
+            "border_radius": "12px",
+            "padding": "32px",
+            "hover": "translateY(-4px) with shadow"
+        }
+    },
+
+    "page_sections": [
+        { "name": "Hero", "bg": "#0F172A", "pattern": "2-column split with heading + form/CTA, gradient overlay on background image" },
+        { "name": "Stats Bar", "bg": "#2563EB", "pattern": "4-column counter row with white text on blue, compact padding" },
+        { "name": "Services Grid", "bg": "#FFFFFF", "pattern": "3-column icon cards with overline + heading above" },
+        { "name": "End of Lease Pricing", "bg": "#EFF6FF", "pattern": "3 pricing cards with check-list features, yellow CTA buttons" },
+        { "name": "Quote Form", "bg": "#0F172A", "pattern": "2-column split — left heading/description, right Elementor form widget" },
+        { "name": "Why Choose Us", "bg": "#FFFFFF", "pattern": "2-column split — left image, right icon-list with 4 differentiators" },
+        { "name": "Reviews", "bg": "#EFF6FF", "pattern": "3-column testimonial cards with star ratings and attribution" },
+        { "name": "FAQ", "bg": "#FFFFFF", "pattern": "Centered accordion/toggle widget with overline + heading" },
+        { "name": "CTA Bar", "bg": "#2563EB", "pattern": "Centered heading + 2 CTA buttons (WhatsApp + Call) on blue" }
+    ]
+}

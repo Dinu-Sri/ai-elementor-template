@@ -1,0 +1,219 @@
+{
+  "title": "Site Footer",
+  "type": "footer",
+  "conditions": ["include/general"],
+  "template": "elementor_header_footer",
+  "elementor_data": [
+    {
+      "elType": "container",
+      "isInner": false,
+      "settings": {
+        "content_width": "full",
+        "flex_direction": "column",
+        "background_background": "classic",
+        "background_color": "#0F172A",
+        "padding": {"unit": "px", "top": "48", "right": "24", "bottom": "24", "left": "24", "isLinked": false},
+        "padding_tablet": {"unit": "px", "top": "40", "right": "20", "bottom": "20", "left": "20", "isLinked": false},
+        "padding_mobile": {"unit": "px", "top": "40", "right": "16", "bottom": "16", "left": "16", "isLinked": false}
+      },
+      "elements": [
+        {
+          "elType": "container",
+          "isInner": true,
+          "settings": {
+            "content_width": "boxed",
+            "boxed_width": {"unit": "px", "size": 1200, "sizes": []},
+            "flex_direction": "column"
+          },
+          "elements": [
+            {
+              "elType": "container",
+              "isInner": true,
+              "settings": {
+                "flex_direction": "row",
+                "flex_wrap": "wrap",
+                "flex_gap": {"column": "32", "row": "32", "unit": "px", "isLinked": false},
+                "flex_gap_mobile": {"column": "24", "row": "24", "unit": "px", "isLinked": true},
+                "padding": {"unit": "px", "top": "0", "right": "0", "bottom": "32", "left": "0", "isLinked": false}
+              },
+              "elements": [
+                {
+                  "elType": "container",
+                  "isInner": true,
+                  "settings": {
+                    "content_width": "full",
+                    "width": {"unit": "%", "size": 38, "sizes": []},
+                    "width_tablet": {"unit": "%", "size": 100, "sizes": []},
+                    "width_mobile": {"unit": "%", "size": 100, "sizes": []},
+                    "flex_direction": "column"
+                  },
+                  "elements": [
+                    {
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "settings": {
+                        "title": "Trogen Facility Services",
+                        "header_size": "h4",
+                        "title_color": "#FFFFFF",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Figtree",
+                        "typography_font_size": {"unit": "px", "size": 20, "sizes": []},
+                        "typography_font_size_mobile": {"unit": "px", "size": 18, "sizes": []},
+                        "typography_font_weight": "700",
+                        "_margin": {"unit": "px", "top": "0", "right": "0", "bottom": "8", "left": "0", "isLinked": false}
+                      },
+                      "elements": []
+                    },
+                    {
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "settings": {
+                        "editor": "<p>Professional cleaning services across Melbourne. IICRC certified with 6+ years of experience. Window cleaning, commercial cleaning, end of lease, and more.</p>",
+                        "text_color": "#94A3B8",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Inter",
+                        "typography_font_size": {"unit": "px", "size": 14, "sizes": []},
+                        "typography_font_size_mobile": {"unit": "px", "size": 13, "sizes": []},
+                        "typography_line_height": {"unit": "em", "size": 1.7, "sizes": []}
+                      },
+                      "elements": []
+                    }
+                  ]
+                },
+                {
+                  "elType": "container",
+                  "isInner": true,
+                  "settings": {
+                    "content_width": "full",
+                    "width": {"unit": "%", "size": 25, "sizes": []},
+                    "width_tablet": {"unit": "%", "size": 47, "sizes": []},
+                    "width_mobile": {"unit": "%", "size": 100, "sizes": []},
+                    "flex_direction": "column"
+                  },
+                  "elements": [
+                    {
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "settings": {
+                        "title": "Contact",
+                        "header_size": "h5",
+                        "title_color": "#FFFFFF",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Figtree",
+                        "typography_font_size": {"unit": "px", "size": 16, "sizes": []},
+                        "typography_font_weight": "600",
+                        "_margin": {"unit": "px", "top": "0", "right": "0", "bottom": "16", "left": "0", "isLinked": false}
+                      },
+                      "elements": []
+                    },
+                    {
+                      "elType": "widget",
+                      "widgetType": "icon-list",
+                      "settings": {
+                        "icon_list": [
+                          {"text": "0426 047 075", "selected_icon": {"value": "fas fa-phone", "library": "fa-solid"}, "_id": "phone"},
+                          {"text": "WhatsApp Us", "selected_icon": {"value": "fab fa-whatsapp", "library": "fa-brands"}, "_id": "whatsapp"},
+                          {"text": "1649 Ferntree Gully Rd, Knoxfield", "selected_icon": {"value": "fas fa-map-marker-alt", "library": "fa-solid"}, "_id": "address"},
+                          {"text": "Mon-Sat 7AM-6PM", "selected_icon": {"value": "fas fa-clock", "library": "fa-solid"}, "_id": "hours"}
+                        ],
+                        "icon_color": "#2563EB",
+                        "text_color": "#94A3B8",
+                        "icon_size": {"unit": "px", "size": 14, "sizes": []},
+                        "space_between": {"unit": "px", "size": 12, "sizes": []},
+                        "typography_typography": "custom",
+                        "typography_font_family": "Inter",
+                        "typography_font_size": {"unit": "px", "size": 14, "sizes": []}
+                      },
+                      "elements": []
+                    }
+                  ]
+                },
+                {
+                  "elType": "container",
+                  "isInner": true,
+                  "settings": {
+                    "content_width": "full",
+                    "width": {"unit": "%", "size": 25, "sizes": []},
+                    "width_tablet": {"unit": "%", "size": 47, "sizes": []},
+                    "width_mobile": {"unit": "%", "size": 100, "sizes": []},
+                    "flex_direction": "column"
+                  },
+                  "elements": [
+                    {
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "settings": {
+                        "title": "Services",
+                        "header_size": "h5",
+                        "title_color": "#FFFFFF",
+                        "typography_typography": "custom",
+                        "typography_font_family": "Figtree",
+                        "typography_font_size": {"unit": "px", "size": 16, "sizes": []},
+                        "typography_font_weight": "600",
+                        "_margin": {"unit": "px", "top": "0", "right": "0", "bottom": "16", "left": "0", "isLinked": false}
+                      },
+                      "elements": []
+                    },
+                    {
+                      "elType": "widget",
+                      "widgetType": "icon-list",
+                      "settings": {
+                        "icon_list": [
+                          {"text": "Window Cleaning", "selected_icon": {"value": "fas fa-check", "library": "fa-solid"}, "_id": "s1"},
+                          {"text": "Commercial Cleaning", "selected_icon": {"value": "fas fa-check", "library": "fa-solid"}, "_id": "s2"},
+                          {"text": "One-Off Cleaning", "selected_icon": {"value": "fas fa-check", "library": "fa-solid"}, "_id": "s3"},
+                          {"text": "End of Lease Cleaning", "selected_icon": {"value": "fas fa-check", "library": "fa-solid"}, "_id": "s4"},
+                          {"text": "Balcony, Garage, Wall Washing", "selected_icon": {"value": "fas fa-check", "library": "fa-solid"}, "_id": "s5"}
+                        ],
+                        "icon_color": "#2563EB",
+                        "text_color": "#94A3B8",
+                        "icon_size": {"unit": "px", "size": 12, "sizes": []},
+                        "space_between": {"unit": "px", "size": 10, "sizes": []},
+                        "typography_typography": "custom",
+                        "typography_font_family": "Inter",
+                        "typography_font_size": {"unit": "px", "size": 14, "sizes": []}
+                      },
+                      "elements": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "elType": "container",
+              "isInner": true,
+              "settings": {
+                "flex_direction": "row",
+                "flex_wrap": "wrap",
+                "flex_justify_content": "center",
+                "flex_align_items": "center",
+                "flex_gap": {"column": "8", "row": "8", "unit": "px", "isLinked": true},
+                "border_border": "solid",
+                "border_width": {"unit": "px", "top": "1", "right": "0", "bottom": "0", "left": "0", "isLinked": false},
+                "border_color": "rgba(255,255,255,0.1)",
+                "padding": {"unit": "px", "top": "24", "right": "0", "bottom": "0", "left": "0", "isLinked": false}
+              },
+              "elements": [
+                {
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "settings": {
+                    "editor": "<p>\u00a9 2026 Trogen Facility Services. All rights reserved. | <a href='https://clean.computereach.org/privacy-policy/' style='color: #94A3B8; text-decoration: underline;'>Privacy Policy</a> | <a href='https://clean.computereach.org/terms-conditions/' style='color: #94A3B8; text-decoration: underline;'>Terms &amp; Conditions</a> | Developed by <a href='https://deshtech.co/' target='_blank' style='color: #2563EB; text-decoration: none; font-weight: 600;'>DeshTech Solutions</a></p>",
+                    "align": "center",
+                    "text_color": "#64748B",
+                    "typography_typography": "custom",
+                    "typography_font_family": "Inter",
+                    "typography_font_size": {"unit": "px", "size": 13, "sizes": []},
+                    "typography_font_size_mobile": {"unit": "px", "size": 12, "sizes": []},
+                    "typography_line_height": {"unit": "em", "size": 1.8, "sizes": []}
+                  },
+                  "elements": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

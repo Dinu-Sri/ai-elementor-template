@@ -116,7 +116,9 @@ Build the Home page as projects/my-site/pages/home.json
 ├── templates/
 │   ├── sample-landing-page.json ← Reference example (8 sections)
 │   ├── project-brief-template.json ← Template for new project briefs
-│   └── design-system-page.json  ← Visual design system review page
+│   ├── design-system-page.json  ← Visual design system review page
+│   └── starter-kits/            ← Archived completed projects (portfolio)
+│       └── <project-name>/      ← Full backup with screenshot + design tokens
 └── projects/                    ← Client projects (gitignored)
     └── <project-name>/
         ├── brief.json           ← Business info, branding, content
@@ -133,7 +135,8 @@ Build the Home page as projects/my-site/pages/home.json
 4. **Build pages** → AI generates one page at a time from the brief
 5. **Push & review** → `sync.ps1` pushes to WordPress, review in browser
 6. **Refine** → Tell AI what to change, re-push
-7. **Sync learnings** → Push improvements back to this repo (see below)
+7. **Archive project** → Save as starter kit with screenshot + design tokens (see Portfolio)
+8. **Sync learnings** → Push improvements back to this repo (see below)
 8. **Repeat** → Until every page is perfect
 
 ## Commands
@@ -228,6 +231,29 @@ This repo is designed to become a **universal AI-powered website builder** that 
 | **Static/Corporate sites** | About sections, team grids, service breakdowns |
 
 Every project contributes to `CLAUDE.md` — the shared brain. After 10, 20, 50 websites, the AI will know every Elementor property name, every responsive breakpoint trick, every layout pattern that works.
+
+---
+
+## Portfolio — Built With This System
+
+Every completed project is archived as a starter kit in `templates/starter-kits/` with full JSON source, design tokens, and screenshots.
+
+### Trogen Facility Services
+
+> **Melbourne Cleaning Company** — Single-page lead generation website with WhatsApp-first CTAs
+
+<a href="templates/starter-kits/trogen-facility-services/">
+  <img src="templates/starter-kits/trogen-facility-services/screenshot.png" alt="Trogen Facility Services Homepage" width="800">
+</a>
+
+| Detail | Value |
+|--------|-------|
+| **Industry** | Commercial & Residential Cleaning |
+| **Location** | Melbourne, Australia |
+| **Type** | Single-page landing page (9 sections) |
+| **Features** | Responsive design, pricing cards, quote form, FAQ accordion, WhatsApp CTAs |
+| **Design** | Figtree 800 headings, Inter body, Blue/Navy/Green palette |
+| **Starter Kit** | [`templates/starter-kits/trogen-facility-services/`](templates/starter-kits/trogen-facility-services/) |
 
 ---
 

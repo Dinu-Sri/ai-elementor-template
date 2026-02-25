@@ -1,0 +1,190 @@
+﻿{
+    "_instructions": "Single-page lead generation website for Trogen Facility Services Melbourne. Optimized for digital ads and WhatsApp lead capture.",
+
+    "project": {
+        "name": "Trogen Facility Services",
+        "domain": "https://clean.computereach.org",
+        "tagline": "Melbourne's Trusted Cleaning Professionals",
+        "description": "Trogen Facility Services provides professional cleaning solutions across Melbourne - from window cleaning and commercial cleaning to end of lease cleans. IICRC certified with 6 years of experience. WhatsApp-first contact for fast quotes.",
+        "industry": "Cleaning Services",
+        "target_audience": "Melbourne renters ending leases, property managers, commercial businesses, homeowners needing one-off or regular cleaning. Ages 25-55.",
+        "competitors": [],
+        "tone": "professional",
+        "language": "English"
+    },
+
+    "branding": {
+        "has_existing_brand": false,
+        "logo_url": "",
+        "primary_color": "#0EA5E9",
+        "secondary_color": "#0F172A",
+        "accent_color": "#25D366",
+        "dark_color": "#0F172A",
+        "light_color": "#F0F9FF",
+        "heading_font": "Montserrat",
+        "body_font": "Inter",
+        "notes": "Accent color #25D366 is WhatsApp green - used for all primary CTAs since WhatsApp is the main contact method. Primary blue for trust/professionalism. Dark navy for dark sections."
+    },
+
+    "site_structure": {
+        "pages": [
+            {
+                "name": "Home",
+                "slug": "home",
+                "is_front_page": true,
+                "priority": 1,
+                "description": "Single-page lead generation landing page optimized for digital ads. All content on one page with WhatsApp CTA buttons throughout.",
+                "sections": [
+                    "hero",
+                    "trust_bar",
+                    "services_grid",
+                    "end_of_lease_pricing",
+                    "why_choose_us",
+                    "testimonials",
+                    "faq",
+                    "final_cta"
+                ]
+            }
+        ],
+        "shared_elements": {
+            "header": "Sticky header with logo text, nav anchors, and WhatsApp CTA button",
+            "footer": "Compact footer with contact info, service area, and legal"
+        }
+    },
+
+    "content": {
+        "has_content_ready": true,
+        "content_source": "client_provided",
+        "sample_content": {
+            "services": [
+                {
+                    "name": "Window Cleaning",
+                    "description": "Professional external and internal window cleaning for homes and businesses. Streak-free results guaranteed.",
+                    "icon": "tabler:window"
+                },
+                {
+                    "name": "Commercial Cleaning",
+                    "description": "Reliable cleaning for offices, retail spaces, and commercial properties. Flexible scheduling to suit your business hours.",
+                    "icon": "tabler:building"
+                },
+                {
+                    "name": "One-Off Cleaning",
+                    "description": "Deep cleaning for any occasion - spring cleans, pre-sale preparation, post-renovation cleanup, or whenever you need a fresh start.",
+                    "icon": "tabler:sparkles"
+                },
+                {
+                    "name": "End of Lease Cleaning",
+                    "description": "Get your bond back with our thorough end of lease cleaning. Prices from $250 for 1 bed, 1 bath with steam clean.",
+                    "icon": "tabler:key"
+                }
+            ],
+            "add_ons": [
+                {"name": "Balcony Cleaning", "icon": "tabler:plant"},
+                {"name": "Garage Cleaning", "icon": "tabler:car"},
+                {"name": "Wall Washing", "icon": "tabler:wash"}
+            ],
+            "end_of_lease_pricing": {
+                "headline": "End of Lease Cleaning",
+                "subheadline": "Get your full bond back - guaranteed",
+                "starting_price": "$250",
+                "starting_description": "1 Bedroom, 1 Bathroom with Steam Clean",
+                "note": "For other configurations, contact us for a free quote via WhatsApp or phone."
+            },
+            "testimonials": [
+                {
+                    "name": "Sarah M.",
+                    "role": "Tenant, Richmond",
+                    "quote": "Trogen did an amazing end of lease clean for my apartment. Got my full bond back with no issues. Highly recommend!",
+                    "rating": 5
+                },
+                {
+                    "name": "David L.",
+                    "role": "Office Manager, South Yarra",
+                    "quote": "We use Trogen for our weekly office cleaning. Always professional, always thorough. The team is reliable and easy to work with.",
+                    "rating": 5
+                },
+                {
+                    "name": "Jenny K.",
+                    "role": "Homeowner, Knoxfield",
+                    "quote": "Had all our windows cleaned inside and out. They were spotless! Great communication via WhatsApp and very fair pricing.",
+                    "rating": 5
+                }
+            ],
+            "trust_signals": {
+                "certification": "IICRC Water Restoration Technician",
+                "experience": "6+ Years Experience",
+                "area": "All Melbourne Metro",
+                "response": "Fast WhatsApp Quotes"
+            },
+            "stats": [
+                {"number": "6", "suffix": "+", "label": "Years Experience"},
+                {"number": "500", "suffix": "+", "label": "Happy Clients"},
+                {"number": "100", "suffix": "%", "label": "Bond Back Guarantee"},
+                {"number": "24", "suffix": "hr", "label": "Quote Response"}
+            ],
+            "faq": [
+                {
+                    "question": "How much does an end of lease clean cost?",
+                    "answer": "Our end of lease cleaning starts from $250 for a 1 bedroom, 1 bathroom property with steam clean included. Larger properties are priced based on bedrooms, bathrooms, and any add-ons. Message us on WhatsApp for an instant quote."
+                },
+                {
+                    "question": "Do you guarantee I will get my bond back?",
+                    "answer": "Yes. We provide a bond-back guarantee on all end of lease cleans. If your agent requests a re-clean within 72 hours, we will return and address it at no extra cost."
+                },
+                {
+                    "question": "What areas in Melbourne do you service?",
+                    "answer": "We service all Melbourne metropolitan areas including eastern, south-eastern, and CBD suburbs. Contact us to confirm availability in your area."
+                },
+                {
+                    "question": "How do I book a cleaning?",
+                    "answer": "The fastest way is via WhatsApp - just tap the green button on this page. You can also call us on 0426 047 075. We usually respond within a few hours."
+                },
+                {
+                    "question": "Are you insured and certified?",
+                    "answer": "Yes. We hold IICRC Water Restoration Technician certification and carry full public liability insurance for your peace of mind."
+                },
+                {
+                    "question": "What add-on services do you offer?",
+                    "answer": "We offer balcony cleaning, garage cleaning, and wall washing as add-ons to any of our cleaning packages. Ask us for pricing when you get your quote."
+                }
+            ],
+            "contact": {
+                "address": "1649 Ferntree Gully Rd, Knoxfield VIC",
+                "phone": "0426 047 075",
+                "whatsapp_url": "https://wa.me/61426047075",
+                "email": "",
+                "service_area": "All Melbourne Metro",
+                "hours": "Mon-Sat 7AM-6PM"
+            },
+            "social_media": {
+                "facebook": "",
+                "instagram": "",
+                "linkedin": "",
+                "twitter": ""
+            }
+        },
+        "photo_style": "realistic",
+        "use_stock_photos": true,
+        "stock_photo_source": "picsum"
+    },
+
+    "technical": {
+        "wordpress_url": "https://clean.computereach.org",
+        "api_key": "r9I5kbs7IqCdZ4LCi9SN0Qp8VgeIot73rqWv4u1b",
+        "elementor_pro": true,
+        "woocommerce": false,
+        "multilingual": false,
+        "forms_plugin": "elementor_pro",
+        "seo_plugin": "none"
+    },
+
+    "preferences": {
+        "animation_style": "subtle",
+        "layout_density": "spacious",
+        "image_shape": "rounded_corners",
+        "button_style": "rounded",
+        "section_dividers": false,
+        "dark_mode_sections": true,
+        "parallax_effects": false
+    }
+}

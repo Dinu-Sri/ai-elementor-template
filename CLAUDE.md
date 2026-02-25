@@ -21,6 +21,7 @@ When you discover any of the following during a session, **immediately edit this
 | New Font Awesome icons were needed | Add to the Available Icons list |
 | User asks to push updates to GitHub | Follow the "Syncing Project Learnings to GitHub" process in GitHub Workflow section |
 | Any system change is being pushed to GitHub | **ALWAYS update README.md** in the repo with new features, commands, and changelog |
+| A project is completed and approved | Follow the **Project Archiving Checklist** — archive as starter kit, take screenshot, update portfolio |
 
 **How to update:** Edit this CLAUDE.md file directly. Add new entries to the relevant section. If no section fits, create a new one (e.g., "## Known Issues", "## Advanced Patterns"). Include the date of the change.
 
@@ -57,7 +58,12 @@ Elementor Template/
 ├── templates/
 │   ├── sample-landing-page.json ← Reference example (8 sections, container-based)
 │   ├── project-brief-template.json ← Template for new project briefs
-│   └── design-system-page.json  ← Master design system review page
+│   ├── design-system-page.json  ← Master design system review page
+│   └── starter-kits/            ← Archived completed projects (portfolio)
+│       └── <project-name>/      ← Full site backup with screenshot
+│           ├── README.md, screenshot.png, design-tokens.json
+│           ├── brief.json, page-mapping.json
+│           └── home.json, header.json, footer.json
 └── projects/
     └── <project-name>/          ← One folder per client project
         ├── brief.json           ← Project requirements, content, branding
@@ -241,6 +247,7 @@ Level 1: PAGE SECTION (full-width container)
         "background_background": "classic",
         "background_color": "#FFFFFF",
         "padding": {"unit": "px", "top": "80", "right": "24", "bottom": "80", "left": "24", "isLinked": false},
+        "padding_tablet": {"unit": "px", "top": "64", "right": "24", "bottom": "64", "left": "24", "isLinked": false},
         "padding_mobile": {"unit": "px", "top": "48", "right": "16", "bottom": "48", "left": "16", "isLinked": false},
         "html_tag": "section"
     },
@@ -271,6 +278,8 @@ Level 1: PAGE SECTION (full-width container)
         "flex_direction": "row",
         "flex_wrap": "wrap",
         "flex_gap": {"column": "24", "row": "24", "unit": "px", "isLinked": true},
+        "flex_gap_tablet": {"column": "20", "row": "20", "unit": "px", "isLinked": true},
+        "flex_gap_mobile": {"column": "16", "row": "16", "unit": "px", "isLinked": true},
         "align_items": "stretch"
     },
     "elements": [ /* column containers or widgets */ ]
@@ -288,7 +297,9 @@ Level 1: PAGE SECTION (full-width container)
         "width_tablet": {"unit": "%", "size": 47, "sizes": []},
         "width_mobile": {"unit": "%", "size": 100, "sizes": []},
         "flex_direction": "column",
-        "padding": {"unit": "px", "top": "32", "right": "32", "bottom": "32", "left": "32", "isLinked": true}
+        "padding": {"unit": "px", "top": "32", "right": "32", "bottom": "32", "left": "32", "isLinked": true},
+        "padding_tablet": {"unit": "px", "top": "28", "right": "24", "bottom": "28", "left": "24", "isLinked": false},
+        "padding_mobile": {"unit": "px", "top": "24", "right": "20", "bottom": "24", "left": "20", "isLinked": false}
     },
     "elements": [ /* widgets */ ]
 }
@@ -374,6 +385,7 @@ Level 1: PAGE SECTION (full-width container)
         "typography_typography": "custom",
         "typography_font_family": "Inter",
         "typography_font_size": {"unit": "px", "size": 18, "sizes": []},
+        "typography_font_size_mobile": {"unit": "px", "size": 16, "sizes": []},
         "typography_line_height": {"unit": "em", "size": 1.8, "sizes": []}
     },
     "elements": []
@@ -394,7 +406,9 @@ Level 1: PAGE SECTION (full-width container)
         "border_radius": {"unit": "px", "top": "8", "right": "8", "bottom": "8", "left": "8", "isLinked": true},
         "typography_typography": "custom",
         "typography_font_weight": "600",
-        "button_background_hover_color": "#5A52D5"
+        "button_background_hover_color": "#5A52D5",
+        "text_padding": {"unit": "px", "top": "14", "right": "32", "bottom": "14", "left": "32", "isLinked": false},
+        "text_padding_mobile": {"unit": "px", "top": "12", "right": "24", "bottom": "12", "left": "24", "isLinked": false}
     },
     "elements": []
 }
@@ -568,13 +582,18 @@ Use these for icon widgets and icon-lists:
 - ALL padding, margin, gap values must be multiples of 8: `8, 16, 24, 32, 48, 64, 80, 96, 120`
 
 ### 5. Responsive Typography
-- H1, H2, and display headings MUST have `_tablet` and `_mobile` font size variants
+- H1, H2, H3, and display headings MUST have `_tablet` and `_mobile` font size variants
+- H4 headings MUST have `_mobile` font size variant (tablet optional)
+- Body text (16px+) MUST have `_mobile` font size variant
 - Example: `typography_font_size` = 36px, `typography_font_size_tablet` = 30px, `typography_font_size_mobile` = 24px
+- See Typography Scale table for exact sizes per level
 
 ### 6. Responsive Grid Items
 - Every column container must set `width`, `width_tablet`, and `width_mobile`
 - 3-column grid: 30% desktop → 47% tablet → 100% mobile
-- 2-column split: 55%/40% desktop → 100%/100% mobile
+- 2-column split: 55%/40% desktop → 100%/100% tablet → 100%/100% mobile
+- 2-column equal: 47%/47% desktop → 47%/47% tablet → 100%/100% mobile
+- Footer columns: brand col 100% tablet, utility cols 47% tablet, all 100% mobile
 
 ### 7. Boxed Content Width
 - Inner content containers should be `content_width: "boxed"` with `boxed_width: 1200`
@@ -607,16 +626,28 @@ Use these for icon widgets and icon-lists:
 - When creating a new page, also audit existing pages for links that should point to the new page
 
 ### 13. Responsive Design Priority
-- **Desktop first**, then tablet, then mobile — this is the development priority order
-- Desktop must look perfect before addressing tablet/mobile
-- Every section MUST have `padding_tablet` and `padding_mobile` variants
-- Every row layout must have `flex_gap_mobile` for tighter spacing on small screens
-- Text alignment: set `align_tablet` and `align_mobile` to `"center"` on split layouts that stack vertically
+- **Build responsive from the first JSON generation** — never build desktop-only and retrofit later
+- Desktop, tablet, and mobile properties are set simultaneously during initial build
+- Every section MUST have `padding` + `padding_tablet` + `padding_mobile`
+- Every flex row MUST have `flex_gap` + `flex_gap_tablet` + `flex_gap_mobile`
+- Every column/card MUST have `width` + `width_tablet` + `width_mobile`
+- Every card with padding MUST have `padding` + `padding_mobile`
+- Every button MUST have `text_padding` + `text_padding_mobile`
+- Every body text (16px+) MUST have `typography_font_size_mobile`
+- Split layouts (2-col that stacks): add `align_mobile: "center"` on headings, text, and buttons
+- See **Responsive Design Master Reference** section for complete property tables
 
 ### 14. No Special Unicode Characters
 - **NEVER use** em-dashes (`\u2014`), en-dashes (`\u2013`), curly quotes, or other special Unicode in JSON text
 - These render as mojibake (e.g., `\u00e2\u20ac\u201c`) on WordPress
 - Use plain hyphens `-`, straight quotes `"`, or HTML entities instead
+
+### 15. Project Archiving (Mandatory)
+- **Every completed project MUST be archived** as a starter kit in `templates/starter-kits/<project-name>/`
+- Archive AFTER the project is fully built, responsive, and approved by the user
+- Follow the complete **Project Archiving Checklist** below — no exceptions
+- The repo README portfolio section MUST be updated with every new project
+- This rule exists so the system builds a portfolio of real work and provides reusable design references
 
 ---
 
@@ -640,12 +671,110 @@ Use these for icon widgets and icon-lists:
 
 ## Section Spacing
 
-| Section Type | Padding Desktop | Padding Mobile |
-|-------------|----------------|----------------|
-| Hero | 120px top/bottom, 24px sides | 80px top/bottom, 16px sides |
-| Standard | 80px top/bottom, 24px sides | 48px top/bottom, 16px sides |
-| Compact/Stats | 48-64px top/bottom | 32-40px top/bottom |
-| CTA Banner | 64px top/bottom | 40px top/bottom |
+| Section Type | Padding Desktop | Padding Tablet | Padding Mobile |
+|-------------|----------------|----------------|----------------|
+| Hero | 120px top/bottom, 24px sides | 96px top/bottom, 24px sides | 80px top/bottom, 16px sides |
+| Standard | 80px top/bottom, 24px sides | 64px top/bottom, 24px sides | 48px top/bottom, 16px sides |
+| Compact/Stats | 48-64px top/bottom, 24px sides | 40-48px top/bottom, 24px sides | 32-40px top/bottom, 16px sides |
+| CTA Banner | 64px top/bottom, 24px sides | 48px top/bottom, 24px sides | 40px top/bottom, 16px sides |
+
+---
+
+## Responsive Design Master Reference (2026-02-25)
+
+**CRITICAL: Every page, header, and footer MUST be fully responsive from the first build.** Never build desktop-only and retrofit responsive later — it doubles the work. Apply ALL responsive properties during initial JSON generation.
+
+### Responsive Property Checklist by Element Type
+
+When building ANY element, always include the responsive variant properties listed below. This is NOT optional.
+
+#### Level 1 — Section Container
+| Property | Desktop | Tablet | Mobile |
+|----------|---------|--------|--------|
+| `padding` | `80px top/bottom, 24px sides` | `padding_tablet`: `64px top/bottom, 24px sides` | `padding_mobile`: `48px top/bottom, 16px sides` |
+
+#### Level 3 — Row Container (multi-column)
+| Property | Desktop | Tablet | Mobile |
+|----------|---------|--------|--------|
+| `flex_gap` | `24-48px` (per design) | `flex_gap_tablet`: reduce by ~33% | `flex_gap_mobile`: reduce by ~50% |
+
+**Gap scaling reference:**
+| Desktop Gap | Tablet Gap | Mobile Gap |
+|-------------|-----------|------------|
+| 48px | 32px | 24px |
+| 32px | 24px | 20px |
+| 24px | 20px | 16px |
+| 16px | 16px | 12px |
+
+#### Level 4 — Column / Card Container
+| Property | Desktop | Tablet | Mobile |
+|----------|---------|--------|--------|
+| `width` | Design size (30%, 45%, 50%, etc.) | `width_tablet`: See grid rules below | `width_mobile`: 100% (always full-width) |
+| `padding` | Design padding | `padding_tablet`: reduce by ~15% | `padding_mobile`: reduce by ~25-30% |
+
+**Column width rules for tablet:**
+| Desktop Layout | Tablet `width_tablet` | Mobile `width_mobile` |
+|---------------|----------------------|----------------------|
+| 3-col grid (30% each) | 47% (2 per row) | 100% (stacked) |
+| 2-col split (55%/40% or 50%/45%) | 100% / 100% (stacked) | 100% / 100% (stacked) |
+| 2-col equal (47%/47%) | 47% (keep side-by-side) | 100% (stacked) |
+| Sidebar layout (65%/30%) | 100% / 100% (stacked) | 100% / 100% (stacked) |
+| Footer 3-col (38%/25%/25%) | Col1: 100%, Col2+3: 47% | All: 100% (stacked) |
+
+#### Heading Widget (H1, H2, H3)
+| Property | Required Responsive |
+|----------|-------------------|
+| `typography_font_size` | **ALWAYS** add `typography_font_size_tablet` AND `typography_font_size_mobile` |
+| `align` | Add `align_mobile: "center"` on headings in split (2-column) layouts |
+
+Use Typography Scale table for exact sizing per heading level.
+
+#### Text Editor Widget (paragraphs, descriptions)
+| Property | Desktop | Mobile |
+|----------|---------|--------|
+| `typography_font_size` | 16-18px | `typography_font_size_mobile`: 15px |
+| `align` | as designed | `align_mobile: "center"` on split layouts |
+
+#### Button Widget
+| Property | Desktop | Mobile |
+|----------|---------|--------|
+| `text_padding` | `14px 32px` | `text_padding_mobile`: `12px 24px` |
+| `align` | as designed | `align_mobile: "center"` on split layouts |
+
+#### Counter Widget
+| Property | Desktop | Tablet | Mobile |
+|----------|---------|--------|--------|
+| `typography_font_size` (number) | 48px | `typography_font_size_tablet`: 40px | `typography_font_size_mobile`: 32px |
+| `typography_title_font_size` (title) | 20px | `typography_title_font_size_tablet`: 18px | `typography_title_font_size_mobile`: 10px |
+| Alignment | — | — | `title_horizontal_alignment_mobile: "center"`, `number_position_mobile: "center"` |
+
+### Header Responsive Requirements
+| Element | Desktop | Tablet | Mobile |
+|---------|---------|--------|--------|
+| Logo container `width` | 20-25% | Keep same | `width_mobile`: 28-35% |
+| Logo image `width` | Full size | Keep same | `width_mobile`: ~400px (or scaled) |
+| Nav menu | Visible | Often hidden (hamburger) | Hidden (hamburger) |
+| CTA container `width` | 20-25% | Keep same | `width_mobile`: 40-50% |
+| Section height | 64px | Keep same | Auto (let content flow) |
+
+### Footer Responsive Requirements
+| Element | Desktop | Tablet | Mobile |
+|---------|---------|--------|--------|
+| Section `padding` | 48px top, 24px sides | `padding_tablet`: 40px top, 20px sides | `padding_mobile`: 40px top, 16px sides |
+| Column 1 (brand) `width` | 38% | `width_tablet`: 100% | `width_mobile`: 100% |
+| Columns 2-3 `width` | 25% each | `width_tablet`: 47% (side-by-side) | `width_mobile`: 100% |
+| Row `flex_gap` | 32px | Keep same | `flex_gap_mobile`: 24px |
+| Copyright `font_size` | 13px | Keep same | `typography_font_size_mobile`: 12px |
+
+### Quick Rules Summary
+1. **EVERY** section: `padding` + `padding_tablet` + `padding_mobile`
+2. **EVERY** flex row: `flex_gap` + `flex_gap_tablet` + `flex_gap_mobile`
+3. **EVERY** column: `width` + `width_tablet` + `width_mobile`
+4. **EVERY** card/container with padding: `padding` + `padding_tablet` (optional) + `padding_mobile`
+5. **EVERY** H1-H3 heading: `font_size` + `font_size_tablet` + `font_size_mobile`
+6. **EVERY** body text (16px+): `font_size` + `font_size_mobile`
+7. **EVERY** button: `text_padding` + `text_padding_mobile`
+8. **EVERY** element in a 2-column split: `align_mobile: "center"` (text + buttons center when stacked)
 
 ---
 
@@ -653,53 +782,52 @@ Use these for icon widgets and icon-lists:
 
 ### Hero (dark, split layout)
 ```
-container (full, dark bg, 120px padding)
-  └── container (boxed 1200px, row, gap 48px)
-      ├── container (55% width, column) → overline + h1 + paragraph + button row
-      └── container (40% width) → image
+container (full, dark bg, padding + padding_tablet + padding_mobile)
+  └── container (boxed 1200px, row, gap + gap_tablet + gap_mobile)
+      ├── container (55% width, width_tablet:100%, width_mobile:100%) → overline + h1(+tablet+mobile sizes) + paragraph(+mobile size) + button row
+      └── container (40% width, width_tablet:100%, width_mobile:100%) → image
 ```
 
 ### Services Grid (3 columns)
 ```
-container (full, light bg, 80px padding)
+container (full, light bg, padding + padding_tablet + padding_mobile)
   └── container (boxed, column)
-      ├── overline heading + h2 + subtitle
-      └── container (row, wrap, gap 24px)
-          ├── card container (30% width) → icon + h3 + text
-          ├── card container (30% width) → icon + h3 + text
-          └── card container (30% width) → icon + h3 + text
+      ├── overline heading + h2(+tablet+mobile sizes) + subtitle(+mobile size)
+      └── container (row, wrap, gap + gap_tablet + gap_mobile)
+          ├── card (30%, width_tablet:47%, width_mobile:100%, padding + padding_mobile) → icon + h3(+mobile size) + text
+          ├── card (30%, width_tablet:47%, width_mobile:100%, padding + padding_mobile) → icon + h3(+mobile size) + text
+          └── card (30%, width_tablet:47%, width_mobile:100%, padding + padding_mobile) → icon + h3(+mobile size) + text
 ```
 
 ### CTA Banner (gradient)
 ```
-container (full, gradient bg, 64px padding, center aligned)
-  └── container (boxed narrow 800px, column, center)
-      ├── h2 (white)
-      ├── paragraph (white muted)
-      └── container (row, center) → button + button
+container (full, gradient bg, padding + padding_tablet + padding_mobile, center aligned)
+  └── container (boxed narrow 800px, column, center, gap + gap_mobile)
+      ├── h2 (white, +tablet+mobile sizes)
+      ├── paragraph (white muted, +mobile size)
+      └── container (row, center, gap + gap_mobile) → button(+padding_mobile) + button(+padding_mobile)
 ```
 
 ### Testimonials (3 cards)
 ```
-container (full, subtle bg, 80px padding)
+container (full, subtle bg, padding + padding_tablet + padding_mobile)
   └── container (boxed, column)
-      ├── section heading group
-      └── container (row, wrap, gap 24px)
-          ├── card (30%) → star-rating + quote text + name + role
-          ├── card (30%) → star-rating + quote text + name + role
-          └── card (30%) → star-rating + quote text + name + role
+      ├── section heading group (h2 +tablet+mobile sizes)
+      └── container (row, wrap, gap + gap_tablet + gap_mobile)
+          ├── card (30%, width_tablet:47%, width_mobile:100%, padding + padding_mobile) → star-rating + quote + name
+          ├── card (30%, width_tablet:47%, width_mobile:100%, padding + padding_mobile) → star-rating + quote + name
+          └── card (30%, width_tablet:47%, width_mobile:100%, padding + padding_mobile) → star-rating + quote + name
 ```
 
-### Footer (4 columns, dark)
+### Footer (3 columns, dark)
 ```
-container (full, dark bg, 64px padding)
+container (full, dark bg, padding + padding_tablet + padding_mobile)
   └── container (boxed, column)
-      ├── container (row, wrap, gap 32px)
-      │   ├── container (22%) → logo/about text
-      │   ├── container (22%) → "Quick Links" heading + icon-list
-      │   ├── container (22%) → "Services" heading + icon-list
-      │   └── container (22%) → "Contact" heading + icon-list
-      └── container (row, border-top) → copyright text
+      ├── container (row, wrap, gap + gap_mobile)
+      │   ├── container (38%, width_tablet:100%, width_mobile:100%) → brand heading(+mobile size) + description(+mobile size)
+      │   ├── container (25%, width_tablet:47%, width_mobile:100%) → "Contact" heading + icon-list
+      │   └── container (25%, width_tablet:47%, width_mobile:100%) → "Services" heading + icon-list
+      └── container (row, border-top) → copyright text(+mobile size)
 ```
 
 ---
@@ -754,9 +882,6 @@ When building pages for a project, get all content from:
 - [ ] All containers use `elType: "container"` (no section/column)
 - [ ] Every widget has `"elements": []`
 - [ ] No `style="..."` with double quotes in any HTML
-- [ ] H1/H2 headings have `_tablet` and `_mobile` font sizes
-- [ ] Grid items have `width`, `width_tablet`, `width_mobile`
-- [ ] All spacing is multiples of 8
 - [ ] Colors match the project brief
 - [ ] Fonts match the project brief (heading font + body font)
 - [ ] Inner containers are boxed at 1200px
@@ -764,8 +889,146 @@ When building pages for a project, get all content from:
 - [ ] File is valid JSON (no trailing commas, proper escaping)
 - [ ] **All button/link URLs verified** — only point to existing pages or valid anchors
 - [ ] **No special Unicode characters** (em-dash, curly quotes) — use plain ASCII
-- [ ] **Responsive variants set** — `padding_tablet`, `padding_mobile`, `flex_gap_mobile`, `align_mobile` on all relevant elements
 - [ ] **Counter widgets have both typography groups** — `typography_*` for number + `typography_title_*` for title
+
+### Responsive Checklist (MANDATORY — every element, first build)
+- [ ] **Every section**: `padding` + `padding_tablet` + `padding_mobile`
+- [ ] **Every flex row**: `flex_gap` + `flex_gap_tablet` + `flex_gap_mobile`
+- [ ] **Every column/card**: `width` + `width_tablet` + `width_mobile` (see Responsive Master Reference for sizing)
+- [ ] **Every card with padding**: `padding` + `padding_mobile` (and optionally `padding_tablet`)
+- [ ] **Every H1-H3 heading**: `typography_font_size` + `typography_font_size_tablet` + `typography_font_size_mobile`
+- [ ] **Every body text (16px+)**: `typography_font_size` + `typography_font_size_mobile`
+- [ ] **Every button**: `text_padding` + `text_padding_mobile`
+- [ ] **Split layouts that stack**: `align_mobile: "center"` on headings, text, and buttons in the stacking columns
+- [ ] **Grid items**: 3-col = 30%/47%/100%, 2-col split = stack to 100% on tablet, always 100% mobile
+
+---
+
+## Project Archiving Checklist (MANDATORY — every completed project)
+
+> **When to archive:** After the project is fully built, responsive, pushed to WordPress, and approved by the user. This is a **strict requirement** (Rule #15) — no project is considered complete until it is archived.
+
+### Retroactive Archiving (Old/Existing Projects)
+
+When archiving a project that was built previously and may not have local files:
+
+**Step 0a — Set up site connection** (if not already configured):
+Add the site to `config/sites.json` with the correct URL and API key.
+
+**Step 0b — Export all pages from WordPress:**
+```powershell
+# List all pages/templates to find IDs
+.\sync.ps1 -Site "<site-name>" -Action list
+
+# Export each page to a local JSON file
+.\sync.ps1 -Site "<site-name>" -Action get -PageId <HOME_ID> -TemplateFile ".\projects\<project>\pages\home.json"
+.\sync.ps1 -Site "<site-name>" -Action get -PageId <HEADER_ID> -TemplateFile ".\projects\<project>\pages\header.json"
+.\sync.ps1 -Site "<site-name>" -Action get -PageId <FOOTER_ID> -TemplateFile ".\projects\<project>\pages\footer.json"
+# Repeat for any other pages (about.json, services.json, etc.)
+```
+
+**Step 0c — Create `brief.json`** (if it doesn't exist):
+Read the exported page JSONs to extract the business name, tagline, colors, fonts, services, contact info, and content. Create a `brief.json` following the template in `templates/project-brief-template.json`.
+
+**Step 0d — Create `page-mapping.json`:**
+```json
+{
+    "header": <HEADER_TEMPLATE_ID>,
+    "footer": <FOOTER_TEMPLATE_ID>,
+    "home": <HOME_PAGE_ID>
+}
+```
+
+After completing Steps 0a-0d, continue with the standard archiving process below (Steps 1-8).
+
+### Step-by-Step Process
+
+**Step 1 — Create starter kit folder:**
+```
+templates/starter-kits/<project-name>/
+```
+
+**Step 2 — Copy all project files (raw, as-is):**
+| File | Source | Required |
+|------|--------|----------|
+| `home.json` (and any other page JSONs) | `projects/<project>/pages/` | YES |
+| `header.json` | `projects/<project>/pages/` | YES |
+| `footer.json` | `projects/<project>/pages/` | YES |
+| `brief.json` | `projects/<project>/` | YES |
+| `page-mapping.json` | `projects/<project>/` | YES |
+
+**Step 3 — Create `design-tokens.json`:**
+Extract from the actual project files:
+- All colors with usage notes (primary, dark, accent, light, CTA, text colors, borders)
+- Typography (heading font + weight, body font + weight, full scale with responsive sizes)
+- Spacing patterns (section padding, card padding, flex gaps — desktop/tablet/mobile)
+- Component definitions (header, footer, buttons, cards with specific values)
+- Page sections list (name, background color, layout pattern for each section)
+
+**Step 4 — Take a full-page homepage screenshot:**
+```powershell
+$path = "templates\starter-kits\<project-name>\screenshot.png"
+& "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu --window-size=1440,8000 --screenshot="$path" --hide-scrollbars --virtual-time-budget=10000 "<site-url>"
+```
+- Use Chrome headless with a tall viewport (8000px) to capture ALL sections
+- Save as `screenshot.png` in the starter kit folder
+- Verify the file is at least 500 KB (a full-page capture of a real site)
+
+**Step 5 — Create starter kit `README.md`:**
+Must include:
+- Project title and one-line description
+- Screenshot image (`![Project Name](screenshot.png)`)
+- "About This Project" table (client, industry, location, site type, live URL, build date)
+- "Design System" table (all color tokens + font tokens)
+- "Page Sections" numbered list with brief descriptions
+- "Files" table listing every file with size and description
+- "How to Use This Starter Kit" section (reference + starting point instructions)
+- "WordPress IDs" table for reference
+
+**Step 6 — Update repo `README.md` portfolio:**
+Add a new entry under "## Portfolio — Built With This System":
+```markdown
+### <Project Name>
+
+> **<Location> <Industry>** — <One-line description>
+
+<a href="templates/starter-kits/<project-name>/">
+  <img src="templates/starter-kits/<project-name>/screenshot.png" alt="<Project Name> Homepage" width="800">
+</a>
+
+| Detail | Value |
+|--------|-------|
+| **Industry** | <industry> |
+| **Location** | <location> |
+| **Type** | <site type> |
+| **Features** | <key features> |
+| **Design** | <fonts and color summary> |
+| **Starter Kit** | [`templates/starter-kits/<project-name>/`](templates/starter-kits/<project-name>/) |
+```
+
+**Step 7 — Update the changelog in CLAUDE.md:**
+Add a dated entry describing the archiving.
+
+**Step 8 — Verify the archive:**
+- [ ] All JSON files are valid and match the live site
+- [ ] Screenshot shows the full homepage (all sections visible)
+- [ ] design-tokens.json has all colors, fonts, spacing, and components
+- [ ] Starter kit README has screenshot, design system table, and file listing
+- [ ] Repo README portfolio section has the new project with embedded screenshot
+- [ ] No API keys, passwords, or secrets in any archived file
+
+### Starter Kit Folder Structure (Reference)
+```
+templates/starter-kits/<project-name>/
+├── README.md              ← Project showcase with screenshot
+├── screenshot.png         ← Full-page homepage capture
+├── design-tokens.json     ← Colors, fonts, spacing, components
+├── brief.json             ← Complete project brief
+├── page-mapping.json      ← WordPress template/page IDs
+├── home.json              ← Homepage (or other page JSONs)
+├── header.json            ← Header template
+└── footer.json            ← Footer template
+```
 
 ---
 
@@ -930,6 +1193,8 @@ The log directory is protected with `.htaccess` (Deny from all) and `index.php`.
 | 2026-02-15 | Counter widget dual typography groups | Counter has TWO typography groups: `typography_*` for the number, `typography_title_*` for the title. Also `title_horizontal_alignment_mobile` and `number_position_mobile` for mobile centering. Learned from manual fix + export |
 | 2026-02-15 | Added interlinking & responsive rules | New strict rules #12 (button/link interlinking), #13 (responsive priority: desktop > tablet > mobile), #14 (no Unicode). Updated checklist with 4 new items. Fixed broken `/about-us/` link in footer and `#consultation` anchor in homepage |
 | 2026-02-15 | Added GitHub sync workflow to CLAUDE.md | Full step-by-step process for syncing project learnings to the universal repo. Added README update as mandatory step. Updated README.md with v1.2.0 features, full command reference, changelog, and universal vision |
+| 2026-02-25 | **Project archiving system** | Added strict rule #15 (mandatory project archiving). Added "Project Archiving Checklist" section with 8-step process. Added self-improvement trigger for completed projects. Updated repo README with Portfolio section and starter-kit structure. Created first starter kit: Trogen Facility Services (home, header, footer, brief, design-tokens, screenshot). |
+| 2026-02-25 | **Major responsive design overhaul** | Added "Responsive Design Master Reference" section with complete property checklists per element type (sections, rows, columns, cards, headings, text, buttons, counters, headers, footers). Updated ALL container examples (Level 1, 3, 4) with `padding_tablet`, `flex_gap_tablet/mobile`, `padding_mobile`. Updated widget examples (text-editor, button) with responsive properties. Updated Section Spacing table with Tablet column. Updated Common Section Patterns with responsive annotations. Rewrote delivery checklist with specific responsive sub-checklist. Updated strict rules #5, #6, #13 to mandate responsive-from-first-build. **Root cause:** Trogen Facility Services project required 40+ responsive properties retrofitted across 9 sections + footer because they weren't included in the initial build. This overhaul ensures all future projects are fully responsive from the first JSON generation. |
 
 ---
 
