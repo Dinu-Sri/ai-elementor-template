@@ -1,0 +1,1019 @@
+﻿{
+    "title":  "Site Footer",
+    "page_settings":  "",
+    "elementor_data":  [
+                           {
+                               "elType":  "container",
+                               "isInner":  false,
+                               "settings":  {
+                                                "content_width":  "full",
+                                                "flex_direction":  "column",
+                                                "background_background":  "classic",
+                                                "background_color":  "#0A1628",
+                                                "padding":  {
+                                                                "unit":  "px",
+                                                                "top":  "64",
+                                                                "right":  "24",
+                                                                "bottom":  "0",
+                                                                "left":  "24",
+                                                                "isLinked":  false
+                                                            },
+                                                "padding_tablet":  {
+                                                                       "unit":  "px",
+                                                                       "top":  "48",
+                                                                       "right":  "16",
+                                                                       "bottom":  "0",
+                                                                       "left":  "16",
+                                                                       "isLinked":  false
+                                                                   },
+                                                "padding_mobile":  {
+                                                                       "unit":  "px",
+                                                                       "top":  "40",
+                                                                       "right":  "16",
+                                                                       "bottom":  "0",
+                                                                       "left":  "16",
+                                                                       "isLinked":  false
+                                                                   },
+                                                "html_tag":  "footer"
+                                            },
+                               "elements":  [
+                                                {
+                                                    "elType":  "container",
+                                                    "isInner":  true,
+                                                    "settings":  {
+                                                                     "content_width":  "boxed",
+                                                                     "boxed_width":  {
+                                                                                         "unit":  "px",
+                                                                                         "size":  1200,
+                                                                                         "sizes":  [
+
+                                                                                                   ]
+                                                                                     },
+                                                                     "flex_direction":  "column"
+                                                                 },
+                                                    "elements":  [
+                                                                     {
+                                                                         "elType":  "container",
+                                                                         "isInner":  true,
+                                                                         "settings":  {
+                                                                                          "flex_direction":  "row",
+                                                                                          "flex_wrap":  "wrap",
+                                                                                          "flex_gap":  {
+                                                                                                           "column":  "24",
+                                                                                                           "row":  "40",
+                                                                                                           "unit":  "px",
+                                                                                                           "isLinked":  false
+                                                                                                       },
+                                                                                          "flex_gap_mobile":  {
+                                                                                                                  "column":  "16",
+                                                                                                                  "row":  "32",
+                                                                                                                  "unit":  "px",
+                                                                                                                  "isLinked":  false
+                                                                                                              },
+                                                                                          "align_items":  "flex-start",
+                                                                                          "margin":  {
+                                                                                                         "unit":  "px",
+                                                                                                         "top":  "0",
+                                                                                                         "right":  "0",
+                                                                                                         "bottom":  "48",
+                                                                                                         "left":  "0",
+                                                                                                         "isLinked":  false
+                                                                                                     },
+                                                                                          "margin_mobile":  {
+                                                                                                                "unit":  "px",
+                                                                                                                "top":  "0",
+                                                                                                                "right":  "0",
+                                                                                                                "bottom":  "32",
+                                                                                                                "left":  "0",
+                                                                                                                "isLinked":  false
+                                                                                                            }
+                                                                                      },
+                                                                         "elements":  [
+                                                                                          {
+                                                                                              "elType":  "container",
+                                                                                              "isInner":  true,
+                                                                                              "settings":  {
+                                                                                                               "content_width":  "full",
+                                                                                                               "width":  {
+                                                                                                                             "unit":  "%",
+                                                                                                                             "size":  30,
+                                                                                                                             "sizes":  [
+
+                                                                                                                                       ]
+                                                                                                                         },
+                                                                                                               "width_tablet":  {
+                                                                                                                                    "unit":  "%",
+                                                                                                                                    "size":  100,
+                                                                                                                                    "sizes":  [
+
+                                                                                                                                              ]
+                                                                                                                                },
+                                                                                                               "width_mobile":  {
+                                                                                                                                    "unit":  "%",
+                                                                                                                                    "size":  100,
+                                                                                                                                    "sizes":  [
+
+                                                                                                                                              ]
+                                                                                                                                },
+                                                                                                               "flex_direction":  "column",
+                                                                                                               "flex_gap":  {
+                                                                                                                                "column":  "16",
+                                                                                                                                "row":  "16",
+                                                                                                                                "unit":  "px",
+                                                                                                                                "isLinked":  true
+                                                                                                                            },
+                                                                                                               "align_items":  "flex-start",
+                                                                                                               "align_items_tablet":  "center",
+                                                                                                               "align_items_mobile":  "center"
+                                                                                                           },
+                                                                                              "elements":  [
+                                                                                                               {
+                                                                                                                   "elType":  "widget",
+                                                                                                                   "widgetType":  "image",
+                                                                                                                   "settings":  {
+                                                                                                                                    "image":  {
+                                                                                                                                                  "url":  "https://elemento.deshtech.lk/wp-content/uploads/2026/02/cropped-czxvjzxklcv.webp",
+                                                                                                                                                  "id":  ""
+                                                                                                                                              },
+                                                                                                                                    "image_size":  "full",
+                                                                                                                                    "width":  {
+                                                                                                                                                  "unit":  "px",
+                                                                                                                                                  "size":  150,
+                                                                                                                                                  "sizes":  [
+
+                                                                                                                                                            ]
+                                                                                                                                              },
+                                                                                                                                    "width_mobile":  {
+                                                                                                                                                         "unit":  "px",
+                                                                                                                                                         "size":  120,
+                                                                                                                                                         "sizes":  [
+
+                                                                                                                                                                   ]
+                                                                                                                                                     },
+                                                                                                                                    "align":  "left",
+                                                                                                                                    "align_tablet":  "center",
+                                                                                                                                    "align_mobile":  "center",
+                                                                                                                                    "border_radius":  {
+                                                                                                                                                          "unit":  "px",
+                                                                                                                                                          "top":  "12",
+                                                                                                                                                          "right":  "12",
+                                                                                                                                                          "bottom":  "12",
+                                                                                                                                                          "left":  "12",
+                                                                                                                                                          "isLinked":  true
+                                                                                                                                                      },
+                                                                                                                                    "border_border":  "solid",
+                                                                                                                                    "border_width":  {
+                                                                                                                                                         "unit":  "px",
+                                                                                                                                                         "top":  "1",
+                                                                                                                                                         "right":  "1",
+                                                                                                                                                         "bottom":  "1",
+                                                                                                                                                         "left":  "1",
+                                                                                                                                                         "isLinked":  true
+                                                                                                                                                     },
+                                                                                                                                    "border_color":  "rgba(255,255,255,0.15)",
+                                                                                                                                    "link_to":  "custom",
+                                                                                                                                    "link":  {
+                                                                                                                                                 "url":  "/",
+                                                                                                                                                 "is_external":  false,
+                                                                                                                                                 "nofollow":  false
+                                                                                                                                             },
+                                                                                                                                    "image_border_border":  "solid",
+                                                                                                                                    "image_border_width":  {
+                                                                                                                                                               "unit":  "px",
+                                                                                                                                                               "top":  "16",
+                                                                                                                                                               "right":  "16",
+                                                                                                                                                               "bottom":  "16",
+                                                                                                                                                               "left":  "16",
+                                                                                                                                                               "isLinked":  true
+                                                                                                                                                           },
+                                                                                                                                    "image_border_width_mobile":  {
+                                                                                                                                                                      "unit":  "px",
+                                                                                                                                                                      "top":  "12",
+                                                                                                                                                                      "right":  "12",
+                                                                                                                                                                      "bottom":  "12",
+                                                                                                                                                                      "left":  "12",
+                                                                                                                                                                      "isLinked":  true
+                                                                                                                                                                  },
+                                                                                                                                    "image_border_radius":  {
+                                                                                                                                                                "unit":  "px",
+                                                                                                                                                                "top":  "10",
+                                                                                                                                                                "right":  "10",
+                                                                                                                                                                "bottom":  "10",
+                                                                                                                                                                "left":  "10",
+                                                                                                                                                                "isLinked":  true
+                                                                                                                                                            },
+                                                                                                                                    "__globals__":  {
+                                                                                                                                                        "image_border_color":  "globals/colors?id=background"
+                                                                                                                                                    }
+                                                                                                                                },
+                                                                                                                   "elements":  [
+
+                                                                                                                                ],
+                                                                                                                   "id":  "a76f927"
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "elType":  "widget",
+                                                                                                                   "widgetType":  "text-editor",
+                                                                                                                   "settings":  {
+                                                                                                                                    "editor":  "\u003cp\u003eExpert guidance for students seeking international education and professionals pursuing global career opportunities.\u003c/p\u003e",
+                                                                                                                                    "align_tablet":  "center",
+                                                                                                                                    "align_mobile":  "center",
+                                                                                                                                    "text_color":  "#B0BEC5",
+                                                                                                                                    "typography_typography":  "custom",
+                                                                                                                                    "typography_font_family":  "DM Sans",
+                                                                                                                                    "typography_font_size":  {
+                                                                                                                                                                 "unit":  "px",
+                                                                                                                                                                 "size":  14,
+                                                                                                                                                                 "sizes":  [
+
+                                                                                                                                                                           ]
+                                                                                                                                                             },
+                                                                                                                                    "typography_font_size_mobile":  {
+                                                                                                                                                                        "unit":  "px",
+                                                                                                                                                                        "size":  13,
+                                                                                                                                                                        "sizes":  [
+
+                                                                                                                                                                                  ]
+                                                                                                                                                                    },
+                                                                                                                                    "typography_line_height":  {
+                                                                                                                                                                   "unit":  "em",
+                                                                                                                                                                   "size":  1.7,
+                                                                                                                                                                   "sizes":  [
+
+                                                                                                                                                                             ]
+                                                                                                                                                               }
+                                                                                                                                },
+                                                                                                                   "elements":  [
+
+                                                                                                                                ],
+                                                                                                                   "id":  "27f06b8"
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "elType":  "widget",
+                                                                                                                   "widgetType":  "social-icons",
+                                                                                                                   "settings":  {
+                                                                                                                                    "social_icon_list":  [
+                                                                                                                                                             {
+                                                                                                                                                                 "social_icon":  {
+                                                                                                                                                                                     "value":  "fab fa-facebook-f",
+                                                                                                                                                                                     "library":  "fa-brands"
+                                                                                                                                                                                 },
+                                                                                                                                                                 "link":  {
+                                                                                                                                                                              "url":  "#",
+                                                                                                                                                                              "is_external":  true,
+                                                                                                                                                                              "nofollow":  false
+                                                                                                                                                                          },
+                                                                                                                                                                 "_id":  "fb1"
+                                                                                                                                                             },
+                                                                                                                                                             {
+                                                                                                                                                                 "social_icon":  {
+                                                                                                                                                                                     "value":  "fab fa-instagram",
+                                                                                                                                                                                     "library":  "fa-brands"
+                                                                                                                                                                                 },
+                                                                                                                                                                 "link":  {
+                                                                                                                                                                              "url":  "#",
+                                                                                                                                                                              "is_external":  true,
+                                                                                                                                                                              "nofollow":  false
+                                                                                                                                                                          },
+                                                                                                                                                                 "_id":  "ig1"
+                                                                                                                                                             },
+                                                                                                                                                             {
+                                                                                                                                                                 "social_icon":  {
+                                                                                                                                                                                     "value":  "fab fa-linkedin-in",
+                                                                                                                                                                                     "library":  "fa-brands"
+                                                                                                                                                                                 },
+                                                                                                                                                                 "link":  {
+                                                                                                                                                                              "url":  "#",
+                                                                                                                                                                              "is_external":  true,
+                                                                                                                                                                              "nofollow":  false
+                                                                                                                                                                          },
+                                                                                                                                                                 "_id":  "li1"
+                                                                                                                                                             }
+                                                                                                                                                         ],
+                                                                                                                                    "shape":  "circle",
+                                                                                                                                    "icon_color":  "custom",
+                                                                                                                                    "icon_primary_color":  "#1A3050",
+                                                                                                                                    "icon_secondary_color":  "#B0BEC5",
+                                                                                                                                    "icon_primary_color_hover":  "#C49A3C",
+                                                                                                                                    "icon_secondary_color_hover":  "#FFFFFF",
+                                                                                                                                    "icon_size":  {
+                                                                                                                                                      "unit":  "px",
+                                                                                                                                                      "size":  14,
+                                                                                                                                                      "sizes":  [
+
+                                                                                                                                                                ]
+                                                                                                                                                  },
+                                                                                                                                    "align":  "left",
+                                                                                                                                    "align_tablet":  "center",
+                                                                                                                                    "align_mobile":  "center"
+                                                                                                                                },
+                                                                                                                   "elements":  [
+
+                                                                                                                                ],
+                                                                                                                   "id":  "aa48b47"
+                                                                                                               }
+                                                                                                           ],
+                                                                                              "id":  "2649a87"
+                                                                                          },
+                                                                                          {
+                                                                                              "elType":  "container",
+                                                                                              "isInner":  true,
+                                                                                              "settings":  {
+                                                                                                               "content_width":  "full",
+                                                                                                               "width":  {
+                                                                                                                             "unit":  "%",
+                                                                                                                             "size":  18,
+                                                                                                                             "sizes":  [
+
+                                                                                                                                       ]
+                                                                                                                         },
+                                                                                                               "width_tablet":  {
+                                                                                                                                    "unit":  "%",
+                                                                                                                                    "size":  28,
+                                                                                                                                    "sizes":  [
+
+                                                                                                                                              ]
+                                                                                                                                },
+                                                                                                               "width_mobile":  {
+                                                                                                                                    "unit":  "%",
+                                                                                                                                    "size":  46,
+                                                                                                                                    "sizes":  [
+
+                                                                                                                                              ]
+                                                                                                                                },
+                                                                                                               "flex_direction":  "column",
+                                                                                                               "flex_gap":  {
+                                                                                                                                "column":  "16",
+                                                                                                                                "row":  "16",
+                                                                                                                                "unit":  "px",
+                                                                                                                                "isLinked":  true
+                                                                                                                            },
+                                                                                                               "flex_gap_mobile":  {
+                                                                                                                                       "column":  "12",
+                                                                                                                                       "row":  "12",
+                                                                                                                                       "unit":  "px",
+                                                                                                                                       "isLinked":  true
+                                                                                                                                   }
+                                                                                                           },
+                                                                                              "elements":  [
+                                                                                                               {
+                                                                                                                   "elType":  "widget",
+                                                                                                                   "widgetType":  "heading",
+                                                                                                                   "settings":  {
+                                                                                                                                    "title":  "Quick Links",
+                                                                                                                                    "header_size":  "h4",
+                                                                                                                                    "title_color":  "#FFFFFF",
+                                                                                                                                    "typography_typography":  "custom",
+                                                                                                                                    "typography_font_family":  "Playfair Display",
+                                                                                                                                    "typography_font_size":  {
+                                                                                                                                                                 "unit":  "px",
+                                                                                                                                                                 "size":  18,
+                                                                                                                                                                 "sizes":  [
+
+                                                                                                                                                                           ]
+                                                                                                                                                             },
+                                                                                                                                    "typography_font_size_mobile":  {
+                                                                                                                                                                        "unit":  "px",
+                                                                                                                                                                        "size":  16,
+                                                                                                                                                                        "sizes":  [
+
+                                                                                                                                                                                  ]
+                                                                                                                                                                    },
+                                                                                                                                    "typography_font_weight":  "600",
+                                                                                                                                    "typography_line_height":  {
+                                                                                                                                                                   "unit":  "em",
+                                                                                                                                                                   "size":  1.3,
+                                                                                                                                                                   "sizes":  [
+
+                                                                                                                                                                             ]
+                                                                                                                                                               }
+                                                                                                                                },
+                                                                                                                   "elements":  [
+
+                                                                                                                                ],
+                                                                                                                   "id":  "fe9ef56"
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "elType":  "widget",
+                                                                                                                   "widgetType":  "icon-list",
+                                                                                                                   "settings":  {
+                                                                                                                                    "icon_list":  [
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Home",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "ql1"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "About Us",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/about/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "ql2"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Education",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/education/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "ql3"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Recruitment",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/recruitment/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "ql4"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Employers",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/employers/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "ql7"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Consultation",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/book-consultation/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "ql5"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Contact",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/contact/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "ql6"
+                                                                                                                                                      }
+                                                                                                                                                  ],
+                                                                                                                                    "icon_color":  "#C49A3C",
+                                                                                                                                    "text_color":  "#B0BEC5",
+                                                                                                                                    "text_color_hover":  "#C49A3C",
+                                                                                                                                    "icon_size":  {
+                                                                                                                                                      "unit":  "px",
+                                                                                                                                                      "size":  10,
+                                                                                                                                                      "sizes":  [
+
+                                                                                                                                                                ]
+                                                                                                                                                  },
+                                                                                                                                    "space_between":  {
+                                                                                                                                                          "unit":  "px",
+                                                                                                                                                          "size":  12,
+                                                                                                                                                          "sizes":  [
+
+                                                                                                                                                                    ]
+                                                                                                                                                      },
+                                                                                                                                    "space_between_mobile":  {
+                                                                                                                                                                 "unit":  "px",
+                                                                                                                                                                 "size":  10,
+                                                                                                                                                                 "sizes":  [
+
+                                                                                                                                                                           ]
+                                                                                                                                                             },
+                                                                                                                                    "typography_typography":  "custom",
+                                                                                                                                    "typography_font_family":  "DM Sans",
+                                                                                                                                    "typography_font_size":  {
+                                                                                                                                                                 "unit":  "px",
+                                                                                                                                                                 "size":  14,
+                                                                                                                                                                 "sizes":  [
+
+                                                                                                                                                                           ]
+                                                                                                                                                             },
+                                                                                                                                    "typography_font_size_mobile":  {
+                                                                                                                                                                        "unit":  "px",
+                                                                                                                                                                        "size":  13,
+                                                                                                                                                                        "sizes":  [
+
+                                                                                                                                                                                  ]
+                                                                                                                                                                    }
+                                                                                                                                },
+                                                                                                                   "elements":  [
+
+                                                                                                                                ],
+                                                                                                                   "id":  "8285f15"
+                                                                                                               }
+                                                                                                           ],
+                                                                                              "id":  "136154f"
+                                                                                          },
+                                                                                          {
+                                                                                              "elType":  "container",
+                                                                                              "isInner":  true,
+                                                                                              "settings":  {
+                                                                                                               "content_width":  "full",
+                                                                                                               "width":  {
+                                                                                                                             "unit":  "%",
+                                                                                                                             "size":  20,
+                                                                                                                             "sizes":  [
+
+                                                                                                                                       ]
+                                                                                                                         },
+                                                                                                               "width_tablet":  {
+                                                                                                                                    "unit":  "%",
+                                                                                                                                    "size":  28,
+                                                                                                                                    "sizes":  [
+
+                                                                                                                                              ]
+                                                                                                                                },
+                                                                                                               "width_mobile":  {
+                                                                                                                                    "unit":  "%",
+                                                                                                                                    "size":  46,
+                                                                                                                                    "sizes":  [
+
+                                                                                                                                              ]
+                                                                                                                                },
+                                                                                                               "flex_direction":  "column",
+                                                                                                               "flex_gap":  {
+                                                                                                                                "column":  "16",
+                                                                                                                                "row":  "16",
+                                                                                                                                "unit":  "px",
+                                                                                                                                "isLinked":  true
+                                                                                                                            },
+                                                                                                               "flex_gap_mobile":  {
+                                                                                                                                       "column":  "12",
+                                                                                                                                       "row":  "12",
+                                                                                                                                       "unit":  "px",
+                                                                                                                                       "isLinked":  true
+                                                                                                                                   }
+                                                                                                           },
+                                                                                              "elements":  [
+                                                                                                               {
+                                                                                                                   "elType":  "widget",
+                                                                                                                   "widgetType":  "heading",
+                                                                                                                   "settings":  {
+                                                                                                                                    "title":  "Our Services",
+                                                                                                                                    "header_size":  "h4",
+                                                                                                                                    "title_color":  "#FFFFFF",
+                                                                                                                                    "typography_typography":  "custom",
+                                                                                                                                    "typography_font_family":  "Playfair Display",
+                                                                                                                                    "typography_font_size":  {
+                                                                                                                                                                 "unit":  "px",
+                                                                                                                                                                 "size":  18,
+                                                                                                                                                                 "sizes":  [
+
+                                                                                                                                                                           ]
+                                                                                                                                                             },
+                                                                                                                                    "typography_font_size_mobile":  {
+                                                                                                                                                                        "unit":  "px",
+                                                                                                                                                                        "size":  16,
+                                                                                                                                                                        "sizes":  [
+
+                                                                                                                                                                                  ]
+                                                                                                                                                                    },
+                                                                                                                                    "typography_font_weight":  "600",
+                                                                                                                                    "typography_line_height":  {
+                                                                                                                                                                   "unit":  "em",
+                                                                                                                                                                   "size":  1.3,
+                                                                                                                                                                   "sizes":  [
+
+                                                                                                                                                                             ]
+                                                                                                                                                               }
+                                                                                                                                },
+                                                                                                                   "elements":  [
+
+                                                                                                                                ],
+                                                                                                                   "id":  "9c8c59d"
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "elType":  "widget",
+                                                                                                                   "widgetType":  "icon-list",
+                                                                                                                   "settings":  {
+                                                                                                                                    "icon_list":  [
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Study in UK",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/education/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "sv1"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Study in Canada",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/education/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "sv2"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Study in USA",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/education/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "sv3"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Study in Australia",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/education/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "sv4"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Study in Europe",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/education/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "sv5"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Job Seeker Support",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-chevron-right",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "/recruitment/",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "sv6"
+                                                                                                                                                      }
+                                                                                                                                                  ],
+                                                                                                                                    "icon_color":  "#C49A3C",
+                                                                                                                                    "text_color":  "#B0BEC5",
+                                                                                                                                    "text_color_hover":  "#C49A3C",
+                                                                                                                                    "icon_size":  {
+                                                                                                                                                      "unit":  "px",
+                                                                                                                                                      "size":  10,
+                                                                                                                                                      "sizes":  [
+
+                                                                                                                                                                ]
+                                                                                                                                                  },
+                                                                                                                                    "space_between":  {
+                                                                                                                                                          "unit":  "px",
+                                                                                                                                                          "size":  12,
+                                                                                                                                                          "sizes":  [
+
+                                                                                                                                                                    ]
+                                                                                                                                                      },
+                                                                                                                                    "space_between_mobile":  {
+                                                                                                                                                                 "unit":  "px",
+                                                                                                                                                                 "size":  10,
+                                                                                                                                                                 "sizes":  [
+
+                                                                                                                                                                           ]
+                                                                                                                                                             },
+                                                                                                                                    "typography_typography":  "custom",
+                                                                                                                                    "typography_font_family":  "DM Sans",
+                                                                                                                                    "typography_font_size":  {
+                                                                                                                                                                 "unit":  "px",
+                                                                                                                                                                 "size":  14,
+                                                                                                                                                                 "sizes":  [
+
+                                                                                                                                                                           ]
+                                                                                                                                                             },
+                                                                                                                                    "typography_font_size_mobile":  {
+                                                                                                                                                                        "unit":  "px",
+                                                                                                                                                                        "size":  13,
+                                                                                                                                                                        "sizes":  [
+
+                                                                                                                                                                                  ]
+                                                                                                                                                                    }
+                                                                                                                                },
+                                                                                                                   "elements":  [
+
+                                                                                                                                ],
+                                                                                                                   "id":  "44a2f23"
+                                                                                                               }
+                                                                                                           ],
+                                                                                              "id":  "7795420"
+                                                                                          },
+                                                                                          {
+                                                                                              "elType":  "container",
+                                                                                              "isInner":  true,
+                                                                                              "settings":  {
+                                                                                                               "content_width":  "full",
+                                                                                                               "width":  {
+                                                                                                                             "unit":  "%",
+                                                                                                                             "size":  24,
+                                                                                                                             "sizes":  [
+
+                                                                                                                                       ]
+                                                                                                                         },
+                                                                                                               "width_tablet":  {
+                                                                                                                                    "unit":  "%",
+                                                                                                                                    "size":  34,
+                                                                                                                                    "sizes":  [
+
+                                                                                                                                              ]
+                                                                                                                                },
+                                                                                                               "width_mobile":  {
+                                                                                                                                    "unit":  "%",
+                                                                                                                                    "size":  100,
+                                                                                                                                    "sizes":  [
+
+                                                                                                                                              ]
+                                                                                                                                },
+                                                                                                               "flex_direction":  "column",
+                                                                                                               "flex_gap":  {
+                                                                                                                                "column":  "16",
+                                                                                                                                "row":  "16",
+                                                                                                                                "unit":  "px",
+                                                                                                                                "isLinked":  true
+                                                                                                                            },
+                                                                                                               "flex_gap_mobile":  {
+                                                                                                                                       "column":  "12",
+                                                                                                                                       "row":  "12",
+                                                                                                                                       "unit":  "px",
+                                                                                                                                       "isLinked":  true
+                                                                                                                                   }
+                                                                                                           },
+                                                                                              "elements":  [
+                                                                                                               {
+                                                                                                                   "elType":  "widget",
+                                                                                                                   "widgetType":  "heading",
+                                                                                                                   "settings":  {
+                                                                                                                                    "title":  "Get In Touch",
+                                                                                                                                    "header_size":  "h4",
+                                                                                                                                    "title_color":  "#FFFFFF",
+                                                                                                                                    "typography_typography":  "custom",
+                                                                                                                                    "typography_font_family":  "Playfair Display",
+                                                                                                                                    "typography_font_size":  {
+                                                                                                                                                                 "unit":  "px",
+                                                                                                                                                                 "size":  18,
+                                                                                                                                                                 "sizes":  [
+
+                                                                                                                                                                           ]
+                                                                                                                                                             },
+                                                                                                                                    "typography_font_size_mobile":  {
+                                                                                                                                                                        "unit":  "px",
+                                                                                                                                                                        "size":  16,
+                                                                                                                                                                        "sizes":  [
+
+                                                                                                                                                                                  ]
+                                                                                                                                                                    },
+                                                                                                                                    "typography_font_weight":  "600",
+                                                                                                                                    "typography_line_height":  {
+                                                                                                                                                                   "unit":  "em",
+                                                                                                                                                                   "size":  1.3,
+                                                                                                                                                                   "sizes":  [
+
+                                                                                                                                                                             ]
+                                                                                                                                                               }
+                                                                                                                                },
+                                                                                                                   "elements":  [
+
+                                                                                                                                ],
+                                                                                                                   "id":  "2e9ad79"
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "elType":  "widget",
+                                                                                                                   "widgetType":  "icon-list",
+                                                                                                                   "settings":  {
+                                                                                                                                    "icon_list":  [
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "info@infiniteglobalrecruitment.co.uk",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-envelope",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "mailto:info@infiniteglobalrecruitment.co.uk",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "ct1"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "+44 7450 719 188",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-phone",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "link":  {
+                                                                                                                                                                       "url":  "tel:+447450719188",
+                                                                                                                                                                       "is_external":  false,
+                                                                                                                                                                       "nofollow":  false
+                                                                                                                                                                   },
+                                                                                                                                                          "_id":  "ct4"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Image Court, 328-334 Molesey Road, Hersham, Surrey, KT12 3LT",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-map-marker-alt",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "_id":  "ct5"
+                                                                                                                                                      },
+                                                                                                                                                      {
+                                                                                                                                                          "text":  "Mon - Fri: 9:00 AM - 5:00 PM",
+                                                                                                                                                          "selected_icon":  {
+                                                                                                                                                                                "value":  "fas fa-clock",
+                                                                                                                                                                                "library":  "fa-solid"
+                                                                                                                                                                            },
+                                                                                                                                                          "_id":  "ct2"
+                                                                                                                                                      }
+                                                                                                                                                  ],
+                                                                                                                                    "icon_color":  "#C49A3C",
+                                                                                                                                    "text_color":  "#B0BEC5",
+                                                                                                                                    "text_color_hover":  "#C49A3C",
+                                                                                                                                    "icon_size":  {
+                                                                                                                                                      "unit":  "px",
+                                                                                                                                                      "size":  14,
+                                                                                                                                                      "sizes":  [
+
+                                                                                                                                                                ]
+                                                                                                                                                  },
+                                                                                                                                    "space_between":  {
+                                                                                                                                                          "unit":  "px",
+                                                                                                                                                          "size":  12,
+                                                                                                                                                          "sizes":  [
+
+                                                                                                                                                                    ]
+                                                                                                                                                      },
+                                                                                                                                    "space_between_mobile":  {
+                                                                                                                                                                 "unit":  "px",
+                                                                                                                                                                 "size":  10,
+                                                                                                                                                                 "sizes":  [
+
+                                                                                                                                                                           ]
+                                                                                                                                                             },
+                                                                                                                                    "typography_typography":  "custom",
+                                                                                                                                    "typography_font_family":  "DM Sans",
+                                                                                                                                    "typography_font_size":  {
+                                                                                                                                                                 "unit":  "px",
+                                                                                                                                                                 "size":  14,
+                                                                                                                                                                 "sizes":  [
+
+                                                                                                                                                                           ]
+                                                                                                                                                             },
+                                                                                                                                    "typography_font_size_mobile":  {
+                                                                                                                                                                        "unit":  "px",
+                                                                                                                                                                        "size":  13,
+                                                                                                                                                                        "sizes":  [
+
+                                                                                                                                                                                  ]
+                                                                                                                                                                    }
+                                                                                                                                },
+                                                                                                                   "elements":  [
+
+                                                                                                                                ],
+                                                                                                                   "id":  "c62b403"
+                                                                                                               }
+                                                                                                           ],
+                                                                                              "id":  "a4541ea"
+                                                                                          }
+                                                                                      ],
+                                                                         "id":  "d069c03"
+                                                                     },
+                                                                     {
+                                                                         "elType":  "container",
+                                                                         "isInner":  true,
+                                                                         "settings":  {
+                                                                                          "flex_direction":  "row",
+                                                                                          "flex_justify_content":  "center",
+                                                                                          "align_items":  "center",
+                                                                                          "border_border":  "solid",
+                                                                                          "border_width":  {
+                                                                                                               "unit":  "px",
+                                                                                                               "top":  "1",
+                                                                                                               "right":  "0",
+                                                                                                               "bottom":  "0",
+                                                                                                               "left":  "0",
+                                                                                                               "isLinked":  false
+                                                                                                           },
+                                                                                          "border_color":  "rgba(255,255,255,0.1)",
+                                                                                          "padding":  {
+                                                                                                          "unit":  "px",
+                                                                                                          "top":  "24",
+                                                                                                          "right":  "0",
+                                                                                                          "bottom":  "24",
+                                                                                                          "left":  "0",
+                                                                                                          "isLinked":  false
+                                                                                                      },
+                                                                                          "padding_mobile":  {
+                                                                                                                 "unit":  "px",
+                                                                                                                 "top":  "16",
+                                                                                                                 "right":  "0",
+                                                                                                                 "bottom":  "16",
+                                                                                                                 "left":  "0",
+                                                                                                                 "isLinked":  false
+                                                                                                             }
+                                                                                      },
+                                                                         "elements":  [
+                                                                                          {
+                                                                                              "elType":  "widget",
+                                                                                              "widgetType":  "text-editor",
+                                                                                              "settings":  {
+                                                                                                               "editor":  "\u003cp\u003e\u0026copy; 2026 Infinite Global Recruitment Ltd. All rights reserved. | \u003ca href=\u0027/privacy-policy/\u0027 style=\u0027color: #C49A3C; text-decoration: none;\u0027\u003ePrivacy Policy\u003c/a\u003e | \u003ca href=\u0027/terms-and-conditions/\u0027 style=\u0027color: #C49A3C; text-decoration: none;\u0027\u003eTerms \u0026amp; Conditions\u003c/a\u003e | Developed by \u003ca href=\u0027https://deshtech.co/\u0027 target=\u0027_blank\u0027 style=\u0027color: #C49A3C; text-decoration: none;\u0027\u003eDeshTech Solutions\u003c/a\u003e\u003c/p\u003e",
+                                                                                                               "align":  "center",
+                                                                                                               "text_color":  "#7A8A9E",
+                                                                                                               "typography_typography":  "custom",
+                                                                                                               "typography_font_family":  "DM Sans",
+                                                                                                               "typography_font_size":  {
+                                                                                                                                            "unit":  "px",
+                                                                                                                                            "size":  13,
+                                                                                                                                            "sizes":  [
+
+                                                                                                                                                      ]
+                                                                                                                                        },
+                                                                                                               "typography_font_size_mobile":  {
+                                                                                                                                                   "unit":  "px",
+                                                                                                                                                   "size":  11,
+                                                                                                                                                   "sizes":  [
+
+                                                                                                                                                             ]
+                                                                                                                                               },
+                                                                                                               "typography_line_height":  {
+                                                                                                                                              "unit":  "em",
+                                                                                                                                              "size":  1.6,
+                                                                                                                                              "sizes":  [
+
+                                                                                                                                                        ]
+                                                                                                                                          },
+                                                                                                               "typography_line_height_mobile":  {
+                                                                                                                                                     "unit":  "em",
+                                                                                                                                                     "size":  1.8,
+                                                                                                                                                     "sizes":  [
+
+                                                                                                                                                               ]
+                                                                                                                                                 }
+                                                                                                           },
+                                                                                              "elements":  [
+
+                                                                                                           ],
+                                                                                              "id":  "65cebfb"
+                                                                                          }
+                                                                                      ],
+                                                                         "id":  "e9517b2"
+                                                                     }
+                                                                 ],
+                                                    "id":  "0c8adc2"
+                                                }
+                                            ],
+                               "id":  "ef0fb96"
+                           }
+                       ]
+}

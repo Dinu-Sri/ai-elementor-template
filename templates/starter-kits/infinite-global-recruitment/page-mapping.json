@@ -1,0 +1,13 @@
+{
+    "_instructions": "Maps page names to WordPress post IDs. Updated automatically when pages are created.",
+    "design-system": 76,
+    "home": 74,
+    "about": 108,
+    "education": 113,
+    "recruitment": 117,
+    "book-consultation": 121,
+    "contact": 140,
+    "employers": 219,
+    "header": 152,
+    "footer": 223
+}

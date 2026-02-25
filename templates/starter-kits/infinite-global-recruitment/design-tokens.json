@@ -1,0 +1,261 @@
+{
+    "project": "Infinite Global Recruitment",
+    "industry": "Education Consultancy & International Recruitment",
+    "location": "Surrey, United Kingdom",
+    "url": "https://elemento.deshtech.lk",
+
+    "colors": {
+        "primary": {
+            "value": "#0B1D3A",
+            "usage": "Headings, primary buttons, header text, dark UI elements, nav-menu text"
+        },
+        "primary_dark": {
+            "value": "#071020",
+            "usage": "Darkest backgrounds (rarely used)"
+        },
+        "primary_light": {
+            "value": "#1A3A5C",
+            "usage": "Button hover states on primary buttons, social icon circle bg"
+        },
+        "secondary": {
+            "value": "#C49A3C",
+            "usage": "Gold accent — overline labels, CTA buttons, icon highlights, hover states, nav active color"
+        },
+        "secondary_dark": {
+            "value": "#A67E2E",
+            "usage": "Gold button hover state"
+        },
+        "secondary_light": {
+            "value": "#D4B05A",
+            "usage": "Lighter gold for decorative elements"
+        },
+        "accent": {
+            "value": "#2AADBD",
+            "usage": "Teal accent — education pathway, stats numbers, icon backgrounds"
+        },
+        "accent_dark": {
+            "value": "#1E8A97",
+            "usage": "Teal hover states"
+        },
+        "dark": {
+            "value": "#0A1628",
+            "usage": "Hero sections, CTA banners, footer, darkest section backgrounds"
+        },
+        "dark_medium": {
+            "value": "#122240",
+            "usage": "Card backgrounds on dark sections"
+        },
+        "dark_light": {
+            "value": "#1A3050",
+            "usage": "Social icon circle backgrounds on dark sections"
+        },
+        "text_primary": {
+            "value": "#0B1D3A",
+            "usage": "Headings and titles on light backgrounds"
+        },
+        "text_secondary": {
+            "value": "#5A6B7F",
+            "usage": "Body text, descriptions, paragraphs"
+        },
+        "text_muted": {
+            "value": "#8A96A8",
+            "usage": "Captions, subtle labels, secondary info"
+        },
+        "text_on_dark": {
+            "value": "#FFFFFF",
+            "usage": "All text on dark backgrounds"
+        },
+        "text_on_dark_muted": {
+            "value": "#B0BEC5",
+            "usage": "Body text on dark backgrounds, social icon glyphs"
+        },
+        "bg_white": {
+            "value": "#FFFFFF",
+            "usage": "Default section background"
+        },
+        "bg_light": {
+            "value": "#F7F9FC",
+            "usage": "Alternating section background, form field backgrounds, FAQ cards"
+        },
+        "bg_subtle": {
+            "value": "#EDF1F7",
+            "usage": "Subtle contrast sections"
+        },
+        "bg_warm": {
+            "value": "#FBF8F3",
+            "usage": "Warm-toned sections (testimonials, CTAs)"
+        },
+        "border_light": {
+            "value": "#E2E8F0",
+            "usage": "Form field borders, card borders"
+        },
+        "border_medium": {
+            "value": "#CBD5E1",
+            "usage": "Dividers, footer copyright border"
+        },
+        "success": {
+            "value": "#10B981",
+            "usage": "Success states, check marks"
+        },
+        "warning": {
+            "value": "#F59E0B",
+            "usage": "Star ratings, warning states"
+        },
+        "error": {
+            "value": "#EF4444",
+            "usage": "Required field markers, error states"
+        }
+    },
+
+    "typography": {
+        "heading_font": "Playfair Display",
+        "heading_weight": "700",
+        "body_font": "DM Sans",
+        "body_weight": "400",
+        "overline": {
+            "font": "DM Sans",
+            "size": "14px",
+            "weight": "600",
+            "letter_spacing": "2-3px",
+            "text_transform": "uppercase",
+            "color": "#C49A3C"
+        },
+        "scale": {
+            "display": {"desktop": "56px", "tablet": "42px", "mobile": "32px", "weight": "800", "line_height": "1.1em"},
+            "h1": {"desktop": "44px", "tablet": "36px", "mobile": "28px", "weight": "700", "line_height": "1.2em"},
+            "h2": {"desktop": "36px", "tablet": "30px", "mobile": "24px", "weight": "700", "line_height": "1.2em"},
+            "h3": {"desktop": "28px", "tablet": "24px", "mobile": "20px", "weight": "600", "line_height": "1.3em"},
+            "h4": {"desktop": "22px", "tablet": "20px", "mobile": "18px", "weight": "600", "line_height": "1.3em"},
+            "h5": {"desktop": "18px", "tablet": "16px", "mobile": "16px", "weight": "600", "line_height": "1.4em"},
+            "body_large": {"desktop": "18px", "tablet": "18px", "mobile": "16px", "weight": "400", "line_height": "1.8em"},
+            "body": {"desktop": "16px", "tablet": "16px", "mobile": "15px", "weight": "400", "line_height": "1.6em"},
+            "body_small": {"desktop": "14px", "tablet": "14px", "mobile": "13px", "weight": "400", "line_height": "1.6em"},
+            "caption": {"desktop": "12px", "tablet": "12px", "mobile": "11px", "weight": "400", "line_height": "1.4em"}
+        }
+    },
+
+    "spacing": {
+        "section_padding": {
+            "hero": {"desktop": "120px 24px", "tablet": "96px 24px", "mobile": "80px 16px"},
+            "standard": {"desktop": "80px 24px", "tablet": "64px 20px", "mobile": "48px 16px"},
+            "compact": {"desktop": "48-64px 24px", "tablet": "40-48px 20px", "mobile": "32-40px 16px"},
+            "cta": {"desktop": "64px 24px", "tablet": "48px 20px", "mobile": "40px 16px"}
+        },
+        "flex_gaps": {
+            "large": {"desktop": "48px", "tablet": "32px", "mobile": "24px"},
+            "medium": {"desktop": "32px", "tablet": "24px", "mobile": "20px"},
+            "standard": {"desktop": "24px", "tablet": "20px", "mobile": "16px"},
+            "small": {"desktop": "16px", "tablet": "16px", "mobile": "12px"}
+        },
+        "card_padding": {
+            "large": {"desktop": "32px", "tablet": "28px", "mobile": "24px"},
+            "standard": {"desktop": "24px", "tablet": "24px", "mobile": "20px"}
+        }
+    },
+
+    "components": {
+        "header": {
+            "background": "#FFFFFF",
+            "shadow": "0 2px 10px rgba(0,0,0,0.08)",
+            "z_index": 100,
+            "boxed_width": "1320px",
+            "logo_width": {"desktop": "160px", "tablet": "130px", "mobile": "100px"},
+            "nav_font": "DM Sans 14px/500",
+            "nav_color": "#0B1D3A",
+            "nav_hover": "#C49A3C",
+            "hamburger_breakpoint": "tablet",
+            "cta_button": {"bg": "#C49A3C", "text": "#FFFFFF", "hover": "#A67E2E"}
+        },
+        "footer": {
+            "background": "#0A1628",
+            "text_color": "#B0BEC5",
+            "heading_color": "#FFFFFF",
+            "columns": "brand (38%) + quick links (18%) + services (18%) + contact (22%)",
+            "social_icons": "Facebook, Instagram, LinkedIn (circle shape)",
+            "copyright_border": "rgba(255,255,255,0.1)"
+        },
+        "buttons": {
+            "primary": {
+                "bg": "#0B1D3A",
+                "text": "#FFFFFF",
+                "hover": "#1A3A5C",
+                "border_radius": "8px",
+                "padding": "14px 32px",
+                "padding_mobile": "12px 24px"
+            },
+            "secondary": {
+                "bg": "#C49A3C",
+                "text": "#FFFFFF",
+                "hover": "#A67E2E",
+                "border_radius": "8px"
+            },
+            "outline": {
+                "bg": "transparent",
+                "text": "#FFFFFF",
+                "border": "#FFFFFF",
+                "hover_bg": "rgba(255,255,255,0.1)",
+                "border_radius": "8px"
+            }
+        },
+        "cards": {
+            "service_card": {
+                "bg": "#FFFFFF",
+                "shadow": "0 8px 30px rgba(0,0,0,0.08)",
+                "border_radius": "16px",
+                "padding": "32px",
+                "padding_mobile": "24px"
+            },
+            "faq_card": {
+                "bg": "#F7F9FC",
+                "border_radius": "8px",
+                "padding": "24px"
+            },
+            "dark_card": {
+                "bg": "#122240",
+                "border_radius": "16px",
+                "padding": "32px"
+            }
+        },
+        "forms": {
+            "field_bg": "#F7F9FC",
+            "field_border": "#E2E8F0",
+            "field_border_radius": "8px",
+            "label_color": "#0B1D3A",
+            "label_weight": "500-600",
+            "required_color": "#EF4444",
+            "button_width": "100%"
+        }
+    },
+
+    "pages": {
+        "home": {
+            "sections": 9,
+            "description": "Hero (dark split), Two Pathways, Why Choose Us (6 cards), How It Works (5 steps), Education Teaser, Recruitment Teaser, Testimonials (3 cards), FAQ Snippet, CTA Banner",
+            "background_pattern": "#0A1628 → #FFFFFF → #F7F9FC → #FFFFFF → #F7F9FC → #FFFFFF → #FBF8F3 → #FFFFFF → gradient"
+        },
+        "about": {
+            "sections": 7,
+            "description": "Hero (dark), Our Story (split), Mission Values (3 cards), Why Choose Us (3 cards), Journey Timeline, Team, CTA Banner"
+        },
+        "education": {
+            "sections": 8,
+            "description": "Hero (dark split), Study Destinations (6 cards), Pathways (4 cards), How It Works (5 steps), Why Choose Us, Stats, Testimonials, CTA Banner"
+        },
+        "recruitment": {
+            "sections": 8,
+            "description": "Hero (dark split), Services (6 cards), How It Works (5 steps), Sectors (6 cards), Screening & Compliance, Stats, Testimonials, CTA Banner"
+        },
+        "book-consultation": {
+            "sections": 5,
+            "description": "Hero, Student Eligibility Form, Job Seeker Form, Why Choose Us, CTA Banner"
+        },
+        "contact": {
+            "sections": 5,
+            "description": "Hero (dark), Contact Info + Form (split), Quick Actions (3 cards), Our Location, CTA Banner"
+        },
+        "employers": {
+            "sections": 9,
+            "description": "Hero (dark split), Why Partner With Us (6 cards), Sectors (6 cards), Process (5 steps), Screening & Compliance, Stats (4 counters), Post a Vacancy Form, Employer FAQ (6 Q&As), CTA Banner"
+        }
+    }
+}

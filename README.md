@@ -10,7 +10,7 @@ Build WordPress/Elementor websites using AI. Generate pages as JSON, push to Wor
       └──────────────────── Feedback ────────────────────────────────┘
 ```
 
-**Built with this system so far:** Recruitment sites, landing pages — with ecommerce, booking, SaaS, and portfolio sites on the roadmap. Each project teaches the AI new patterns that benefit all future projects.
+**Built with this system so far:** Multi-page recruitment sites, education consultancies, landing pages — with ecommerce, booking, SaaS, and portfolio sites on the roadmap. Each project teaches the AI new patterns that benefit all future projects.
 
 ---
 
@@ -255,6 +255,23 @@ Every completed project is archived as a starter kit in `templates/starter-kits/
 | **Design** | Figtree 800 headings, Inter body, Blue/Navy/Green palette |
 | **Starter Kit** | [`templates/starter-kits/trogen-facility-services/`](templates/starter-kits/trogen-facility-services/) |
 
+### Infinite Global Recruitment
+
+> **Surrey, UK Recruitment & Education Consultancy** — Multi-page website (9 templates) for an international recruitment agency and education consultancy
+
+<a href="templates/starter-kits/infinite-global-recruitment/">
+  <img src="templates/starter-kits/infinite-global-recruitment/screenshot.png" alt="Infinite Global Recruitment Homepage" width="800">
+</a>
+
+| Detail | Value |
+|--------|-------|
+| **Industry** | Education Consultancy & International Recruitment |
+| **Location** | Hersham, Surrey, United Kingdom |
+| **Type** | Multi-page website (7 pages + header + footer) |
+| **Features** | Nav-menu with hamburger, Elementor Pro forms, FAQ sections, employer vacancy form, dual consultation forms, Iconify icons |
+| **Design** | Playfair Display 700 headings, DM Sans body, Navy/Gold/Teal palette |
+| **Starter Kit** | [`templates/starter-kits/infinite-global-recruitment/`](templates/starter-kits/infinite-global-recruitment/) |
+
 ---
 
 ## Requirements
@@ -269,11 +286,11 @@ Every completed project is archived as a starter kit in `templates/starter-kits/
 `CLAUDE.md` is a living knowledge base. Every AI session that discovers a bug, a better pattern, or a new widget setting updates this file. The next AI thread reads the updated version and inherits all previous learnings.
 
 The knowledge base currently includes:
-- **14+ strict rules** — Container-only layouts, responsive typography, 8pt grid, animation safety, interlinking
+- **15 strict rules** — Container-only layouts, responsive typography, 8pt grid, animation safety, interlinking, project archiving
 - **15+ known issues & fixes** — With root causes and solutions
 - **20+ Elementor property name mappings** — Correcting common guesses vs actual property names
-- **6+ common section patterns** — Hero, services grid, CTA, testimonials, footer, and more
-- **Widget examples** — Heading, text, button, image, icon, counter, icon-list, star-rating, divider, spacer, Iconify
+- **8+ common section patterns** — Hero, services grid, CTA, testimonials, footer, FAQ, contact form split, and more
+- **Widget examples** — Heading, text, button, image, icon, counter, icon-list, star-rating, divider, spacer, Iconify, form, social-icons, nav-menu
 
 See the "Self-Improvement Rule" section in `CLAUDE.md` for details.
 

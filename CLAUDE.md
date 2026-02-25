@@ -349,6 +349,8 @@ Level 1: PAGE SECTION (full-width container)
 ---
 ## Widget Examples
 
+> **NOTE: Colors and fonts in these examples are PLACEHOLDERS.** Every new project gets its own colors and fonts from `projects/<name>/brief.json`. Never copy these example values literally — always replace `#1A1A2E`, `#6C63FF`, `Poppins`, `Inter`, etc. with the actual project's branding from its brief. The JSON **structure** and **property names** are what matters here — those are universal across all projects.
+
 ### Heading
 ```json
 {
@@ -553,6 +555,163 @@ Level 1: PAGE SECTION (full-width container)
     "elements": []
 }
 ```
+
+### Form (Elementor Pro)
+```json
+{
+    "elType": "widget",
+    "widgetType": "form",
+    "settings": {
+        "form_name": "Contact Form",
+        "form_fields": [
+            {"field_type": "text", "field_label": "Full Name", "placeholder": "Enter your full name", "required": "true", "width": "100", "_id": "ct_name"},
+            {"field_type": "email", "field_label": "Email Address", "placeholder": "your@email.com", "required": "true", "width": "50", "_id": "ct_email"},
+            {"field_type": "tel", "field_label": "Phone Number", "placeholder": "+44 7XXX XXX XXX", "required": "true", "width": "50", "_id": "ct_phone"},
+            {"field_type": "select", "field_label": "Subject", "field_options": "Option 1\nOption 2\nOption 3\nOther", "required": "true", "width": "100", "_id": "ct_subject"},
+            {"field_type": "textarea", "field_label": "Your Message", "placeholder": "Tell us how we can help...", "required": "true", "rows": 5, "width": "100", "_id": "ct_message"},
+            {"field_type": "honeypot", "field_label": "Honeypot", "_id": "ct_honeypot"}
+        ],
+        "button_text": "Send Message",
+        "button_size": "lg",
+        "button_width": "100",
+        "button_background_color": "#0B1D3A",
+        "button_text_color": "#FFFFFF",
+        "button_border_radius": {"unit": "px", "top": "8", "right": "8", "bottom": "8", "left": "8", "isLinked": true},
+        "button_typography_typography": "custom",
+        "button_typography_font_family": "DM Sans",
+        "button_typography_font_weight": "600",
+        "button_background_hover_color": "#1A3A5C",
+        "email_to": "info@example.com",
+        "email_subject": "New Inquiry - {{ct_name}}",
+        "success_message": "Thank you! We will get back to you within 1-2 business days.",
+        "label_color": "#0B1D3A",
+        "field_text_color": "#0B1D3A",
+        "field_background_color": "#F7F9FC",
+        "field_border_color": "#E2E8F0",
+        "field_border_radius": 8,
+        "field_typography_typography": "custom",
+        "field_typography_font_family": "DM Sans",
+        "label_typography_typography": "custom",
+        "label_typography_font_family": "DM Sans",
+        "label_typography_font_weight": "500",
+        "mark_required_color": "#EF4444"
+    },
+    "elements": []
+}
+```
+
+**IMPORTANT Form widget notes:**
+- `field_type` options: `text`, `email`, `tel`, `textarea`, `select`, `number`, `date`, `url`, `password`, `honeypot`, `hidden`, `acceptance`, `upload`
+- `width` controls field width: `"100"` = full width, `"50"` = half width (side-by-side), `"33"` = third width
+- `field_options` for `select` type: separate options with `\n` (newline)
+- `_id` must be unique per field and is used in `email_subject` as `{{field_id}}`
+- Always include a `honeypot` field for spam protection
+- `button_*` properties control the submit button (separate from regular button widget settings)
+- **NEVER animate form widgets** — `_animation` causes permanent invisibility (see Known Issues)
+
+### Social Icons
+```json
+{
+    "elType": "widget",
+    "widgetType": "social-icons",
+    "settings": {
+        "social_icon_list": [
+            {
+                "social_icon": {"value": "fab fa-facebook-f", "library": "fa-brands"},
+                "link": {"url": "https://facebook.com/yourpage", "is_external": true, "nofollow": false},
+                "_id": "fb1"
+            },
+            {
+                "social_icon": {"value": "fab fa-instagram", "library": "fa-brands"},
+                "link": {"url": "https://instagram.com/yourpage", "is_external": true, "nofollow": false},
+                "_id": "ig1"
+            },
+            {
+                "social_icon": {"value": "fab fa-linkedin-in", "library": "fa-brands"},
+                "link": {"url": "https://linkedin.com/company/yourcompany", "is_external": true, "nofollow": false},
+                "_id": "li1"
+            }
+        ],
+        "shape": "circle",
+        "icon_color": "custom",
+        "icon_primary_color": "#1A3050",
+        "icon_secondary_color": "#B0BEC5",
+        "icon_primary_color_hover": "#C49A3C",
+        "icon_secondary_color_hover": "#FFFFFF",
+        "icon_size": {"unit": "px", "size": 14, "sizes": []},
+        "align": "left",
+        "align_tablet": "center",
+        "align_mobile": "center"
+    },
+    "elements": []
+}
+```
+
+**IMPORTANT Social Icons notes:**
+- With `shape: "circle"`: `icon_primary_color` = circle background, `icon_secondary_color` = icon glyph color
+- Without shape: `icon_primary_color` = icon color directly
+- Always add hover states (`_hover` variants) for interactivity
+- Available icons: `fab fa-facebook-f`, `fab fa-twitter`, `fab fa-instagram`, `fab fa-linkedin-in`, `fab fa-youtube`, `fab fa-whatsapp`, `fab fa-tiktok`, `fab fa-pinterest-p`
+- Use `is_external: true` for social links (opens in new tab)
+- Social icon URLs can use `#` as placeholder only if real URLs are not yet provided
+
+### Nav Menu (Elementor Pro)
+```json
+{
+    "elType": "widget",
+    "widgetType": "nav-menu",
+    "settings": {
+        "menu": "",
+        "align_items": "center",
+        "submenu_indicator": "none",
+        "color_menu_item": "#0B1D3A",
+        "color_menu_item_hover": "#C49A3C",
+        "color_menu_item_active": "#C49A3C",
+        "pointer_color_menu_item_hover": "#C49A3C",
+        "pointer": "none",
+        "typography_menu_item_typography": "custom",
+        "typography_menu_item_font_family": "DM Sans",
+        "typography_menu_item_font_size": {"unit": "px", "size": 14, "sizes": []},
+        "typography_menu_item_font_weight": "500",
+        "typography_menu_item_letter_spacing": {"unit": "px", "size": 0.2, "sizes": []},
+        "padding_horizontal_menu_item": {"unit": "px", "size": 12, "sizes": []},
+        "padding_horizontal_menu_item_tablet": {"unit": "px", "size": 10, "sizes": []},
+        "toggle_color": "#0B1D3A",
+        "toggle_size": {"unit": "px", "size": 22, "sizes": []},
+        "toggle_size_tablet": {"unit": "px", "size": 22, "sizes": []},
+        "toggle_size_mobile": {"unit": "px", "size": 20, "sizes": []},
+        "breakpoint": "tablet",
+        "full_width": "stretch",
+        "text_align": "center",
+        "menu_name": "Menu",
+        "menu_typography_typography": "custom",
+        "menu_typography_font_family": "DM Sans",
+        "menu_typography_font_size": {"unit": "px", "size": 15},
+        "menu_typography_font_size_tablet": {"unit": "px", "size": 20},
+        "menu_typography_font_size_mobile": {"unit": "px", "size": 16},
+        "menu_typography_font_weight": "700",
+        "menu_typography_text_transform": "uppercase",
+        "menu_space_between": {"unit": "px", "size": 10, "sizes": []},
+        "background_color_dropdown_item_hover": "#0B1D3A",
+        "padding_horizontal_dropdown_item_mobile": {"unit": "px", "size": 0, "sizes": []},
+        "padding_vertical_dropdown_item_mobile": {"unit": "px", "size": 6, "sizes": []},
+        "dropdown_top_distance_tablet": {"unit": "px", "size": 22, "sizes": []},
+        "dropdown_top_distance_mobile": {"unit": "px", "size": 16, "sizes": []},
+        "__globals__": {"toggle_background_color": "globals/colors?id=background"}
+    },
+    "elements": []
+}
+```
+
+**IMPORTANT Nav Menu notes:**
+- `menu: ""` pulls from the default WordPress menu (Appearance > Menus). Menu items must be managed in WP admin, NOT in the JSON.
+- TWO separate typography groups: `typography_menu_item_*` controls desktop horizontal items, `menu_typography_*` controls the mobile/tablet dropdown items
+- `breakpoint: "tablet"` means the hamburger menu appears on tablet and below
+- `pointer: "none"` removes the underline hover effect on desktop
+- `full_width: "stretch"` makes dropdown menu items fill the full width
+- `toggle_*` properties control the hamburger icon (color, size per breakpoint)
+- `__globals__` can reference Elementor global colors for toggle background
+- **Limitation:** Adding new pages to the nav requires manual WP menu update — the API cannot modify WordPress menus
 
 ---
 
@@ -829,6 +988,28 @@ container (full, dark bg, padding + padding_tablet + padding_mobile)
       │   └── container (25%, width_tablet:47%, width_mobile:100%) → "Services" heading + icon-list
       └── container (row, border-top) → copyright text(+mobile size)
 ```
+
+### FAQ Section (stacked cards)
+```
+container (full, white bg, padding + padding_tablet + padding_mobile)
+  └── container (boxed 900px, column, gap 32px)
+      ├── section heading group (overline + h2 +tablet+mobile sizes + subtitle)
+      └── container (column, gap 16px)
+          ├── card (100%, bg #F7F9FC, padding 24px, border-radius 8px) → h4 question + text-editor answer
+          ├── card (100%, bg #F7F9FC, padding 24px, border-radius 8px) → h4 question + text-editor answer
+          ├── card (100%, bg #F7F9FC, padding 24px, border-radius 8px) → h4 question + text-editor answer
+          └── ... (repeat for each Q&A pair)
+```
+**Notes:** Use narrow boxed width (800-900px) for readability. Each card is a container with heading (h4, 18px) + text-editor (15px). No animation on cards — FAQ content must always be visible.
+
+### Contact Form (split layout)
+```
+container (full, light bg, padding + padding_tablet + padding_mobile)
+  └── container (boxed 1200px, row, gap + gap_tablet + gap_mobile)
+      ├── container (45%, width_tablet:100%, width_mobile:100%) → overline + h2 + contact icon-list + social-icons
+      └── container (50%, width_tablet:100%, width_mobile:100%, bg white, shadow, padding) → overline + h3 + text-editor + form widget
+```
+**Notes:** NEVER animate the form widget. Contact info column can use `_animation: "fadeInLeft"`, form column uses `_animation: "fadeInRight"` on the heading only (not the form itself).
 
 ---
 
@@ -1195,6 +1376,8 @@ The log directory is protected with `.htaccess` (Deny from all) and `index.php`.
 | 2026-02-15 | Added GitHub sync workflow to CLAUDE.md | Full step-by-step process for syncing project learnings to the universal repo. Added README update as mandatory step. Updated README.md with v1.2.0 features, full command reference, changelog, and universal vision |
 | 2026-02-25 | **Project archiving system** | Added strict rule #15 (mandatory project archiving). Added "Project Archiving Checklist" section with 8-step process. Added self-improvement trigger for completed projects. Updated repo README with Portfolio section and starter-kit structure. Created first starter kit: Trogen Facility Services (home, header, footer, brief, design-tokens, screenshot). |
 | 2026-02-25 | **Major responsive design overhaul** | Added "Responsive Design Master Reference" section with complete property checklists per element type (sections, rows, columns, cards, headings, text, buttons, counters, headers, footers). Updated ALL container examples (Level 1, 3, 4) with `padding_tablet`, `flex_gap_tablet/mobile`, `padding_mobile`. Updated widget examples (text-editor, button) with responsive properties. Updated Section Spacing table with Tablet column. Updated Common Section Patterns with responsive annotations. Rewrote delivery checklist with specific responsive sub-checklist. Updated strict rules #5, #6, #13 to mandate responsive-from-first-build. **Root cause:** Trogen Facility Services project required 40+ responsive properties retrofitted across 9 sections + footer because they weren't included in the initial build. This overhaul ensures all future projects are fully responsive from the first JSON generation. |
+| 2026-02-25 | **Added Form, Social Icons, Nav Menu widget examples** | Documented Elementor Pro form widget with all field types, button styling, email settings, honeypot spam protection, and field width controls. Added social-icons widget with circle shape color model (primary = bg, secondary = glyph). Added nav-menu widget with dual typography groups, hamburger breakpoint, dropdown settings, and WP menu limitation. Added FAQ section pattern and Contact Form split layout pattern. Learned from Infinite Global Recruitment project (9+ pages). |
+| 2026-02-25 | **Archived Infinite Global Recruitment** | Second starter kit archived: 7 content pages + header + footer (9 templates total). Multi-page recruitment & education consultancy site. Exported all pages from WordPress, created design-tokens.json, took homepage screenshot, updated repo README portfolio. Added widget examples note clarifying colors/fonts are placeholders. |
 
 ---
 

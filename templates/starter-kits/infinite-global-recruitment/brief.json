@@ -1,0 +1,487 @@
+{
+    "_instructions": "Complete project brief for Infinite Global Recruitment. This is the single source of truth for all page generation.",
+
+    "project": {
+        "name": "Infinite Global Recruitment",
+        "domain": "https://elemento.deshtech.lk",
+        "tagline": "Your Gateway to Global Opportunities",
+        "description": "Infinite Global Recruitment is an education consultancy and recruitment support firm. We guide students seeking to study abroad (UK, Canada, USA, Australia, Europe) through the full application process, and support job seekers with skill migration guidance, profile preparation, and employer coordination.",
+        "industry": "Education Consultancy & Recruitment",
+        "target_audience": "Students aged 18-35 seeking study abroad opportunities and job seekers aged 25-45 looking for international career pathways. Based primarily in Sri Lanka and South Asia.",
+        "competitors": [],
+        "tone": "professional, trustworthy, friendly, clear, supportive",
+        "language": "English"
+    },
+
+    "branding": {
+        "has_existing_brand": true,
+        "logo_url": "",
+        "primary_color": "#0B1D3A",
+        "secondary_color": "#C49A3C",
+        "accent_color": "#2AADBD",
+        "dark_color": "#0A1628",
+        "light_color": "#F7F9FC",
+        "heading_font": "Playfair Display",
+        "body_font": "DM Sans",
+        "notes": "Logo features an infinity symbol — left loop has ocean/water texture (teal/cyan), right loop is metallic gold with 'R' inside. Text is dark navy. The color palette is derived from this: Navy = trust/authority, Gold = premium/success, Teal = global reach/freshness.",
+        "colors": {
+            "primary": "#0B1D3A",
+            "primary_dark": "#071020",
+            "primary_light": "#1A3A5C",
+            "secondary": "#C49A3C",
+            "secondary_dark": "#A67E2E",
+            "secondary_light": "#D4B05A",
+            "accent": "#2AADBD",
+            "accent_dark": "#1E8A97",
+            "accent_light": "#4DC8D6",
+            "dark": "#0A1628",
+            "dark_medium": "#122240",
+            "dark_light": "#1A3050",
+            "text_primary": "#0B1D3A",
+            "text_secondary": "#5A6B7F",
+            "text_muted": "#8A96A8",
+            "text_on_dark": "#FFFFFF",
+            "text_on_dark_muted": "#B0BEC5",
+            "bg_white": "#FFFFFF",
+            "bg_light": "#F7F9FC",
+            "bg_subtle": "#EDF1F7",
+            "bg_warm": "#FBF8F3",
+            "border_light": "#E2E8F0",
+            "border_medium": "#CBD5E1",
+            "success": "#10B981",
+            "warning": "#F59E0B",
+            "error": "#EF4444",
+            "gold_gradient_start": "#C49A3C",
+            "gold_gradient_end": "#E8C96A"
+        }
+    },
+
+    "site_structure": {
+        "pages": [
+            {
+                "name": "Home",
+                "slug": "home",
+                "is_front_page": true,
+                "priority": 1,
+                "description": "Conversion-focused landing page. Two clear pathways (Students vs Job Seekers), trust builders, process overview, teasers for both services, testimonials, and a final CTA banner.",
+                "sections": [
+                    "hero",
+                    "two_pathways",
+                    "why_choose_us",
+                    "how_it_works",
+                    "education_teaser",
+                    "recruitment_teaser",
+                    "testimonials",
+                    "faq_snippet",
+                    "cta_banner"
+                ]
+            },
+            {
+                "name": "About Us",
+                "slug": "about-us",
+                "is_front_page": false,
+                "priority": 2,
+                "description": "Trust-building page. Who we are, mission/values, what makes us different, process promise, optional team section, and CTA banner.",
+                "sections": [
+                    "page_hero",
+                    "who_we_are",
+                    "mission_values",
+                    "what_makes_us_different",
+                    "process_promise",
+                    "team_section",
+                    "cta_banner"
+                ]
+            },
+            {
+                "name": "Education",
+                "slug": "education",
+                "is_front_page": false,
+                "priority": 3,
+                "description": "Single page covering all 5 study destinations (UK, Canada, USA, Australia, Europe) using tabs/accordion. Each region has overview, benefits, requirements, timeline, documents, FAQ, and CTA. General education process section included.",
+                "sections": [
+                    "page_hero",
+                    "education_process",
+                    "destination_tabs",
+                    "student_eligibility_form",
+                    "faq_section",
+                    "cta_banner"
+                ]
+            },
+            {
+                "name": "Recruitment / Job Seekers",
+                "slug": "recruitment",
+                "is_front_page": false,
+                "priority": 4,
+                "description": "Single page covering recruitment services, process steps, support details, fees (embedded), disclaimer, job seeker application form, and FAQs.",
+                "sections": [
+                    "page_hero",
+                    "who_this_is_for",
+                    "what_support_includes",
+                    "how_it_works",
+                    "requirements_checklist",
+                    "fees_section",
+                    "disclaimer",
+                    "job_seeker_form",
+                    "faq_section",
+                    "cta_banner"
+                ]
+            },
+            {
+                "name": "Book a Consultation / Apply",
+                "slug": "book-consultation",
+                "is_front_page": false,
+                "priority": 5,
+                "description": "Main conversion hub. Two application pathways (Student vs Job Seeker), consultation request form, FAQs about the process, and contact quick options.",
+                "sections": [
+                    "page_hero",
+                    "pathway_selector",
+                    "student_application_form",
+                    "job_seeker_application_form",
+                    "consultation_form",
+                    "faq_section",
+                    "contact_quick_options"
+                ]
+            },
+            {
+                "name": "Contact",
+                "slug": "contact",
+                "is_front_page": false,
+                "priority": 6,
+                "description": "Simple contact page with contact info, optional contact form, office hours, and optional embedded map.",
+                "sections": [
+                    "page_hero",
+                    "contact_info_and_form",
+                    "office_hours",
+                    "map_section"
+                ]
+            }
+        ],
+        "shared_elements": {
+            "header": "Sticky header with navigation: Home | About Us | Education | Recruitment/Job Seekers | Book a Consultation/Apply | Contact. Sticky CTA button: 'Apply Now' or 'Book a Consultation'.",
+            "footer": "Quick links to all 6 pages, contact details, social icons, legal links (Privacy Policy + Terms & Conditions).",
+            "cta_section": "Reuse consistent CTA banner across pages for visual consistency."
+        },
+        "navigation": [
+            {"label": "Home", "url": "/"},
+            {"label": "About Us", "url": "/about-us/"},
+            {"label": "Education", "url": "/education/"},
+            {"label": "Recruitment / Job Seekers", "url": "/recruitment/"},
+            {"label": "Book a Consultation", "url": "/book-consultation/"},
+            {"label": "Contact", "url": "/contact/"}
+        ]
+    },
+
+    "content": {
+        "has_content_ready": false,
+        "content_source": "ai_generated",
+
+        "services": {
+            "education": {
+                "tagline": "Your Study Abroad Journey Starts Here",
+                "description": "Expert guidance for students seeking to study in the UK, Canada, USA, Australia, and Europe. From eligibility assessment to pre-departure support.",
+                "destinations": [
+                    {
+                        "region": "UK",
+                        "overview": "World-class universities, shorter course durations, post-study work opportunities.",
+                        "benefits": [
+                            "Internationally recognized degrees",
+                            "1-3 year course durations (shorter than many countries)",
+                            "Post-Study Work Visa (Graduate Route — 2 years)",
+                            "Multicultural environment and vibrant student life",
+                            "Scholarships and financial aid options available"
+                        ],
+                        "requirements": [
+                            "Valid passport",
+                            "Academic transcripts and certificates",
+                            "English language proficiency (IELTS/TOEFL)",
+                            "Statement of Purpose (SOP)",
+                            "Reference letters",
+                            "Financial proof / bank statements"
+                        ]
+                    },
+                    {
+                        "region": "Canada",
+                        "overview": "Affordable tuition, post-graduation work permits, and clear pathways to permanent residency.",
+                        "benefits": [
+                            "Affordable tuition compared to US/UK",
+                            "Post-Graduation Work Permit (PGWP — up to 3 years)",
+                            "Pathways to Permanent Residency (PR)",
+                            "Safe, multicultural, high quality of life",
+                            "Co-op and internship programs available"
+                        ],
+                        "requirements": [
+                            "Valid passport",
+                            "Academic transcripts",
+                            "IELTS / English proficiency",
+                            "Statement of Purpose (SOP)",
+                            "Financial proof (GIC + tuition funds)",
+                            "Medical exam (if required)"
+                        ]
+                    },
+                    {
+                        "region": "USA",
+                        "overview": "Home to the world's top-ranked universities with diverse programs and research opportunities.",
+                        "benefits": [
+                            "World's highest-ranked universities",
+                            "Wide range of courses and specializations",
+                            "Optional Practical Training (OPT — up to 3 years for STEM)",
+                            "Campus employment and assistantship opportunities",
+                            "Strong alumni networks globally"
+                        ],
+                        "requirements": [
+                            "Valid passport",
+                            "Academic transcripts",
+                            "Standardized tests (GRE/GMAT/SAT if required)",
+                            "TOEFL / IELTS scores",
+                            "Statement of Purpose + Essays",
+                            "Financial documentation (I-20 support)"
+                        ]
+                    },
+                    {
+                        "region": "Australia",
+                        "overview": "High-quality education, excellent student support services, and post-study work rights.",
+                        "benefits": [
+                            "Globally recognized qualifications",
+                            "Post-Study Work Visa (2-4 years depending on qualification)",
+                            "Part-time work rights during study (48 hrs/fortnight)",
+                            "Strong support services for international students",
+                            "Beautiful lifestyle and diverse culture"
+                        ],
+                        "requirements": [
+                            "Valid passport",
+                            "Academic transcripts and certificates",
+                            "IELTS / PTE / TOEFL scores",
+                            "Genuine Temporary Entrant (GTE) statement",
+                            "Financial capacity evidence",
+                            "Health insurance (OSHC)"
+                        ]
+                    },
+                    {
+                        "region": "Europe",
+                        "overview": "Affordable or tuition-free education in many countries, rich cultural experiences, and Schengen access.",
+                        "benefits": [
+                            "Low or zero tuition in many countries (Germany, Norway, etc.)",
+                            "Programs taught in English increasingly available",
+                            "Rich cultural and travel experiences (Schengen area)",
+                            "Strong industry connections and internship options",
+                            "Diverse range of specialized programs"
+                        ],
+                        "requirements": [
+                            "Valid passport",
+                            "Academic transcripts",
+                            "Language proficiency (English and/or local language)",
+                            "Motivation letter / Statement of Purpose",
+                            "Financial proof (blocked account in some countries)",
+                            "Health insurance"
+                        ]
+                    }
+                ],
+                "process_steps": [
+                    {"step": 1, "title": "Eligibility Check", "description": "We assess your academic background, test scores, and goals to identify the best options."},
+                    {"step": 2, "title": "Free Consultation", "description": "Discuss your study plans, budget, and preferred destinations with our expert advisors."},
+                    {"step": 3, "title": "Document Preparation", "description": "We guide you through gathering and preparing all required documents."},
+                    {"step": 4, "title": "Application Submission", "description": "We handle your university applications and track progress on your behalf."},
+                    {"step": 5, "title": "Offer & Pre-Departure", "description": "Receive your offer, complete visa formalities, and get pre-departure briefing."}
+                ]
+            },
+            "recruitment": {
+                "tagline": "Your Career, Taken Global",
+                "description": "Professional support for skilled workers seeking international career opportunities. From profile assessment to employer coordination and pre-departure preparation.",
+                "support_includes": [
+                    "Profile & skills assessment review",
+                    "CV enhancement and formatting guidance",
+                    "Interview preparation and coaching",
+                    "Job matching support and employer coordination",
+                    "Documentation and visa guidance",
+                    "Pre-departure orientation and support"
+                ],
+                "process_steps": [
+                    {"step": 1, "title": "Submit Your Profile", "description": "Fill in your details and upload your CV for initial review."},
+                    {"step": 2, "title": "Profile Review", "description": "Our team reviews your qualifications, experience, and suitability."},
+                    {"step": 3, "title": "Matching & Coordination", "description": "We match your profile with suitable opportunities and coordinate with employers."},
+                    {"step": 4, "title": "Interview & Offer", "description": "Attend interviews, receive guidance, and work toward securing an offer."},
+                    {"step": 5, "title": "Documentation & Departure", "description": "Complete all documentation and receive pre-departure support."}
+                ],
+                "requirements_checklist": [
+                    "Valid passport",
+                    "Updated CV / Resume",
+                    "Educational certificates and transcripts",
+                    "Work experience letters / references",
+                    "Skills certifications (trade/professional)",
+                    "English language test scores (if applicable)",
+                    "Police clearance certificate (if required)",
+                    "Medical fitness report (if required)"
+                ],
+                "fees": [
+                    {
+                        "name": "Initial Consultation",
+                        "amount": "Contact us",
+                        "description": "Profile assessment and eligibility review",
+                        "includes": ["Initial skills/profile review", "Eligibility assessment", "Guidance on next steps"]
+                    },
+                    {
+                        "name": "Processing Fee",
+                        "amount": "Contact us",
+                        "description": "Document preparation and application processing",
+                        "includes": ["CV formatting and review", "Document compilation", "Application submission support"]
+                    },
+                    {
+                        "name": "Service Fee",
+                        "amount": "Contact us",
+                        "description": "Full service including employer coordination",
+                        "includes": ["Job matching and coordination", "Interview preparation", "Pre-departure support"]
+                    }
+                ],
+                "disclaimer": "Please note: Final job offers, work permits, and visa outcomes are determined by employers and relevant government authorities. Infinite Global Recruitment provides guidance and coordination support only. We do not guarantee specific job placements or visa approvals."
+            }
+        },
+
+        "testimonials": [
+            {"name": "Amara S.", "role": "Student — UK", "quote": "Infinite Global made my dream of studying in the UK a reality. Their step-by-step guidance was incredible, and I felt supported throughout the entire process."},
+            {"name": "Kavindu P.", "role": "Student — Canada", "quote": "I was confused about the process, but the team simplified everything. Got my offer letter within weeks and my visa approved smoothly."},
+            {"name": "Nishantha R.", "role": "Job Seeker — Dubai", "quote": "Professional service from start to finish. They helped me prepare my CV, coordinated with employers, and guided me through every step."},
+            {"name": "Dilini F.", "role": "Student — Australia", "quote": "The consultation was thorough and honest. They helped me pick the right course and university. Highly recommend!"},
+            {"name": "Rajeev M.", "role": "Job Seeker — Europe", "quote": "Transparent about fees and realistic about outcomes. That honesty is what made me trust them with my career move."},
+            {"name": "Shenali W.", "role": "Student — USA", "quote": "From eligibility check to pre-departure, Infinite Global handled everything. I'm now studying at my dream university!"}
+        ],
+
+        "stats": [
+            {"number": "2000+", "label": "Students Guided"},
+            {"number": "500+", "label": "Successful Placements"},
+            {"number": "15+", "label": "Partner Universities"},
+            {"number": "5+", "label": "Countries Covered"}
+        ],
+
+        "why_choose_us": [
+            {"title": "Expert Guidance", "description": "Experienced consultants with deep knowledge of international education and recruitment systems.", "icon": "fas fa-award"},
+            {"title": "Transparent Process", "description": "Clear steps, honest timelines, and upfront about fees — no hidden costs or surprises.", "icon": "fas fa-shield-alt"},
+            {"title": "Personalized Support", "description": "Every student and job seeker gets tailored advice based on their unique goals and background.", "icon": "fas fa-users"},
+            {"title": "End-to-End Service", "description": "From initial consultation to pre-departure support — we're with you at every step.", "icon": "fas fa-handshake"},
+            {"title": "Fast Response", "description": "We value your time. Expect prompt replies and regular updates on your application status.", "icon": "fas fa-clock"},
+            {"title": "Proven Track Record", "description": "Thousands of students and job seekers have trusted us to guide their international journey.", "icon": "fas fa-chart-line"}
+        ],
+
+        "faqs": {
+            "general": [
+                {"q": "What services does Infinite Global Recruitment offer?", "a": "We provide study abroad consultancy for students (UK, Canada, USA, Australia, Europe) and recruitment/skill migration support for job seekers."},
+                {"q": "How do I get started?", "a": "Simply fill out the application form on our website or book a free consultation. Our team will review your profile and contact you within 1-2 business days."},
+                {"q": "Is there a fee for the initial consultation?", "a": "Initial consultations for education guidance are typically free. For recruitment services, please contact us for current fee details."},
+                {"q": "How long does the process take?", "a": "Timelines vary by destination and service. Education applications typically take 4-12 weeks. Recruitment timelines depend on employer processes."},
+                {"q": "Do you guarantee visa approval or job placement?", "a": "No. Final decisions are made by universities, employers, and immigration authorities. We provide expert guidance and support to maximize your chances."},
+                {"q": "Can I apply for multiple countries/destinations?", "a": "Yes! Our team can guide you through applications to multiple destinations simultaneously."}
+            ],
+            "education": [
+                {"q": "Which countries can I study in?", "a": "We currently support applications to the UK, Canada, USA, Australia, and Europe (Germany, France, Netherlands, etc.)."},
+                {"q": "Do I need IELTS to study abroad?", "a": "Most countries require English language proficiency. IELTS is widely accepted, but TOEFL, PTE, and Duolingo English Test may also be valid depending on the university."},
+                {"q": "Can you help with scholarship applications?", "a": "Yes, our consultants can identify scholarship opportunities and guide you through the application process."},
+                {"q": "What documents do I need?", "a": "Generally: valid passport, academic transcripts, English test scores, statement of purpose, financial proof, and reference letters. Requirements vary by country."},
+                {"q": "Do you handle visa applications?", "a": "We provide comprehensive visa guidance including document preparation, application support, and interview coaching."},
+                {"q": "What happens after I receive an offer?", "a": "We assist with acceptance, visa application, accommodation guidance, and pre-departure orientation."}
+            ],
+            "recruitment": [
+                {"q": "What types of jobs do you help with?", "a": "We support a range of skilled occupations including healthcare, engineering, IT, hospitality, construction trades, and more."},
+                {"q": "Do you charge the job seeker or the employer?", "a": "Please contact us for our current fee structure. We are transparent about all costs upfront."},
+                {"q": "How long does the recruitment process take?", "a": "Timelines vary depending on the destination, employer, and visa processing. Our team will give you a realistic estimate during consultation."},
+                {"q": "Is a job offer guaranteed?", "a": "No. We provide profile optimization, coordination, and support, but final hiring decisions are made by employers."},
+                {"q": "What if my profile isn't suitable?", "a": "We will provide honest feedback and suggest steps to improve your profile (additional certifications, experience, language skills, etc.)."},
+                {"q": "Do you help with visa and travel?", "a": "Yes, we provide documentation guidance, visa support, and pre-departure briefing to help you prepare for your move."}
+            ]
+        },
+
+        "contact": {
+            "address": "",
+            "phone": "",
+            "whatsapp": "",
+            "email": "info@infiniteglobalrecruitment.com",
+            "hours": "Monday - Friday: 9:00 AM - 5:00 PM",
+            "timezone": "GMT+5:30"
+        },
+
+        "social_media": {
+            "facebook": "",
+            "instagram": "",
+            "linkedin": "",
+            "twitter": "",
+            "youtube": "",
+            "whatsapp": ""
+        },
+
+        "legal": {
+            "privacy_policy": "/privacy-policy/",
+            "terms_conditions": "/terms-and-conditions/",
+            "disclaimer": "Infinite Global Recruitment provides consultancy and coordination services only. Final outcomes including university admissions, job offers, and visa approvals are determined by the respective institutions, employers, and government authorities. We do not guarantee specific results."
+        }
+    },
+
+    "forms": {
+        "student_application": {
+            "name": "Student Application / Eligibility Form",
+            "used_on": ["education", "book-consultation"],
+            "required_fields": [
+                {"name": "full_name", "label": "Full Name", "type": "text", "validation": "required"},
+                {"name": "email", "label": "Email Address", "type": "email", "validation": "required, valid email"},
+                {"name": "phone", "label": "Phone / WhatsApp Number", "type": "tel", "validation": "required"},
+                {"name": "country_selection", "label": "Intended Study Destination", "type": "dropdown", "options": ["United Kingdom", "Canada", "United States", "Australia", "Europe"], "validation": "required"},
+                {"name": "education_level", "label": "Current Education Level", "type": "dropdown", "options": ["O/L Completed", "A/L Completed", "Diploma", "Bachelor's Degree", "Master's Degree", "Other"], "validation": "required"},
+                {"name": "intended_course", "label": "Intended Course / Field of Study", "type": "text", "validation": "required"},
+                {"name": "preferred_intake", "label": "Preferred Intake / Timeframe", "type": "dropdown", "options": ["January 2027", "May 2027", "September 2027", "January 2028", "Flexible / Not Sure"], "validation": "required"},
+                {"name": "current_location", "label": "Current Country / City", "type": "text", "validation": "required"}
+            ],
+            "optional_fields": [
+                {"name": "budget_range", "label": "Budget Range", "type": "dropdown", "options": ["Below $10,000/year", "$10,000 - $20,000/year", "$20,000 - $30,000/year", "Above $30,000/year", "Need Scholarship"]},
+                {"name": "notes", "label": "Additional Notes / Message", "type": "textarea"}
+            ],
+            "optional_upload": [
+                {"name": "documents", "label": "Upload Passport / Certificates (optional)", "type": "file", "accept": ".pdf,.jpg,.png,.doc,.docx"}
+            ],
+            "on_submit": "Thank you for your application! Our team will review your details and contact you within 1-2 business days.",
+            "email_to": "info@infiniteglobalrecruitment.com"
+        },
+        "job_seeker_application": {
+            "name": "Job Seeker Application Form",
+            "used_on": ["recruitment", "book-consultation"],
+            "required_fields": [
+                {"name": "full_name", "label": "Full Name", "type": "text", "validation": "required"},
+                {"name": "email", "label": "Email Address", "type": "email", "validation": "required, valid email"},
+                {"name": "phone", "label": "Phone / WhatsApp Number", "type": "tel", "validation": "required"},
+                {"name": "occupation", "label": "Occupation / Skill Category", "type": "dropdown", "options": ["Healthcare / Nursing", "Engineering", "IT / Software", "Hospitality / Hotel", "Construction / Trades", "Driving / Transport", "Accounting / Finance", "Education / Teaching", "Other"], "validation": "required"},
+                {"name": "experience", "label": "Years of Experience", "type": "dropdown", "options": ["Less than 1 year", "1-2 years", "3-5 years", "5-10 years", "10+ years"], "validation": "required"},
+                {"name": "current_location", "label": "Current Location", "type": "text", "validation": "required"}
+            ],
+            "optional_fields": [
+                {"name": "preferred_destination", "label": "Preferred Destination / Region", "type": "dropdown", "options": ["Middle East", "Europe", "UK", "Canada", "Australia", "Asia", "Any / Flexible"]},
+                {"name": "availability", "label": "Availability", "type": "dropdown", "options": ["Immediately", "Within 1 month", "Within 3 months", "3-6 months", "Flexible"]},
+                {"name": "notes", "label": "Additional Notes", "type": "textarea"}
+            ],
+            "optional_upload": [
+                {"name": "cv", "label": "Upload CV / Resume (optional)", "type": "file", "accept": ".pdf,.doc,.docx"}
+            ],
+            "on_submit": "Thank you for submitting your profile! Our recruitment team will review your details and reach out to you within 2-3 business days.",
+            "email_to": "info@infiniteglobalrecruitment.com"
+        },
+        "consultation_request": {
+            "name": "Consultation Request Form",
+            "used_on": ["book-consultation"],
+            "required_fields": [
+                {"name": "full_name", "label": "Full Name", "type": "text", "validation": "required"},
+                {"name": "email", "label": "Email Address", "type": "email", "validation": "required, valid email"},
+                {"name": "phone", "label": "Phone / WhatsApp Number", "type": "tel", "validation": "required"},
+                {"name": "service_type", "label": "I Need Help With", "type": "dropdown", "options": ["Education / Study Abroad", "Recruitment / Job Seeking", "Both"], "validation": "required"},
+                {"name": "preferred_time", "label": "Preferred Day / Time", "type": "text", "validation": "required"},
+                {"name": "message", "label": "Brief Message", "type": "textarea", "validation": "required"}
+            ],
+            "on_submit": "Thank you for your consultation request! We will contact you within 1 business day to confirm your appointment.",
+            "email_to": "info@infiniteglobalrecruitment.com"
+        }
+    },
+
+    "technical": {
+        "wordpress_url": "https://elemento.deshtech.lk",
+        "api_key": "6761M1tEgacnB3Z23Q1pcBq0hMAlDRUd8a8SBEGu",
+        "elementor_pro": true,
+        "forms_plugin": "Elementor Pro Forms",
+        "seo_notes": "Use proper H1/H2 hierarchy, descriptive page titles, meta descriptions. Mobile-first responsive design.",
+        "analytics_placeholders": "GA4 + Meta Pixel (to be added later)",
+        "image_strategy": "Placeholder images from picsum.photos until real images are provided"
+    }
+}
