@@ -238,39 +238,49 @@ Every project contributes to `CLAUDE.md` — the shared brain. After 10, 20, 50 
 
 Every completed project is archived as a starter kit in `templates/starter-kits/` with full JSON source, design tokens, and screenshots.
 
+<table>
+<tr>
+<td width="50%" valign="top">
+
 ### Trogen Facility Services
 
-> **Melbourne Cleaning Company** — Single-page lead generation website with WhatsApp-first CTAs
-
 <a href="templates/starter-kits/trogen-facility-services/">
-  <img src="templates/starter-kits/trogen-facility-services/screenshot.png" alt="Trogen Facility Services Homepage" width="800">
+  <img src="templates/starter-kits/trogen-facility-services/screenshot.png" alt="Trogen Facility Services" width="100%">
 </a>
 
-| Detail | Value |
-|--------|-------|
+**Melbourne Cleaning Company** — Single-page lead generation
+
+| | |
+|---|---|
 | **Industry** | Commercial & Residential Cleaning |
 | **Location** | Melbourne, Australia |
-| **Type** | Single-page landing page (9 sections) |
-| **Features** | Responsive design, pricing cards, quote form, FAQ accordion, WhatsApp CTAs |
-| **Design** | Figtree 800 headings, Inter body, Blue/Navy/Green palette |
-| **Starter Kit** | [`templates/starter-kits/trogen-facility-services/`](templates/starter-kits/trogen-facility-services/) |
+| **Type** | Single-page (9 sections) |
+| **Design** | Figtree + Inter, Blue/Navy/Green |
+| **Kit** | [`starter-kits/trogen-facility-services/`](templates/starter-kits/trogen-facility-services/) |
+
+</td>
+<td width="50%" valign="top">
 
 ### Infinite Global Recruitment
 
-> **Surrey, UK Recruitment & Education Consultancy** — Multi-page website (9 templates) for an international recruitment agency and education consultancy
-
 <a href="templates/starter-kits/infinite-global-recruitment/">
-  <img src="templates/starter-kits/infinite-global-recruitment/screenshot.png" alt="Infinite Global Recruitment Homepage" width="800">
+  <img src="templates/starter-kits/infinite-global-recruitment/screenshot.png" alt="Infinite Global Recruitment" width="100%">
 </a>
 
-| Detail | Value |
-|--------|-------|
-| **Industry** | Education Consultancy & International Recruitment |
-| **Location** | Hersham, Surrey, United Kingdom |
-| **Type** | Multi-page website (7 pages + header + footer) |
-| **Features** | Nav-menu with hamburger, Elementor Pro forms, FAQ sections, employer vacancy form, dual consultation forms, Iconify icons |
-| **Design** | Playfair Display 700 headings, DM Sans body, Navy/Gold/Teal palette |
-| **Starter Kit** | [`templates/starter-kits/infinite-global-recruitment/`](templates/starter-kits/infinite-global-recruitment/) |
+**Surrey, UK Recruitment & Education** — Multi-page site (9 templates)
+
+| | |
+|---|---|
+| **Industry** | Education & International Recruitment |
+| **Location** | Hersham, Surrey, UK |
+| **Type** | Multi-page (7 pages + header + footer) |
+| **Design** | Playfair Display + DM Sans, Navy/Gold/Teal |
+| **Kit** | [`starter-kits/infinite-global-recruitment/`](templates/starter-kits/infinite-global-recruitment/) |
+
+</td>
+<!-- <td width="33%" valign="top"> Next project goes here </td> -->
+</tr>
+</table>
 
 ---
 
@@ -304,6 +314,15 @@ See the "Self-Improvement Rule" section in `CLAUDE.md` for details.
 - Regenerate API key from Settings → AI Elementor Sync if compromised
 
 ## Changelog
+
+### v1.2.1 (2026-02-25)
+- **Project archiving system** — Mandatory archiving of completed projects as starter kits with screenshots, design tokens, and README
+- **Responsive Design Master Reference** — Complete property checklists for every element type (responsive-from-first-build)
+- **New widget examples** — Form (Elementor Pro), Social Icons, Nav Menu with full documentation
+- **New section patterns** — FAQ (stacked cards), Contact Form (split layout)
+- **Archived: Trogen Facility Services** — Single-page cleaning company (Melbourne)
+- **Archived: Infinite Global Recruitment** — Multi-page recruitment & education site (Surrey, UK; 9 templates)
+- **Portfolio README layout** — Side-by-side project showcases with screenshots
 
 ### v1.2.0 (2026-02-15)
 - **Iconify icon support** — Custom widget for 100,000+ icons (Tabler, Material, Phosphor, etc.)
