@@ -6,6 +6,7 @@ config/page-mapping.json
 
 # Secrets — never commit real API keys
 # config/sites.json is committed with placeholder values only
+config/fireworks.json
 
 # Generated artifacts
 plugin/ai-elementor-sync.zip

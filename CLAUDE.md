@@ -1630,6 +1630,119 @@ templates/starter-kits/<project-name>/
 
 ---
 
+## Featured Image Generation (v1.5.0)
+
+This system generates AI-powered featured images for blog posts using **FLUX.1 [dev] FP8 via Fireworks AI**, converts them to optimized WebP format, and pushes them to WordPress as featured images — all via the CLI.
+
+### Overview
+
+| Component | Detail |
+|-----------|--------|
+| **AI Model** | FLUX.1 [dev] FP8 (12B parameter text-to-image) |
+| **Provider** | Fireworks AI (workflows API) |
+| **Generation Size** | 1344x704 (FLUX requires multiples of 64) |
+| **Final Size** | 1200x628 (matches WordPress OG/social ratio 1.91:1) |
+| **Format** | WebP (quality 85) |
+| **SEO** | Filename, alt text, title, and caption auto-generated from article title |
+| **Script** | `generate-featured-images.py` (Python 3.11+ with Pillow + requests) |
+
+### Prerequisites
+
+```bash
+pip install Pillow requests
+```
+
+Create `config/fireworks.json` (gitignored):
+```json
+{
+    "api_key": "fw_YOUR_KEY_HERE"
+}
+```
+
+### Workflow
+
+```bash
+# 1. List articles and see which need images
+python generate-featured-images.py list --project <name>
+
+# 2. Generate images in batches of 10 (saved locally for review)
+python generate-featured-images.py generate --project <name> --batch 1
+
+# 3. Generate specific articles only
+python generate-featured-images.py generate --project <name> --articles 1-1,1-2,1-3
+
+# 4. Review images in: projects/<name>/blog/images/
+
+# 5. Auto-fill WordPress post IDs from the API
+python generate-featured-images.py populate-ids --project <name>
+
+# 6. Push approved images to WordPress (sets as featured image automatically)
+python generate-featured-images.py push --project <name> --batch 1
+
+# 7. Check overall status
+python generate-featured-images.py status --project <name>
+```
+
+### Image SEO Strategy
+
+| Element | Rule |
+|---------|------|
+| **Filename** | SEO-friendly kebab-case from article title (e.g., `what-is-watercolor-paint-types-grades.webp`) |
+| **Alt text** | Article title (primary keyword + descriptive context, max 125 chars) |
+| **Title** | Article title (for WordPress media library) |
+| **Caption** | "Featured image for {title} - {cluster theme} guide" |
+| **Format** | WebP for optimal compression and quality |
+| **Dimensions** | 1200x628 matches existing post images and OG standards |
+
+### Prompt Engineering Tips
+
+- **Always include "Photorealistic photograph"** at the start of prompts — FLUX.1 defaults to illustration/painting style otherwise
+- **Always include "No text, no labels, no letters, no words, no writing, no watermarks"** — AI models love adding text
+- **Specify camera style**: "Shot with a DSLR camera with shallow depth of field" improves realism
+- **Specify lighting**: "Soft natural window lighting" produces consistent editorial look
+- **Use cluster themes**: Group articles by visual theme for consistency within content clusters
+- **Use article-specific overrides**: When the cluster default doesn't match, write a custom prompt
+
+### File Structure
+
+```
+projects/<project>/blog/
+├── articles/           ← Blog post JSON files
+├── images/             ← Generated featured images (WebP, 1200x628)
+│   ├── what-is-watercolor-paint-types-grades.webp
+│   ├── watercolor-pans-vs-tubes.webp
+│   └── ...
+└── image-manifest.json ← Tracks: article_id, filename, post_id, alt, pushed status
+```
+
+### Plugin Endpoints (v1.5.0)
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/media/upload` | POST | Upload base64-encoded image, auto-set as featured image |
+| `/posts/{id}/featured-image` | PUT | Set existing attachment as post's featured image |
+
+The `/media/upload` endpoint accepts:
+```json
+{
+    "data": "<base64-encoded image>",
+    "filename": "image-name.webp",
+    "post_id": 1234,
+    "title": "Image Title",
+    "alt": "Alt text for SEO",
+    "caption": "Optional caption"
+}
+```
+
+### Known Constraints
+
+- **FLUX dimensions must be multiples of 64** — 1200x628 is not valid; generate at 1344x704 and resize
+- **Fireworks API only returns JPEG** — `Accept: image/webp` header doesn't work; convert locally via Pillow
+- **Title matching with `&`** — WordPress encodes `&` as `&amp;` in titles; the `populate-ids` command may miss these; add manually
+- **Deterministic seeds** — The script uses `hash(article_id) % 2^31` for reproducible results; change the seed logic to regenerate different variants
+
+---
+
 ## Known Issues & Fixes
 
 > Add entries here when bugs are discovered and fixed. Format: `[DATE] Issue → Fix`
@@ -1796,6 +1909,8 @@ The log directory is protected with `.htaccess` (Deny from all) and `index.php`.
 | 2026-02-25 | **Added Form, Social Icons, Nav Menu widget examples** | Documented Elementor Pro form widget with all field types, button styling, email settings, honeypot spam protection, and field width controls. Added social-icons widget with circle shape color model (primary = bg, secondary = glyph). Added nav-menu widget with dual typography groups, hamburger breakpoint, dropdown settings, and WP menu limitation. Added FAQ section pattern and Contact Form split layout pattern. Learned from Infinite Global Recruitment project (9+ pages). |
 | 2026-02-25 | **Archived Infinite Global Recruitment** | Second starter kit archived: 7 content pages + header + footer (9 templates total). Multi-page recruitment & education consultancy site. Exported all pages from WordPress, created design-tokens.json, took homepage screenshot, updated repo README portfolio. Added widget examples note clarifying colors/fonts are placeholders. |
 | 2026-03-01 | **WooCommerce SEO workflow documented** | Added full "WooCommerce SEO Workflow (v1.3.0)" section to CLAUDE.md covering: audit approach (list-wc-categories/products), category JSON format (description + seo_title + seo_description), product JSON format (+ short_description), product-mapping.json tracking, individual and batch push commands, run-seo-push.ps1 batch script pattern, SEO content writing guidelines (local SEO, no keyword stuffing, HTML rules, character limits), API endpoints reference with SiteSEO meta keys. Based on Watercolor.lk project: 8 categories + 14 products SEO-optimized. |
+| 2026-03-01 | **Featured image generation system (v1.5.0)** | Added `generate-featured-images.py` script for AI-powered featured images via FLUX.1 [dev] FP8 on Fireworks AI. Plugin v1.5.0 adds `POST /media/upload` (base64 image upload + auto-set featured) and `PUT /posts/{id}/featured-image` endpoints. Images generated at 1344x704 (FLUX constraint), resized to 1200x628, converted to WebP via Pillow. 68 photorealistic featured images created for watercolor.lk blog. Added full "Featured Image Generation" section to CLAUDE.md with workflow, SEO strategy, prompt tips, plugin endpoints, and constraints. Added `config/fireworks.json` to .gitignore. |
+| 2026-03-01 | **Holistic SEO Knowledge Base v2.0 (major upgrade)** | Upgraded `docs/holistic-seo-knowledge-base.md` from 618 lines (35KB) to 1224 lines (68KB). Integrated 16+ methodology gaps from Koray agent-training reference: Section 0 Warnings (anti-footprint, primary vs secondary sources, AI content risks), Query/Document/Intent Templates, Core vs Outer topical map design with JSON schemas, SCN Publishing Order, Macro vs Micro Context rules, Early Answer Zone, Lexical Semantics & Vocabulary Control, Content Configuration Loop, AA Lint Rules (JSON), Statistics/Data Authority Pages, Internal Link Patterns (hub propagation, problem-solution, comparison network), Faceted Navigation & Duplication risks, Quality/Relevance Thresholds (replacing keyword difficulty), Entity Graph JSON schemas, Monitoring & Iteration metrics, Niche Site Implementation, Multi-language Strategy, Agent Prompt Templates, and Curated Reference Library with primary + secondary sources. |
 
 ---
 

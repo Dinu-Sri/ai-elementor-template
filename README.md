@@ -1,6 +1,6 @@
 # AI Elementor Template System
 
-> **v1.4.0** — Build any WordPress/Elementor website AND semantic SEO content using AI. The system gets smarter with every site you build.
+> **v1.5.0** — Build any WordPress/Elementor website AND semantic SEO content using AI. The system gets smarter with every site you build.
 
 Build WordPress/Elementor websites and SEO content systems using AI. Generate pages and blog posts as JSON, push to WordPress via REST API, review, refine, repeat. Every bug fix, layout pattern, SEO strategy, and widget discovery is captured in the knowledge base (`CLAUDE.md`) so the next project starts where the last one left off.
 
@@ -36,6 +36,7 @@ Build WordPress/Elementor websites and SEO content systems using AI. Generate pa
 - **Blog categories** — Create and manage WordPress blog categories via API
 - **WooCommerce SEO** — Bulk-update product/category descriptions and SiteSEO meta (v1.3.0)
 - **Local article copies** — Every blog post is kept as a local JSON file for updates, interlinking, and auditing
+- **AI featured image generation** — Generate photorealistic images via FLUX.1 [dev] FP8 (Fireworks AI), auto-convert to WebP, push to WordPress as featured images (v1.5.0)
 - **Featured image sideloading** — Upload images from URL directly to WordPress media library
 - **Interlink workflows** — Comprehensive interlink passes across all articles after publishing
 
@@ -127,8 +128,9 @@ Build the Home page as projects/my-site/pages/home.json
 │   ├── holistic-seo-knowledge-base.md ← Universal SEO strategy reference (Koray method)
 │   ├── workflow-guide.md        ← Full workflow documentation
 │   └── ai-prompt-templates.md   ← Ready-to-use prompts for AI
+├── generate-featured-images.py   ← AI image generation tool (FLUX.1 + Fireworks)
 ├── plugin/
-│   └── ai-elementor-sync/       ← WordPress REST API plugin (v1.4.0)
+│   └── ai-elementor-sync/       ← WordPress REST API plugin (v1.5.0)
 │       ├── ai-elementor-sync.php    ← Core plugin (pages, templates, blog, WooCommerce, diagnostics)
 │       ├── iconify-elementor-widget.php ← Custom Iconify icon widget
 │       └── iconify-support.php      ← Iconify JS loader for frontend
@@ -147,6 +149,8 @@ Build the Home page as projects/my-site/pages/home.json
         ├── pages/*.json         ← Generated Elementor page templates
         ├── blog/
         │   ├── articles/*.json  ← One JSON per blog post (local copy)
+        │   ├── images/*.webp    ← AI-generated featured images (WebP, 1200x628)
+        │   ├── image-manifest.json ← Tracks image status, post IDs, push state
         │   └── categories/*.json← Blog category definitions
         └── seo/
             ├── categories/*.json← WooCommerce category SEO content
@@ -170,9 +174,10 @@ Build the Home page as projects/my-site/pages/home.json
 3. **Create blog categories** → Push category definitions via API
 4. **Write articles per phase** → AI generates article JSON files in `blog/articles/`
 5. **Publish in clusters** → Push articles to WordPress (definitional first, commercial last)
-6. **Interlink pass** → Add contextual in-body links across all articles
-7. **Expand & maintain** → Fill topical gaps, update content, grow authority
-8. **Sync learnings** → Push improvements back to this repo
+6. **Generate featured images** → AI generates photorealistic images via FLUX.1, pushes to WordPress
+7. **Interlink pass** → Add contextual in-body links across all articles
+8. **Expand & maintain** → Fill topical gaps, update content, grow authority
+9. **Sync learnings** → Push improvements back to this repo
 
 ## Commands
 
@@ -219,6 +224,21 @@ Build the Home page as projects/my-site/pages/home.json
 | `.\sync.ps1 -Site X -Action list-wc-products` | List products with SEO status |
 | `.\sync.ps1 -Site X -Action update-wc-category -PageId 86 -TemplateFile path` | Update category SEO content |
 | `.\sync.ps1 -Site X -Action update-wc-product -PageId 1234 -TemplateFile path` | Update product SEO content |
+
+### Featured Image Generation (v1.5.0)
+
+Requires Python 3.11+ with `Pillow` and `requests`. API key in `config/fireworks.json` (gitignored).
+
+| Command | Description |
+|---------|-------------|
+| `python generate-featured-images.py list --project X` | List articles and image status |
+| `python generate-featured-images.py generate --project X --batch 1` | Generate next 10 images via FLUX.1 AI |
+| `python generate-featured-images.py generate --project X --articles 1-1,1-2` | Generate specific articles only |
+| `python generate-featured-images.py populate-ids --project X` | Auto-fill WordPress post IDs from API |
+| `python generate-featured-images.py push --project X --batch 1` | Push next 10 images to WordPress |
+| `python generate-featured-images.py status --project X` | Check overall generation/push status |
+
+> Images are generated at 1344x704 via FLUX.1 [dev] FP8 (Fireworks AI), resized to 1200x628, converted to WebP (quality 85), and uploaded as featured images via the plugin's `/media/upload` endpoint.
 
 ### Diagnostics & Debugging (v1.2.0)
 
@@ -349,6 +369,7 @@ Every completed project is archived as a starter kit in `templates/starter-kits/
 - PowerShell 5.1+ (Windows) or PowerShell 7+ (Mac/Linux)
 - VS Code with GitHub Copilot (Claude)
 - PHP 8.0+ on the WordPress server
+- Python 3.11+ with `Pillow` and `requests` (for featured image generation only)
 
 ## How AI Self-Improvement Works
 
@@ -362,6 +383,7 @@ The knowledge base currently includes:
 - **Widget examples** — Heading, text, button, image, icon, counter, icon-list, star-rating, divider, spacer, Iconify, form, social-icons, nav-menu
 - **SEO workflow** — Holistic SEO knowledge base, topical map strategy, article JSON format, publishing phases, interlink methodology
 - **WooCommerce SEO** — Category and product description templates, SiteSEO meta, batch push scripts
+- **Featured image generation** — FLUX.1 AI prompts, WebP conversion, WordPress upload, SEO optimization
 
 See the "Self-Improvement Rule" section in `CLAUDE.md` for details.
 
@@ -375,6 +397,17 @@ See the "Self-Improvement Rule" section in `CLAUDE.md` for details.
 - Regenerate API key from Settings → AI Elementor Sync if compromised
 
 ## Changelog
+
+### v1.5.0 (2026-03-01)
+- **AI featured image generation** — Python CLI tool (`generate-featured-images.py`) using FLUX.1 [dev] FP8 via Fireworks AI
+- **Photorealistic prompts** — 68 custom article-specific prompts with cluster themes, DSLR style, no-text rules
+- **WebP conversion** — Generate at 1344x704, resize to 1200x628, convert to WebP q85 via Pillow
+- **Plugin media upload** — New `POST /media/upload` endpoint for base64-encoded image upload with auto featured image
+- **Plugin featured image** — New `PUT /posts/{id}/featured-image` endpoint for setting existing attachments
+- **Image SEO** — Auto-generated filenames, alt text, titles, and captions from article metadata
+- **Image manifest** — `image-manifest.json` tracks generation status, push status, attachment IDs, and WordPress URLs
+- **Batch workflow** — `list`, `generate`, `populate-ids`, `push`, `status` commands for managing image pipeline
+- **CLAUDE.md v1.5.0** — Full Featured Image Generation section with workflow, prompts, SEO strategy, and constraints
 
 ### v1.4.0 (2026-03-01)
 - **Blog post CRUD** — Create, update, delete, list blog posts as JSON via REST API

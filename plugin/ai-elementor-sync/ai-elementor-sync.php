@@ -395,6 +395,20 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             'callback' => [$this, 'sideload_media'],
             'permission_callback' => [$this, 'permission_check'],
         ]);
+
+        // Upload media from base64 data
+        register_rest_route($namespace, '/media/upload', [
+            'methods'  => 'POST',
+            'callback' => [$this, 'upload_media_base64'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Set featured image on a post
+        register_rest_route($namespace, '/posts/(?P<id>\d+)/featured-image', [
+            'methods'  => 'PUT',
+            'callback' => [$this, 'set_featured_image'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
     }
 
     /**
@@ -1941,8 +1955,139 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
     }
 
     // ===================================================================
-    // Media Management (v1.4.0)
+    // Media Management (v1.4.0+)
     // ===================================================================
+
+    /**
+     * POST /media/upload — Upload image from base64 data to WordPress media library
+     * Body: { "data": "base64...", "filename": "image.webp", "post_id": 123, "title": "Image Title", "alt": "Alt text", "caption": "", "description": "" }
+     */
+    public function upload_media_base64($request) {
+        $params = $request->get_json_params();
+        if (!$params || empty($params['data']) || empty($params['filename'])) {
+            return new WP_Error('invalid_params', 'data (base64) and filename are required', ['status' => 400]);
+        }
+
+        $this->log('INFO', 'Uploading media from base64', ['filename' => $params['filename']]);
+
+        require_once ABSPATH . 'wp-admin/includes/media.php';
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+
+        // Decode base64 data
+        $image_data = base64_decode($params['data']);
+        if ($image_data === false) {
+            return new WP_Error('invalid_data', 'Failed to decode base64 data', ['status' => 400]);
+        }
+
+        // Write to temp file
+        $tmp_file = wp_tempnam($params['filename']);
+        file_put_contents($tmp_file, $image_data);
+
+        // Detect MIME type
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime  = finfo_file($finfo, $tmp_file);
+        finfo_close($finfo);
+
+        $file_array = [
+            'name'     => sanitize_file_name($params['filename']),
+            'type'     => $mime,
+            'tmp_name' => $tmp_file,
+            'error'    => 0,
+            'size'     => strlen($image_data),
+        ];
+
+        $post_id = isset($params['post_id']) ? (int) $params['post_id'] : 0;
+        $title   = $params['title'] ?? '';
+
+        // Upload to media library
+        $attach_id = media_handle_sideload($file_array, $post_id, $title ?: '');
+
+        if (is_wp_error($attach_id)) {
+            @unlink($tmp_file);
+            $this->log('ERROR', 'Media upload failed', ['error' => $attach_id->get_error_message()]);
+            return new WP_Error('upload_failed', $attach_id->get_error_message(), ['status' => 500]);
+        }
+
+        // Set alt text
+        if (!empty($params['alt'])) {
+            update_post_meta($attach_id, '_wp_attachment_image_alt', sanitize_text_field($params['alt']));
+        }
+
+        // Set caption and description
+        $update_args = [];
+        if (!empty($params['caption'])) {
+            $update_args['post_excerpt'] = sanitize_textarea_field($params['caption']);
+        }
+        if (!empty($params['description'])) {
+            $update_args['post_content'] = sanitize_textarea_field($params['description']);
+        }
+        if (!empty($params['title'])) {
+            $update_args['post_title'] = sanitize_text_field($params['title']);
+        }
+        if (!empty($update_args)) {
+            $update_args['ID'] = $attach_id;
+            wp_update_post($update_args);
+        }
+
+        // Auto-set as featured image if post_id is provided
+        if ($post_id > 0) {
+            set_post_thumbnail($post_id, $attach_id);
+            $this->log('INFO', 'Featured image set', ['post_id' => $post_id, 'attachment_id' => $attach_id]);
+        }
+
+        $this->log('INFO', 'Media uploaded', ['attachment_id' => $attach_id, 'url' => wp_get_attachment_url($attach_id)]);
+
+        return [
+            'success'       => true,
+            'attachment_id' => $attach_id,
+            'url'           => wp_get_attachment_url($attach_id),
+            'post_id'       => $post_id,
+            'featured_set'  => $post_id > 0,
+        ];
+    }
+
+    /**
+     * PUT /posts/{id}/featured-image — Set a media attachment as a post's featured image
+     * Body: { "attachment_id": 456 }
+     */
+    public function set_featured_image($request) {
+        $post_id = (int) $request['id'];
+        $params  = $request->get_json_params();
+
+        if (!$params || empty($params['attachment_id'])) {
+            return new WP_Error('invalid_params', 'attachment_id is required', ['status' => 400]);
+        }
+
+        $attach_id = (int) $params['attachment_id'];
+
+        // Verify post exists
+        $post = get_post($post_id);
+        if (!$post) {
+            return new WP_Error('not_found', 'Post not found', ['status' => 404]);
+        }
+
+        // Verify attachment exists
+        $attachment = get_post($attach_id);
+        if (!$attachment || $attachment->post_type !== 'attachment') {
+            return new WP_Error('not_found', 'Attachment not found', ['status' => 404]);
+        }
+
+        $result = set_post_thumbnail($post_id, $attach_id);
+
+        if ($result === false) {
+            return new WP_Error('failed', 'Failed to set featured image', ['status' => 500]);
+        }
+
+        $this->log('INFO', 'Featured image set', ['post_id' => $post_id, 'attachment_id' => $attach_id]);
+
+        return [
+            'success'       => true,
+            'post_id'       => $post_id,
+            'attachment_id' => $attach_id,
+            'url'           => wp_get_attachment_url($attach_id),
+        ];
+    }
 
     /**
      * POST /media/sideload — Download an image from a URL and add to WordPress media library
