@@ -15,7 +15,7 @@ param(
     [string]$Site,
 
     [Parameter(Mandatory = $true)]
-    [ValidateSet("status", "create", "update", "get", "list", "delete", "create-template", "list-templates", "bulk", "site-info", "diagnostics", "logs", "clear-logs", "test")]
+    [ValidateSet("status", "create", "update", "get", "list", "delete", "create-template", "list-templates", "bulk", "site-info", "diagnostics", "logs", "clear-logs", "test", "list-wc-categories", "update-wc-category", "update-wc-product", "list-wc-products", "list-posts", "create-post", "update-post", "get-post", "delete-post", "list-blog-categories", "create-blog-category", "sideload-media")]
     [string]$Action,
 
     [string]$TemplateFile,
@@ -551,6 +551,259 @@ switch ($Action) {
                 }
             }
             Write-Host ""
+        }
+    }
+
+    # ---------------------------------------------------------------
+    # WooCommerce SEO Actions (v1.3.0)
+    # ---------------------------------------------------------------
+
+    "list-wc-categories" {
+        Write-Host "Fetching WooCommerce categories from $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "wc-categories"
+
+        Write-Host ""
+        Write-Host "=== WooCommerce Product Categories ($($result.count) total) ===" -ForegroundColor Cyan
+        Write-Host ""
+        foreach ($cat in $result.categories) {
+            $hasDesc = if ($cat.description) { "YES" } else { "NO" }
+            $hasSeoTitle = if ($cat.seo_title) { "YES" } else { "NO" }
+            $hasSeoDesc = if ($cat.seo_description) { "YES" } else { "NO" }
+            Write-Host "  [$($cat.id)] $($cat.name) (slug: $($cat.slug), products: $($cat.count))" -ForegroundColor White
+            Write-Host "    Description:   $hasDesc" -ForegroundColor $(if ($cat.description) { "Green" } else { "Red" })
+            Write-Host "    SEO Title:     $hasSeoTitle" -ForegroundColor $(if ($cat.seo_title) { "Green" } else { "Red" })
+            Write-Host "    SEO Desc:      $hasSeoDesc" -ForegroundColor $(if ($cat.seo_description) { "Green" } else { "Red" })
+            if ($cat.seo_title) { Write-Host "    Title Value:   $($cat.seo_title)" -ForegroundColor Gray }
+            Write-Host ""
+        }
+    }
+
+    "update-wc-category" {
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId is required (the WooCommerce category term_id)" -ForegroundColor Red
+            exit 1
+        }
+        $payload = Read-TemplateFile -Path $TemplateFile
+        Write-Host "Updating WooCommerce category ID $PageId on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "wc-categories/$PageId" -Method "PUT" -Body $payload
+        Write-Success "Category '$($result.name)' updated!"
+        Write-Host "  Term ID:  $($result.term_id)" -ForegroundColor White
+        Write-Host "  Slug:     $($result.slug)" -ForegroundColor White
+        Write-Host "  Updated:  $($result.updated | ConvertTo-Json -Compress)" -ForegroundColor White
+        Write-Host ""
+    }
+
+    "update-wc-product" {
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId is required (the WooCommerce product post_id)" -ForegroundColor Red
+            exit 1
+        }
+        $payload = Read-TemplateFile -Path $TemplateFile
+        Write-Host "Updating WooCommerce product ID $PageId on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "wc-products/$PageId" -Method "PUT" -Body $payload
+        Write-Success "Product '$($result.name)' updated!"
+        Write-Host "  Post ID:  $($result.post_id)" -ForegroundColor White
+        Write-Host "  Updated:  $($result.updated | ConvertTo-Json -Compress)" -ForegroundColor White
+        Write-Host ""
+    }
+
+    "list-wc-products" {
+        Write-Host "Fetching WooCommerce products from $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "wc-products"
+
+        Write-Host ""
+        Write-Host "=== WooCommerce Products ($($result.count) total) ===" -ForegroundColor Cyan
+        Write-Host ""
+        foreach ($prod in $result.products) {
+            $hasSeoTitle = if ($prod.has_seo_title) { "YES" } else { "NO" }
+            $hasSeoDesc  = if ($prod.has_seo_desc)  { "YES" } else { "NO" }
+            $hasDesc     = if ($prod.has_description) { "YES" } else { "NO" }
+            $cats        = ($prod.categories) -join ", "
+            Write-Host "  [$($prod.id)] $($prod.name)" -ForegroundColor White
+            Write-Host "    Slug:        $($prod.slug)" -ForegroundColor Gray
+            Write-Host "    Categories:  $cats" -ForegroundColor Gray
+            Write-Host "    Description: $hasDesc" -ForegroundColor $(if ($prod.has_description) { "Green" } else { "Red" })
+            Write-Host "    SEO Title:   $hasSeoTitle" -ForegroundColor $(if ($prod.has_seo_title) { "Green" } else { "Red" })
+            Write-Host "    SEO Desc:    $hasSeoDesc" -ForegroundColor $(if ($prod.has_seo_desc) { "Green" } else { "Red" })
+            Write-Host ""
+        }
+    }
+
+    # ---------------------------------------------------------------
+    # Blog Post Management (v1.4.0)
+    # ---------------------------------------------------------------
+
+    "list-posts" {
+        Write-Host "Fetching blog posts from $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "blog-posts"
+        Write-Host ""
+        Write-Host "=== Blog Posts ($($result.count) total) ===" -ForegroundColor Cyan
+        Write-Host ""
+        foreach ($p in $result.posts) {
+            $cats = ($p.categories | ForEach-Object { $_.name }) -join ", "
+            $hasSeo = if ($p.seo_title) { "YES" } else { "NO" }
+            $hasFI  = if ($p.featured_image) { "YES" } else { "NO" }
+            Write-Host "  [$($p.id)] $($p.title)" -ForegroundColor White
+            Write-Host "    Status: $($p.status) | Date: $($p.date)" -ForegroundColor Gray
+            Write-Host "    Categories: $cats" -ForegroundColor Gray
+            Write-Host "    Featured Image: $hasFI | SEO: $hasSeo" -ForegroundColor $(if ($hasSeo -eq "YES") { "Green" } else { "Yellow" })
+            Write-Host "    Link: $($p.link)" -ForegroundColor DarkGray
+            Write-Host ""
+        }
+    }
+
+    "create-post" {
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: -TemplateFile is required for create-post" -ForegroundColor Red
+            exit 1
+        }
+        if (-not (Test-Path $TemplateFile)) {
+            Write-Host "ERROR: Template file not found: $TemplateFile" -ForegroundColor Red
+            exit 1
+        }
+
+        $jsonContent = Get-Content $TemplateFile -Raw -Encoding UTF8
+        Write-Host "Creating blog post from $TemplateFile on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "blog-posts" -Method POST -Body $jsonContent
+
+        if ($result.success) {
+            Write-Host "SUCCESS: Blog post created!" -ForegroundColor Green
+            Write-Host "  Post ID: $($result.post_id)" -ForegroundColor Cyan
+            Write-Host "  Link:    $($result.link)" -ForegroundColor Cyan
+            if ($result.results) {
+                $result.results.PSObject.Properties | ForEach-Object {
+                    Write-Host "  $($_.Name): $($_.Value)" -ForegroundColor Gray
+                }
+            }
+        } else {
+            Write-Host "FAILED: $($result.message)" -ForegroundColor Red
+        }
+    }
+
+    "update-post" {
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId is required for update-post" -ForegroundColor Red
+            exit 1
+        }
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: -TemplateFile is required for update-post" -ForegroundColor Red
+            exit 1
+        }
+        if (-not (Test-Path $TemplateFile)) {
+            Write-Host "ERROR: Template file not found: $TemplateFile" -ForegroundColor Red
+            exit 1
+        }
+
+        $jsonContent = Get-Content $TemplateFile -Raw -Encoding UTF8
+        Write-Host "Updating blog post $PageId on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "blog-posts/$PageId" -Method PUT -Body $jsonContent
+
+        if ($result.success) {
+            Write-Host "SUCCESS: Blog post updated!" -ForegroundColor Green
+            Write-Host "  Post ID: $($result.post_id)" -ForegroundColor Cyan
+            Write-Host "  Link:    $($result.link)" -ForegroundColor Cyan
+        } else {
+            Write-Host "FAILED: $($result.message)" -ForegroundColor Red
+        }
+    }
+
+    "get-post" {
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId is required for get-post" -ForegroundColor Red
+            exit 1
+        }
+        Write-Host "Fetching blog post $PageId from $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "blog-posts/$PageId"
+
+        if ($result.success) {
+            $p = $result.post
+            Write-Host ""
+            Write-Host "=== Blog Post: $($p.title) ===" -ForegroundColor Cyan
+            Write-Host "  ID:       $($p.id)" -ForegroundColor Gray
+            Write-Host "  Status:   $($p.status)" -ForegroundColor Gray
+            Write-Host "  Date:     $($p.date)" -ForegroundColor Gray
+            Write-Host "  Link:     $($p.link)" -ForegroundColor Gray
+            Write-Host "  SEO:      $($p.seo_title)" -ForegroundColor Gray
+            Write-Host "  Excerpt:  $($p.excerpt)" -ForegroundColor Gray
+            Write-Host ""
+
+            if ($TemplateFile) {
+                $result.post | ConvertTo-Json -Depth 10 | Out-File $TemplateFile -Encoding UTF8
+                Write-Host "Exported to $TemplateFile" -ForegroundColor Green
+            }
+        }
+    }
+
+    "delete-post" {
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId is required for delete-post" -ForegroundColor Red
+            exit 1
+        }
+        $endpoint = "blog-posts/$PageId"
+        if ($Force) { $endpoint += "?force=true" }
+        Write-Host "Deleting blog post $PageId on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint $endpoint -Method DELETE
+
+        if ($result.success) {
+            Write-Host "SUCCESS: Blog post $($result.action)!" -ForegroundColor Green
+        }
+    }
+
+    "list-blog-categories" {
+        Write-Host "Fetching blog categories from $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "blog-categories"
+        Write-Host ""
+        Write-Host "=== Blog Categories ($($result.count) total) ===" -ForegroundColor Cyan
+        Write-Host ""
+        foreach ($c in $result.categories) {
+            $parentInfo = if ($c.parent -gt 0) { " (parent: $($c.parent))" } else { "" }
+            Write-Host "  [$($c.id)] $($c.name)$parentInfo - $($c.count) posts" -ForegroundColor White
+        }
+        Write-Host ""
+    }
+
+    "create-blog-category" {
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: -TemplateFile is required (JSON with name, slug, description)" -ForegroundColor Red
+            exit 1
+        }
+        if (-not (Test-Path $TemplateFile)) {
+            Write-Host "ERROR: File not found: $TemplateFile" -ForegroundColor Red
+            exit 1
+        }
+        $jsonContent = Get-Content $TemplateFile -Raw -Encoding UTF8
+        Write-Host "Creating blog category on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "blog-categories" -Method POST -Body $jsonContent
+
+        if ($result.success) {
+            if ($result.already_exists) {
+                Write-Host "Category already exists: ID $($result.term_id)" -ForegroundColor Yellow
+            } else {
+                Write-Host "SUCCESS: Category created!" -ForegroundColor Green
+                Write-Host "  Term ID: $($result.term_id)" -ForegroundColor Cyan
+                Write-Host "  Name:    $($result.name)" -ForegroundColor Cyan
+                Write-Host "  Slug:    $($result.slug)" -ForegroundColor Cyan
+            }
+        }
+    }
+
+    "sideload-media" {
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: -TemplateFile is required (JSON with url, title, alt)" -ForegroundColor Red
+            exit 1
+        }
+        if (-not (Test-Path $TemplateFile)) {
+            Write-Host "ERROR: File not found: $TemplateFile" -ForegroundColor Red
+            exit 1
+        }
+        $jsonContent = Get-Content $TemplateFile -Raw -Encoding UTF8
+        Write-Host "Sideloading media on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "media/sideload" -Method POST -Body $jsonContent
+
+        if ($result.success) {
+            Write-Host "SUCCESS: Media uploaded!" -ForegroundColor Green
+            Write-Host "  Attachment ID: $($result.attachment_id)" -ForegroundColor Cyan
+            Write-Host "  URL:           $($result.url)" -ForegroundColor Cyan
         }
     }
 }

@@ -61,8 +61,16 @@ Write-Host ""
 # 1. Create folder structure
 Write-Host "[1/5] Creating project folders..." -ForegroundColor Yellow
 New-Item -ItemType Directory -Path $pagesDir -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $projectDir "blog\articles") -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $projectDir "blog\categories") -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $projectDir "seo\categories") -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $projectDir "seo\products") -Force | Out-Null
 Write-Host "  Created: projects/$Name/" -ForegroundColor Green
 Write-Host "  Created: projects/$Name/pages/" -ForegroundColor Green
+Write-Host "  Created: projects/$Name/blog/articles/" -ForegroundColor Green
+Write-Host "  Created: projects/$Name/blog/categories/" -ForegroundColor Green
+Write-Host "  Created: projects/$Name/seo/categories/" -ForegroundColor Green
+Write-Host "  Created: projects/$Name/seo/products/" -ForegroundColor Green
 
 # 2. Create brief.json from template
 Write-Host "[2/5] Creating project brief..." -ForegroundColor Yellow
@@ -150,4 +158,7 @@ Write-Host "     Read projects/$Name/brief.json for requirements." -ForegroundCo
 Write-Host ""
 Write-Host "  4. After each page is generated, push it:" -ForegroundColor White
 Write-Host "     .\sync.ps1 -Site `"$Name`" -Action create -TemplateFile `".\projects\$Name\pages\home.json`"" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "  5. For SEO content (blog posts), read CLAUDE.md section 'Blog Content & SEO Workflow'." -ForegroundColor White
+Write-Host "     Start by building topical-map.md, then write articles in blog/articles/." -ForegroundColor Yellow
 Write-Host ""

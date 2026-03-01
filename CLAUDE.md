@@ -31,12 +31,26 @@ When you discover any of the following during a session, **immediately edit this
 
 ## What This System Does
 
+This system does **two things** for WordPress websites:
+
+### 1. Web Design (Elementor Pages)
 We build Elementor pages as JSON files and push them to WordPress via a custom REST API plugin. The workflow:
 1. AI generates a page template as JSON
 2. User pushes it to WordPress with `sync.ps1`
 3. User reviews the live result in browser
 4. User requests changes → AI edits the JSON → re-push
 5. Repeat until perfect
+
+### 2. SEO Content (Blog Posts & WooCommerce)
+We build topical authority through semantic SEO content — blog posts, WooCommerce product/category descriptions — all managed as JSON files and pushed via the same API. The workflow:
+1. Study the SEO knowledge base (`docs/holistic-seo-knowledge-base.md`)
+2. Build a semantic topical map for the project
+3. AI writes blog posts as JSON files (title, content, SEO meta, categories)
+4. User pushes posts to WordPress with `sync.ps1`
+5. AI runs interlink passes to connect all content
+6. Repeat and expand topical coverage over time
+
+Both workflows share the same CLI (`sync.ps1`), the same plugin, and the same project folder structure.
 
 ---
 
@@ -51,6 +65,7 @@ Elementor Template/
 │   └── sites.json               ← WordPress site connections (URL + API key)
 ├── docs/
 │   ├── design-system.json       ← Technical design rules (spacing, typography, colors)
+│   ├── holistic-seo-knowledge-base.md ← Universal SEO strategy reference (Koray method)
 │   ├── workflow-guide.md        ← Step-by-step workflow documentation
 │   └── ai-prompt-templates.md   ← Ready-to-use prompt templates
 ├── plugin/
@@ -69,10 +84,25 @@ Elementor Template/
         ├── brief.json           ← Project requirements, content, branding
         ├── design-system-page.json ← Customized design system page
         ├── page-mapping.json    ← Maps page names to WordPress post IDs
-        └── pages/               ← Generated page templates
-            ├── home.json
-            ├── about.json
-            └── ...
+        ├── pages/               ← Generated Elementor page templates
+        │   ├── home.json
+        │   ├── about.json
+        │   └── ...
+        ├── topical-map.md       ← Semantic topical map & publishing blueprint
+        ├── blog/                ← Blog content management
+        │   ├── articles/        ← One JSON file per blog post (local copy)
+        │   │   ├── 1-1-what-is-watercolor-paint.json
+        │   │   ├── 2-1-types-of-brushes.json
+        │   │   └── ...
+        │   └── categories/      ← Blog category definitions
+        │       ├── cat-watercolor-paints.json
+        │       └── ...
+        └── seo/                 ← WooCommerce SEO content
+            ├── categories/      ← Product category descriptions + meta
+            │   └── cat-<id>-<slug>.json
+            └── products/        ← Product descriptions + meta
+                ├── product-mapping.json
+                └── <slug>.json
 ```
 
 ---
@@ -111,9 +141,396 @@ Elementor Template/
 
 # Run a specific test
 .\sync.ps1 -Site "<project-name>" -Action test -Title "template_create"
+
+# --- WooCommerce SEO (v1.3.0+) ---
+
+# List all WooCommerce categories with SEO status
+.\sync.ps1 -Site "<project-name>" -Action list-wc-categories
+
+# List all WooCommerce products with SEO status
+.\sync.ps1 -Site "<project-name>" -Action list-wc-products
+
+# Update a single category's SEO content
+.\sync.ps1 -Site "<project-name>" -Action update-wc-category -PageId <term_id> -TemplateFile ".\projects\<project>\seo\categories\cat-<id>-<slug>.json"
+
+# Update a single product's SEO content
+.\sync.ps1 -Site "<project-name>" -Action update-wc-product -PageId <post_id> -TemplateFile ".\projects\<project>\seo\products\<slug>.json"
+
+# Batch push all SEO updates (requires run-seo-push.ps1 script)
+powershell -ExecutionPolicy Bypass -File .\run-seo-push.ps1
+
+# --- Blog Posts (v1.4.0+) ---
+
+# List all blog posts
+.\sync.ps1 -Site "<project-name>" -Action list-posts
+
+# Create a new blog post
+.\sync.ps1 -Site "<project-name>" -Action create-post -TemplateFile ".\projects\<project>\blog\articles\1-1-article-slug.json"
+
+# Update an existing blog post
+.\sync.ps1 -Site "<project-name>" -Action update-post -TemplateFile ".\projects\<project>\blog\articles\1-1-article-slug.json" -PageId <post_id>
+
+# Get a blog post (view or export)
+.\sync.ps1 -Site "<project-name>" -Action get-post -PageId <post_id>
+
+# Delete a blog post
+.\sync.ps1 -Site "<project-name>" -Action delete-post -PageId <post_id> -Force
+
+# List blog categories
+.\sync.ps1 -Site "<project-name>" -Action list-blog-categories
+
+# Create a new blog category
+.\sync.ps1 -Site "<project-name>" -Action create-blog-category -Title "Category Name" -TemplateFile ".\projects\<project>\blog\categories\cat-name.json"
+
+# Sideload a featured image from URL
+.\sync.ps1 -Site "<project-name>" -Action sideload-media -Title "image-alt-text" -TemplateFile "https://example.com/image.jpg"
 ```
 
 You do NOT push pages yourself. Generate the JSON file → tell the user the sync command to run.
+
+---
+
+## WooCommerce SEO Workflow (v1.3.0)
+
+This system can bulk-update WooCommerce product and category SEO content (descriptions, short descriptions, SEO titles, and meta descriptions) via the same REST API plugin. The SEO plugin supported is **SiteSEO** (meta keys: `_seopress_titles_title`, `_seopress_titles_desc`).
+
+### Overview & Approach
+
+The WooCommerce SEO workflow follows these steps:
+1. **Audit** — List all categories/products to see which are missing SEO content
+2. **Generate** — AI writes SEO-optimized JSON files (one per category, one per product)
+3. **Review** — User reviews/edits the generated content
+4. **Push** — Run sync commands to push content to WordPress
+5. **Verify** — Check live site and search engine rendering
+
+### Project File Structure for SEO
+
+```
+projects/<project-name>/
+└── seo/
+    ├── categories/
+    │   ├── cat-<id>-<slug>.json       ← One file per WooCommerce category
+    │   ├── cat-86-pigments.json
+    │   ├── cat-87-color-palettes.json
+    │   └── ...
+    └── products/
+        ├── product-mapping.json        ← Maps product slugs to post IDs
+        ├── <product-slug>.json         ← One file per product
+        ├── winsor-newton-cotman-8ml-tube.json
+        └── ...
+```
+
+### Step 1 — Audit Current SEO Status
+
+```powershell
+# List all categories with SEO status (YES/NO for description, SEO title, SEO desc)
+.\sync.ps1 -Site "<project>" -Action list-wc-categories
+
+# List all products with SEO status
+.\sync.ps1 -Site "<project>" -Action list-wc-products
+```
+
+These commands show which items are missing content, helping you prioritize.
+
+### Step 2 — Generate Category SEO JSON
+
+Each category JSON has 3 fields:
+
+```json
+{
+    "description": "<p>HTML description displayed on the category archive page. 2-3 paragraphs covering what the category contains, why these products matter, and a call to action. Include the store name and location for local SEO.</p>",
+    "seo_title": "Category Name in Location | Store Name",
+    "seo_description": "Buy [products] in [location]. [Key selling points]. [Delivery info]. Max 155 characters."
+}
+```
+
+**Category SEO writing rules:**
+- `description`: 2-3 `<p>` paragraphs of natural, informative content (NOT keyword-stuffed). Mention specific product brands/types stocked. Include location for local SEO. End with a call to browse/order.
+- `seo_title`: Max 60 characters. Format: `[Category] in [Location] | [Store Name]`
+- `seo_description`: Max 155 characters. Summarize what's available, mention location, include delivery info.
+- File naming: `cat-<term_id>-<slug>.json` (e.g., `cat-87-color-palettes.json`)
+
+### Step 3 — Generate Product SEO JSON
+
+Each product JSON has up to 4 fields:
+
+```json
+{
+    "description": "<p>Full HTML product description. Multiple paragraphs covering product features, materials, use cases, and specifications.</p><ul><li>Brand: ...</li><li>Size: ...</li><li>Key specs...</li></ul>",
+    "short_description": "<p>1-2 sentence summary shown on the product card and at the top of the product page. Key selling point + what it is.</p>",
+    "seo_title": "Buy Product Name in Location | Store Name",
+    "seo_description": "Product summary for search results. Key features, brand, size. Max 155 characters."
+}
+```
+
+**Product SEO writing rules:**
+- `description`: 2-3 `<p>` paragraphs of detailed, helpful content. Describe what the product is, who it's for, how to use it. End with a `<ul>` of key specs (brand, size, material, quantity, grade). Write like an expert recommending it, not like a salesperson.
+- `short_description`: 1-2 sentences. Appears on product cards and above the Add to Cart. Keep it punchy and informative.
+- `seo_title`: Max 60 characters. Format: `Buy [Product] in [Location] | [Store]` or `[Product Name] - [Key Feature] | [Store]`
+- `seo_description`: Max 155 characters. Summarize the product for Google snippet display.
+- File naming: `<product-slug>.json` (e.g., `winsor-newton-cotman-8ml-tube.json`)
+- Some products may omit `short_description` if it already exists on the site — check the `has` array in `product-mapping.json`
+
+### Step 4 — Create Product Mapping
+
+Create `projects/<project>/seo/products/product-mapping.json` to track all products:
+
+```json
+{
+    "_note": "Fill in post IDs after running: .\\sync.ps1 -Site <project> -Action list-wc-products",
+    "_usage": ".\\sync.ps1 -Site <project> -Action update-wc-product -PageId <ID> -TemplateFile .\\projects\\<project>\\seo\\products\\<file>.json",
+    "products": {
+        "product-slug": {
+            "post_id": 1234,
+            "file": "projects/<project>/seo/products/product-slug.json",
+            "has": ["description", "short_description", "seo_title", "seo_description"]
+        }
+    }
+}
+```
+
+The `has` array documents which fields the JSON file contains (useful for tracking what was updated).
+
+### Step 5 — Push Individual Items
+
+```powershell
+# Push a single category
+.\sync.ps1 -Site "<project>" -Action update-wc-category -PageId <term_id> -TemplateFile ".\projects\<project>\seo\categories\cat-<id>-<slug>.json"
+
+# Push a single product
+.\sync.ps1 -Site "<project>" -Action update-wc-product -PageId <post_id> -TemplateFile ".\projects\<project>\seo\products\<slug>.json"
+```
+
+### Step 6 — Batch Push Script
+
+For pushing all SEO updates at once, create `run-seo-push.ps1` in the project root:
+
+```powershell
+Set-Location $PSScriptRoot
+
+Write-Host "`n=== PUSHING CATEGORY SEO ==="  -ForegroundColor Cyan
+
+.\sync.ps1 -Site <project> -Action update-wc-category -PageId <id> -TemplateFile ".\projects\<project>\seo\categories\cat-<id>-<slug>.json"
+# ... repeat for each category
+
+Write-Host "`n=== PUSHING PRODUCT SEO ===" -ForegroundColor Cyan
+
+.\sync.ps1 -Site <project> -Action update-wc-product -PageId <id> -TemplateFile ".\projects\<project>\seo\products\<slug>.json"
+# ... repeat for each product
+
+Write-Host "`n=== ALL DONE ===" -ForegroundColor Green
+```
+
+Run with: `powershell -ExecutionPolicy Bypass -File .\run-seo-push.ps1`
+
+### SEO Content Guidelines
+
+| Rule | Detail |
+|------|--------|
+| **No keyword stuffing** | Write naturally — Google penalizes over-optimization |
+| **Local SEO** | Mention location (city/country) in descriptions and meta for geo-targeting |
+| **Brand names** | Include specific brand names stocked — users search for brands |
+| **HTML in descriptions** | Use `<p>`, `<ul>`, `<li>` only — no inline styles, no `<div>`, no classes |
+| **No special Unicode** | Use plain hyphens `-`, straight quotes — no em-dashes or curly quotes |
+| **SEO title length** | Max 60 characters (Google truncates beyond this) |
+| **Meta description length** | Max 155 characters (Google truncates beyond this) |
+| **Unique content** | Every category and product must have unique descriptions — no duplicates |
+| **Spec lists** | End product descriptions with a `<ul>` bullet list of key specs |
+| **Short description** | 1-2 sentences max — shown on product cards, must be scannable |
+
+### API Endpoints Reference
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/wc-categories` | GET | List all categories with SEO status |
+| `/wc-categories/{term_id}` | PUT | Update category description + SEO meta |
+| `/wc-products` | GET | List all products with SEO status |
+| `/wc-products/{post_id}` | PUT | Update product descriptions + SEO meta |
+
+The plugin stores SEO meta using SiteSEO keys:
+- `_seopress_titles_title` — SEO title (shown in search results)
+- `_seopress_titles_desc` — SEO meta description (shown in search results)
+
+For categories, these are stored as **term meta**. For products, as **post meta**.
+
+---
+
+## Blog Content & SEO Workflow (v1.4.0)
+
+This system builds topical authority through semantic SEO content — blog posts, interlinks, and content clusters — managed as local JSON files and pushed to WordPress via the REST API. The SEO knowledge and methodology are kept **separate from project data** so they improve across all projects.
+
+### The Three Layers
+
+| Layer | Location | Purpose | Shared? |
+|-------|----------|---------|---------|
+| **SEO Knowledge Base** | `docs/holistic-seo-knowledge-base.md` | Universal SEO methodology (Koray Gubur's Holistic SEO framework). Strategy, theory, implementation playbook. | YES — shared across ALL projects, lives in the repo |
+| **Project Topical Map** | `projects/<name>/topical-map.md` | Project-specific semantic topical map: clusters, articles, publishing phases, interlink strategy | NO — unique per project |
+| **Article JSON Files** | `projects/<name>/blog/articles/*.json` | One JSON file per blog post — the local copy used for updates, interlinking, and fixes | NO — unique per project |
+
+### Why Separate?
+
+- The **SEO Knowledge Base** is methodology — it teaches the AI HOW to do SEO. It improves over time across all projects and gets pushed to GitHub.
+- The **Topical Map** is a project-specific strategy document — it defines WHAT content to create for THIS website.
+- The **Article JSON files** are the actual content — kept locally so we can update, interlink, and fix posts without re-fetching from WordPress.
+
+### SEO Knowledge Base (`docs/holistic-seo-knowledge-base.md`)
+
+This is the universal reference for all SEO work. Based on Koray Tugberk Gubur's Holistic SEO methodology, it covers:
+
+- **6 Pillars**: Topical Map, Semantic Content Network, Content Briefs, Content Configuration, Authorship Rules, Topical Authority
+- **Topical Authority**: Topical Coverage + Historical Data = Rankings
+- **Entity-Attribute-Value (EAV)**: How to structure content around entities, attributes, and relationships
+- **Semantic Content Networks**: Interconnected content forming a knowledge graph
+- **Publishing Strategy**: Publish in clusters (not drip), complete topics before moving on
+- **Interlinking**: Contextual in-body links > generic "related posts" lists
+- **12 Case Studies**: Real sites that achieved 100-5000%+ traffic growth via semantic SEO alone
+
+**When to reference it:**
+- Starting ANY new SEO/content project — read it first
+- Building a topical map — follow the entity mapping methodology
+- Writing articles — follow the EAV content structure
+- Troubleshooting rankings — check for topical gaps and missing contextual bridges
+
+**When to update it:**
+- Discovered a new SEO pattern that works
+- Found a technique from Koray or other sources worth adding
+- A strategy failed and the lesson should be recorded
+
+### Per-Project SEO Structure
+
+Every project that includes blog content follows this structure:
+
+```
+projects/<project-name>/
+├── topical-map.md              ← Semantic topical map & publishing blueprint
+├── blog/
+│   ├── articles/               ← One JSON file per blog post
+│   │   ├── 1-1-article-slug.json    ← Cluster 1, Article 1
+│   │   ├── 1-2-article-slug.json    ← Cluster 1, Article 2
+│   │   ├── 2-1-article-slug.json    ← Cluster 2, Article 1
+│   │   └── ...
+│   └── categories/             ← Blog category definitions
+│       ├── cat-category-name.json
+│       └── ...
+└── seo/                        ← WooCommerce SEO (if applicable)
+    ├── categories/
+    └── products/
+```
+
+### Topical Map (`topical-map.md`)
+
+The topical map is the strategy document for the project's content. It defines:
+
+1. **Source Context** — Why this website talks about this topic (e.g., "We sell watercolor supplies and educate artists in Sri Lanka")
+2. **Content Clusters** — Grouped by entity type (e.g., Paints, Paper, Brushes, Techniques)
+3. **Articles per Cluster** — Each article with ID, title, target keywords, and status
+4. **Publishing Phases** — Which articles to publish first (definitional > buying guides > tutorials > advanced)
+5. **Interlink Strategy** — How clusters connect to each other via contextual bridges
+6. **Category Mapping** — WordPress category IDs for each cluster
+
+**Article ID Convention:** `<cluster>-<number>` (e.g., `1-1`, `2-3`, `6-12`). This maps directly to the JSON filename: `1-1-article-slug.json`.
+
+**Creating a Topical Map:**
+1. Read `docs/holistic-seo-knowledge-base.md` first
+2. Identify the central entity and all sub-entities
+3. Map entity types → clusters, entity instances → articles
+4. Cover all query patterns: "what is", "how to", "best", "vs", "types of", "review"
+5. Plan contextual bridges between clusters
+6. Define 3-4 publishing phases (definitional first, commercial last)
+
+### Blog Article JSON Format
+
+Each article is a single JSON file with this structure:
+
+```json
+{
+    "title": "Article Title — Descriptive and SEO-Friendly",
+    "status": "publish",
+    "categories": [93, 127],
+    "excerpt": "1-2 sentence summary for WordPress excerpt and social sharing.",
+    "seo_title": "Max 60 chars — Primary Keyword | Brand",
+    "seo_description": "Max 155 chars — Compelling summary for Google search results snippet.",
+    "featured_image_alt": "Descriptive alt text for the featured image",
+    "content": "<p>Full HTML content of the article...</p>"
+}
+```
+
+**Content Rules:**
+- HTML only: `<p>`, `<h2>`, `<h3>`, `<ul>`, `<li>`, `<ol>`, `<strong>`, `<em>`, `<a>`
+- No inline styles, no `<div>`, no classes
+- Use `<h2>` for main sections, `<h3>` for subsections
+- Internal links use full URLs: `<a href='https://site.com/slug/'>anchor text</a>`
+- No special Unicode characters (em-dashes, curly quotes) — use plain ASCII
+- Target 1500-2500 words per article
+- Include 3-5 contextual internal links to related articles
+- End with a practical takeaway or next-step recommendation
+
+**Article Writing Approach (from Koray's methodology):**
+1. **Definitional opener**: Clear "X is a [type] that [key attribute]" sentence
+2. **EAV coverage**: Cover root attributes, rare attributes, unique attributes
+3. **Semantic vocabulary**: Use the terminology authoritative sources consistently use
+4. **Contextual bridges**: Link to related articles naturally within the text
+5. **No keyword stuffing**: Write for readers, structure for search engines
+
+### Blog Category JSON Format
+
+```json
+{
+    "name": "Category Name",
+    "slug": "category-slug",
+    "description": "Brief category description for WordPress."
+}
+```
+
+### Workflow: Building a Blog from Scratch
+
+**Phase 1 — Foundation:**
+1. Read `docs/holistic-seo-knowledge-base.md`
+2. Study the project brief and business context
+3. Build `topical-map.md` with all clusters, articles, and phases
+4. Present the topical map to the user for approval
+5. Create blog categories: `.\sync.ps1 -Site X -Action create-blog-category`
+
+**Phase 2 — Content Creation (per publishing phase):**
+1. Write articles as JSON files in `blog/articles/`
+2. Include contextual internal links to already-published articles
+3. Publish in batches: `.\sync.ps1 -Site X -Action create-post`
+4. Record post IDs in the topical map
+5. Repeat for each phase
+
+**Phase 3 — Interlinking:**
+1. After all articles are published, run a comprehensive interlink pass
+2. Add contextual in-body links from older articles to newer ones
+3. Optionally add "Keep Reading" sections at the bottom of each article
+4. Update articles via: `.\sync.ps1 -Site X -Action update-post -PageId <id>`
+
+**Phase 4 — Maintenance (Ongoing):**
+1. Monitor rankings and identify weak articles
+2. Update content with new information, better links
+3. Fill topical gaps identified from search console data
+4. All updates go through the local JSON → push to WordPress flow
+
+### Why Keep Local Copies of Every Article
+
+Every blog post JSON file is kept locally in `blog/articles/` because:
+
+- **Interlinking**: When adding links to Article A from Article B, we need to read and edit Article A's content locally
+- **Updates**: When facts change or new products launch, edit the local JSON and re-push
+- **Auditing**: Quickly grep across all articles for broken links, outdated info, or missing interlinks
+- **Backup**: If WordPress has issues, the full content exists locally
+- **New projects**: Past articles serve as writing style references for future projects
+- **No re-fetching**: Avoids repeated `get-post` API calls to read existing content
+
+### Interlink Strategy (Koray Method)
+
+From the SEO knowledge base, the ideal interlinking approach is:
+
+1. **Contextual in-body links** (BEST): Natural links within paragraph text that flow with the content. Example: "When choosing paper, the <a href='...'>weight and texture</a> matter more than brand."
+2. **Contextual bridge articles**: Dedicated articles that connect two otherwise separate clusters.
+3. **"Keep Reading" sections** (ACCEPTABLE): Curated link lists at the bottom of articles. Less SEO value than in-body links but still useful for user navigation.
+4. **Avoid**: Generic "related posts" plugins, sidebar link widgets, footer link dumps.
+
+**Rule**: Every article should have at least 3 contextual in-body links to other articles. Add more as the content library grows.
 
 ---
 
@@ -1378,6 +1795,7 @@ The log directory is protected with `.htaccess` (Deny from all) and `index.php`.
 | 2026-02-25 | **Major responsive design overhaul** | Added "Responsive Design Master Reference" section with complete property checklists per element type (sections, rows, columns, cards, headings, text, buttons, counters, headers, footers). Updated ALL container examples (Level 1, 3, 4) with `padding_tablet`, `flex_gap_tablet/mobile`, `padding_mobile`. Updated widget examples (text-editor, button) with responsive properties. Updated Section Spacing table with Tablet column. Updated Common Section Patterns with responsive annotations. Rewrote delivery checklist with specific responsive sub-checklist. Updated strict rules #5, #6, #13 to mandate responsive-from-first-build. **Root cause:** Trogen Facility Services project required 40+ responsive properties retrofitted across 9 sections + footer because they weren't included in the initial build. This overhaul ensures all future projects are fully responsive from the first JSON generation. |
 | 2026-02-25 | **Added Form, Social Icons, Nav Menu widget examples** | Documented Elementor Pro form widget with all field types, button styling, email settings, honeypot spam protection, and field width controls. Added social-icons widget with circle shape color model (primary = bg, secondary = glyph). Added nav-menu widget with dual typography groups, hamburger breakpoint, dropdown settings, and WP menu limitation. Added FAQ section pattern and Contact Form split layout pattern. Learned from Infinite Global Recruitment project (9+ pages). |
 | 2026-02-25 | **Archived Infinite Global Recruitment** | Second starter kit archived: 7 content pages + header + footer (9 templates total). Multi-page recruitment & education consultancy site. Exported all pages from WordPress, created design-tokens.json, took homepage screenshot, updated repo README portfolio. Added widget examples note clarifying colors/fonts are placeholders. |
+| 2026-03-01 | **WooCommerce SEO workflow documented** | Added full "WooCommerce SEO Workflow (v1.3.0)" section to CLAUDE.md covering: audit approach (list-wc-categories/products), category JSON format (description + seo_title + seo_description), product JSON format (+ short_description), product-mapping.json tracking, individual and batch push commands, run-seo-push.ps1 batch script pattern, SEO content writing guidelines (local SEO, no keyword stuffing, HTML rules, character limits), API endpoints reference with SiteSEO meta keys. Based on Watercolor.lk project: 8 categories + 14 products SEO-optimized. |
 
 ---
 

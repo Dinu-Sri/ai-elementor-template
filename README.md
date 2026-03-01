@@ -1,21 +1,26 @@
 # AI Elementor Template System
 
-> **v1.2.0** — Build any WordPress/Elementor website using AI. The system gets smarter with every site you build.
+> **v1.4.0** — Build any WordPress/Elementor website AND semantic SEO content using AI. The system gets smarter with every site you build.
 
-Build WordPress/Elementor websites using AI. Generate pages as JSON, push to WordPress via REST API, review, refine, repeat. Every bug fix, layout pattern, and widget discovery is captured in the knowledge base (`CLAUDE.md`) so the next project starts where the last one left off.
+Build WordPress/Elementor websites and SEO content systems using AI. Generate pages and blog posts as JSON, push to WordPress via REST API, review, refine, repeat. Every bug fix, layout pattern, SEO strategy, and widget discovery is captured in the knowledge base (`CLAUDE.md`) so the next project starts where the last one left off.
 
 ```
  You Describe ──→ AI Generates JSON ──→ Push to WordPress ──→ Review in Browser
       ↑                                                              │
       └──────────────────── Feedback ────────────────────────────────┘
+
+ SEO Strategy ──→ Topical Map ──→ AI Writes Articles ──→ Push to WordPress
+      ↑                                                         │
+      └────────────── Interlink Pass ───────────────────────────┘
 ```
 
-**Built with this system so far:** Multi-page recruitment sites, education consultancies, landing pages — with ecommerce, booking, SaaS, and portfolio sites on the roadmap. Each project teaches the AI new patterns that benefit all future projects.
+**Built with this system so far:** Multi-page recruitment sites, education consultancies, landing pages, e-commerce SEO content (70+ blog posts, WooCommerce product/category descriptions) — with booking, SaaS, and portfolio sites on the roadmap. Each project teaches the AI new patterns that benefit all future projects.
 
 ---
 
 ## Features
 
+### Web Design
 - **Container-based Flexbox layouts** — Modern Elementor containers (no legacy sections/columns)
 - **Iconify icon support** — 100,000+ icons from Tabler, Material, Phosphor, and more via custom widget
 - **Header & Footer templates** — Full Theme Builder support with proper create/delete/re-create workflow
@@ -23,7 +28,20 @@ Build WordPress/Elementor websites using AI. Generate pages as JSON, push to Wor
 - **Design system driven** — 8pt grid spacing, typography scale, color palette from project brief
 - **Diagnostics & logging** — Built-in error logging, system diagnostics, and dry-run tests
 - **Animation safety** — Smart rules for which elements can be animated without rendering issues
-- **Self-improving AI** — Every session discovers and records new Elementor property names, layout patterns, and fixes
+
+### SEO & Content
+- **Holistic SEO knowledge base** — Universal Koray Gubur methodology reference (`docs/holistic-seo-knowledge-base.md`)
+- **Semantic topical maps** — Per-project strategy docs defining clusters, articles, publishing phases, and interlink plans
+- **Blog post management** — Create, update, delete blog posts as JSON via REST API (v1.4.0)
+- **Blog categories** — Create and manage WordPress blog categories via API
+- **WooCommerce SEO** — Bulk-update product/category descriptions and SiteSEO meta (v1.3.0)
+- **Local article copies** — Every blog post is kept as a local JSON file for updates, interlinking, and auditing
+- **Featured image sideloading** — Upload images from URL directly to WordPress media library
+- **Interlink workflows** — Comprehensive interlink passes across all articles after publishing
+
+### System
+- **Self-improving AI** — Every session discovers and records new Elementor property names, layout patterns, SEO strategies, and fixes
+- **Project archiving** — Completed projects archived as starter kits with screenshots and design tokens
 
 ---
 
@@ -106,11 +124,12 @@ Build the Home page as projects/my-site/pages/home.json
 │   └── sites.json               ← WordPress site connections
 ├── docs/
 │   ├── design-system.json       ← Design rules (spacing, typography, colors)
+│   ├── holistic-seo-knowledge-base.md ← Universal SEO strategy reference (Koray method)
 │   ├── workflow-guide.md        ← Full workflow documentation
 │   └── ai-prompt-templates.md   ← Ready-to-use prompts for AI
 ├── plugin/
-│   └── ai-elementor-sync/       ← WordPress REST API plugin (v1.2.0)
-│       ├── ai-elementor-sync.php    ← Core plugin (pages, templates, diagnostics)
+│   └── ai-elementor-sync/       ← WordPress REST API plugin (v1.4.0)
+│       ├── ai-elementor-sync.php    ← Core plugin (pages, templates, blog, WooCommerce, diagnostics)
 │       ├── iconify-elementor-widget.php ← Custom Iconify icon widget
 │       └── iconify-support.php      ← Iconify JS loader for frontend
 ├── templates/
@@ -124,20 +143,36 @@ Build the Home page as projects/my-site/pages/home.json
         ├── brief.json           ← Business info, branding, content
         ├── page-mapping.json    ← Maps page names to WordPress post IDs
         ├── design-system-page.json
-        └── pages/*.json         ← Generated page templates
+        ├── topical-map.md       ← Semantic topical map & publishing blueprint
+        ├── pages/*.json         ← Generated Elementor page templates
+        ├── blog/
+        │   ├── articles/*.json  ← One JSON per blog post (local copy)
+        │   └── categories/*.json← Blog category definitions
+        └── seo/
+            ├── categories/*.json← WooCommerce category SEO content
+            └── products/*.json  ← WooCommerce product SEO content
 ```
 
 ## Workflow
 
+### Web Design
 1. **Init project** → `init-project.ps1` scaffolds folder with brief + design system
 2. **Fill brief** → Define pages, content, branding in `brief.json`
 3. **Push design system** → Client reviews colors, fonts, buttons, cards
 4. **Build pages** → AI generates one page at a time from the brief
 5. **Push & review** → `sync.ps1` pushes to WordPress, review in browser
 6. **Refine** → Tell AI what to change, re-push
-7. **Archive project** → Save as starter kit with screenshot + design tokens (see Portfolio)
-8. **Sync learnings** → Push improvements back to this repo (see below)
-8. **Repeat** → Until every page is perfect
+7. **Archive project** → Save as starter kit with screenshot + design tokens
+
+### SEO Content
+1. **Study SEO knowledge base** → Read `docs/holistic-seo-knowledge-base.md`
+2. **Build topical map** → AI creates `topical-map.md` with clusters, articles, and publishing phases
+3. **Create blog categories** → Push category definitions via API
+4. **Write articles per phase** → AI generates article JSON files in `blog/articles/`
+5. **Publish in clusters** → Push articles to WordPress (definitional first, commercial last)
+6. **Interlink pass** → Add contextual in-body links across all articles
+7. **Expand & maintain** → Fill topical gaps, update content, grow authority
+8. **Sync learnings** → Push improvements back to this repo
 
 ## Commands
 
@@ -162,6 +197,28 @@ Build the Home page as projects/my-site/pages/home.json
 | `.\sync.ps1 -Site X -Action create-template -TemplateFile path -Title "Site Header"` | Re-create template (step 2 of update) |
 
 > **Note:** Header/footer templates cannot be updated via PUT — they must be deleted and re-created. See CLAUDE.md for details.
+
+### Blog Posts (v1.4.0)
+
+| Command | Description |
+|---------|-------------|
+| `.\sync.ps1 -Site X -Action list-posts` | List all blog posts |
+| `.\sync.ps1 -Site X -Action create-post -TemplateFile path` | Create a new blog post |
+| `.\sync.ps1 -Site X -Action update-post -TemplateFile path -PageId 42` | Update an existing blog post |
+| `.\sync.ps1 -Site X -Action get-post -PageId 42` | Get a blog post |
+| `.\sync.ps1 -Site X -Action delete-post -PageId 42 -Force` | Delete a blog post |
+| `.\sync.ps1 -Site X -Action list-blog-categories` | List blog categories |
+| `.\sync.ps1 -Site X -Action create-blog-category -Title "Name" -TemplateFile path` | Create a blog category |
+| `.\sync.ps1 -Site X -Action sideload-media -Title "alt text" -TemplateFile "https://..."` | Sideload featured image from URL |
+
+### WooCommerce SEO (v1.3.0)
+
+| Command | Description |
+|---------|-------------|
+| `.\sync.ps1 -Site X -Action list-wc-categories` | List categories with SEO status |
+| `.\sync.ps1 -Site X -Action list-wc-products` | List products with SEO status |
+| `.\sync.ps1 -Site X -Action update-wc-category -PageId 86 -TemplateFile path` | Update category SEO content |
+| `.\sync.ps1 -Site X -Action update-wc-product -PageId 1234 -TemplateFile path` | Update product SEO content |
 
 ### Diagnostics & Debugging (v1.2.0)
 
@@ -207,6 +264,7 @@ Or simply tell the AI: *"Push the latest updates to the universal setup in GitHu
 | `sync.ps1` | CLI improvements, new actions, bug fixes |
 | `plugin/ai-elementor-sync/*.php` | Plugin updates, new widgets, API fixes |
 | `docs/design-system.json` | Updated spacing, typography, or component rules |
+| `docs/holistic-seo-knowledge-base.md` | Universal SEO methodology — improves across all projects |
 | `README.md` | Feature docs, command reference |
 
 ### What Stays Local (never synced)
@@ -224,11 +282,12 @@ This repo is designed to become a **universal AI-powered website builder** that 
 | Website Type | What the AI Learns |
 |-------------|-------------------|
 | **Recruitment sites** | Job listing layouts, consultation forms, two-audience pathways |
-| **E-commerce sites** | Product grids, pricing cards, cart flows, trust badges |
+| **E-commerce + SEO** | Product grids, pricing cards, topical authority, WooCommerce SEO, semantic content networks |
 | **Booking sites** | Calendar layouts, availability forms, confirmation flows |
 | **Portfolio sites** | Gallery grids, project showcases, filterable layouts |
 | **SaaS/Tool sites** | Feature comparisons, pricing tables, onboarding flows |
 | **Static/Corporate sites** | About sections, team grids, service breakdowns |
+| **Blog/Content sites** | Article layouts, interlink strategies, topical map patterns, publishing workflows |
 
 Every project contributes to `CLAUDE.md` — the shared brain. After 10, 20, 50 websites, the AI will know every Elementor property name, every responsive breakpoint trick, every layout pattern that works.
 
@@ -301,6 +360,8 @@ The knowledge base currently includes:
 - **20+ Elementor property name mappings** — Correcting common guesses vs actual property names
 - **8+ common section patterns** — Hero, services grid, CTA, testimonials, footer, FAQ, contact form split, and more
 - **Widget examples** — Heading, text, button, image, icon, counter, icon-list, star-rating, divider, spacer, Iconify, form, social-icons, nav-menu
+- **SEO workflow** — Holistic SEO knowledge base, topical map strategy, article JSON format, publishing phases, interlink methodology
+- **WooCommerce SEO** — Category and product description templates, SiteSEO meta, batch push scripts
 
 See the "Self-Improvement Rule" section in `CLAUDE.md` for details.
 
@@ -314,6 +375,17 @@ See the "Self-Improvement Rule" section in `CLAUDE.md` for details.
 - Regenerate API key from Settings → AI Elementor Sync if compromised
 
 ## Changelog
+
+### v1.4.0 (2026-03-01)
+- **Blog post CRUD** — Create, update, delete, list blog posts as JSON via REST API
+- **Blog category management** — Create and list WordPress blog categories via API
+- **Featured image sideloading** — Upload images from URL to WP media library
+- **Holistic SEO knowledge base** — Universal Koray Gubur methodology at `docs/holistic-seo-knowledge-base.md`
+- **Semantic topical maps** — Per-project strategy docs for content clusters, publishing phases, and interlinks
+- **Local article copies** — All blog posts stored locally for updates, interlinking, and auditing
+- **WooCommerce SEO** — Bulk-update product/category descriptions and SiteSEO meta (v1.3.0)
+- **Updated project scaffolding** — `init-project.ps1` now creates `blog/`, `seo/`, and sub-folders
+- **CLAUDE.md SEO workflow** — Comprehensive Blog Content & SEO Workflow section added
 
 ### v1.2.1 (2026-02-25)
 - **Project archiving system** — Mandatory archiving of completed projects as starter kits with screenshots, design tokens, and README

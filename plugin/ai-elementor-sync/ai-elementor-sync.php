@@ -3,7 +3,7 @@
  * Plugin Name: AI Elementor Sync
  * Plugin URI: https://github.com/ai-elementor-sync
  * Description: REST API bridge for AI-powered Elementor template management. Now supports Iconify icons (Tabler, Material, Phosphor, etc.) in Elementor via a custom widget. Allows external tools to create, update, list, and delete Elementor pages/templates with premium icon support. Developed for Deshtech Global Pvt Ltd.
- * Version: 1.2.0
+ * Version: 1.4.0
  * Author: Dr. Dinu Sri Madusanka
  * Author URI: https://deshtech.co
  * License: GPL v2 or later
@@ -21,7 +21,7 @@ require_once __DIR__ . '/iconify-support.php';
 // Register Iconify Elementor widget
 require_once __DIR__ . '/iconify-elementor-widget.php';
 
-define('AI_ELEMENTOR_SYNC_VERSION', '1.2.0');
+define('AI_ELEMENTOR_SYNC_VERSION', '1.4.0');
 define('AI_ELEMENTOR_SYNC_LOG_DIR', WP_CONTENT_DIR . '/ai-sync-logs');
 
 class AI_Elementor_Sync {
@@ -301,6 +301,98 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
         register_rest_route($namespace, '/clear-cache', [
             'methods'  => 'POST',
             'callback' => [$this, 'clear_elementor_cache'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // ---------------------------------------------------------------
+        // WooCommerce SEO endpoints (v1.3.0)
+        // ---------------------------------------------------------------
+
+        // List WooCommerce product categories with descriptions and SEO meta
+        register_rest_route($namespace, '/wc-categories', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'list_wc_categories'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Update WC category description + SiteSEO meta
+        register_rest_route($namespace, '/wc-categories/(?P<id>\d+)', [
+            'methods'             => 'PUT',
+            'callback'            => [$this, 'update_wc_category'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Update WC product description + SiteSEO meta
+        register_rest_route($namespace, '/wc-products/(?P<id>\d+)', [
+            'methods'             => 'PUT',
+            'callback'            => [$this, 'update_wc_product'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // List all WooCommerce products with IDs, slugs, and SEO meta
+        register_rest_route($namespace, '/wc-products', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'list_wc_products'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // ---------------------------------------------------------------
+        // Blog Post Management endpoints (v1.4.0)
+        // ---------------------------------------------------------------
+
+        // List blog posts
+        register_rest_route($namespace, '/blog-posts', [
+            'methods'  => 'GET',
+            'callback' => [$this, 'list_blog_posts'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Create blog post
+        register_rest_route($namespace, '/blog-posts', [
+            'methods'  => 'POST',
+            'callback' => [$this, 'create_blog_post'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Get single blog post
+        register_rest_route($namespace, '/blog-posts/(?P<id>\d+)', [
+            'methods'  => 'GET',
+            'callback' => [$this, 'get_blog_post'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Update blog post
+        register_rest_route($namespace, '/blog-posts/(?P<id>\d+)', [
+            'methods'  => 'PUT',
+            'callback' => [$this, 'update_blog_post'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Delete blog post
+        register_rest_route($namespace, '/blog-posts/(?P<id>\d+)', [
+            'methods'  => 'DELETE',
+            'callback' => [$this, 'delete_blog_post'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // List blog categories
+        register_rest_route($namespace, '/blog-categories', [
+            'methods'  => 'GET',
+            'callback' => [$this, 'list_blog_categories'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Create blog category
+        register_rest_route($namespace, '/blog-categories', [
+            'methods'  => 'POST',
+            'callback' => [$this, 'create_blog_category'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Sideload media from URL
+        register_rest_route($namespace, '/media/sideload', [
+            'methods'  => 'POST',
+            'callback' => [$this, 'sideload_media'],
             'permission_callback' => [$this, 'permission_check'],
         ]);
     }
@@ -1282,6 +1374,209 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
     }
 
     /**
+     * GET /wc-categories — List all WooCommerce product categories with current descriptions and SEO meta
+     */
+    public function list_wc_categories($request) {
+        $this->log('INFO', 'Listing WooCommerce product categories');
+
+        if (!function_exists('get_terms')) {
+            return new WP_Error('wc_missing', 'WooCommerce not available', ['status' => 500]);
+        }
+
+        $terms = get_terms([
+            'taxonomy'   => 'product_cat',
+            'hide_empty' => false,
+        ]);
+
+        if (is_wp_error($terms)) {
+            return new WP_Error('wc_categories_error', 'Failed to retrieve categories: ' . $terms->get_error_message(), ['status' => 500]);
+        }
+
+        $categories = [];
+        foreach ($terms as $term) {
+            $seo_title = get_term_meta($term->term_id, '_seopress_titles_title', true);
+            $seo_desc  = get_term_meta($term->term_id, '_seopress_titles_desc', true);
+
+            $categories[] = [
+                'id'              => $term->term_id,
+                'name'            => $term->name,
+                'slug'            => $term->slug,
+                'count'           => (int) $term->count,
+                'description'     => $term->description,
+                'seo_title'       => $seo_title ?: '',
+                'seo_description' => $seo_desc ?: '',
+            ];
+        }
+
+        return [
+            'success'    => true,
+            'count'      => count($categories),
+            'categories' => $categories,
+        ];
+    }
+
+    /**
+     * PUT /wc-categories/{id} — Update WooCommerce category description and SiteSEO meta
+     * Body: { "description": "...", "seo_title": "...", "seo_description": "..." }
+     */
+    public function update_wc_category($request) {
+        $term_id = (int) $request['id'];
+        $params  = $request->get_json_params();
+
+        $this->log('INFO', 'Updating WC category', ['term_id' => $term_id]);
+
+        if (!$params) {
+            return new WP_Error('invalid_params', 'Request body must be valid JSON', ['status' => 400]);
+        }
+
+        $term = get_term($term_id, 'product_cat');
+        if (!$term || is_wp_error($term)) {
+            return new WP_Error('not_found', 'Product category not found (id: ' . $term_id . ')', ['status' => 404]);
+        }
+
+        $results = [];
+
+        // Update the category description
+        if (isset($params['description'])) {
+            $update = wp_update_term($term_id, 'product_cat', [
+                'description' => wp_kses_post($params['description']),
+            ]);
+            if (is_wp_error($update)) {
+                return new WP_Error('update_failed', 'Failed to update category description: ' . $update->get_error_message(), ['status' => 500]);
+            }
+            $results['description'] = 'updated';
+            $this->log('INFO', 'Category description updated', ['term_id' => $term_id]);
+        }
+
+        // Update SiteSEO meta title
+        if (isset($params['seo_title'])) {
+            update_term_meta($term_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+            $results['seo_title'] = 'updated';
+        }
+
+        // Update SiteSEO meta description
+        if (isset($params['seo_description'])) {
+            update_term_meta($term_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+            $results['seo_description'] = 'updated';
+        }
+
+        $this->log('INFO', 'WC category update complete', ['term_id' => $term_id, 'results' => $results]);
+
+        return [
+            'success'   => true,
+            'term_id'   => $term_id,
+            'name'      => $term->name,
+            'slug'      => $term->slug,
+            'updated'   => $results,
+            'timestamp' => date('Y-m-d H:i:s'),
+        ];
+    }
+
+    /**
+     * PUT /wc-products/{id} — Update WooCommerce product descriptions and SiteSEO meta
+     * Body: { "description": "...", "short_description": "...", "seo_title": "...", "seo_description": "..." }
+     */
+    public function update_wc_product($request) {
+        $post_id = (int) $request['id'];
+        $params  = $request->get_json_params();
+
+        $this->log('INFO', 'Updating WC product', ['post_id' => $post_id]);
+
+        if (!$params) {
+            return new WP_Error('invalid_params', 'Request body must be valid JSON', ['status' => 400]);
+        }
+
+        $post = get_post($post_id);
+        if (!$post || $post->post_type !== 'product') {
+            return new WP_Error('not_found', 'Product not found (id: ' . $post_id . ')', ['status' => 404]);
+        }
+
+        $update_args = ['ID' => $post_id];
+        $results     = [];
+
+        // Update main product description (post_content)
+        if (isset($params['description'])) {
+            $update_args['post_content'] = wp_kses_post($params['description']);
+            $results['description'] = 'updated';
+        }
+
+        // Update short description (post_excerpt)
+        if (isset($params['short_description'])) {
+            $update_args['post_excerpt'] = wp_kses_post($params['short_description']);
+            $results['short_description'] = 'updated';
+        }
+
+        if (count($update_args) > 1) {
+            $updated = wp_update_post(wp_slash($update_args), true);
+            if (is_wp_error($updated)) {
+                return new WP_Error('update_failed', 'Failed to update product: ' . $updated->get_error_message(), ['status' => 500]);
+            }
+        }
+
+        // Update SiteSEO meta title
+        if (isset($params['seo_title'])) {
+            update_post_meta($post_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+            $results['seo_title'] = 'updated';
+        }
+
+        // Update SiteSEO meta description
+        if (isset($params['seo_description'])) {
+            update_post_meta($post_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+            $results['seo_description'] = 'updated';
+        }
+
+        $this->log('INFO', 'WC product update complete', ['post_id' => $post_id, 'results' => $results]);
+
+        return [
+            'success'   => true,
+            'post_id'   => $post_id,
+            'name'      => $post->post_title,
+            'updated'   => $results,
+            'timestamp' => date('Y-m-d H:i:s'),
+        ];
+    }
+
+    /**
+     * GET /wc-products — List all WooCommerce products with IDs, slugs, prices and SEO meta
+     */
+    public function list_wc_products($request) {
+        $this->log('INFO', 'Listing WC products');
+
+        $posts = get_posts([
+            'post_type'      => 'product',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+        ]);
+
+        $products = [];
+        foreach ($posts as $post) {
+            $price      = get_post_meta($post->ID, '_price', true);
+            $categories = wp_get_post_terms($post->ID, 'product_cat', ['fields' => 'names']);
+            $seo_title  = get_post_meta($post->ID, '_seopress_titles_title', true);
+            $seo_desc   = get_post_meta($post->ID, '_seopress_titles_desc', true);
+
+            $products[] = [
+                'id'              => $post->ID,
+                'name'            => $post->post_title,
+                'slug'            => $post->post_name,
+                'price'           => $price ?: '',
+                'categories'      => $categories,
+                'has_description' => !empty(trim(strip_tags($post->post_content))),
+                'has_seo_title'   => !empty($seo_title),
+                'has_seo_desc'    => !empty($seo_desc),
+            ];
+        }
+
+        return [
+            'success' => true,
+            'count'   => count($products),
+            'products' => $products,
+        ];
+    }
+
+    /**
      * Get memory limit in bytes
      */
     private function get_memory_limit_bytes() {
@@ -1295,6 +1590,434 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             case 'k': $value *= 1024;
         }
         return $value;
+    }
+
+    // ===================================================================
+    // Blog Post Management (v1.4.0)
+    // ===================================================================
+
+    /**
+     * GET /blog-posts — List all blog posts with categories, SEO meta, and featured images
+     */
+    public function list_blog_posts($request) {
+        $this->log('INFO', 'Listing blog posts');
+
+        $posts = get_posts([
+            'post_type'      => 'post',
+            'post_status'    => ['publish', 'draft', 'pending'],
+            'posts_per_page' => -1,
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+        ]);
+
+        $result = [];
+        foreach ($posts as $post) {
+            $cats = wp_get_post_categories($post->ID, ['fields' => 'all']);
+            $cat_list = array_map(function($c) {
+                return ['id' => $c->term_id, 'name' => $c->name, 'slug' => $c->slug];
+            }, $cats);
+            $thumbnail_id  = get_post_thumbnail_id($post->ID);
+            $thumbnail_url = $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : '';
+            $seo_title     = get_post_meta($post->ID, '_seopress_titles_title', true);
+            $seo_desc      = get_post_meta($post->ID, '_seopress_titles_desc', true);
+
+            $result[] = [
+                'id'                => $post->ID,
+                'title'             => $post->post_title,
+                'slug'              => $post->post_name,
+                'status'            => $post->post_status,
+                'date'              => $post->post_date,
+                'link'              => get_permalink($post->ID),
+                'categories'        => $cat_list,
+                'featured_image'    => $thumbnail_url,
+                'featured_image_id' => (int) $thumbnail_id,
+                'seo_title'         => $seo_title ?: '',
+                'seo_description'   => $seo_desc ?: '',
+                'excerpt'           => $post->post_excerpt,
+            ];
+        }
+
+        return ['success' => true, 'count' => count($result), 'posts' => $result];
+    }
+
+    /**
+     * POST /blog-posts — Create a new blog post
+     * Body: { "title": "...", "content": "<html>...", "excerpt": "...",
+     *         "categories": [93, 94], "status": "publish",
+     *         "seo_title": "...", "seo_description": "...",
+     *         "featured_image_url": "https://..." }
+     */
+    public function create_blog_post($request) {
+        $params = $request->get_json_params();
+        if (!$params || empty($params['title'])) {
+            return new WP_Error('invalid_params', 'title is required', ['status' => 400]);
+        }
+
+        $this->log('INFO', 'Creating blog post', ['title' => $params['title']]);
+
+        $post_data = [
+            'post_type'    => 'post',
+            'post_title'   => sanitize_text_field($params['title']),
+            'post_content' => wp_kses_post($params['content'] ?? ''),
+            'post_excerpt' => sanitize_textarea_field($params['excerpt'] ?? ''),
+            'post_status'  => sanitize_text_field($params['status'] ?? 'draft'),
+        ];
+
+        if (isset($params['author'])) {
+            $post_data['post_author'] = (int) $params['author'];
+        }
+
+        $post_id = wp_insert_post(wp_slash($post_data), true);
+        if (is_wp_error($post_id)) {
+            $this->log('ERROR', 'Failed to create blog post', ['error' => $post_id->get_error_message()]);
+            return new WP_Error('create_failed', $post_id->get_error_message(), ['status' => 500]);
+        }
+
+        $results = ['post_created' => $post_id];
+
+        // Assign categories
+        if (!empty($params['categories'])) {
+            $cat_ids = array_map('intval', (array) $params['categories']);
+            wp_set_post_categories($post_id, $cat_ids);
+            $results['categories_set'] = $cat_ids;
+        }
+
+        // Set SiteSEO meta
+        if (isset($params['seo_title'])) {
+            update_post_meta($post_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+            $results['seo_title'] = 'set';
+        }
+        if (isset($params['seo_description'])) {
+            update_post_meta($post_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+            $results['seo_description'] = 'set';
+        }
+
+        // Sideload featured image from URL
+        if (!empty($params['featured_image_url'])) {
+            $attach_id = $this->sideload_image_from_url(
+                $params['featured_image_url'],
+                $post_id,
+                $params['featured_image_title'] ?? '',
+                $params['featured_image_alt'] ?? ''
+            );
+            if (is_wp_error($attach_id)) {
+                $results['featured_image'] = 'failed: ' . $attach_id->get_error_message();
+            } else {
+                set_post_thumbnail($post_id, $attach_id);
+                $results['featured_image'] = 'set (attachment: ' . $attach_id . ')';
+            }
+        }
+
+        $this->log('INFO', 'Blog post created', ['post_id' => $post_id, 'results' => $results]);
+
+        return [
+            'success'   => true,
+            'post_id'   => $post_id,
+            'link'      => get_permalink($post_id),
+            'results'   => $results,
+            'timestamp' => date('Y-m-d H:i:s'),
+        ];
+    }
+
+    /**
+     * GET /blog-posts/{id} — Get a single blog post with full content
+     */
+    public function get_blog_post($request) {
+        $post_id = (int) $request['id'];
+        $post = get_post($post_id);
+        if (!$post || $post->post_type !== 'post') {
+            return new WP_Error('not_found', 'Blog post not found', ['status' => 404]);
+        }
+
+        $cats = wp_get_post_categories($post_id, ['fields' => 'all']);
+        $cat_list = array_map(function($c) {
+            return ['id' => $c->term_id, 'name' => $c->name, 'slug' => $c->slug];
+        }, $cats);
+        $thumbnail_id = get_post_thumbnail_id($post_id);
+
+        return [
+            'success' => true,
+            'post'    => [
+                'id'              => $post->ID,
+                'title'           => $post->post_title,
+                'slug'            => $post->post_name,
+                'status'          => $post->post_status,
+                'date'            => $post->post_date,
+                'content'         => $post->post_content,
+                'excerpt'         => $post->post_excerpt,
+                'link'            => get_permalink($post_id),
+                'categories'      => $cat_list,
+                'featured_image'  => $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : '',
+                'featured_image_id' => (int) $thumbnail_id,
+                'seo_title'       => get_post_meta($post_id, '_seopress_titles_title', true) ?: '',
+                'seo_description' => get_post_meta($post_id, '_seopress_titles_desc', true) ?: '',
+            ],
+        ];
+    }
+
+    /**
+     * PUT /blog-posts/{id} — Update an existing blog post
+     * Body: any subset of { title, content, excerpt, status, categories, seo_title, seo_description, featured_image_url }
+     */
+    public function update_blog_post($request) {
+        $post_id = (int) $request['id'];
+        $params  = $request->get_json_params();
+
+        $this->log('INFO', 'Updating blog post', ['post_id' => $post_id]);
+
+        $post = get_post($post_id);
+        if (!$post || $post->post_type !== 'post') {
+            return new WP_Error('not_found', 'Blog post not found', ['status' => 404]);
+        }
+
+        $update_args = ['ID' => $post_id];
+        $results     = [];
+
+        if (isset($params['title'])) {
+            $update_args['post_title'] = sanitize_text_field($params['title']);
+            $results['title'] = 'updated';
+        }
+        if (isset($params['content'])) {
+            $update_args['post_content'] = wp_kses_post($params['content']);
+            $results['content'] = 'updated';
+        }
+        if (isset($params['excerpt'])) {
+            $update_args['post_excerpt'] = sanitize_textarea_field($params['excerpt']);
+            $results['excerpt'] = 'updated';
+        }
+        if (isset($params['status'])) {
+            $update_args['post_status'] = sanitize_text_field($params['status']);
+            $results['status'] = 'updated';
+        }
+
+        if (count($update_args) > 1) {
+            $updated = wp_update_post(wp_slash($update_args), true);
+            if (is_wp_error($updated)) {
+                return new WP_Error('update_failed', $updated->get_error_message(), ['status' => 500]);
+            }
+        }
+
+        if (!empty($params['categories'])) {
+            $cat_ids = array_map('intval', (array) $params['categories']);
+            wp_set_post_categories($post_id, $cat_ids);
+            $results['categories'] = 'updated';
+        }
+
+        if (isset($params['seo_title'])) {
+            update_post_meta($post_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+            $results['seo_title'] = 'updated';
+        }
+        if (isset($params['seo_description'])) {
+            update_post_meta($post_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+            $results['seo_description'] = 'updated';
+        }
+
+        if (!empty($params['featured_image_url'])) {
+            $attach_id = $this->sideload_image_from_url($params['featured_image_url'], $post_id);
+            if (!is_wp_error($attach_id)) {
+                set_post_thumbnail($post_id, $attach_id);
+                $results['featured_image'] = 'set (attachment: ' . $attach_id . ')';
+            } else {
+                $results['featured_image'] = 'failed: ' . $attach_id->get_error_message();
+            }
+        }
+
+        $this->log('INFO', 'Blog post updated', ['post_id' => $post_id, 'results' => $results]);
+
+        return [
+            'success'   => true,
+            'post_id'   => $post_id,
+            'link'      => get_permalink($post_id),
+            'updated'   => $results,
+            'timestamp' => date('Y-m-d H:i:s'),
+        ];
+    }
+
+    /**
+     * DELETE /blog-posts/{id} — Delete (trash) a blog post. Add ?force=true to permanently delete.
+     */
+    public function delete_blog_post($request) {
+        $post_id = (int) $request['id'];
+        $force   = $request->get_param('force') === 'true';
+
+        $post = get_post($post_id);
+        if (!$post || $post->post_type !== 'post') {
+            return new WP_Error('not_found', 'Blog post not found', ['status' => 404]);
+        }
+
+        $this->log('INFO', 'Deleting blog post', ['post_id' => $post_id, 'force' => $force]);
+
+        if ($force) {
+            wp_delete_post($post_id, true);
+        } else {
+            wp_trash_post($post_id);
+        }
+
+        return ['success' => true, 'post_id' => $post_id, 'action' => $force ? 'deleted' : 'trashed'];
+    }
+
+    // ===================================================================
+    // Blog Category Management (v1.4.0)
+    // ===================================================================
+
+    /**
+     * GET /blog-categories — List all post categories
+     */
+    public function list_blog_categories($request) {
+        $terms = get_terms([
+            'taxonomy'   => 'category',
+            'hide_empty' => false,
+        ]);
+
+        if (is_wp_error($terms)) {
+            return new WP_Error('failed', $terms->get_error_message(), ['status' => 500]);
+        }
+
+        $categories = [];
+        foreach ($terms as $term) {
+            $categories[] = [
+                'id'          => $term->term_id,
+                'name'        => $term->name,
+                'slug'        => $term->slug,
+                'count'       => (int) $term->count,
+                'parent'      => (int) $term->parent,
+                'description' => $term->description,
+            ];
+        }
+
+        return ['success' => true, 'count' => count($categories), 'categories' => $categories];
+    }
+
+    /**
+     * POST /blog-categories — Create a new post category
+     * Body: { "name": "...", "slug": "...", "description": "...", "parent": 0 }
+     */
+    public function create_blog_category($request) {
+        $params = $request->get_json_params();
+        if (!$params || empty($params['name'])) {
+            return new WP_Error('invalid_params', 'name is required', ['status' => 400]);
+        }
+
+        $this->log('INFO', 'Creating blog category', ['name' => $params['name']]);
+
+        $args = [
+            'description' => sanitize_textarea_field($params['description'] ?? ''),
+            'slug'        => sanitize_title($params['slug'] ?? $params['name']),
+        ];
+        if (isset($params['parent'])) {
+            $args['parent'] = (int) $params['parent'];
+        }
+
+        $result = wp_insert_term(sanitize_text_field($params['name']), 'category', $args);
+        if (is_wp_error($result)) {
+            // If category already exists, return the existing one
+            if ($result->get_error_code() === 'term_exists') {
+                $existing_id = $result->get_error_data();
+                return [
+                    'success'        => true,
+                    'term_id'        => (int) $existing_id,
+                    'already_exists' => true,
+                    'name'           => $params['name'],
+                ];
+            }
+            return new WP_Error('create_failed', $result->get_error_message(), ['status' => 500]);
+        }
+
+        // Set SiteSEO meta if provided
+        if (isset($params['seo_title'])) {
+            update_term_meta($result['term_id'], '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+        }
+        if (isset($params['seo_description'])) {
+            update_term_meta($result['term_id'], '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+        }
+
+        return [
+            'success'          => true,
+            'term_id'          => $result['term_id'],
+            'term_taxonomy_id' => $result['term_taxonomy_id'],
+            'name'             => $params['name'],
+            'slug'             => $args['slug'],
+        ];
+    }
+
+    // ===================================================================
+    // Media Management (v1.4.0)
+    // ===================================================================
+
+    /**
+     * POST /media/sideload — Download an image from a URL and add to WordPress media library
+     * Body: { "url": "https://...", "post_id": 123, "title": "...", "alt": "..." }
+     */
+    public function sideload_media($request) {
+        $params = $request->get_json_params();
+        if (!$params || empty($params['url'])) {
+            return new WP_Error('invalid_params', 'url is required', ['status' => 400]);
+        }
+
+        $this->log('INFO', 'Sideloading media', ['url' => $params['url']]);
+
+        $post_id  = isset($params['post_id']) ? (int) $params['post_id'] : 0;
+        $attach_id = $this->sideload_image_from_url(
+            $params['url'],
+            $post_id,
+            $params['title'] ?? '',
+            $params['alt'] ?? ''
+        );
+
+        if (is_wp_error($attach_id)) {
+            return new WP_Error('sideload_failed', $attach_id->get_error_message(), ['status' => 500]);
+        }
+
+        return [
+            'success'       => true,
+            'attachment_id' => $attach_id,
+            'url'           => wp_get_attachment_url($attach_id),
+        ];
+    }
+
+    /**
+     * Download an image from URL and add to WP media library
+     */
+    private function sideload_image_from_url($url, $post_id = 0, $title = '', $alt = '') {
+        require_once ABSPATH . 'wp-admin/includes/media.php';
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+
+        // Download file to temp location
+        $tmp = download_url($url, 60);
+        if (is_wp_error($tmp)) {
+            $this->log('ERROR', 'Failed to download image', ['url' => $url, 'error' => $tmp->get_error_message()]);
+            return $tmp;
+        }
+
+        // Detect filename from URL
+        $filename = basename(parse_url($url, PHP_URL_PATH));
+        if (empty($filename) || strpos($filename, '.') === false) {
+            $filename = 'image-' . time() . '.webp';
+        }
+
+        $file_array = [
+            'name'     => sanitize_file_name($filename),
+            'tmp_name' => $tmp,
+        ];
+
+        // Sideload the file into the media library
+        $attach_id = media_handle_sideload($file_array, $post_id, $title ?: '');
+
+        // Clean up temp file if sideload failed
+        if (is_wp_error($attach_id)) {
+            @unlink($tmp);
+            $this->log('ERROR', 'Media sideload failed', ['error' => $attach_id->get_error_message()]);
+            return $attach_id;
+        }
+
+        // Set alt text if provided
+        if ($alt) {
+            update_post_meta($attach_id, '_wp_attachment_image_alt', sanitize_text_field($alt));
+        }
+
+        $this->log('INFO', 'Media sideloaded', ['attachment_id' => $attach_id, 'url' => wp_get_attachment_url($attach_id)]);
+        return $attach_id;
     }
 }
 
