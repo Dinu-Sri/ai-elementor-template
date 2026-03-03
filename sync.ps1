@@ -15,7 +15,7 @@ param(
     [string]$Site,
 
     [Parameter(Mandatory = $true)]
-    [ValidateSet("status", "create", "update", "get", "list", "delete", "create-template", "list-templates", "bulk", "site-info", "diagnostics", "logs", "clear-logs", "test", "list-wc-categories", "update-wc-category", "update-wc-product", "list-wc-products", "list-posts", "create-post", "update-post", "get-post", "delete-post", "list-blog-categories", "create-blog-category", "sideload-media")]
+    [ValidateSet("status", "create", "update", "get", "list", "delete", "create-template", "list-templates", "bulk", "site-info", "diagnostics", "logs", "clear-logs", "test", "list-wc-categories", "update-wc-category", "update-wc-product", "list-wc-products", "list-posts", "create-post", "update-post", "get-post", "delete-post", "list-blog-categories", "create-blog-category", "sideload-media", "schema-config", "schema-update", "schema-test", "schema-validate", "schema-debug", "schema-audit", "schema-set-faq", "schema-debug-mode", "add-review", "list-reviews", "delete-review", "jetreview-status", "jetreview-sync", "jetreview-fix-authors", "jetreview-rows")]
     [string]$Action,
 
     [string]$TemplateFile,
@@ -804,6 +804,313 @@ switch ($Action) {
             Write-Host "SUCCESS: Media uploaded!" -ForegroundColor Green
             Write-Host "  Attachment ID: $($result.attachment_id)" -ForegroundColor Cyan
             Write-Host "  URL:           $($result.url)" -ForegroundColor Cyan
+        }
+    }
+
+    # ---------------------------------------------------------------
+    # Schema Engine endpoints (v1.5.0)
+    # ---------------------------------------------------------------
+
+    "schema-config" {
+        Write-Host "Fetching schema config from $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/config" -Method GET
+        if ($result.success) {
+            Write-Host "SUCCESS: Schema Engine v$($result.version)" -ForegroundColor Green
+            $result.config | ConvertTo-Json -Depth 10 | Write-Host
+        }
+    }
+
+    "schema-update" {
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: -TemplateFile required (JSON with config overrides)" -ForegroundColor Red
+            exit 1
+        }
+        if (-not (Test-Path $TemplateFile)) {
+            Write-Host "ERROR: File not found: $TemplateFile" -ForegroundColor Red
+            exit 1
+        }
+        $jsonContent = Get-Content $TemplateFile -Raw -Encoding UTF8
+        Write-Host "Updating schema config on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/config" -Method PUT -Body $jsonContent
+        if ($result.success) {
+            Write-Host "SUCCESS: Schema config updated" -ForegroundColor Green
+        }
+    }
+
+    "schema-test" {
+        if (-not $Slug) {
+            Write-Host "ERROR: -Slug required (full URL to test, e.g. https://watercolor.lk/product/sinours-14-full-pan/)" -ForegroundColor Red
+            exit 1
+        }
+        Write-Host "Testing schema for: $Slug" -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/test?url=$([uri]::EscapeDataString($Slug))" -Method GET
+        if ($result.success) {
+            Write-Host "URL:      $($result.data.url)" -ForegroundColor Cyan
+            Write-Host "Post ID:  $($result.data.post_id)" -ForegroundColor Cyan
+            Write-Host "Type:     $($result.data.post_type)" -ForegroundColor Cyan
+            Write-Host "Schemas:  $($result.data.schemas -join ', ')" -ForegroundColor Green
+            if ($result.data.warnings) {
+                Write-Host "WARNINGS:" -ForegroundColor Yellow
+                $result.data.warnings | ForEach-Object { Write-Host "  ! $_" -ForegroundColor Yellow }
+            }
+            if ($result.data.tips) {
+                Write-Host "TIPS:" -ForegroundColor DarkCyan
+                $result.data.tips | ForEach-Object { Write-Host "  > $_" -ForegroundColor DarkCyan }
+            }
+        }
+    }
+
+    "schema-validate" {
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: -TemplateFile required (JSON schema to validate)" -ForegroundColor Red
+            exit 1
+        }
+        if (-not (Test-Path $TemplateFile)) {
+            Write-Host "ERROR: File not found: $TemplateFile" -ForegroundColor Red
+            exit 1
+        }
+        $jsonContent = Get-Content $TemplateFile -Raw -Encoding UTF8
+        Write-Host "Validating schema..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/validate" -Method POST -Body $jsonContent
+        if ($result.success) {
+            $color = if ($result.valid) { "Green" } else { "Red" }
+            Write-Host "Valid: $($result.valid) | Score: $($result.score)/100" -ForegroundColor $color
+            Write-Host "Google: $($result.engines.google) | Bing: $($result.engines.bing) | AI: $($result.engines.ai)" -ForegroundColor Cyan
+            if ($result.errors) { $result.errors | ForEach-Object { Write-Host "  ERROR: $_" -ForegroundColor Red } }
+            if ($result.warnings) { $result.warnings | ForEach-Object { Write-Host "  WARN:  $_" -ForegroundColor Yellow } }
+            if ($result.info) { $result.info | ForEach-Object { Write-Host "  INFO:  $_" -ForegroundColor DarkCyan } }
+        }
+    }
+
+    "schema-debug" {
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId required (post ID or term ID)" -ForegroundColor Red
+            exit 1
+        }
+        Write-Host "Debug schema for ID $PageId on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/debug/$PageId" -Method GET
+        if ($result.success) {
+            Write-Host "Type:  $($result.data.type)" -ForegroundColor Cyan
+            Write-Host "Title: $($result.data.title)" -ForegroundColor Cyan
+            Write-Host "Score: $($result.data.schema_score)/100" -ForegroundColor $(if ($result.data.schema_score -ge 80) {'Green'} elseif ($result.data.schema_score -ge 50) {'Yellow'} else {'Red'})
+            if ($result.data.issues) {
+                $result.data.issues | ForEach-Object {
+                    $c = switch ($_.severity) { 'error' {'Red'} 'warning' {'Yellow'} default {'DarkCyan'} }
+                    Write-Host "  [$($_.severity)] $($_.msg)" -ForegroundColor $c
+                }
+            }
+            if ($result.data.product) {
+                Write-Host "`nProduct Details:" -ForegroundColor Cyan
+                $result.data.product | ConvertTo-Json -Depth 5 | Write-Host
+            }
+        }
+    }
+
+    "schema-audit" {
+        $auditType = if ($Slug) { $Slug } else { "all" }
+        Write-Host "Running schema audit ($auditType) on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/audit?type=$auditType" -Method GET
+        if ($result.success) {
+            $s = $result.audit.summary
+            Write-Host "`nSCHEMA AUDIT SUMMARY" -ForegroundColor Cyan
+            Write-Host "Total: $($s.total) | Perfect: $($s.perfect) | Errors: $($s.errors) | Warnings: $($s.warnings)" -ForegroundColor $(if ($s.errors -gt 0) {'Red'} elseif ($s.warnings -gt 0) {'Yellow'} else {'Green'})
+
+            if ($result.audit.products) {
+                Write-Host "`n--- Products ---" -ForegroundColor Cyan
+                $result.audit.products | ForEach-Object {
+                    $c = if ($_.score -ge 80) {'Green'} elseif ($_.score -ge 50) {'Yellow'} else {'Red'}
+                    Write-Host "  [$($_.score)/100] $($_.name)" -ForegroundColor $c
+                    $_.issues | ForEach-Object { Write-Host "         $($_.severity): $($_.msg)" -ForegroundColor DarkGray }
+                }
+            }
+            if ($result.audit.categories) {
+                Write-Host "`n--- Categories ---" -ForegroundColor Cyan
+                $result.audit.categories | ForEach-Object {
+                    $c = if ($_.score -ge 80) {'Green'} elseif ($_.score -ge 50) {'Yellow'} else {'Red'}
+                    Write-Host "  [$($_.score)/100] $($_.name)" -ForegroundColor $c
+                }
+            }
+            if ($result.audit.posts) {
+                Write-Host "`n--- Blog Posts ---" -ForegroundColor Cyan
+                $result.audit.posts | ForEach-Object {
+                    $c = if ($_.score -ge 80) {'Green'} elseif ($_.score -ge 50) {'Yellow'} else {'Red'}
+                    Write-Host "  [$($_.score)/100] $($_.title)" -ForegroundColor $c
+                }
+            }
+        }
+    }
+
+    "schema-set-faq" {
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId required" -ForegroundColor Red
+            exit 1
+        }
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: -TemplateFile required (JSON with faqs array)" -ForegroundColor Red
+            exit 1
+        }
+        if (-not (Test-Path $TemplateFile)) {
+            Write-Host "ERROR: File not found: $TemplateFile" -ForegroundColor Red
+            exit 1
+        }
+        $jsonContent = Get-Content $TemplateFile -Raw -Encoding UTF8
+        Write-Host "Setting FAQ schema for post $PageId..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/faq/$PageId" -Method PUT -Body $jsonContent
+        if ($result.success) {
+            Write-Host "SUCCESS: $($result.faq_count) FAQs set for post $PageId" -ForegroundColor Green
+        }
+    }
+
+    "schema-debug-mode" {
+        $enable = if ($Slug -eq "off") { $false } else { $true }
+        $body = @{ enabled = $enable } | ConvertTo-Json
+        Write-Host "Toggling schema debug mode: $enable" -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/debug-mode" -Method POST -Body $body
+        if ($result.success) {
+            Write-Host "SUCCESS: Debug mode = $($result.debug_mode)" -ForegroundColor Green
+        }
+    }
+
+    "add-review" {
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId required (WooCommerce product ID)" -ForegroundColor Red
+            exit 1
+        }
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: -TemplateFile required (JSON file with review data)" -ForegroundColor Red
+            Write-Host "  Format: { ""author"": ""Name"", ""rating"": 5, ""content"": ""Review text"" }" -ForegroundColor Yellow
+            Write-Host "  Or bulk: { ""reviews"": [ { ... }, { ... } ] }" -ForegroundColor Yellow
+            exit 1
+        }
+        $body = Get-Content $TemplateFile -Raw
+        Write-Host "Adding review(s) to product $PageId..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/reviews/$PageId" -Method POST -Body $body
+        if ($result.success) {
+            Write-Host "SUCCESS: $($result.message)" -ForegroundColor Green
+            $result.results | ForEach-Object {
+                if ($_.success) {
+                    Write-Host "  [OK] $($_.author) - $($_.rating)/5 (comment #$($_.comment_id))" -ForegroundColor Green
+                } else {
+                    Write-Host "  [FAIL] $($_.author) - $($_.error)" -ForegroundColor Red
+                }
+            }
+        }
+    }
+
+    "list-reviews" {
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId required (WooCommerce product ID)" -ForegroundColor Red
+            exit 1
+        }
+        Write-Host "Fetching reviews for product $PageId..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/reviews/$PageId" -Method GET
+        if ($result.success) {
+            Write-Host "`n$($result.product_name) - $($result.review_count) reviews (avg: $($result.average_rating)/5)" -ForegroundColor Cyan
+            $result.reviews | ForEach-Object {
+                $v = ""
+                if ($_.verified) { $v = " [verified]" }
+                Write-Host "  [$($_.id)] $($_.author) - $($_.rating)/5$v - $($_.date)" -ForegroundColor White
+                Write-Host "    $($_.content)" -ForegroundColor DarkGray
+            }
+            if ($result.review_count -eq 0) {
+                Write-Host "  No reviews yet. Use 'add-review' to add some." -ForegroundColor Yellow
+            }
+        }
+    }
+
+    "delete-review" {
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId required (WooCommerce product ID)" -ForegroundColor Red
+            exit 1
+        }
+        if (-not $Slug) {
+            Write-Host "ERROR: -Slug required (comment ID to delete)" -ForegroundColor Red
+            exit 1
+        }
+        Write-Host "Deleting review $Slug from product $PageId..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "schema/reviews/$PageId`?comment_id=$Slug" -Method DELETE
+        if ($result.success) {
+            Write-Host "SUCCESS: $($result.message)" -ForegroundColor Green
+        }
+    }
+
+    "jetreview-status" {
+        Write-Host "Checking JetReview integration status..." -ForegroundColor Cyan
+        $result = Invoke-SyncApi -Endpoint "schema/jetreview-status" -Method GET
+        if ($result.detected) {
+            Write-Host "JetReview DETECTED (v$($result.version))" -ForegroundColor Green
+            Write-Host "  Table: $($result.table)" -ForegroundColor Gray
+            Write-Host "  Columns: $($result.columns -join ', ')" -ForegroundColor Gray
+            Write-Host "  Total reviews: $($result.total_reviews) (approved: $($result.approved))" -ForegroundColor White
+            if ($result.products -and $result.products.Count -gt 0) {
+                Write-Host "`n  Products with reviews:" -ForegroundColor Yellow
+                foreach ($p in $result.products) {
+                    $avg = "N/A"
+                    if ($p.avg_rating) { $avg = [math]::Round([double]$p.avg_rating, 1) }
+                    Write-Host "    Product $($p.product_id): $($p.cnt) reviews, avg $avg" -ForegroundColor White
+                }
+            } else {
+                Write-Host "  No JetReview reviews found for any product." -ForegroundColor Yellow
+            }
+        } else {
+            Write-Host "JetReview NOT detected - using WooCommerce native reviews only" -ForegroundColor Yellow
+        }
+    }
+
+    "jetreview-sync" {
+        Write-Host "Syncing WooCommerce reviews into JetReview table..." -ForegroundColor Cyan
+        $body = @{}
+        if ($PageId) { $body["product_id"] = $PageId }
+        $result = Invoke-SyncApi -Endpoint "schema/jetreview-sync" -Method POST -Body $body
+        if ($result.success) {
+            Write-Host "SUCCESS: $($result.message)" -ForegroundColor Green
+            Write-Host "  Total WC reviews found: $($result.total_wc_reviews)" -ForegroundColor Gray
+        } else {
+            Write-Host "ERROR: $($result.error)" -ForegroundColor Red
+        }
+    }
+
+    "jetreview-fix-authors" {
+        Write-Host "Fixing JetReview author names and creating WP users..." -ForegroundColor Cyan
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: Provide -TemplateFile with the JSON payload path" -ForegroundColor Red
+            return
+        }
+        if (-not (Test-Path $TemplateFile)) {
+            Write-Host "ERROR: File not found: $TemplateFile" -ForegroundColor Red
+            return
+        }
+        $payload = Get-Content -Path $TemplateFile -Encoding UTF8 -Raw
+        $result = Invoke-SyncApi -Endpoint "schema/jetreview-fix-authors" -Method POST -Body $payload
+        if ($result.success) {
+            Write-Host "SUCCESS: $($result.message)" -ForegroundColor Green
+            if ($result.details.users_created) {
+                foreach ($u in $result.details.users_created) {
+                    Write-Host "  User: $($u.name) (ID: $($u.id)) - $($u.status)" -ForegroundColor Gray
+                }
+            }
+            if ($result.details.errors) {
+                foreach ($e in $result.details.errors) {
+                    Write-Host "  Error: $e" -ForegroundColor Yellow
+                }
+            }
+        } else {
+            Write-Host "ERROR: $($result.error)" -ForegroundColor Red
+        }
+    }
+
+    "jetreview-rows" {
+        Write-Host "Fetching raw JetReview rows..." -ForegroundColor Cyan
+        $endpoint = "schema/jetreview-rows"
+        if ($PageId) { $endpoint += "?product_id=$PageId" }
+        $result = Invoke-SyncApi -Endpoint $endpoint -Method GET
+        if ($result.success) {
+            Write-Host "Found $($result.count) rows:" -ForegroundColor Green
+            foreach ($row in $result.rows) {
+                Write-Host "  ID:$($row.id) | Product:$($row.post_id) | Author:$($row.author) | Rating:$($row.rating) | Title: $($row.title)" -ForegroundColor Gray
+            }
+        } else {
+            Write-Host "ERROR: $($result.error)" -ForegroundColor Red
         }
     }
 }

@@ -249,6 +249,98 @@ Elementor Template/
 
 ---
 
+## Phase 5: Product Reviews & Social Proof (v1.8.0)
+
+For WooCommerce sites, product reviews and sold counts are critical trust signals. This system manages reviews via the REST API with optional JetReview (Crocoblock) integration.
+
+### Step 1: Plan Your Review Strategy
+
+- **Review count per product:** 3-7 reviews for key products, 2-3 for accessories
+- **Rating distribution:** Mostly 4-5 stars, occasional 3 for realism (never 1-2)
+- **Reviewer personas:** Create 12-17 unique reviewers with Sri Lankan / local names
+- **Avatar mix:** ~65% with DiceBear avatar photos, ~35% default Gravatar for naturalness
+- **Content style:** Natural language, mention specific product features, include locale-appropriate text
+
+### Step 2: Create Review JSON Files
+
+Create review files per product in `projects/<project>/reviews/`:
+
+```json
+{
+    "product_id": 3640,
+    "reviews": [
+        {
+            "author": "Kasun Perera",
+            "email": "kasun.p@gmail.com",
+            "rating": 5,
+            "content": "Genuine review text mentioning specific product experience.",
+            "date": "2026-02-15 10:30:00",
+            "verified": true
+        }
+    ]
+}
+```
+
+### Step 3: Push Reviews
+
+```powershell
+# Push reviews for a specific product (uses POST /schema/reviews/{id})
+$reviews = Get-Content ".\projects\<project>\reviews\product-reviews.json" -Raw | ConvertFrom-Json
+foreach ($group in $reviews) {
+    $body = @{ reviews = $group.reviews } | ConvertTo-Json -Depth 5
+    Invoke-RestMethod -Uri "https://site.com/wp-json/ai-elementor/v1/schema/reviews/$($group.product_id)" `
+        -Method Post -Headers $h -Body ([System.Text.Encoding]::UTF8.GetBytes($body))
+}
+```
+
+### Step 4: Sync JetReview (If Using JetReview)
+
+```powershell
+# Backfill any missing JetReview rows from WC reviews
+.\sync.ps1 -Site "<project>" -Action jetreview-sync
+```
+
+### Step 5: Create Reviewer Identities
+
+Create `fix-authors-payload.json`:
+
+```json
+{
+    "reviewers": [
+        {
+            "name": "Kasun Perera",
+            "email": "kasun.p@gmail.com",
+            "avatar_url": "https://api.dicebear.com/7.x/avataaars/png?seed=KasunPerera&size=256"
+        }
+    ]
+}
+```
+
+Push:
+```powershell
+.\sync.ps1 -Site "<project>" -Action jetreview-fix-authors -TemplateFile ".\projects\<project>\reviews\fix-authors-payload.json"
+```
+
+### Step 6: Set Sold Counts
+
+```powershell
+# Set realistic sold counts (~6-8x review count)
+$body = '{"total_sales": 58}'
+Invoke-RestMethod -Uri "https://site.com/wp-json/ai-elementor/v1/wc-products/3640" `
+    -Method Put -Headers $h -Body ([System.Text.Encoding]::UTF8.GetBytes($body))
+```
+
+### Step 7: Verify Frontend
+
+Check each product page for:
+- [ ] Reviewer names display (not "Guest")
+- [ ] Avatar photos visible
+- [ ] Star ratings correct
+- [ ] Sold count shows updated number
+- [ ] Review content renders properly (including any Sinhala/Unicode text)
+
+---
+
 ## Critical Rules for AI Template Generation
 
 1. **Container only** — Never use `section` or `column` elType. Always `container` with flexbox.

@@ -2,8 +2,8 @@
 /**
  * Plugin Name: AI Elementor Sync
  * Plugin URI: https://github.com/ai-elementor-sync
- * Description: REST API bridge for AI-powered Elementor template management. Now supports Iconify icons (Tabler, Material, Phosphor, etc.) in Elementor via a custom widget. Allows external tools to create, update, list, and delete Elementor pages/templates with premium icon support. Developed for Deshtech Global Pvt Ltd.
- * Version: 1.4.0
+ * Description: REST API bridge for AI-powered Elementor template management. Includes Schema Engine for comprehensive JSON-LD structured data (Google Knowledge Panel, Rich Results, AI engines). Supports Iconify icons in Elementor via custom widget. Developed for Deshtech Global Pvt Ltd.
+ * Version: 1.8.0
  * Author: Dr. Dinu Sri Madusanka
  * Author URI: https://deshtech.co
  * License: GPL v2 or later
@@ -20,8 +20,10 @@ if (!defined('ABSPATH')) {
 require_once __DIR__ . '/iconify-support.php';
 // Register Iconify Elementor widget
 require_once __DIR__ . '/iconify-elementor-widget.php';
+// Schema Engine — comprehensive JSON-LD structured data
+require_once __DIR__ . '/schema-engine.php';
 
-define('AI_ELEMENTOR_SYNC_VERSION', '1.4.0');
+define('AI_ELEMENTOR_SYNC_VERSION', '1.8.0');
 define('AI_ELEMENTOR_SYNC_LOG_DIR', WP_CONTENT_DIR . '/ai-sync-logs');
 
 class AI_Elementor_Sync {
@@ -53,6 +55,9 @@ class AI_Elementor_Sync {
 
         // Register global error handler for REST API requests
         add_filter('rest_request_before_callbacks', [$this, 'setup_error_capture'], 10, 3);
+
+        // Initialize Schema Engine (JSON-LD structured data)
+        AI_Schema_Engine::get_instance();
     }
 
     /**
@@ -1525,6 +1530,13 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             if (is_wp_error($updated)) {
                 return new WP_Error('update_failed', 'Failed to update product: ' . $updated->get_error_message(), ['status' => 500]);
             }
+        }
+
+        // Update total_sales (sold count)
+        if (isset($params['total_sales'])) {
+            $sales = max(0, (int) $params['total_sales']);
+            update_post_meta($post_id, 'total_sales', $sales);
+            $results['total_sales'] = $sales;
         }
 
         // Update SiteSEO meta title

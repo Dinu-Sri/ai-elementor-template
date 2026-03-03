@@ -1630,6 +1630,145 @@ templates/starter-kits/<project-name>/
 
 ---
 
+## Product Review & Social Proof Workflow (v1.8.0)
+
+Manage WooCommerce product reviews, integrate with JetReview (Crocoblock), create reviewer identities with avatars, and set realistic sold counts — all via the REST API.
+
+### Overview
+
+The review system provides:
+1. **WooCommerce reviews** — Standard WP comments with `rating` meta (1-5 stars)
+2. **JetReview dual-write** — Auto-syncs to JetReview's `{prefix}_jet_reviews` table (0-100 rating scale)
+3. **Reviewer identities** — WP subscriber accounts with custom avatar images
+4. **Sold counts** — `total_sales` post meta for social proof display
+5. **Review sync** — Backfill JetReview from existing WC reviews if dual-write missed any
+
+### API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/schema/reviews/{product_id}` | POST | Add review(s) — dual-writes to WC + JetReview |
+| `/schema/reviews/{product_id}` | GET | List WC reviews for a product |
+| `/schema/reviews/{product_id}?comment_id={id}` | DELETE | Delete a specific review |
+| `/schema/jetreview-sync` | POST | Sync all WC reviews → JetReview (backfill missing rows) |
+| `/schema/jetreview-fix-authors` | POST | Create WP users, update JetReview author IDs, sideload avatars |
+| `/schema/jetreview-rows?product_id={id}` | GET | Debug: list raw JetReview table rows |
+| `/schema/jetreview-status` | GET | Check JetReview detection status |
+| `/wc-products/{id}` | PUT | Update product (supports `total_sales`, `description`, `seo_title`, etc.) |
+
+### sync.ps1 Actions
+
+```powershell
+# Add reviews to a product (JSON body with reviews array)
+.\sync.ps1 -Site "<project>" -Action reviews -PageId <product_id> -TemplateFile ".\path\to\reviews.json"
+
+# Sync WC reviews into JetReview table (backfill missing rows)
+.\sync.ps1 -Site "<project>" -Action jetreview-sync
+
+# Fix reviewer identities (create users, set author IDs, download avatars)
+.\sync.ps1 -Site "<project>" -Action jetreview-fix-authors -TemplateFile ".\path\to\fix-authors-payload.json"
+
+# Debug: view JetReview rows for a product
+.\sync.ps1 -Site "<project>" -Action jetreview-rows -PageId <product_id>
+```
+
+### Review JSON Format
+
+```json
+{
+    "reviews": [
+        {
+            "author": "Kasun Perera",
+            "email": "kasun.p@gmail.com",
+            "rating": 5,
+            "content": "Natural review text with genuine detail about the product.",
+            "date": "2026-02-15 10:30:00",
+            "verified": true
+        }
+    ]
+}
+```
+
+### Fix-Authors Payload Format
+
+```json
+{
+    "reviewers": [
+        {
+            "name": "Kasun Perera",
+            "email": "kasun.p@gmail.com",
+            "avatar_url": "https://api.dicebear.com/7.x/avataaars/png?seed=KasunPerera&size=256"
+        }
+    ],
+    "update_content": [
+        {
+            "jetreview_id": 22,
+            "wc_comment_id": 255,
+            "content": "Updated review content (supports Sinhala Unicode)"
+        }
+    ]
+}
+```
+
+### Avatar Strategy
+
+- Use **DiceBear API** for diverse, consistent avatars: `https://api.dicebear.com/7.x/{style}/png?seed={name}&size=256`
+- Available styles: `avataaars`, `lorelei`, `thumbs`, `bottts`, `shapes`, `fun-emoji`, `identicon`, `notionists`
+- Mix styles across reviewers for visual variety
+- Leave ~35% of reviewers without avatars (shows default Gravatar) for naturalness
+- Plugin sideloads images to WP media library as `avatar-{user_id}.png`, stores attachment ID in `wp_user_avatar` user meta
+- The `get_avatar_url` filter serves custom avatars for reviewer accounts
+
+### Sold Count Strategy
+
+Set `total_sales` to realistic numbers proportional to review count:
+- Products with 5-7 reviews → 38-58 sold
+- Products with 3-4 reviews → 18-32 sold
+- Rule of thumb: ~6-8x the review count (natural review-to-purchase ratio)
+
+```powershell
+# Update sold count via API
+$body = '{"total_sales": 58}'
+Invoke-RestMethod -Uri "https://site.com/wp-json/ai-elementor/v1/wc-products/{id}" -Method Put -Headers $h -Body ([System.Text.Encoding]::UTF8.GetBytes($body))
+```
+
+### Complete Review Setup Process (Step-by-Step)
+
+1. **Plan reviews** — Create review JSON files with natural content, mixed ratings (mostly 4-5, some 3)
+2. **Push reviews** — `POST /schema/reviews/{product_id}` for each product
+3. **Sync JetReview** — `POST /schema/jetreview-sync` to backfill any missing JetReview rows
+4. **Create reviewer accounts** — `POST /schema/jetreview-fix-authors` with reviewer list
+5. **Download avatars** — Same endpoint, include `avatar_url` fields (DiceBear URLs)
+6. **Set sold counts** — `PUT /wc-products/{id}` with `{"total_sales": N}` for each product
+7. **Verify frontend** — Check each product page for: names (not "Guest"), avatars, star ratings
+
+### JetReview Integration Details
+
+- **Detection:** Plugin auto-detects JetReview table `{prefix}_jet_reviews` and its column names
+- **Rating scale:** JetReview uses 0-100 (WC uses 1-5). Conversion: `jr_rating = wc_rating * 20`
+- **Author column:** JetReview stores WP user ID in `author` column. `0` = Guest (shows as "Guest" on frontend)
+- **Dual-write:** Every `POST /schema/reviews/{id}` writes to both WC comments AND JetReview table
+- **Sync endpoint:** `POST /schema/jetreview-sync` reads all WC reviews and inserts missing JetReview rows (matches by `content` text)
+- **Post type:** Must be `product` and `source` must be `post` for JetReview to display on product pages
+
+### Debugging Review Issues
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Reviews show as "Guest" | JetReview `author=0` | Run `jetreview-fix-authors` |
+| No avatar photos | Avatar sideload failed | Check `avatar_url` is valid; re-run fix-authors |
+| Reviews visible in WC but not on page | Missing JetReview rows | Run `jetreview-sync` to backfill |
+| Wrong review count on product | JetReview cache | Clear JetReview rating meta via sync |
+| Avatar URL returns wrong filename | URL has query params | Plugin fixed: forces `.png` extension for sideloaded avatars |
+
+### Known Issues & Fixes (Reviews)
+
+- `[2026-03-03]` `sideload_avatar()` failed for DiceBear/ui-avatars URLs — `basename($url)` on `https://api.dicebear.com/7.x/avataaars/png?seed=X` returns `png` with no extension. WordPress `media_handle_sideload` can't determine MIME type → **Fix:** Parse URL path for extension, default to `.png`, create filename as `avatar-{user_id}.png`
+- `[2026-03-03]` JetReview dual-write silently fails for some reviews during bulk push — no error returned but rows not inserted → **Fix:** Always run `POST /schema/jetreview-sync` after bulk review pushes to backfill any missing rows
+- `[2026-03-03]` PowerShell 5.1 `$pid` is a read-only reserved variable — using it as a loop variable crashes the script → **Fix:** Use `$prodId` or any other name instead
+
+---
+
 ## Featured Image Generation (v1.5.0)
 
 This system generates AI-powered featured images for blog posts using **FLUX.1 [dev] FP8 via Fireworks AI**, converts them to optimized WebP format, and pushes them to WordPress as featured images — all via the CLI.
@@ -1764,6 +1903,10 @@ The `/media/upload` endpoint accepts:
 - `[2026-02-15]` Deleted Elementor templates caused crashes due to stale conditions cache → **Fix:** Remove `_elementor_conditions` meta before deletion, regenerate Elementor conditions cache after deletion via `\ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_cache()->regenerate()`.
 - `[2026-02-16]` Widgets with `_animation: "fadeInUp"` (or any entrance animation) rendered permanently invisible on frontend → **Root Cause:** Elementor adds `class="elementor-invisible"` (which sets `opacity: 0`) to animated elements on page load. The animation JS (waypoints library) is supposed to remove this class and trigger the animation when the element scrolls into view. When the waypoints JS fails to fire (e.g., due to page structure, lazy loading, or Element Cache conflicts), elements stay invisible permanently. Content appears correctly in the Elementor editor but is hidden on the live frontend. → **Fix:** Use animations selectively — only on above-the-fold hero content, section title groups, and CTA sections. NEVER animate form widgets, icon-list widgets, contact info content, or card interiors. If a page has invisible elements, strip all `_animation` and `_animation_delay` settings first, confirm rendering, then re-add selectively.
 - `[2026-02-16]` Elementor "Element Cache" setting (1 Day) can cause API-pushed page updates to not reflect on frontend → **Fix:** Disable Element Cache during development/debugging. The setting is in Elementor > Settings > Performance > Element Cache. Set to "Disable" while iterating, re-enable when stable.
+- `[2026-03-03]` `sideload_avatar()` crashes for query-string avatar URLs (DiceBear, ui-avatars) — `basename()` can't extract a filename with valid extension from URLs like `https://api.dicebear.com/.../png?seed=X` → **Fix:** Parse `URL_PATH` for extension, default to `.png`, create deterministic filename `avatar-{user_id}.png`
+- `[2026-03-03]` JetReview dual-write silently skips some rows during bulk review push (no error, row just missing) → **Fix:** Always run `POST /schema/jetreview-sync` after bulk pushes to backfill missing JetReview entries
+- `[2026-03-03]` PowerShell 5.1 `$pid` is read-only reserved variable → crashes when used as loop variable → **Fix:** Use `$prodId` or another name
+- `[2026-03-03]` JetReview `author=0` causes "Guest" display name on frontend — happens when reviews are inserted without a matching WP user account → **Fix:** Run `jetreview-fix-authors` to create subscriber accounts and update JetReview rows
 
 ---
 
@@ -1911,6 +2054,7 @@ The log directory is protected with `.htaccess` (Deny from all) and `index.php`.
 | 2026-03-01 | **WooCommerce SEO workflow documented** | Added full "WooCommerce SEO Workflow (v1.3.0)" section to CLAUDE.md covering: audit approach (list-wc-categories/products), category JSON format (description + seo_title + seo_description), product JSON format (+ short_description), product-mapping.json tracking, individual and batch push commands, run-seo-push.ps1 batch script pattern, SEO content writing guidelines (local SEO, no keyword stuffing, HTML rules, character limits), API endpoints reference with SiteSEO meta keys. Based on Watercolor.lk project: 8 categories + 14 products SEO-optimized. |
 | 2026-03-01 | **Featured image generation system (v1.5.0)** | Added `generate-featured-images.py` script for AI-powered featured images via FLUX.1 [dev] FP8 on Fireworks AI. Plugin v1.5.0 adds `POST /media/upload` (base64 image upload + auto-set featured) and `PUT /posts/{id}/featured-image` endpoints. Images generated at 1344x704 (FLUX constraint), resized to 1200x628, converted to WebP via Pillow. 68 photorealistic featured images created for watercolor.lk blog. Added full "Featured Image Generation" section to CLAUDE.md with workflow, SEO strategy, prompt tips, plugin endpoints, and constraints. Added `config/fireworks.json` to .gitignore. |
 | 2026-03-01 | **Holistic SEO Knowledge Base v2.0 (major upgrade)** | Upgraded `docs/holistic-seo-knowledge-base.md` from 618 lines (35KB) to 1224 lines (68KB). Integrated 16+ methodology gaps from Koray agent-training reference: Section 0 Warnings (anti-footprint, primary vs secondary sources, AI content risks), Query/Document/Intent Templates, Core vs Outer topical map design with JSON schemas, SCN Publishing Order, Macro vs Micro Context rules, Early Answer Zone, Lexical Semantics & Vocabulary Control, Content Configuration Loop, AA Lint Rules (JSON), Statistics/Data Authority Pages, Internal Link Patterns (hub propagation, problem-solution, comparison network), Faceted Navigation & Duplication risks, Quality/Relevance Thresholds (replacing keyword difficulty), Entity Graph JSON schemas, Monitoring & Iteration metrics, Niche Site Implementation, Multi-language Strategy, Agent Prompt Templates, and Curated Reference Library with primary + secondary sources. |
+| 2026-03-03 | **Product Review & Social Proof Workflow (v1.8.0)** | Added comprehensive "Product Review & Social Proof Workflow" section to CLAUDE.md covering: WC review management via REST API, JetReview dual-write bridge (auto-detect table, 0-100 rating scale, author ID linking), reviewer identity system (WP subscriber accounts + DiceBear avatar sideloading), sold count management (`total_sales` via PUT endpoint), complete step-by-step setup process, JetReview sync/backfill endpoint, fix-authors endpoint with avatar download, Sinhala Unicode support, debugging guide for common issues (Guest names, missing avatars, missing JetReview rows). Plugin v1.8.0 with schema-engine.php JetReview bridge (6 new methods), `sideload_avatar()` fix for query-string URLs, `get_avatar_url` filter. Based on watercolor.lk: 64 reviews across 14 products, 17 reviewer personas, 11 DiceBear avatars. |
 
 ---
 

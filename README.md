@@ -1,6 +1,6 @@
 # AI Elementor Template System
 
-> **v1.5.0** — Build any WordPress/Elementor website AND semantic SEO content using AI. The system gets smarter with every site you build.
+> **v1.8.0** — Build any WordPress/Elementor website AND semantic SEO content using AI. The system gets smarter with every site you build.
 
 Build WordPress/Elementor websites and SEO content systems using AI. Generate pages and blog posts as JSON, push to WordPress via REST API, review, refine, repeat. Every bug fix, layout pattern, SEO strategy, and widget discovery is captured in the knowledge base (`CLAUDE.md`) so the next project starts where the last one left off.
 
@@ -35,6 +35,8 @@ Build WordPress/Elementor websites and SEO content systems using AI. Generate pa
 - **Blog post management** — Create, update, delete blog posts as JSON via REST API (v1.4.0)
 - **Blog categories** — Create and manage WordPress blog categories via API
 - **WooCommerce SEO** — Bulk-update product/category descriptions and SiteSEO meta (v1.3.0)
+- **Product reviews & social proof** — Manage WooCommerce reviews via API with JetReview integration, reviewer identities, avatar sideloading, and sold counts (v1.8.0)
+- **JSON-LD Schema Engine** — Comprehensive structured data: Organization, Product, BreadcrumbList, FAQPage, BlogPosting, AggregateRating (v1.6.0)
 - **Local article copies** — Every blog post is kept as a local JSON file for updates, interlinking, and auditing
 - **AI featured image generation** — Generate photorealistic images via FLUX.1 [dev] FP8 (Fireworks AI), auto-convert to WebP, push to WordPress as featured images (v1.5.0)
 - **Featured image sideloading** — Upload images from URL directly to WordPress media library
@@ -130,8 +132,9 @@ Build the Home page as projects/my-site/pages/home.json
 │   └── ai-prompt-templates.md   ← Ready-to-use prompts for AI
 ├── generate-featured-images.py   ← AI image generation tool (FLUX.1 + Fireworks)
 ├── plugin/
-│   └── ai-elementor-sync/       ← WordPress REST API plugin (v1.5.0)
+│   └── ai-elementor-sync/       ← WordPress REST API plugin (v1.8.0)
 │       ├── ai-elementor-sync.php    ← Core plugin (pages, templates, blog, WooCommerce, diagnostics)
+│       ├── schema-engine.php        ← JSON-LD schema + JetReview bridge + review management
 │       ├── iconify-elementor-widget.php ← Custom Iconify icon widget
 │       └── iconify-support.php      ← Iconify JS loader for frontend
 ├── templates/
@@ -224,6 +227,15 @@ Build the Home page as projects/my-site/pages/home.json
 | `.\sync.ps1 -Site X -Action list-wc-products` | List products with SEO status |
 | `.\sync.ps1 -Site X -Action update-wc-category -PageId 86 -TemplateFile path` | Update category SEO content |
 | `.\sync.ps1 -Site X -Action update-wc-product -PageId 1234 -TemplateFile path` | Update product SEO content |
+
+### Product Reviews & Social Proof (v1.8.0)
+
+| Command | Description |
+|---------|-------------|
+| `.\sync.ps1 -Site X -Action reviews -PageId 1234 -TemplateFile path` | Add reviews to a product |
+| `.\sync.ps1 -Site X -Action jetreview-sync` | Sync WC reviews into JetReview table |
+| `.\sync.ps1 -Site X -Action jetreview-fix-authors -TemplateFile path` | Create reviewer accounts + download avatars |
+| `.\sync.ps1 -Site X -Action jetreview-rows -PageId 1234` | Debug: view JetReview rows for a product |
 
 ### Featured Image Generation (v1.5.0)
 
@@ -397,6 +409,20 @@ See the "Self-Improvement Rule" section in `CLAUDE.md` for details.
 - Regenerate API key from Settings → AI Elementor Sync if compromised
 
 ## Changelog
+
+### v1.8.0 (2026-03-03)
+- **Product review management** — Create, list, delete WooCommerce product reviews via REST API with bulk support
+- **JetReview integration** — Auto-detect Crocoblock JetReview table, dual-write reviews to both WC comments and JetReview, sync/backfill endpoint
+- **Reviewer identity system** — Create WP subscriber accounts for reviewers, link to JetReview author column (fixes "Guest" display)
+- **Avatar sideloading** — Download profile photos from DiceBear API URLs to WP media library, serve via `get_avatar_url` filter
+- **Sold count management** — Set `total_sales` via `PUT /wc-products/{id}` for social proof display
+- **JetReview sync** — `POST /schema/jetreview-sync` backfills missing JetReview rows from existing WC reviews
+- **Fix-authors endpoint** — `POST /schema/jetreview-fix-authors` creates users, updates JetReview author IDs, sideloads avatars, updates review content (Sinhala Unicode support)
+- **Schema Engine v1.7.0** — JSON-LD structured data for Organization, Product, BreadcrumbList, FAQPage, BlogPosting, AggregateRating
+- **Avatar URL fix** — `sideload_avatar()` handles query-string URLs (DiceBear, ui-avatars) by parsing URL path and forcing `.png` extension
+- **PowerShell 5.1 fixes** — `$pid` reserved variable workaround, UTF-8 encoding for API request bodies
+- **CLAUDE.md** — Complete "Product Review & Social Proof Workflow" section with API reference, debugging guide, step-by-step setup process
+- **Workflow guide updated** — Phase 5: Product Reviews & Social Proof added to `docs/workflow-guide.md`
 
 ### v1.5.0 (2026-03-01)
 - **AI featured image generation** — Python CLI tool (`generate-featured-images.py`) using FLUX.1 [dev] FP8 via Fireworks AI
