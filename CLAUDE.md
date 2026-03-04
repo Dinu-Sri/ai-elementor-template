@@ -1766,6 +1766,7 @@ Invoke-RestMethod -Uri "https://site.com/wp-json/ai-elementor/v1/wc-products/{id
 - `[2026-03-03]` `sideload_avatar()` failed for DiceBear/ui-avatars URLs — `basename($url)` on `https://api.dicebear.com/7.x/avataaars/png?seed=X` returns `png` with no extension. WordPress `media_handle_sideload` can't determine MIME type → **Fix:** Parse URL path for extension, default to `.png`, create filename as `avatar-{user_id}.png`
 - `[2026-03-03]` JetReview dual-write silently fails for some reviews during bulk push — no error returned but rows not inserted → **Fix:** Always run `POST /schema/jetreview-sync` after bulk review pushes to backfill any missing rows
 - `[2026-03-03]` PowerShell 5.1 `$pid` is a read-only reserved variable — using it as a loop variable crashes the script → **Fix:** Use `$prodId` or any other name instead
+- `[2026-03-04]` Google Rich Results Test: "Invalid object type for field `<parent_node>`" on all products — **Cause:** SiteSEO (SEOPress fork) outputs its own JSON-LD with `@type: Thing` instead of `@type: Product`, conflicting with our comprehensive Product schema → **Fix:** v1.8.1 disables SiteSEO schema output via filters (`seopress_schemas_auto_output`, `seopress_jsonld_html`, `seopress_toggle_schemas` + SiteSEO equivalents) and removes SiteSEO schema actions from `wp_head` at `wp_loaded`. Our schema engine is the single source of truth for JSON-LD.
 
 ---
 

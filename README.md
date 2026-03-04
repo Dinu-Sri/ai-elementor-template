@@ -410,6 +410,10 @@ See the "Self-Improvement Rule" section in `CLAUDE.md` for details.
 
 ## Changelog
 
+### v1.8.1 (2026-03-04)
+- **Schema conflict fix** — Disable SiteSEO/SEOPress automatic schema output that generates `@type: Thing` instead of `@type: Product`, causing Google Rich Results "Invalid object type for `<parent_node>`" errors on all product pages
+- **Comprehensive SEO plugin schema removal** — Filters (`seopress_schemas_auto_output`, `seopress_jsonld_html`, `seopress_toggle_schemas` + SiteSEO equivalents) plus action removal from `wp_head` at `wp_loaded`
+
 ### v1.8.0 (2026-03-03)
 - **Product review management** — Create, list, delete WooCommerce product reviews via REST API with bulk support
 - **JetReview integration** — Auto-detect Crocoblock JetReview table, dual-write reviews to both WC comments and JetReview, sync/backfill endpoint

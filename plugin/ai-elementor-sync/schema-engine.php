@@ -13,7 +13,7 @@
  *
  * @package AI_Elementor_Sync
  * @since   1.5.0
- * @version 1.8.0
+ * @version 1.8.1
  */
 
 if (!defined('ABSPATH')) {
@@ -51,8 +51,63 @@ class AI_Schema_Engine {
         // Register REST API routes for schema management
         add_action('rest_api_init', [$this, 'register_schema_routes']);
 
+        // Disable SiteSEO / SEOPress automatic schema output — we generate our own
+        // comprehensive schemas and SiteSEO outputs @type:Thing instead of Product
+        // Try all known filter hooks across SEOPress & SiteSEO versions
+        add_filter('seopress_schemas_auto_output', '__return_empty_string');
+        add_filter('seopress_pro_schemas_manual_html', '__return_empty_string');
+        add_filter('seopress_jsonld_html', '__return_empty_string');
+        add_filter('siteseo_schemas_auto_output', '__return_empty_string');
+        add_filter('siteseo_pro_schemas_manual_html', '__return_empty_string');
+        add_filter('siteseo_jsonld_html', '__return_empty_string');
+        // Disable auto schema toggle (return false = disabled)
+        add_filter('seopress_toggle_schemas', '__return_false');
+        add_filter('siteseo_toggle_schemas', '__return_false');
+        // Remove SiteSEO/SEOPress schema actions from wp_head (common hook points)
+        add_action('wp_loaded', [$this, 'remove_seo_plugin_schemas']);
+
         // Custom avatar support — serve avatars from wp_user_avatar meta
         add_filter('get_avatar_url', [$this, 'filter_avatar_url'], 10, 3);
+    }
+
+    /**
+     * Remove SEO plugin schema actions from wp_head to prevent duplicate/conflicting JSON-LD
+     * Called on wp_loaded so all plugins have registered their actions
+     */
+    public function remove_seo_plugin_schemas() {
+        global $wp_filter;
+        if (!isset($wp_filter['wp_head'])) return;
+
+        // Search wp_head hooks for SiteSEO/SEOPress schema output functions
+        foreach ($wp_filter['wp_head']->callbacks as $priority => $hooks) {
+            foreach ($hooks as $tag => $hook) {
+                $fn = $hook['function'];
+                $fn_name = '';
+
+                if (is_string($fn)) {
+                    $fn_name = $fn;
+                } elseif (is_array($fn) && count($fn) === 2) {
+                    $class = is_object($fn[0]) ? get_class($fn[0]) : (string) $fn[0];
+                    $fn_name = $class . '::' . $fn[1];
+                }
+
+                // Match common SiteSEO/SEOPress schema output patterns
+                $fn_lower = strtolower($fn_name);
+                if (strpos($fn_lower, 'seopress') !== false && strpos($fn_lower, 'schema') !== false) {
+                    remove_action('wp_head', $fn, $priority);
+                }
+                if (strpos($fn_lower, 'siteseo') !== false && strpos($fn_lower, 'schema') !== false) {
+                    remove_action('wp_head', $fn, $priority);
+                }
+                // Also match the JSON-LD output specifically
+                if (strpos($fn_lower, 'seopress') !== false && strpos($fn_lower, 'jsonld') !== false) {
+                    remove_action('wp_head', $fn, $priority);
+                }
+                if (strpos($fn_lower, 'siteseo') !== false && strpos($fn_lower, 'jsonld') !== false) {
+                    remove_action('wp_head', $fn, $priority);
+                }
+            }
+        }
     }
 
     /**
