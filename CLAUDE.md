@@ -622,6 +622,122 @@ The plugin's `create-template` endpoint automatically:
 
 ---
 
+## Single Post Template (Theme Builder)
+
+A **single post template** controls how individual blog posts render. Without one, posts use the theme's default layout. Like header/footer templates, this is a Theme Builder template (`elementor_library` post type) — NOT a regular page.
+
+### How to Create
+
+```powershell
+.\sync.ps1 -Site "<project>" -Action create-template -TemplateFile ".\projects\<project>\pages\single-post.json" -Title "Single Post"
+```
+
+The plugin sets `_elementor_template_type` to `single-post` and display conditions to `['include/singular/post']` (applies to all blog posts only).
+
+### Template Structure (2 Sections)
+
+The single post template has exactly **2 top-level containers**:
+
+**Section 1 — Hero (Post Title):**
+- Full-width container with `margin-top: -132px` (to overlap under transparent header)
+- Dark gradient background (`#1A2340` → `#263660`, 160deg)
+- Contains a boxed inner container (900px) with a `theme-post-title` widget
+- The `theme-post-title` widget uses `__dynamic__` binding to pull the post title dynamically
+
+**Section 2 — Content Area:**
+- Full-width container with light background (`#F4F6FA`)
+- Contains a boxed inner container (900px) with 3 elements in order:
+  1. `theme-post-featured-image` widget (uses `__dynamic__` binding for image)
+  2. White card container (rounded corners, shadow, padding 48px) with `theme-post-content` widget inside
+  3. `post-navigation` widget (Previous/Next post links)
+
+### Key Patterns for Dynamic Theme Widgets
+
+Theme Builder widgets use `__dynamic__` bindings instead of static content. These are critical — without them, the widgets show placeholder text instead of actual post data.
+
+**Post Title (`theme-post-title`):**
+```json
+{
+    "elType": "widget",
+    "widgetType": "theme-post-title",
+    "settings": {
+        "__dynamic__": {
+            "title": "[elementor-tag id=\"\" name=\"post-title\" settings=\"%7B%22before%22%3A%22%22%2C%22after%22%3A%22%22%2C%22fallback%22%3A%22%22%7D\"]"
+        },
+        "title": "Add Your Heading Text Here",
+        "typography_typography": "custom",
+        "typography_font_family": "Poppins",
+        "typography_font_weight": "600",
+        "title_color": "#FFFFFF"
+    },
+    "elements": []
+}
+```
+
+**Featured Image (`theme-post-featured-image`):**
+```json
+{
+    "elType": "widget",
+    "widgetType": "theme-post-featured-image",
+    "settings": {
+        "__dynamic__": {
+            "image": "[elementor-tag id=\"\" name=\"post-featured-image\" settings=\"%7B%22fallback%22%3A%7B%22url%22%3A%22%22%2C%22id%22%3A%22%22%2C%22size%22%3A%22%22%7D%7D\"]"
+        }
+    },
+    "elements": []
+}
+```
+
+**Post Content (`theme-post-content`):**
+```json
+{
+    "elType": "widget",
+    "widgetType": "theme-post-content",
+    "settings": {
+        "text_color": "#374151",
+        "typography_typography": "custom",
+        "typography_font_family": "DM Sans",
+        "typography_font_size": {"unit": "px", "size": 16, "sizes": []},
+        "typography_line_height": {"unit": "em", "size": 1.8, "sizes": []},
+        "align": "left"
+    },
+    "elements": []
+}
+```
+
+**Post Navigation (`post-navigation`):**
+```json
+{
+    "elType": "widget",
+    "widgetType": "post-navigation",
+    "settings": {
+        "prev_label": "Previous Post",
+        "next_label": "Next Post",
+        "label_color": "#6B7280",
+        "title_color": "#1A2340",
+        "title_color_hover": "#3050A0",
+        "label_typography_typography": "custom",
+        "label_typography_font_family": "DM Sans",
+        "label_typography_font_size": {"unit": "px", "size": 13, "sizes": []},
+        "title_typography_typography": "custom",
+        "title_typography_font_family": "Poppins",
+        "title_typography_font_size": {"unit": "px", "size": 15, "sizes": []},
+        "title_typography_font_weight": "600"
+    },
+    "elements": []
+}
+```
+
+### Important Notes
+
+- The featured image goes **outside** the hero section, in the content area above the white card — NOT inside the hero as a background
+- Do NOT add `post-info` (date/author/category) widget unless explicitly requested
+- The `__dynamic__` tag strings are URL-encoded JSON — copy them exactly, do not modify the encoded settings
+- Like header/footer, to update this template: **delete + re-create** (never use `update`)
+- Display condition `include/singular/post` ensures it only applies to blog posts, not pages
+
+---
+
 ## Elementor JSON Structure
 
 Every page template JSON has this top-level format:
@@ -2056,6 +2172,7 @@ The log directory is protected with `.htaccess` (Deny from all) and `index.php`.
 | 2026-03-01 | **Featured image generation system (v1.5.0)** | Added `generate-featured-images.py` script for AI-powered featured images via FLUX.1 [dev] FP8 on Fireworks AI. Plugin v1.5.0 adds `POST /media/upload` (base64 image upload + auto-set featured) and `PUT /posts/{id}/featured-image` endpoints. Images generated at 1344x704 (FLUX constraint), resized to 1200x628, converted to WebP via Pillow. 68 photorealistic featured images created for watercolor.lk blog. Added full "Featured Image Generation" section to CLAUDE.md with workflow, SEO strategy, prompt tips, plugin endpoints, and constraints. Added `config/fireworks.json` to .gitignore. |
 | 2026-03-01 | **Holistic SEO Knowledge Base v2.0 (major upgrade)** | Upgraded `docs/holistic-seo-knowledge-base.md` from 618 lines (35KB) to 1224 lines (68KB). Integrated 16+ methodology gaps from Koray agent-training reference: Section 0 Warnings (anti-footprint, primary vs secondary sources, AI content risks), Query/Document/Intent Templates, Core vs Outer topical map design with JSON schemas, SCN Publishing Order, Macro vs Micro Context rules, Early Answer Zone, Lexical Semantics & Vocabulary Control, Content Configuration Loop, AA Lint Rules (JSON), Statistics/Data Authority Pages, Internal Link Patterns (hub propagation, problem-solution, comparison network), Faceted Navigation & Duplication risks, Quality/Relevance Thresholds (replacing keyword difficulty), Entity Graph JSON schemas, Monitoring & Iteration metrics, Niche Site Implementation, Multi-language Strategy, Agent Prompt Templates, and Curated Reference Library with primary + secondary sources. |
 | 2026-03-03 | **Product Review & Social Proof Workflow (v1.8.0)** | Added comprehensive "Product Review & Social Proof Workflow" section to CLAUDE.md covering: WC review management via REST API, JetReview dual-write bridge (auto-detect table, 0-100 rating scale, author ID linking), reviewer identity system (WP subscriber accounts + DiceBear avatar sideloading), sold count management (`total_sales` via PUT endpoint), complete step-by-step setup process, JetReview sync/backfill endpoint, fix-authors endpoint with avatar download, Sinhala Unicode support, debugging guide for common issues (Guest names, missing avatars, missing JetReview rows). Plugin v1.8.0 with schema-engine.php JetReview bridge (6 new methods), `sideload_avatar()` fix for query-string URLs, `get_avatar_url` filter. Based on watercolor.lk: 64 reviews across 14 products, 17 reviewer personas, 11 DiceBear avatars. |
+| 2026-03-18 | **Single Post Template guide** | Added "Single Post Template (Theme Builder)" section to CLAUDE.md. Documents the 2-section layout pattern (Hero with dynamic post title + Content area with featured image, white content card, post navigation). Includes exact `__dynamic__` tag bindings for `theme-post-title`, `theme-post-featured-image`, `theme-post-content`, and `post-navigation` widgets. Key learnings: featured image goes outside the hero in the content area (not as hero background), `__dynamic__` URL-encoded tag strings must be copied exactly, display condition is `include/singular/post` for blog posts only. Based on DiGiSavi.lk single post template (ID 123). |
 
 ---
 

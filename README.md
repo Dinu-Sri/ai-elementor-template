@@ -1,6 +1,6 @@
 # AI Elementor Template System
 
-> **v1.8.0** — Build any WordPress/Elementor website AND semantic SEO content using AI. The system gets smarter with every site you build.
+> **v1.8.2** — Build any WordPress/Elementor website AND semantic SEO content using AI. The system gets smarter with every site you build.
 
 Build WordPress/Elementor websites and SEO content systems using AI. Generate pages and blog posts as JSON, push to WordPress via REST API, review, refine, repeat. Every bug fix, layout pattern, SEO strategy, and widget discovery is captured in the knowledge base (`CLAUDE.md`) so the next project starts where the last one left off.
 
@@ -409,6 +409,12 @@ See the "Self-Improvement Rule" section in `CLAUDE.md` for details.
 - Regenerate API key from Settings → AI Elementor Sync if compromised
 
 ## Changelog
+
+### v1.8.2 (2026-03-18)
+- **Single post template guide** — Added "Single Post Template (Theme Builder)" section to `CLAUDE.md` documenting the 2-section layout pattern (hero with dynamic post title + content area with featured image, white content card, post navigation)
+- **Dynamic widget bindings** — Documented exact `__dynamic__` tag bindings for `theme-post-title`, `theme-post-featured-image`, `theme-post-content`, and `post-navigation` widgets
+- **Post list page (cards skin)** — Posts widget with `_skin: cards` for beautiful card-based blog listing with hover effects (lift, image zoom, color transitions), category badges, and pagination
+- **Media upload workflow** — Documented `POST /media/upload` base64 image upload pattern for bulk blog post image management
 
 ### v1.8.1 (2026-03-04)
 - **Schema conflict fix** — Disable SiteSEO/SEOPress automatic schema output that generates `@type: Thing` instead of `@type: Product`, causing Google Rich Results "Invalid object type for `<parent_node>`" errors on all product pages
