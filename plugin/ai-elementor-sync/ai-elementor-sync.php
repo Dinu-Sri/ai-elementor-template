@@ -22,6 +22,11 @@ require_once __DIR__ . '/iconify-support.php';
 require_once __DIR__ . '/iconify-elementor-widget.php';
 // Schema Engine — comprehensive JSON-LD structured data
 require_once __DIR__ . '/schema-engine.php';
+// Shop Filters — price/category filter shortcodes for product archives
+if (file_exists(__DIR__ . '/shop-filters.php')) {
+    require_once __DIR__ . '/shop-filters.php';
+    AI_Sync_Shop_Filters::init();
+}
 
 define('AI_ELEMENTOR_SYNC_VERSION', '1.8.0');
 define('AI_ELEMENTOR_SYNC_LOG_DIR', WP_CONTENT_DIR . '/ai-sync-logs');
@@ -341,6 +346,34 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             'permission_callback' => [$this, 'permission_check'],
         ]);
 
+        // Create a new WooCommerce product (simple or variable) (v1.9.0)
+        register_rest_route($namespace, '/wc-products', [
+            'methods'             => 'POST',
+            'callback'            => [$this, 'create_wc_product'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Add gallery images to a WooCommerce product (v1.9.0)
+        register_rest_route($namespace, '/wc-products/(?P<id>\d+)/gallery', [
+            'methods'             => 'POST',
+            'callback'            => [$this, 'add_product_gallery_image'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Create a WooCommerce product category (v1.9.0)
+        register_rest_route($namespace, '/wc-categories', [
+            'methods'             => 'POST',
+            'callback'            => [$this, 'create_wc_category'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Delete a WooCommerce product category (v1.9.1)
+        register_rest_route($namespace, '/wc-categories/(?P<id>\d+)', [
+            'methods'             => 'DELETE',
+            'callback'            => [$this, 'delete_wc_category'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
         // ---------------------------------------------------------------
         // Blog Post Management endpoints (v1.4.0)
         // ---------------------------------------------------------------
@@ -412,6 +445,24 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
         register_rest_route($namespace, '/posts/(?P<id>\d+)/featured-image', [
             'methods'  => 'PUT',
             'callback' => [$this, 'set_featured_image'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // ---------------------------------------------------------------
+        // WooCommerce Shipping Zones (v1.10.0)
+        // ---------------------------------------------------------------
+
+        // Configure shipping zones (bulk create/replace)
+        register_rest_route($namespace, '/shipping-zones', [
+            'methods'  => 'POST',
+            'callback' => [$this, 'configure_shipping_zones'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // List shipping zones
+        register_rest_route($namespace, '/shipping-zones', [
+            'methods'  => 'GET',
+            'callback' => [$this, 'list_shipping_zones'],
             'permission_callback' => [$this, 'permission_check'],
         ]);
     }
@@ -1532,6 +1583,18 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             }
         }
 
+        // Update categories (array of term IDs)
+        if (isset($params['categories'])) {
+            $cat_ids = [];
+            foreach ((array) $params['categories'] as $cat) {
+                if (is_numeric($cat)) {
+                    $cat_ids[] = (int) $cat;
+                }
+            }
+            wp_set_object_terms($post_id, $cat_ids, 'product_cat');
+            $results['categories'] = $cat_ids;
+        }
+
         // Update total_sales (sold count)
         if (isset($params['total_sales'])) {
             $sales = max(0, (int) $params['total_sales']);
@@ -2133,6 +2196,373 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
     }
 
     /**
+     * POST /wc-products — Create a new WooCommerce product (simple or variable) (v1.9.0)
+     * Body: { name, sku, type, description, short_description, regular_price, categories, tags,
+     *         attributes, manage_stock, stock_quantity, seo_title, seo_description,
+     *         parent_id, meta }
+     */
+    public function create_wc_product($request) {
+        $params = $request->get_json_params();
+        if (!$params || empty($params['name'])) {
+            return new WP_Error('invalid_params', 'name is required', ['status' => 400]);
+        }
+
+        if (!class_exists('WooCommerce')) {
+            return new WP_Error('wc_missing', 'WooCommerce is not active', ['status' => 500]);
+        }
+
+        $type = $params['type'] ?? 'simple';
+        $this->log('INFO', 'Creating WC product', ['name' => $params['name'], 'type' => $type]);
+
+        // Build product post
+        $post_data = [
+            'post_title'   => sanitize_text_field($params['name']),
+            'post_content' => isset($params['description']) ? wp_kses_post($params['description']) : '',
+            'post_excerpt'  => isset($params['short_description']) ? wp_kses_post($params['short_description']) : '',
+            'post_status'  => $params['status'] ?? 'publish',
+            'post_type'    => 'product',
+        ];
+
+        // For product variations, post_type is product_variation
+        if ($type === 'variation' && !empty($params['parent_id'])) {
+            $post_data['post_type']   = 'product_variation';
+            $post_data['post_parent'] = (int) $params['parent_id'];
+            $post_data['post_title']  = ''; // WC handles variation titles
+        }
+
+        $post_id = wp_insert_post(wp_slash($post_data), true);
+        if (is_wp_error($post_id)) {
+            $this->log('ERROR', 'Product creation failed', ['error' => $post_id->get_error_message()]);
+            return new WP_Error('create_failed', $post_id->get_error_message(), ['status' => 500]);
+        }
+
+        $results = ['post_id' => $post_id];
+
+        // Set product type (simple, variable, grouped, external)
+        if ($type !== 'variation') {
+            wp_set_object_terms($post_id, $type, 'product_type');
+            $results['type'] = $type;
+        }
+
+        // SKU
+        if (!empty($params['sku'])) {
+            update_post_meta($post_id, '_sku', sanitize_text_field($params['sku']));
+            $results['sku'] = $params['sku'];
+        }
+
+        // Regular price
+        if (isset($params['regular_price'])) {
+            $price = sanitize_text_field((string) $params['regular_price']);
+            update_post_meta($post_id, '_regular_price', $price);
+            update_post_meta($post_id, '_price', $price);
+            $results['regular_price'] = $price;
+        }
+
+        // Sale price
+        if (isset($params['sale_price'])) {
+            $sale = sanitize_text_field((string) $params['sale_price']);
+            update_post_meta($post_id, '_sale_price', $sale);
+            update_post_meta($post_id, '_price', $sale);
+            $results['sale_price'] = $sale;
+        }
+
+        // Stock management
+        $manage_stock = !empty($params['manage_stock']);
+        update_post_meta($post_id, '_manage_stock', $manage_stock ? 'yes' : 'no');
+        if ($manage_stock && isset($params['stock_quantity'])) {
+            update_post_meta($post_id, '_stock', (int) $params['stock_quantity']);
+            update_post_meta($post_id, '_stock_status', (int) $params['stock_quantity'] > 0 ? 'instock' : 'outofstock');
+        } else {
+            $stock_status = ($params['in_stock'] ?? true) ? 'instock' : 'outofstock';
+            update_post_meta($post_id, '_stock_status', $stock_status);
+        }
+
+        // Visibility
+        update_post_meta($post_id, '_visibility', $params['visibility'] ?? 'visible');
+
+        // Tax status
+        if (!empty($params['tax_status'])) {
+            update_post_meta($post_id, '_tax_status', sanitize_text_field($params['tax_status']));
+        }
+
+        // Is Featured
+        if (!empty($params['is_featured'])) {
+            wp_set_object_terms($post_id, 'featured', 'product_visibility');
+            $results['featured'] = true;
+        }
+
+        // Categories (array of term IDs or names)
+        if (!empty($params['categories'])) {
+            $cat_ids = [];
+            foreach ((array) $params['categories'] as $cat) {
+                if (is_numeric($cat)) {
+                    $cat_ids[] = (int) $cat;
+                } else {
+                    $term = get_term_by('name', $cat, 'product_cat');
+                    if ($term) {
+                        $cat_ids[] = $term->term_id;
+                    } else {
+                        $new_term = wp_insert_term($cat, 'product_cat');
+                        if (!is_wp_error($new_term)) {
+                            $cat_ids[] = $new_term['term_id'];
+                        }
+                    }
+                }
+            }
+            if (!empty($cat_ids)) {
+                wp_set_object_terms($post_id, $cat_ids, 'product_cat');
+                $results['categories'] = $cat_ids;
+            }
+        }
+
+        // Tags (array of tag names)
+        if (!empty($params['tags'])) {
+            $tag_names = array_map('sanitize_text_field', (array) $params['tags']);
+            wp_set_object_terms($post_id, $tag_names, 'product_tag');
+            $results['tags'] = $tag_names;
+        }
+
+        // Attributes (for variable products)
+        if (!empty($params['attributes'])) {
+            $product_attributes = [];
+            foreach ((array) $params['attributes'] as $attr) {
+                $attr_name  = sanitize_text_field($attr['name']);
+                $attr_slug  = sanitize_title($attr_name);
+                $attr_values = array_map('sanitize_text_field', (array) $attr['values']);
+
+                $product_attributes[$attr_slug] = [
+                    'name'         => $attr_name,
+                    'value'        => implode(' | ', $attr_values),
+                    'position'     => $attr['position'] ?? 0,
+                    'is_visible'   => $attr['visible'] ?? 1,
+                    'is_variation' => $attr['variation'] ?? 1,
+                    'is_taxonomy'  => 0,
+                ];
+            }
+            update_post_meta($post_id, '_product_attributes', $product_attributes);
+            $results['attributes'] = array_keys($product_attributes);
+        }
+
+        // Variation-specific attribute values
+        if ($type === 'variation' && !empty($params['variation_attributes'])) {
+            foreach ($params['variation_attributes'] as $attr_name => $attr_value) {
+                $meta_key = 'attribute_' . sanitize_title($attr_name);
+                update_post_meta($post_id, $meta_key, sanitize_text_field($attr_value));
+            }
+            $results['variation_attributes'] = $params['variation_attributes'];
+        }
+
+        // Custom meta fields
+        if (!empty($params['meta'])) {
+            foreach ($params['meta'] as $key => $value) {
+                update_post_meta($post_id, sanitize_key($key), sanitize_text_field($value));
+            }
+            $results['meta_keys'] = array_keys($params['meta']);
+        }
+
+        // SiteSEO meta
+        if (!empty($params['seo_title'])) {
+            update_post_meta($post_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+            $results['seo_title'] = 'set';
+        }
+        if (!empty($params['seo_description'])) {
+            update_post_meta($post_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+            $results['seo_description'] = 'set';
+        }
+
+        // Clear WC product cache
+        wc_delete_product_transients($post_id);
+
+        $this->log('INFO', 'WC product created', ['post_id' => $post_id, 'type' => $type, 'name' => $params['name']]);
+
+        return [
+            'success'   => true,
+            'post_id'   => $post_id,
+            'name'      => $params['name'],
+            'type'      => $type,
+            'results'   => $results,
+            'timestamp' => date('Y-m-d H:i:s'),
+        ];
+    }
+
+    /**
+     * POST /wc-products/{id}/gallery — Add a gallery image to a WooCommerce product (v1.9.0)
+     * Body: { data (base64), filename, alt, title, role } OR { attachment_id, role }
+     */
+    public function add_product_gallery_image($request) {
+        $post_id = (int) $request['id'];
+        $params  = $request->get_json_params();
+
+        $post = get_post($post_id);
+        if (!$post || !in_array($post->post_type, ['product', 'product_variation'])) {
+            return new WP_Error('not_found', 'Product not found', ['status' => 404]);
+        }
+
+        $this->log('INFO', 'Adding image to product', ['post_id' => $post_id]);
+
+        $attach_id = null;
+
+        // Option 1: Upload base64 image
+        if (!empty($params['data']) && !empty($params['filename'])) {
+            require_once ABSPATH . 'wp-admin/includes/media.php';
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+            require_once ABSPATH . 'wp-admin/includes/image.php';
+
+            $image_data = base64_decode($params['data']);
+            if ($image_data === false) {
+                return new WP_Error('invalid_data', 'Failed to decode base64', ['status' => 400]);
+            }
+
+            $tmp_file = wp_tempnam($params['filename']);
+            file_put_contents($tmp_file, $image_data);
+
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime  = finfo_file($finfo, $tmp_file);
+            finfo_close($finfo);
+
+            $file_array = [
+                'name'     => sanitize_file_name($params['filename']),
+                'type'     => $mime,
+                'tmp_name' => $tmp_file,
+                'error'    => 0,
+                'size'     => strlen($image_data),
+            ];
+
+            $attach_id = media_handle_sideload($file_array, $post_id, $params['title'] ?? '');
+
+            if (is_wp_error($attach_id)) {
+                @unlink($tmp_file);
+                return new WP_Error('upload_failed', $attach_id->get_error_message(), ['status' => 500]);
+            }
+
+            if (!empty($params['alt'])) {
+                update_post_meta($attach_id, '_wp_attachment_image_alt', sanitize_text_field($params['alt']));
+            }
+            if (!empty($params['title'])) {
+                wp_update_post(['ID' => $attach_id, 'post_title' => sanitize_text_field($params['title'])]);
+            }
+        }
+        // Option 2: Use existing attachment ID
+        elseif (!empty($params['attachment_id'])) {
+            $attach_id = (int) $params['attachment_id'];
+        }
+        else {
+            return new WP_Error('invalid_params', 'Provide either data+filename or attachment_id', ['status' => 400]);
+        }
+
+        $role = $params['role'] ?? 'gallery';
+
+        if ($role === 'featured') {
+            set_post_thumbnail($post_id, $attach_id);
+            $this->log('INFO', 'Featured image set', ['post_id' => $post_id, 'attach' => $attach_id]);
+        } else {
+            $existing = get_post_meta($post_id, '_product_image_gallery', true);
+            $gallery_ids = $existing ? explode(',', $existing) : [];
+            if (!in_array((string) $attach_id, $gallery_ids)) {
+                $gallery_ids[] = $attach_id;
+                update_post_meta($post_id, '_product_image_gallery', implode(',', $gallery_ids));
+            }
+            $this->log('INFO', 'Gallery image added', ['post_id' => $post_id, 'attach' => $attach_id]);
+        }
+
+        return [
+            'success'       => true,
+            'post_id'       => $post_id,
+            'attachment_id' => $attach_id,
+            'role'          => $role,
+            'url'           => wp_get_attachment_url($attach_id),
+        ];
+    }
+
+    /**
+     * POST /wc-categories — Create a new WooCommerce product category (v1.9.0)
+     * Body: { name, slug, description, parent_id, seo_title, seo_description }
+     */
+    public function create_wc_category($request) {
+        $params = $request->get_json_params();
+        if (!$params || empty($params['name'])) {
+            return new WP_Error('invalid_params', 'name is required', ['status' => 400]);
+        }
+
+        $this->log('INFO', 'Creating WC category', ['name' => $params['name']]);
+
+        $args = [];
+        if (!empty($params['slug'])) {
+            $args['slug'] = sanitize_title($params['slug']);
+        }
+        if (!empty($params['description'])) {
+            $args['description'] = wp_kses_post($params['description']);
+        }
+        if (!empty($params['parent_id'])) {
+            $args['parent'] = (int) $params['parent_id'];
+        }
+
+        // Check if category already exists
+        $existing = get_term_by('name', $params['name'], 'product_cat');
+        if ($existing) {
+            return [
+                'success' => true,
+                'term_id' => $existing->term_id,
+                'name'    => $existing->name,
+                'slug'    => $existing->slug,
+                'exists'  => true,
+            ];
+        }
+
+        $result = wp_insert_term(sanitize_text_field($params['name']), 'product_cat', $args);
+        if (is_wp_error($result)) {
+            return new WP_Error('create_failed', $result->get_error_message(), ['status' => 500]);
+        }
+
+        $term_id = $result['term_id'];
+
+        if (!empty($params['seo_title'])) {
+            update_term_meta($term_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+        }
+        if (!empty($params['seo_description'])) {
+            update_term_meta($term_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+        }
+
+        $this->log('INFO', 'WC category created', ['term_id' => $term_id, 'name' => $params['name']]);
+
+        return [
+            'success' => true,
+            'term_id' => $term_id,
+            'name'    => $params['name'],
+            'slug'    => $args['slug'] ?? sanitize_title($params['name']),
+            'exists'  => false,
+        ];
+    }
+
+    /**
+     * DELETE /wc-categories/{id} — Delete a WooCommerce product category (v1.9.1)
+     */
+    public function delete_wc_category($request) {
+        $term_id = (int) $request['id'];
+        $this->log('INFO', 'Deleting WC category', ['term_id' => $term_id]);
+
+        $term = get_term($term_id, 'product_cat');
+        if (!$term || is_wp_error($term)) {
+            return new WP_Error('not_found', 'Category not found (id: ' . $term_id . ')', ['status' => 404]);
+        }
+
+        $name = $term->name;
+        $deleted = wp_delete_term($term_id, 'product_cat');
+        if (is_wp_error($deleted)) {
+            return new WP_Error('delete_failed', $deleted->get_error_message(), ['status' => 500]);
+        }
+
+        $this->log('INFO', 'WC category deleted', ['term_id' => $term_id, 'name' => $name]);
+
+        return [
+            'success' => true,
+            'term_id' => $term_id,
+            'name'    => $name,
+            'deleted' => true,
+        ];
+    }
+
+    /**
      * Download an image from URL and add to WP media library
      */
     private function sideload_image_from_url($url, $post_id = 0, $title = '', $alt = '') {
@@ -2175,6 +2605,159 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
 
         $this->log('INFO', 'Media sideloaded', ['attachment_id' => $attach_id, 'url' => wp_get_attachment_url($attach_id)]);
         return $attach_id;
+    }
+
+    /**
+     * GET /shipping-zones — List all WooCommerce shipping zones
+     */
+    public function list_shipping_zones($request) {
+        if (!class_exists('WC_Shipping_Zones')) {
+            return new WP_Error('wc_missing', 'WooCommerce not active', ['status' => 500]);
+        }
+
+        $zones = WC_Shipping_Zones::get_zones();
+        $result = [];
+
+        // Include zone 0 (Rest of World)
+        $default_zone = new WC_Shipping_Zone(0);
+        $methods = $default_zone->get_shipping_methods();
+        $method_list = [];
+        foreach ($methods as $m) {
+            $method_list[] = [
+                'instance_id' => $m->get_instance_id(),
+                'method_id'   => $m->id,
+                'title'       => $m->get_title(),
+                'enabled'     => $m->is_enabled(),
+            ];
+        }
+        $result[] = [
+            'zone_id'   => 0,
+            'zone_name' => 'Rest of World',
+            'countries' => [],
+            'methods'   => $method_list,
+        ];
+
+        foreach ($zones as $zone_data) {
+            $zone = new WC_Shipping_Zone($zone_data['id']);
+            $locations = $zone->get_zone_locations();
+            $countries = [];
+            foreach ($locations as $loc) {
+                if ($loc->type === 'country') {
+                    $countries[] = $loc->code;
+                }
+            }
+            $methods = $zone->get_shipping_methods();
+            $method_list = [];
+            foreach ($methods as $m) {
+                $cost = '';
+                if ($m->id === 'flat_rate') {
+                    // Read cost using WC's own API (same way checkout reads it)
+                    $fr = new WC_Shipping_Flat_Rate($m->get_instance_id());
+                    $cost = $fr->get_option('cost', '');
+                }
+                $method_list[] = [
+                    'instance_id' => $m->get_instance_id(),
+                    'method_id'   => $m->id,
+                    'title'       => $m->get_title(),
+                    'enabled'     => $m->is_enabled(),
+                    'cost'        => $cost,
+                ];
+            }
+            $result[] = [
+                'zone_id'   => $zone_data['id'],
+                'zone_name' => $zone_data['zone_name'],
+                'countries' => $countries,
+                'methods'   => $method_list,
+            ];
+        }
+
+        return rest_ensure_response(['success' => true, 'zones' => $result]);
+    }
+
+    /**
+     * POST /shipping-zones — Configure shipping zones (delete existing + create new)
+     *
+     * Body: { "zones": [ { "zone_name": "...", "countries": ["US","GB"], "cost": 11 }, ... ] }
+     */
+    public function configure_shipping_zones($request) {
+        if (!class_exists('WC_Shipping_Zones')) {
+            return new WP_Error('wc_missing', 'WooCommerce not active', ['status' => 500]);
+        }
+
+        $body = $request->get_json_params();
+        $zones_data = isset($body['zones']) ? $body['zones'] : [];
+
+        if (empty($zones_data)) {
+            return new WP_Error('no_zones', 'No zones provided', ['status' => 400]);
+        }
+
+        $this->log('INFO', 'Configuring shipping zones', ['count' => count($zones_data)]);
+
+        // Step 1: Delete all existing zones (except zone 0 which can't be deleted)
+        $existing = WC_Shipping_Zones::get_zones();
+        foreach ($existing as $z) {
+            $zone = new WC_Shipping_Zone($z['id']);
+            $zone->delete(true);
+        }
+        $this->log('INFO', 'Deleted existing shipping zones', ['count' => count($existing)]);
+
+        // Step 2: Clear methods from zone 0 (Rest of World)
+        $zone0 = new WC_Shipping_Zone(0);
+        $z0_methods = $zone0->get_shipping_methods();
+        foreach ($z0_methods as $m) {
+            $zone0->delete_shipping_method($m->get_instance_id());
+        }
+
+        // Step 3: Create new zones
+        $created = [];
+        foreach ($zones_data as $zd) {
+            $zone = new WC_Shipping_Zone();
+            $zone->set_zone_name(sanitize_text_field($zd['zone_name']));
+            $zone->save();
+
+            // Add country locations
+            foreach ($zd['countries'] as $country_code) {
+                $zone->add_location(strtoupper(sanitize_text_field($country_code)), 'country');
+            }
+
+            // CRITICAL: Save zone again to persist locations to DB
+            $zone->save();
+
+            // Add flat_rate method
+            $instance_id = $zone->add_shipping_method('flat_rate');
+
+            // Configure the flat rate cost using WC's option storage directly
+            $cost = floatval($zd['cost']);
+            $option_key = 'woocommerce_flat_rate_' . $instance_id . '_settings';
+            $settings = array(
+                'title'      => 'Flat Rate Shipping',
+                'tax_status' => 'none',
+                'cost'       => strval($cost),
+            );
+            update_option($option_key, $settings);
+
+            $created[] = [
+                'zone_id'     => $zone->get_id(),
+                'zone_name'   => $zd['zone_name'],
+                'countries'   => $zd['countries'],
+                'cost'        => $cost,
+                'instance_id' => $instance_id,
+            ];
+        }
+
+        // Step 4: Flush ALL shipping caches aggressively
+        WC_Cache_Helper::get_transient_version('shipping', true);
+        delete_transient('wc_shipping_method_count');
+        wp_cache_flush();
+
+        $this->log('INFO', 'Shipping zones configured', ['created' => count($created)]);
+
+        return rest_ensure_response([
+            'success'   => true,
+            'deleted'   => count($existing),
+            'created'   => count($created),
+            'zones'     => $created,
+        ]);
     }
 }
 

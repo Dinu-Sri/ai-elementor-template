@@ -2024,6 +2024,10 @@ The `/media/upload` endpoint accepts:
 - `[2026-03-03]` JetReview dual-write silently skips some rows during bulk review push (no error, row just missing) → **Fix:** Always run `POST /schema/jetreview-sync` after bulk pushes to backfill missing JetReview entries
 - `[2026-03-03]` PowerShell 5.1 `$pid` is read-only reserved variable → crashes when used as loop variable → **Fix:** Use `$prodId` or another name
 - `[2026-03-03]` JetReview `author=0` causes "Guest" display name on frontend — happens when reviews are inserted without a matching WP user account → **Fix:** Run `jetreview-fix-authors` to create subscriber accounts and update JetReview rows
+- `[2026-03-23]` `WC_Shipping_Flat_Rate::update_option('cost', $value)` silently fails — costs saved as "0" despite correct method call → **Root Cause:** The `WC_Shipping_Flat_Rate` constructor with just an `$instance_id` doesn't load the existing settings context properly. The `update_option()` method writes back to the wrong option key or with incomplete settings. → **Fix:** Use `update_option('woocommerce_flat_rate_' . $instance_id . '_settings', ['title' => '...', 'tax_status' => 'none', 'cost' => strval($cost)])` which directly writes the full settings array to the correct WP option.
+- `[2026-03-23]` `WC_Shipping_Zone::add_location()` does NOT auto-persist — country assignments silently lost after zone creation → **Root Cause:** `add_location()` only modifies the in-memory zone object. Without a subsequent `$zone->save()`, the `woocommerce_shipping_zone_locations` table row is never written. WooCommerce then can't match any customer country to any zone, falling back to "Rest of World" (which has no methods = no shipping). → **Fix:** Always call `$zone->save()` after all `add_location()` calls.
+- `[2026-03-23]` WooCommerce checkout always shows lowest shipping rate ($5) regardless of selected country → **Root Cause:** Combination of bugs above — zones existed but had no persisted locations and costs were all $0. WooCommerce matched everything to the first zone or Rest of World. → **Fix:** Both fixes above (save locations + direct option write) resolved it.
+- `[2026-03-23]` Select2 dropdown on checkout page: blue highlight with black text is unreadable → **Fix:** Added CSS via `wp_head` action on `is_checkout()`: `.select2-results__option--highlighted` → gold background (#A67146) + white text
 
 ---
 
@@ -2134,6 +2138,125 @@ The log directory is protected with `.htaccess` (Deny from all) and `index.php`.
 
 ---
 
+## WooCommerce Shipping Zones (v1.9.0)
+
+Configure flat-rate shipping zones for WooCommerce directly via the REST API. Supports bulk creation of zones with per-country flat-rate pricing, country restriction on checkout, and custom no-shipping messages.
+
+### Overview
+
+The shipping zone system provides:
+1. **Bulk zone creation** -- Delete all existing zones and re-create from a JSON configuration file
+2. **Flat-rate pricing** -- Each zone gets a flat-rate shipping method with a specified cost
+3. **Country restriction** -- Checkout dropdown shows only countries with configured shipping
+4. **Custom no-shipping message** -- Countries without zones see a contact message with email/social links
+5. **Checkout UX fixes** -- Billing section rename, dropdown hover styling
+
+### API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/shipping-zones` | POST | Delete all existing zones and create new ones from JSON |
+| `/shipping-zones` | GET | List all zones with methods, costs, and country assignments |
+
+### Shipping Zones JSON Format
+
+```json
+{
+    "zones": [
+        {
+            "zone_name": "Vietnam",
+            "countries": ["VN"],
+            "cost": 5
+        },
+        {
+            "zone_name": "Southeast & East Asia",
+            "countries": ["TW", "TH", "JP", "SG", "MY"],
+            "cost": 8
+        }
+    ]
+}
+```
+
+### sync.ps1 Commands
+
+```powershell
+# Push shipping zones (deletes existing, creates new)
+.\sync.ps1 -Site "<project>" -Action shipping-zones -TemplateFile ".\shipping-zones.json"
+
+# Or via direct API call:
+$body = Get-Content "shipping-zones.json" -Raw -Encoding UTF8
+Invoke-RestMethod -Uri "https://site.com/wp-json/ai-elementor/v1/shipping-zones" -Method Post -Headers $headers -Body ([System.Text.Encoding]::UTF8.GetBytes($body))
+
+# List all zones with costs
+Invoke-RestMethod -Uri "https://site.com/wp-json/ai-elementor/v1/shipping-zones" -Method Get -Headers $headers
+```
+
+### Shipping Rate Calculation Approach
+
+When converting from supplier rates (e.g., RMB/kg):
+1. Get per-kg rate in source currency for each country
+2. Convert to USD: `rate_usd = rate_rmb / exchange_rate`
+3. Round up: `ceil(rate_usd)`
+4. Add markup: `+ $1`
+5. Group countries with same final price into one zone
+6. Use clean round numbers for customer-facing prices
+
+### Plugin Implementation Details
+
+- **Zone creation**: Uses `WC_Shipping_Zone` API -- `set_zone_name()`, `add_location()`, `add_shipping_method('flat_rate')`
+- **Cost saving**: Writes directly to `woocommerce_flat_rate_{instance_id}_settings` option with `update_option()` (NOT `WC_Shipping_Flat_Rate::update_option()` which doesn't persist correctly)
+- **Cache clearing**: Flushes `WC_Cache_Helper` transient version, `wc_shipping_method_count` transient, and `wp_cache_flush()`
+- **Zone locations MUST be saved**: Call `$zone->save()` AFTER `add_location()` -- without this, country-to-zone matching fails silently
+
+### Known Shipping Zone Bugs & Fixes
+
+| Bug | Cause | Fix |
+|-----|-------|-----|
+| All zones show $0 cost | `WC_Shipping_Flat_Rate::update_option()` doesn't persist | Use `update_option('woocommerce_flat_rate_{id}_settings', $settings)` directly |
+| Wrong country matched to zone | Missing `$zone->save()` after `add_location()` | Always call `$zone->save()` after adding all locations |
+| Shipping price doesn't update on country change | WooCommerce shipping cache | Flush transients + `wp_cache_flush()` after zone creation |
+
+---
+
+## WooCommerce Shop Filters & Checkout Customization (v1.9.0)
+
+The `shop-filters.php` module provides shortcodes for product filtering and checkout UX improvements.
+
+### Shop Filter Shortcodes
+
+| Shortcode | Description |
+|-----------|-------------|
+| `[siconart_price_filter]` | Min/Max price inputs (vertical sidebar layout) |
+| `[siconart_category_filter]` | Category list with links (hides Uncategorized) |
+| `[siconart_category_filter_dropdown]` | Category dropdown (for top bar) |
+
+### Checkout Customizations
+
+| Feature | Implementation |
+|---------|----------------|
+| **Buy Now button** | `woocommerce_product_add_to_cart_text` filter returns 'Buy Now' instead of 'Add to Cart' / 'Read More' |
+| **Country restriction** | `woocommerce_countries_allowed_countries` filter limits dropdown to countries with shipping zones |
+| **Billing section title** | `gettext` filter changes 'Billing details' to 'Billing and Shipping Details' (WooCommerce domain) |
+| **Dropdown hover fix** | `wp_head` action injects CSS for Select2 dropdown: gold bg (#A67146) + white text on hover |
+| **No-shipping message** | `woocommerce_no_shipping_available_html` filter shows contact info (email + social links) for unsupported countries |
+
+### WooCommerce Product Management via API
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/wc-products` | GET | List all products with SEO status |
+| `/wc-products` | POST | Create a new product (title, description, price, images, categories) |
+| `/wc-products/{id}` | PUT | Update product fields (description, price, SEO meta, `total_sales`, etc.) |
+| `/wc-products/{id}/gallery` | POST | Add gallery images to a product |
+| `/wc-categories` | GET | List all product categories |
+| `/wc-categories` | POST | Create a new product category |
+| `/wc-categories/{id}` | PUT | Update category description + SEO meta |
+| `/wc-categories/{id}` | DELETE | Delete a product category |
+| `/media/sideload` | POST | Sideload an image from URL to WP media library |
+| `/media/upload` | POST | Upload base64-encoded image, auto-set as featured |
+
+---
+
 ## Changelog
 
 > This section tracks when CLAUDE.md itself was updated with new knowledge.
@@ -2173,6 +2296,8 @@ The log directory is protected with `.htaccess` (Deny from all) and `index.php`.
 | 2026-03-01 | **Holistic SEO Knowledge Base v2.0 (major upgrade)** | Upgraded `docs/holistic-seo-knowledge-base.md` from 618 lines (35KB) to 1224 lines (68KB). Integrated 16+ methodology gaps from Koray agent-training reference: Section 0 Warnings (anti-footprint, primary vs secondary sources, AI content risks), Query/Document/Intent Templates, Core vs Outer topical map design with JSON schemas, SCN Publishing Order, Macro vs Micro Context rules, Early Answer Zone, Lexical Semantics & Vocabulary Control, Content Configuration Loop, AA Lint Rules (JSON), Statistics/Data Authority Pages, Internal Link Patterns (hub propagation, problem-solution, comparison network), Faceted Navigation & Duplication risks, Quality/Relevance Thresholds (replacing keyword difficulty), Entity Graph JSON schemas, Monitoring & Iteration metrics, Niche Site Implementation, Multi-language Strategy, Agent Prompt Templates, and Curated Reference Library with primary + secondary sources. |
 | 2026-03-03 | **Product Review & Social Proof Workflow (v1.8.0)** | Added comprehensive "Product Review & Social Proof Workflow" section to CLAUDE.md covering: WC review management via REST API, JetReview dual-write bridge (auto-detect table, 0-100 rating scale, author ID linking), reviewer identity system (WP subscriber accounts + DiceBear avatar sideloading), sold count management (`total_sales` via PUT endpoint), complete step-by-step setup process, JetReview sync/backfill endpoint, fix-authors endpoint with avatar download, Sinhala Unicode support, debugging guide for common issues (Guest names, missing avatars, missing JetReview rows). Plugin v1.8.0 with schema-engine.php JetReview bridge (6 new methods), `sideload_avatar()` fix for query-string URLs, `get_avatar_url` filter. Based on watercolor.lk: 64 reviews across 14 products, 17 reviewer personas, 11 DiceBear avatars. |
 | 2026-03-18 | **Single Post Template guide** | Added "Single Post Template (Theme Builder)" section to CLAUDE.md. Documents the 2-section layout pattern (Hero with dynamic post title + Content area with featured image, white content card, post navigation). Includes exact `__dynamic__` tag bindings for `theme-post-title`, `theme-post-featured-image`, `theme-post-content`, and `post-navigation` widgets. Key learnings: featured image goes outside the hero in the content area (not as hero background), `__dynamic__` URL-encoded tag strings must be copied exactly, display condition is `include/singular/post` for blog posts only. Based on DiGiSavi.lk single post template (ID 123). |
+| 2026-03-23 | **WooCommerce Shipping Zones (v1.9.0)** | Added full "WooCommerce Shipping Zones" section to CLAUDE.md. Plugin endpoints: POST/GET `/shipping-zones` for bulk zone creation and listing. Flat-rate pricing per country via `woocommerce_flat_rate_{id}_settings` option storage. Key bugs fixed: (1) `WC_Shipping_Flat_Rate::update_option()` doesn't persist costs -- must use `update_option()` directly, (2) missing `$zone->save()` after `add_location()` causes silent zone-country matching failure. Also added Shop Filters section documenting: Buy Now button filter, checkout country restriction, billing section rename, dropdown hover CSS fix, no-shipping contact message, price/category filter shortcodes. Based on SiconArt.com: 19 shipping zones for 39 countries, rates converted from RMB/kg to USD. |
+| 2026-03-23 | **WooCommerce Product API endpoints documented** | Added comprehensive API endpoint table for product/category CRUD: POST/GET/PUT/DELETE for products, categories, gallery images, media sideload/upload. Based on SiconArt.com: 21 brush products created via API with image sideloading. |
 
 ---
 
