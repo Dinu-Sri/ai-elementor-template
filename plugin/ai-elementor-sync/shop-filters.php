@@ -94,7 +94,7 @@ class AI_Sync_Shop_Filters {
      * Fix checkout dropdown hover: white text on blue background.
      */
     public function checkout_dropdown_css() {
-        if (!is_checkout()) return;
+        if (!function_exists('is_checkout') || !is_checkout()) return;
         echo '<style>
             .select2-results__option--highlighted[aria-selected],
             .select2-results__option--highlighted {

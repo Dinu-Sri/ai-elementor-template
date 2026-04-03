@@ -22,8 +22,8 @@ require_once __DIR__ . '/iconify-support.php';
 require_once __DIR__ . '/iconify-elementor-widget.php';
 // Schema Engine — comprehensive JSON-LD structured data
 require_once __DIR__ . '/schema-engine.php';
-// Shop Filters — price/category filter shortcodes for product archives
-if (file_exists(__DIR__ . '/shop-filters.php')) {
+// Shop Filters — price/category filter shortcodes for product archives (requires WooCommerce)
+if (file_exists(__DIR__ . '/shop-filters.php') && class_exists('WooCommerce')) {
     require_once __DIR__ . '/shop-filters.php';
     AI_Sync_Shop_Filters::init();
 }
