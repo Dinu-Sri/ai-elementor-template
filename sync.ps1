@@ -15,7 +15,7 @@ param(
     [string]$Site,
 
     [Parameter(Mandatory = $true)]
-    [ValidateSet("status", "create", "update", "get", "list", "delete", "create-template", "list-templates", "bulk", "site-info", "diagnostics", "logs", "clear-logs", "test", "list-wc-categories", "update-wc-category", "update-wc-product", "list-wc-products", "list-posts", "create-post", "update-post", "get-post", "delete-post", "list-blog-categories", "create-blog-category", "sideload-media", "schema-config", "schema-update", "schema-test", "schema-validate", "schema-debug", "schema-audit", "schema-set-faq", "schema-debug-mode", "add-review", "list-reviews", "delete-review", "jetreview-status", "jetreview-sync", "jetreview-fix-authors", "jetreview-rows")]
+    [ValidateSet("status", "create", "update", "get", "list", "delete", "create-template", "list-templates", "bulk", "site-info", "diagnostics", "logs", "clear-logs", "test", "list-wc-categories", "update-wc-category", "update-wc-product", "list-wc-products", "list-posts", "create-post", "update-post", "get-post", "delete-post", "list-blog-categories", "create-blog-category", "sideload-media", "schema-config", "schema-update", "schema-test", "schema-validate", "schema-debug", "schema-audit", "schema-set-faq", "schema-debug-mode", "add-review", "list-reviews", "delete-review", "jetreview-status", "jetreview-sync", "jetreview-fix-authors", "jetreview-rows", "seo-list", "seo-get", "seo-update", "seo-bulk")]
     [string]$Action,
 
     [string]$TemplateFile,
@@ -804,6 +804,130 @@ switch ($Action) {
             Write-Host "SUCCESS: Media uploaded!" -ForegroundColor Green
             Write-Host "  Attachment ID: $($result.attachment_id)" -ForegroundColor Cyan
             Write-Host "  URL:           $($result.url)" -ForegroundColor Cyan
+        }
+    }
+
+    # ---------------------------------------------------------------
+    # RankMath SEO Endpoints (v1.9.0)
+    # ---------------------------------------------------------------
+
+    "seo-list" {
+        # Usage: .\sync.ps1 -Site sms-cleaning -Action seo-list
+        # Optional: -Status page (or post)
+        $postType = if ($Status -and $Status -ne "draft") { $Status } else { "page" }
+        Write-Host "Listing pages with RankMath SEO status on $Site ($postType)..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "seo/pages?post_type=$postType&include_posts=1" -Method GET
+
+        if ($result.success) {
+            Write-Host ""
+            Write-Host "=== RankMath SEO Status ($($result.total) pages) ===" -ForegroundColor Cyan
+            Write-Host "  Complete: $($result.summary.complete) | Partial: $($result.summary.partial) | Missing: $($result.summary.missing)" -ForegroundColor White
+            Write-Host ""
+            foreach ($p in $result.pages) {
+                $statusColor = switch ($p.status) {
+                    "complete" { "Green" }
+                    "partial"  { "Yellow" }
+                    default    { "Red" }
+                }
+                Write-Host "  [$($p.id)] $($p.title)" -ForegroundColor White
+                Write-Host "    Status: " -NoNewline -ForegroundColor Gray
+                Write-Host $p.status.ToUpper() -ForegroundColor $statusColor
+                if ($p.seo_title) { Write-Host "    SEO Title ($($p.title_length) chars): $($p.seo_title)" -ForegroundColor $(if ($p.title_length -ge 50 -and $p.title_length -le 60) { "Green" } else { "Yellow" }) }
+                else { Write-Host "    SEO Title: MISSING" -ForegroundColor Red }
+                if ($p.seo_description) { Write-Host "    Meta Desc  ($($p.desc_length) chars): $($p.seo_description.Substring(0, [Math]::Min(80, $p.seo_description.Length)))..." -ForegroundColor $(if ($p.desc_length -ge 120 -and $p.desc_length -le 160) { "Green" } else { "Yellow" }) }
+                else { Write-Host "    Meta Desc: MISSING" -ForegroundColor Red }
+                if ($p.focus_keyword) { Write-Host "    Focus KW: $($p.focus_keyword)" -ForegroundColor Cyan }
+                Write-Host ""
+            }
+        } else {
+            Write-Host "FAILED: $($result | ConvertTo-Json)" -ForegroundColor Red
+        }
+    }
+
+    "seo-get" {
+        # Usage: .\sync.ps1 -Site sms-cleaning -Action seo-get -PageId 72
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId is required for seo-get" -ForegroundColor Red
+            exit 1
+        }
+        Write-Host "Getting RankMath SEO meta for page $PageId on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "seo/meta/$PageId" -Method GET
+
+        if ($result.success) {
+            Write-Host ""
+            Write-Host "=== SEO Meta: $($result.title) (ID: $($result.id)) ===" -ForegroundColor Cyan
+            Write-Host "  URL:             $($result.url)" -ForegroundColor Gray
+            Write-Host "  SEO Title:       $($result.seo_title)" -ForegroundColor $(if ($result.seo_title) { "Green" } else { "Red" })
+            Write-Host "  Meta Desc:       $($result.seo_description)" -ForegroundColor $(if ($result.seo_description) { "Green" } else { "Red" })
+            Write-Host "  Focus Keyword:   $($result.focus_keyword)" -ForegroundColor $(if ($result.focus_keyword) { "Cyan" } else { "Yellow" })
+            Write-Host "  Title Length:    $($result.title_length) chars $(if ($result.title_length -ge 50 -and $result.title_length -le 60) { '(GOOD)' } elseif ($result.title_length -gt 0) { '(CHECK)' } else { '(EMPTY)' })" -ForegroundColor Gray
+            Write-Host "  Desc Length:     $($result.desc_length) chars $(if ($result.desc_length -ge 120 -and $result.desc_length -le 160) { '(GOOD)' } elseif ($result.desc_length -gt 0) { '(CHECK)' } else { '(EMPTY)' })" -ForegroundColor Gray
+            if ($result.og_title) { Write-Host "  OG Title:        $($result.og_title)" -ForegroundColor Gray }
+            if ($result.og_description) { Write-Host "  OG Desc:         $($result.og_description)" -ForegroundColor Gray }
+            if ($result.canonical_url) { Write-Host "  Canonical:       $($result.canonical_url)" -ForegroundColor Gray }
+        } else {
+            Write-Host "FAILED: $($result | ConvertTo-Json)" -ForegroundColor Red
+        }
+    }
+
+    "seo-update" {
+        # Usage: .\sync.ps1 -Site sms-cleaning -Action seo-update -PageId 72 -TemplateFile seo-data.json
+        # JSON: { "seo_title": "...", "seo_description": "...", "focus_keyword": "..." }
+        if (-not $PageId) {
+            Write-Host "ERROR: -PageId is required for seo-update" -ForegroundColor Red
+            exit 1
+        }
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: -TemplateFile is required for seo-update (JSON with seo_title, seo_description, focus_keyword)" -ForegroundColor Red
+            exit 1
+        }
+        if (-not (Test-Path $TemplateFile)) {
+            Write-Host "ERROR: File not found: $TemplateFile" -ForegroundColor Red
+            exit 1
+        }
+
+        $jsonContent = Get-Content $TemplateFile -Raw -Encoding UTF8
+        Write-Host "Updating RankMath SEO meta for page $PageId on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "seo/meta/$PageId" -Method PUT -Body $jsonContent
+
+        if ($result.success) {
+            Write-Host "SUCCESS: SEO meta updated for '$($result.title)'" -ForegroundColor Green
+            $result.updated.PSObject.Properties | ForEach-Object {
+                Write-Host "  $($_.Name): $($_.Value)" -ForegroundColor Gray
+            }
+        } else {
+            Write-Host "FAILED: $($result | ConvertTo-Json)" -ForegroundColor Red
+        }
+    }
+
+    "seo-bulk" {
+        # Usage: .\sync.ps1 -Site sms-cleaning -Action seo-bulk -TemplateFile seo-bulk-data.json
+        # JSON: { "items": [ { "id": 72, "seo_title": "...", "seo_description": "...", "focus_keyword": "..." }, ... ] }
+        if (-not $TemplateFile) {
+            Write-Host "ERROR: -TemplateFile is required for seo-bulk" -ForegroundColor Red
+            exit 1
+        }
+        if (-not (Test-Path $TemplateFile)) {
+            Write-Host "ERROR: File not found: $TemplateFile" -ForegroundColor Red
+            exit 1
+        }
+
+        $jsonContent = Get-Content $TemplateFile -Raw -Encoding UTF8
+        $data = $jsonContent | ConvertFrom-Json
+        $count = if ($data.items) { $data.items.Count } else { 0 }
+
+        Write-Host "Bulk updating RankMath SEO meta for $count page(s) on $Site..." -ForegroundColor Yellow
+        $result = Invoke-SyncApi -Endpoint "seo/bulk" -Method PUT -Body $jsonContent
+
+        if ($result.success) {
+            Write-Host "SUCCESS: $($result.message)" -ForegroundColor Green
+            foreach ($r in $result.results) {
+                $col = if ($r.success) { "Green" } else { "Red" }
+                $fields = if ($r.updated) { " [" + ($r.updated -join ", ") + "]" } else { "" }
+                Write-Host "  ID $($r.id): $(if ($r.success) { 'OK' } else { 'FAILED - ' + $r.error })$fields" -ForegroundColor $col
+            }
+        } else {
+            Write-Host "FAILED: $($result | ConvertTo-Json)" -ForegroundColor Red
         }
     }
 

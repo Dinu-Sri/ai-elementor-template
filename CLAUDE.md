@@ -521,6 +521,59 @@ Every blog post JSON file is kept locally in `blog/articles/` because:
 - **New projects**: Past articles serve as writing style references for future projects
 - **No re-fetching**: Avoids repeated `get-post` API calls to read existing content
 
+### Blog Post Content Format — Critical Rules
+
+**ARCHITECTURE (NEVER confuse these two):**
+| Layer | What it is | How to edit |
+|-------|-----------|-------------|
+| **Single Post Template** (elementor_library, ID like 754) | Page LAYOUT — hero, featured image, content area, related posts, CTA | Edit in Elementor Template Editor or push via API script |
+| **Post Body Content** (post_content in DB) | The actual article TEXT — headings, paragraphs, lists | Edit in **WordPress Gutenberg editor** (Posts → Edit) or push via API |
+
+**You CANNOT edit blog post body content via Elementor.** The `theme-post-content` dynamic widget in the template simply RENDERS whatever is in `post_content`. It's not editable from the template builder.
+
+**Content format rules for Gutenberg compatibility:**
+
+1. **NEVER wrap entire post content in a single `<!-- wp:html -->` block** — this makes the whole post one uneditable code block in Gutenberg
+2. Each section should be its own Gutenberg block:
+   - `<p>` → `<!-- wp:paragraph --><p>...</p><!-- /wp:paragraph -->`
+   - `<h2>` → `<!-- wp:heading --><h2 class="wp-block-heading">...</h2><!-- /wp:heading -->`
+   - `<h3>` → `<!-- wp:heading {"level":3} --><h3 class="wp-block-heading">...</h3><!-- /wp:heading -->`
+   - `<ul>` → `<!-- wp:list --><ul class="wp-block-list"><!-- wp:list-item --><li>...</li><!-- /wp:list-item --></ul><!-- /wp:list -->`
+   - `<ol>` → `<!-- wp:list {"ordered":true} --><ol class="wp-block-list"><!-- wp:list-item --><li>...</li><!-- /wp:list-item --></ol><!-- /wp:list -->`
+   - Styled `<div>` boxes (custom styled sections) → keep as individual `<!-- wp:html --><div style="...">...</div><!-- /wp:html -->`
+3. **No inline styles on text elements** (p, h2, h3, li) — template CSS handles typography
+4. **Preserve inline styles inside `<!-- wp:html -->` div blocks** — those are custom-designed components
+5. **No `<article>` wrapper** around the entire post body
+
+**When writing new articles, use this structure in the JSON `content` field:**
+```html
+<!-- wp:paragraph -->
+<p>Your paragraph text here with <a href="/related-post/">contextual links</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading">Section Heading</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list">
+<!-- wp:list-item -->
+<li>List item one with <strong>emphasis</strong></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>List item two</li>
+<!-- /wp:list-item -->
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:html -->
+<div style="background:#FFF9F0;border-left:4px solid #F7941D;border-radius:8px;padding:24px 28px;margin:32px 0">
+  <p style="font-family:DM Sans,sans-serif;font-size:13px;font-weight:700;color:#F7941D;letter-spacing:2px;text-transform:uppercase;margin:0 0 8px">Quick Answer</p>
+  <p style="font-family:DM Sans,sans-serif;font-size:16px;color:#1A1F36;line-height:1.75;font-style:italic;margin:0">Answer text here.</p>
+</div>
+<!-- /wp:html -->
+```
+
 ### Interlink Strategy (Koray Method)
 
 From the SEO knowledge base, the ideal interlinking approach is:
@@ -2018,6 +2071,9 @@ The `/media/upload` endpoint accepts:
 - `[2026-02-15]` Footer template caused "critical error on this website" after creation via API → **Root Cause:** `_elementor_data` was stored as a JSON object `{"0":{...}}` instead of a JSON array `[{...}]`. This happens when PHP's `wp_json_encode()` receives an associative array (keys "0", "1", etc. as strings from REST API deserialization) and encodes it as an object. Elementor's `create_element_instance()` expects array elements, not object properties. → **Fix:** Always call `array_values()` on `$elementor_data` before `wp_json_encode()` in `create_page()`, `update_page()`, and `import_template()`. Also detect unwrapped single elements: `if (!isset($elementor_data[0]) && !empty($elementor_data)) { $elementor_data = [$elementor_data]; }`.
 - `[2026-02-15]` `assign_element_ids()` crashed with `Cannot access offset of type string on string` on PHP 8.1 → **Fix:** Added `if (!is_array($element)) continue;` guard before accessing element properties.
 - `[2026-02-15]` Deleted Elementor templates caused crashes due to stale conditions cache → **Fix:** Remove `_elementor_conditions` meta before deletion, regenerate Elementor conditions cache after deletion via `\ElementorPro\Modules\ThemeBuilder\Module::instance()->get_conditions_manager()->get_cache()->regenerate()`.
+- `[2026-04-06]` CSS Classes field not applied — used `css_classes` instead of `_css_classes` → **Fix:** The correct Elementor JSON property for the Advanced > CSS Classes field is `_css_classes` (with underscore prefix). Without the underscore, the class is silently ignored.
+- `[2026-04-06]` `custom_css` in `page_settings` unreliable for injecting page-level CSS → **Fix:** Use an HTML widget (`widgetType: "html"`) with a `<style>` block instead. Place it inside the section that needs the styles. This is the most reliable way to inject custom CSS into an Elementor page via JSON.
+- `[2026-04-06]` Marquee/auto-scroll slider pattern: Use an outer container with `_css_classes: "track-class"` and `overflow: hidden`, an inner container with `_css_classes: "scroll-class"`, `flex_direction: row`, `flex_wrap: nowrap`, and duplicate all items for seamless infinite loop. Inject CSS via HTML widget: `display:flex; flex-wrap:nowrap; width:max-content; animation: marquee Xs linear infinite; @keyframes marquee { 0%{translateX(0)} 100%{translateX(-50%)} }`.
 - `[2026-02-16]` Widgets with `_animation: "fadeInUp"` (or any entrance animation) rendered permanently invisible on frontend → **Root Cause:** Elementor adds `class="elementor-invisible"` (which sets `opacity: 0`) to animated elements on page load. The animation JS (waypoints library) is supposed to remove this class and trigger the animation when the element scrolls into view. When the waypoints JS fails to fire (e.g., due to page structure, lazy loading, or Element Cache conflicts), elements stay invisible permanently. Content appears correctly in the Elementor editor but is hidden on the live frontend. → **Fix:** Use animations selectively — only on above-the-fold hero content, section title groups, and CTA sections. NEVER animate form widgets, icon-list widgets, contact info content, or card interiors. If a page has invisible elements, strip all `_animation` and `_animation_delay` settings first, confirm rendering, then re-add selectively.
 - `[2026-02-16]` Elementor "Element Cache" setting (1 Day) can cause API-pushed page updates to not reflect on frontend → **Fix:** Disable Element Cache during development/debugging. The setting is in Elementor > Settings > Performance > Element Cache. Set to "Disable" while iterating, re-enable when stable.
 - `[2026-03-03]` `sideload_avatar()` crashes for query-string avatar URLs (DiceBear, ui-avatars) — `basename()` can't extract a filename with valid extension from URLs like `https://api.dicebear.com/.../png?seed=X` → **Fix:** Parse `URL_PATH` for extension, default to `.png`, create deterministic filename `avatar-{user_id}.png`
@@ -2298,6 +2354,7 @@ The `shop-filters.php` module provides shortcodes for product filtering and chec
 | 2026-03-18 | **Single Post Template guide** | Added "Single Post Template (Theme Builder)" section to CLAUDE.md. Documents the 2-section layout pattern (Hero with dynamic post title + Content area with featured image, white content card, post navigation). Includes exact `__dynamic__` tag bindings for `theme-post-title`, `theme-post-featured-image`, `theme-post-content`, and `post-navigation` widgets. Key learnings: featured image goes outside the hero in the content area (not as hero background), `__dynamic__` URL-encoded tag strings must be copied exactly, display condition is `include/singular/post` for blog posts only. Based on DiGiSavi.lk single post template (ID 123). |
 | 2026-03-23 | **WooCommerce Shipping Zones (v1.9.0)** | Added full "WooCommerce Shipping Zones" section to CLAUDE.md. Plugin endpoints: POST/GET `/shipping-zones` for bulk zone creation and listing. Flat-rate pricing per country via `woocommerce_flat_rate_{id}_settings` option storage. Key bugs fixed: (1) `WC_Shipping_Flat_Rate::update_option()` doesn't persist costs -- must use `update_option()` directly, (2) missing `$zone->save()` after `add_location()` causes silent zone-country matching failure. Also added Shop Filters section documenting: Buy Now button filter, checkout country restriction, billing section rename, dropdown hover CSS fix, no-shipping contact message, price/category filter shortcodes. Based on SiconArt.com: 19 shipping zones for 39 countries, rates converted from RMB/kg to USD. |
 | 2026-03-23 | **WooCommerce Product API endpoints documented** | Added comprehensive API endpoint table for product/category CRUD: POST/GET/PUT/DELETE for products, categories, gallery images, media sideload/upload. Based on SiconArt.com: 21 brush products created via API with image sideloading. |
+| 2026-04-27 | **Blog post Gutenberg format + URL structure** | Added "Blog Post Content Format — Critical Rules" section clarifying the two-layer architecture: Elementor template (layout) vs post body content (Gutenberg). Key rules: NEVER wrap post body in a single `<!-- wp:html -->` block — converts to individual wp:paragraph/heading/list/html blocks. Styled div boxes keep inline styles inside their own `<!-- wp:html -->`. Template `theme-post-content` widget is read-only render — post body is edited in Gutenberg (Posts > Edit). Also documented: WordPress flat permalink structure (`/%postname%/`) — all blog slugs must NOT use `/blog/` prefix. `/blog/slug/` redirects to `/slug/` (Rank Math canonical confirms). Always verify canonical before writing internal links. |
 
 ---
 

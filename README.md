@@ -443,6 +443,16 @@ See the "Self-Improvement Rule" section in `CLAUDE.md` for details.
 
 ## Changelog
 
+### v2.2.0 (2026-04-27)
+- **RankMath SEO endpoints** -- `GET /seo/pages`, `GET /seo/meta/{id}`, `PUT /seo/meta/{id}`, `POST /seo/bulk` for reading and writing Rank Math focus keyword, title, description, robots, OG meta
+- **Blog posts endpoints** -- `GET/POST /blog-posts`, `GET/PUT/DELETE /blog-posts/{id}` for full post management including content, excerpt, categories, and SEO meta
+- **Template update endpoint** -- `PUT /templates/{id}` to update Theme Builder templates (single post, archive, etc.) by ID without delete/recreate
+- **Media upload endpoint** -- `POST /media/upload` base64 image upload with auto-set featured image
+- **Featured image generation** -- AI image generation via Fireworks FLUX.1 FP8, saved as WebP 1200x628, uploaded via plugin
+- **Blog archive + single post templates** -- Cards skin posts widget (`_skin: "cards"`) for archive (ID 753) and single post layout with 6 sections (ID 754)
+- **sync.ps1** -- Added `seo-list`, `seo-get`, `seo-update`, `seo-bulk` actions for RankMath SEO management
+- **CLAUDE.md** -- Added "Blog Post Content Format" rules: Gutenberg block structure, never wrap post body in single wp:html, URL structure (flat `/%postname%/` — no `/blog/` prefix), and two-layer architecture (Elementor template = layout, Gutenberg = content)
+
 ### v1.9.0 (2026-03-23)
 - **WooCommerce shipping zones** -- Bulk create/delete flat-rate shipping zones via REST API (`POST/GET /shipping-zones`)
 - **Per-country flat-rate pricing** -- JSON-based zone configuration with automatic method instance creation

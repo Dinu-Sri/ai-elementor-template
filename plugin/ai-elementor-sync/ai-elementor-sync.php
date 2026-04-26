@@ -1,9 +1,9 @@
-<?php
+﻿<?php
 /**
  * Plugin Name: AI Elementor Sync
  * Plugin URI: https://github.com/ai-elementor-sync
  * Description: REST API bridge for AI-powered Elementor template management. Includes Schema Engine for comprehensive JSON-LD structured data (Google Knowledge Panel, Rich Results, AI engines). Supports Iconify icons in Elementor via custom widget. Developed for Deshtech Global Pvt Ltd.
- * Version: 1.8.0
+ * Version: 2.2.0
  * Author: Dr. Dinu Sri Madusanka
  * Author URI: https://deshtech.co
  * License: GPL v2 or later
@@ -28,7 +28,7 @@ if (file_exists(__DIR__ . '/shop-filters.php') && class_exists('WooCommerce')) {
     AI_Sync_Shop_Filters::init();
 }
 
-define('AI_ELEMENTOR_SYNC_VERSION', '1.8.0');
+define('AI_ELEMENTOR_SYNC_VERSION', '2.2.0');
 define('AI_ELEMENTOR_SYNC_LOG_DIR', WP_CONTENT_DIR . '/ai-sync-logs');
 
 class AI_Elementor_Sync {
@@ -272,6 +272,13 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             'permission_callback' => [$this, 'permission_check'],
         ]);
 
+        // Update template by ID
+        register_rest_route($namespace, '/templates/(?P<id>\d+)', [
+            'methods'  => 'PUT',
+            'callback' => [$this, 'update_template'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
         // Get site info (theme, active plugins, etc.)
         register_rest_route($namespace, '/site-info', [
             'methods'  => 'GET',
@@ -463,6 +470,59 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
         register_rest_route($namespace, '/shipping-zones', [
             'methods'  => 'GET',
             'callback' => [$this, 'list_shipping_zones'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // ---------------------------------------------------------------
+        // RankMath SEO Endpoints (v1.9.0)
+        // ---------------------------------------------------------------
+
+        // List all pages/posts with their RankMath SEO status
+        register_rest_route($namespace, '/seo/pages', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'list_seo_pages'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Get RankMath SEO meta for a single post/page
+        register_rest_route($namespace, '/seo/meta/(?P<id>\d+)', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'get_seo_meta'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Update RankMath SEO meta for a single post/page
+        register_rest_route($namespace, '/seo/meta/(?P<id>\d+)', [
+            'methods'             => 'PUT',
+            'callback'            => [$this, 'update_seo_meta'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Bulk update RankMath SEO meta for multiple posts
+        register_rest_route($namespace, '/seo/bulk', [
+            'methods'             => 'PUT',
+            'callback'            => [$this, 'bulk_update_seo'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // List all media attachments with their current ALT text
+        register_rest_route($namespace, '/media/list', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'list_media_alts'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Bulk update ALT text for media attachments
+        register_rest_route($namespace, '/media/bulk-alt', [
+            'methods'             => 'PUT',
+            'callback'            => [$this, 'bulk_update_media_alt'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        // Self-update: replace this plugin file with a new version (base64-encoded)
+        register_rest_route($namespace, '/plugin/self-update', [
+            'methods'             => 'POST',
+            'callback'            => [$this, 'self_update_plugin'],
             'permission_callback' => [$this, 'permission_check'],
         ]);
     }
@@ -1045,6 +1105,69 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
     }
 
     /**
+     * PUT /templates/{id} — Update an existing Elementor library template in place.
+     * Body: { elementor_data, type, title, conditions }
+     */
+    public function update_template($request) {
+        $post_id = (int) $request['id'];
+        $data    = $request->get_json_params();
+
+        $post = get_post($post_id);
+        if (!$post || $post->post_type !== 'elementor_library') {
+            return new WP_Error('not_found', 'Template not found', ['status' => 404]);
+        }
+
+        if (!empty($data['title'])) {
+            wp_update_post(['ID' => $post_id, 'post_title' => sanitize_text_field($data['title'])]);
+        }
+
+        if (!empty($data['elementor_data'])) {
+            $elementor_data = $data['elementor_data'];
+            if (is_string($elementor_data)) {
+                $elementor_data = json_decode($elementor_data, true);
+            }
+            if (is_array($elementor_data)) {
+                $elementor_data = array_values($elementor_data);
+            }
+            $elementor_data = $this->assign_element_ids($elementor_data);
+            $json_data = wp_json_encode(array_values($elementor_data));
+            update_post_meta($post_id, '_elementor_data', wp_slash($json_data));
+        }
+
+        if (!empty($data['type'])) {
+            $type = sanitize_text_field($data['type']);
+            update_post_meta($post_id, '_elementor_template_type', $type);
+            wp_set_object_terms($post_id, $type, 'elementor_library_type');
+        }
+
+        if (!empty($data['conditions'])) {
+            update_post_meta($post_id, '_elementor_conditions', $data['conditions']);
+        }
+
+        // Regenerate conditions cache
+        if (class_exists('\ElementorPro\Modules\ThemeBuilder\Module')) {
+            try {
+                $theme_builder = \ElementorPro\Modules\ThemeBuilder\Module::instance();
+                if (method_exists($theme_builder, 'get_conditions_manager')) {
+                    $theme_builder->get_conditions_manager()->get_cache()->regenerate();
+                }
+            } catch (\Exception $e) {}
+        }
+
+        // Clear Elementor CSS + file cache
+        if (class_exists('\Elementor\Plugin')) {
+            \Elementor\Plugin::$instance->files_manager->clear_cache();
+        }
+
+        return [
+            'success'     => true,
+            'template_id' => $post_id,
+            'edit_url'    => admin_url("post.php?post={$post_id}&action=elementor"),
+            'timestamp'   => current_time('mysql'),
+        ];
+    }
+
+    /**
      * GET /templates — List all Elementor library templates
      */
     public function list_templates($request) {
@@ -1464,8 +1587,8 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
 
         $categories = [];
         foreach ($terms as $term) {
-            $seo_title = get_term_meta($term->term_id, '_seopress_titles_title', true);
-            $seo_desc  = get_term_meta($term->term_id, '_seopress_titles_desc', true);
+            $seo_title = get_term_meta($term->term_id, 'rank_math_title', true);
+            $seo_desc  = get_term_meta($term->term_id, 'rank_math_description', true);
 
             $categories[] = [
                 'id'              => $term->term_id,
@@ -1520,13 +1643,13 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
 
         // Update SiteSEO meta title
         if (isset($params['seo_title'])) {
-            update_term_meta($term_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+            update_term_meta($term_id, 'rank_math_title', sanitize_text_field($params['seo_title']));
             $results['seo_title'] = 'updated';
         }
 
         // Update SiteSEO meta description
         if (isset($params['seo_description'])) {
-            update_term_meta($term_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+            update_term_meta($term_id, 'rank_math_description', sanitize_textarea_field($params['seo_description']));
             $results['seo_description'] = 'updated';
         }
 
@@ -1604,13 +1727,13 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
 
         // Update SiteSEO meta title
         if (isset($params['seo_title'])) {
-            update_post_meta($post_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+            update_post_meta($post_id, 'rank_math_title', sanitize_text_field($params['seo_title']));
             $results['seo_title'] = 'updated';
         }
 
         // Update SiteSEO meta description
         if (isset($params['seo_description'])) {
-            update_post_meta($post_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+            update_post_meta($post_id, 'rank_math_description', sanitize_textarea_field($params['seo_description']));
             $results['seo_description'] = 'updated';
         }
 
@@ -1643,8 +1766,8 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
         foreach ($posts as $post) {
             $price      = get_post_meta($post->ID, '_price', true);
             $categories = wp_get_post_terms($post->ID, 'product_cat', ['fields' => 'names']);
-            $seo_title  = get_post_meta($post->ID, '_seopress_titles_title', true);
-            $seo_desc   = get_post_meta($post->ID, '_seopress_titles_desc', true);
+            $seo_title  = get_post_meta($post->ID, 'rank_math_title', true);
+            $seo_desc   = get_post_meta($post->ID, 'rank_math_description', true);
 
             $products[] = [
                 'id'              => $post->ID,
@@ -1707,8 +1830,8 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             }, $cats);
             $thumbnail_id  = get_post_thumbnail_id($post->ID);
             $thumbnail_url = $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : '';
-            $seo_title     = get_post_meta($post->ID, '_seopress_titles_title', true);
-            $seo_desc      = get_post_meta($post->ID, '_seopress_titles_desc', true);
+            $seo_title     = get_post_meta($post->ID, 'rank_math_title', true);
+            $seo_desc      = get_post_meta($post->ID, 'rank_math_description', true);
 
             $result[] = [
                 'id'                => $post->ID,
@@ -1752,6 +1875,10 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             'post_status'  => sanitize_text_field($params['status'] ?? 'draft'),
         ];
 
+        if (isset($params['slug'])) {
+            $post_data['post_name'] = sanitize_title($params['slug']);
+        }
+
         if (isset($params['author'])) {
             $post_data['post_author'] = (int) $params['author'];
         }
@@ -1771,14 +1898,26 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             $results['categories_set'] = $cat_ids;
         }
 
-        // Set SiteSEO meta
-        if (isset($params['seo_title'])) {
-            update_post_meta($post_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
-            $results['seo_title'] = 'set';
-        }
-        if (isset($params['seo_description'])) {
-            update_post_meta($post_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
-            $results['seo_description'] = 'set';
+        // Set Rank Math SEO meta
+        $seo_post_field_map = [
+            'seo_title'       => ['rank_math_title',           'text'],
+            'seo_description' => ['rank_math_description',     'textarea'],
+            'focus_keyword'   => ['rank_math_focus_keyword',   'text'],
+            'robots'          => ['rank_math_robots',          'robots'],
+            'og_title'        => ['rank_math_og_title',        'text'],
+            'og_description'  => ['rank_math_og_description',  'textarea'],
+        ];
+        foreach ($seo_post_field_map as $param_key => [$meta_key, $type]) {
+            if (!isset($params[$param_key])) continue;
+            if ($type === 'robots') {
+                $rv = sanitize_text_field($params[$param_key]);
+                $rv ? update_post_meta($post_id, $meta_key, array_values(array_filter(array_map('trim', explode(',', $rv))))) : delete_post_meta($post_id, $meta_key);
+            } elseif ($type === 'textarea') {
+                update_post_meta($post_id, $meta_key, sanitize_textarea_field($params[$param_key]));
+            } else {
+                update_post_meta($post_id, $meta_key, sanitize_text_field($params[$param_key]));
+            }
+            $results[$param_key] = 'set';
         }
 
         // Sideload featured image from URL
@@ -1838,8 +1977,12 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
                 'categories'      => $cat_list,
                 'featured_image'  => $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : '',
                 'featured_image_id' => (int) $thumbnail_id,
-                'seo_title'       => get_post_meta($post_id, '_seopress_titles_title', true) ?: '',
-                'seo_description' => get_post_meta($post_id, '_seopress_titles_desc', true) ?: '',
+                'seo_title'       => get_post_meta($post_id, 'rank_math_title', true) ?: '',
+                'seo_description' => get_post_meta($post_id, 'rank_math_description', true) ?: '',
+                'focus_keyword'   => get_post_meta($post_id, 'rank_math_focus_keyword', true) ?: '',
+                'og_title'        => get_post_meta($post_id, 'rank_math_og_title', true) ?: '',
+                'og_description'  => get_post_meta($post_id, 'rank_math_og_description', true) ?: '',
+                'robots'          => get_post_meta($post_id, 'rank_math_robots', true) ?: '',
             ],
         ];
     }
@@ -1878,6 +2021,10 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             $update_args['post_status'] = sanitize_text_field($params['status']);
             $results['status'] = 'updated';
         }
+        if (isset($params['slug'])) {
+            $update_args['post_name'] = sanitize_title($params['slug']);
+            $results['slug'] = 'updated';
+        }
 
         if (count($update_args) > 1) {
             $updated = wp_update_post(wp_slash($update_args), true);
@@ -1892,13 +2039,25 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             $results['categories'] = 'updated';
         }
 
-        if (isset($params['seo_title'])) {
-            update_post_meta($post_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
-            $results['seo_title'] = 'updated';
-        }
-        if (isset($params['seo_description'])) {
-            update_post_meta($post_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
-            $results['seo_description'] = 'updated';
+        $seo_upd_field_map = [
+            'seo_title'       => ['rank_math_title',           'text'],
+            'seo_description' => ['rank_math_description',     'textarea'],
+            'focus_keyword'   => ['rank_math_focus_keyword',   'text'],
+            'robots'          => ['rank_math_robots',          'robots'],
+            'og_title'        => ['rank_math_og_title',        'text'],
+            'og_description'  => ['rank_math_og_description',  'textarea'],
+        ];
+        foreach ($seo_upd_field_map as $param_key => [$meta_key, $type]) {
+            if (!isset($params[$param_key])) continue;
+            if ($type === 'robots') {
+                $rv = sanitize_text_field($params[$param_key]);
+                $rv ? update_post_meta($post_id, $meta_key, array_values(array_filter(array_map('trim', explode(',', $rv))))) : delete_post_meta($post_id, $meta_key);
+            } elseif ($type === 'textarea') {
+                update_post_meta($post_id, $meta_key, sanitize_textarea_field($params[$param_key]));
+            } else {
+                update_post_meta($post_id, $meta_key, sanitize_text_field($params[$param_key]));
+            }
+            $results[$param_key] = 'updated';
         }
 
         if (!empty($params['featured_image_url'])) {
@@ -2012,12 +2171,19 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             return new WP_Error('create_failed', $result->get_error_message(), ['status' => 500]);
         }
 
-        // Set SiteSEO meta if provided
-        if (isset($params['seo_title'])) {
-            update_term_meta($result['term_id'], '_seopress_titles_title', sanitize_text_field($params['seo_title']));
-        }
-        if (isset($params['seo_description'])) {
-            update_term_meta($result['term_id'], '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+        // Set Rank Math SEO meta for category
+        $seo_term_field_map = [
+            'seo_title'       => ['rank_math_title',           'text'],
+            'seo_description' => ['rank_math_description',     'textarea'],
+            'focus_keyword'   => ['rank_math_focus_keyword',   'text'],
+            'og_title'        => ['rank_math_og_title',        'text'],
+            'og_description'  => ['rank_math_og_description',  'textarea'],
+        ];
+        foreach ($seo_term_field_map as $param_key => [$meta_key, $type]) {
+            if (!isset($params[$param_key])) continue;
+            $type === 'textarea'
+                ? update_term_meta($result['term_id'], $meta_key, sanitize_textarea_field($params[$param_key]))
+                : update_term_meta($result['term_id'], $meta_key, sanitize_text_field($params[$param_key]));
         }
 
         return [
@@ -2362,11 +2528,11 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
 
         // SiteSEO meta
         if (!empty($params['seo_title'])) {
-            update_post_meta($post_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+            update_post_meta($post_id, 'rank_math_title', sanitize_text_field($params['seo_title']));
             $results['seo_title'] = 'set';
         }
         if (!empty($params['seo_description'])) {
-            update_post_meta($post_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+            update_post_meta($post_id, 'rank_math_description', sanitize_textarea_field($params['seo_description']));
             $results['seo_description'] = 'set';
         }
 
@@ -2517,10 +2683,10 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
         $term_id = $result['term_id'];
 
         if (!empty($params['seo_title'])) {
-            update_term_meta($term_id, '_seopress_titles_title', sanitize_text_field($params['seo_title']));
+            update_term_meta($term_id, 'rank_math_title', sanitize_text_field($params['seo_title']));
         }
         if (!empty($params['seo_description'])) {
-            update_term_meta($term_id, '_seopress_titles_desc', sanitize_textarea_field($params['seo_description']));
+            update_term_meta($term_id, 'rank_math_description', sanitize_textarea_field($params['seo_description']));
         }
 
         $this->log('INFO', 'WC category created', ['term_id' => $term_id, 'name' => $params['name']]);
@@ -2758,6 +2924,379 @@ Invoke-RestMethod -Uri "<?php echo esc_html(rest_url('ai-elementor/v1/status'));
             'created'   => count($created),
             'zones'     => $created,
         ]);
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    //  RANKMATH SEO ENDPOINTS (v1.9.0)
+    // ═══════════════════════════════════════════════════════════════
+
+    /**
+     * GET /seo/pages — List all published pages/posts with RankMath SEO status
+     * Params: ?post_type=page (default: page), ?include_posts=1 (include posts too)
+     */
+    public function list_seo_pages($request) {
+        $post_type   = $request->get_param('post_type') ?: 'page';
+        $include_all = $request->get_param('include_posts') === '1';
+
+        $post_types = $include_all ? ['page', 'post'] : [$post_type];
+
+        $posts = get_posts([
+            'post_type'      => $post_types,
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+        ]);
+
+        $results = [];
+        foreach ($posts as $post) {
+            $seo_title = get_post_meta($post->ID, 'rank_math_title', true);
+            $seo_desc  = get_post_meta($post->ID, 'rank_math_description', true);
+            $focus_kw  = get_post_meta($post->ID, 'rank_math_focus_keyword', true);
+
+            $status = 'missing';
+            if ($seo_title && $seo_desc) {
+                $status = 'complete';
+            } elseif ($seo_title || $seo_desc) {
+                $status = 'partial';
+            }
+
+            $results[] = [
+                'id'              => $post->ID,
+                'title'           => $post->post_title,
+                'slug'            => $post->post_name,
+                'url'             => get_permalink($post->ID),
+                'post_type'       => $post->post_type,
+                'seo_title'       => $seo_title ?: '',
+                'seo_description' => $seo_desc ?: '',
+                'focus_keyword'   => $focus_kw ?: '',
+                'status'          => $status,
+                'title_length'    => $seo_title ? mb_strlen($seo_title) : 0,
+                'desc_length'     => $seo_desc ? mb_strlen($seo_desc) : 0,
+            ];
+        }
+
+        $missing  = count(array_filter($results, fn($r) => $r['status'] === 'missing'));
+        $partial  = count(array_filter($results, fn($r) => $r['status'] === 'partial'));
+        $complete = count(array_filter($results, fn($r) => $r['status'] === 'complete'));
+
+        $this->log('INFO', 'SEO pages listed', ['total' => count($results), 'missing' => $missing]);
+
+        return rest_ensure_response([
+            'success' => true,
+            'total'   => count($results),
+            'summary' => compact('missing', 'partial', 'complete'),
+            'pages'   => $results,
+        ]);
+    }
+
+    /**
+     * GET /seo/meta/{id} — Get RankMath SEO meta for a single post/page
+     */
+    public function get_seo_meta($request) {
+        $post_id = (int) $request['id'];
+        $post    = get_post($post_id);
+
+        if (!$post) {
+            return new WP_Error('not_found', 'Post not found (id: ' . $post_id . ')', ['status' => 404]);
+        }
+
+        $seo_title   = get_post_meta($post_id, 'rank_math_title', true);
+        $seo_desc    = get_post_meta($post_id, 'rank_math_description', true);
+        $focus_kw    = get_post_meta($post_id, 'rank_math_focus_keyword', true);
+        $robots      = get_post_meta($post_id, 'rank_math_robots', true);
+        $canonical   = get_post_meta($post_id, 'rank_math_canonical_url', true);
+        $og_title    = get_post_meta($post_id, 'rank_math_og_title', true);
+        $og_desc     = get_post_meta($post_id, 'rank_math_og_description', true);
+
+        return rest_ensure_response([
+            'success'         => true,
+            'id'              => $post_id,
+            'post_type'       => $post->post_type,
+            'title'           => $post->post_title,
+            'url'             => get_permalink($post_id),
+            'seo_title'       => $seo_title ?: '',
+            'seo_description' => $seo_desc ?: '',
+            'focus_keyword'   => $focus_kw ?: '',
+            'robots'          => $robots ?: '',
+            'canonical_url'   => $canonical ?: '',
+            'og_title'        => $og_title ?: '',
+            'og_description'  => $og_desc ?: '',
+            'title_length'    => $seo_title ? mb_strlen($seo_title) : 0,
+            'desc_length'     => $seo_desc ? mb_strlen($seo_desc) : 0,
+        ]);
+    }
+
+    /**
+     * PUT /seo/meta/{id} — Update RankMath SEO meta for a single post/page
+     * Body: { "seo_title": "...", "seo_description": "...", "focus_keyword": "...", "og_title": "...", "og_description": "..." }
+     */
+    public function update_seo_meta($request) {
+        $post_id = (int) $request['id'];
+        $params  = $request->get_json_params();
+
+        if (!$params) {
+            return new WP_Error('invalid_params', 'Request body must be valid JSON', ['status' => 400]);
+        }
+
+        $post = get_post($post_id);
+        if (!$post) {
+            return new WP_Error('not_found', 'Post not found (id: ' . $post_id . ')', ['status' => 404]);
+        }
+
+        $updated = [];
+
+        $field_map = [
+            'seo_title'       => 'rank_math_title',
+            'seo_description' => 'rank_math_description',
+            'focus_keyword'   => 'rank_math_focus_keyword',
+            'robots'          => 'rank_math_robots',
+            'canonical_url'   => 'rank_math_canonical_url',
+            'og_title'        => 'rank_math_og_title',
+            'og_description'  => 'rank_math_og_description',
+        ];
+
+        foreach ($field_map as $param_key => $meta_key) {
+            if (isset($params[$param_key])) {
+                if ($param_key === 'robots') {
+                    // RankMath stores robots as a serialized PHP array, e.g. ['noindex','nofollow']
+                    $raw_robots = sanitize_text_field($params[$param_key]);
+                    if (!empty($raw_robots)) {
+                        $robots_array = array_values(array_filter(array_map('trim', explode(',', $raw_robots))));
+                        update_post_meta($post_id, $meta_key, $robots_array);
+                    } else {
+                        delete_post_meta($post_id, $meta_key);
+                    }
+                } elseif ($param_key === 'seo_description' || $param_key === 'og_description') {
+                    $value = sanitize_textarea_field($params[$param_key]);
+                    update_post_meta($post_id, $meta_key, $value);
+                } else {
+                    $value = sanitize_text_field($params[$param_key]);
+                    update_post_meta($post_id, $meta_key, $value);
+                }
+                $updated[$param_key] = 'updated';
+            }
+        }
+
+        $this->log('INFO', 'RankMath SEO meta updated', ['post_id' => $post_id, 'fields' => array_keys($updated)]);
+
+        return rest_ensure_response([
+            'success'   => true,
+            'id'        => $post_id,
+            'title'     => $post->post_title,
+            'updated'   => $updated,
+            'timestamp' => date('Y-m-d H:i:s'),
+        ]);
+    }
+
+    /**
+     * PUT /seo/bulk — Bulk update RankMath SEO meta for multiple posts
+     * Body: { "items": [ { "id": 72, "seo_title": "...", "seo_description": "...", "focus_keyword": "..." }, ... ] }
+     */
+    public function bulk_update_seo($request) {
+        $body  = $request->get_json_params();
+        $items = $body['items'] ?? [];
+
+        if (empty($items) || !is_array($items)) {
+            return new WP_Error('invalid_params', 'Body must contain an "items" array', ['status' => 400]);
+        }
+
+        $results  = [];
+        $success  = 0;
+        $failures = 0;
+
+        foreach ($items as $item) {
+            $post_id = (int) ($item['id'] ?? 0);
+
+            if (!$post_id || !get_post($post_id)) {
+                $results[] = ['id' => $post_id, 'success' => false, 'error' => 'Post not found'];
+                $failures++;
+                continue;
+            }
+
+            $updated = [];
+
+            if (!empty($item['seo_title'])) {
+                update_post_meta($post_id, 'rank_math_title', sanitize_text_field($item['seo_title']));
+                $updated[] = 'seo_title';
+            }
+            if (!empty($item['seo_description'])) {
+                update_post_meta($post_id, 'rank_math_description', sanitize_textarea_field($item['seo_description']));
+                $updated[] = 'seo_description';
+            }
+            if (!empty($item['focus_keyword'])) {
+                update_post_meta($post_id, 'rank_math_focus_keyword', sanitize_text_field($item['focus_keyword']));
+                $updated[] = 'focus_keyword';
+            }
+            if (!empty($item['og_title'])) {
+                update_post_meta($post_id, 'rank_math_og_title', sanitize_text_field($item['og_title']));
+                $updated[] = 'og_title';
+            }
+            if (!empty($item['og_description'])) {
+                update_post_meta($post_id, 'rank_math_og_description', sanitize_textarea_field($item['og_description']));
+                $updated[] = 'og_description';
+            }
+
+            $results[] = [
+                'id'      => $post_id,
+                'success' => true,
+                'updated' => $updated,
+            ];
+            $success++;
+        }
+
+        $this->log('INFO', 'Bulk RankMath SEO update complete', ['success' => $success, 'failures' => $failures]);
+
+        return rest_ensure_response([
+            'success'   => true,
+            'message'   => "{$success} page(s) updated, {$failures} failed",
+            'results'   => $results,
+            'timestamp' => date('Y-m-d H:i:s'),
+        ]);
+    }
+
+    /**
+     * GET /media/list — List all image attachments with current ALT text
+     */
+    public function list_media_alts($request) {
+        $per_page = (int) ($request->get_param('per_page') ?? 200);
+        $page     = (int) ($request->get_param('page') ?? 1);
+
+        $attachments = get_posts([
+            'post_type'      => 'attachment',
+            'post_mime_type' => 'image',
+            'post_status'    => 'inherit',
+            'numberposts'    => $per_page,
+            'offset'         => ($page - 1) * $per_page,
+            'orderby'        => 'ID',
+            'order'          => 'ASC',
+        ]);
+
+        $total = (int) wp_count_posts('attachment')->inherit;
+
+        $items = array_map(function($att) {
+            $alt = get_post_meta($att->ID, '_wp_attachment_image_alt', true);
+            return [
+                'id'       => $att->ID,
+                'filename' => basename(get_attached_file($att->ID)),
+                'url'      => wp_get_attachment_url($att->ID),
+                'title'    => $att->post_title,
+                'alt'      => $alt ?: '',
+                'has_alt'  => !empty($alt),
+            ];
+        }, $attachments);
+
+        $missing = count(array_filter($items, fn($i) => !$i['has_alt']));
+
+        return rest_ensure_response([
+            'success'  => true,
+            'total'    => $total,
+            'returned' => count($items),
+            'missing'  => $missing,
+            'items'    => $items,
+        ]);
+    }
+
+    /**
+     * PUT /media/bulk-alt — Bulk update ALT text for media attachments
+     * Body: { "items": [ { "id": 70, "alt": "Professional maid service Dubai" }, ... ] }
+     */
+    public function bulk_update_media_alt($request) {
+        $body  = $request->get_json_params();
+        $items = $body['items'] ?? [];
+
+        if (empty($items) || !is_array($items)) {
+            return new WP_Error('invalid_params', 'Body must contain an "items" array', ['status' => 400]);
+        }
+
+        $updated  = [];
+        $skipped  = [];
+        $failures = [];
+
+        foreach ($items as $item) {
+            $id  = isset($item['id'])  ? absint($item['id'])                            : 0;
+            $alt = isset($item['alt']) ? sanitize_text_field($item['alt'])              : '';
+
+            if (!$id) { $failures[] = ['id' => $id, 'error' => 'Invalid ID']; continue; }
+
+            $post = get_post($id);
+            if (!$post || $post->post_type !== 'attachment') {
+                $failures[] = ['id' => $id, 'error' => 'Attachment not found'];
+                continue;
+            }
+
+            if (empty($alt)) {
+                $skipped[] = $id;
+                continue;
+            }
+
+            update_post_meta($id, '_wp_attachment_image_alt', $alt);
+            $updated[] = ['id' => $id, 'filename' => basename(get_attached_file($id)), 'alt' => $alt];
+        }
+
+        $this->log('INFO', 'Media ALT bulk update', [
+            'updated'  => count($updated),
+            'skipped'  => count($skipped),
+            'failures' => count($failures),
+        ]);
+
+        return rest_ensure_response([
+            'success'   => true,
+            'updated'   => count($updated),
+            'skipped'   => count($skipped),
+            'failures'  => count($failures),
+            'items'     => $updated,
+            'timestamp' => date('Y-m-d H:i:s'),
+        ]);
+    }
+
+    /**
+     * POST /plugin/self-update
+     * Replaces this plugin file with an updated version.
+     * Body: { "content": "<base64-encoded PHP file>" }
+     * Protected by the same X-API-Key as all other endpoints.
+     */
+    public function self_update_plugin($request) {
+        $params = $request->get_json_params();
+
+        if (empty($params['content'])) {
+            return new WP_Error('invalid_params', 'content (base64) is required', ['status' => 400]);
+        }
+
+        $decoded = base64_decode($params['content'], true);
+        if ($decoded === false) {
+            return new WP_Error('decode_failed', 'Failed to decode base64 content', ['status' => 400]);
+        }
+
+        // Validate it looks like a PHP file
+        if (strpos($decoded, '<?php') === false) {
+            return new WP_Error('invalid_file', 'Content does not appear to be a PHP file', ['status' => 400]);
+        }
+
+        $plugin_file = __FILE__;
+        $backup_file = $plugin_file . '.bak';
+
+        // Write backup of current version
+        @copy($plugin_file, $backup_file);
+
+        $bytes = file_put_contents($plugin_file, $decoded);
+        if ($bytes === false) {
+            return new WP_Error('write_failed', 'Failed to write plugin file — check file permissions', ['status' => 500]);
+        }
+
+        $this->log('INFO', 'Plugin self-updated', [
+            'bytes'   => $bytes,
+            'backup'  => $backup_file,
+        ]);
+
+        return [
+            'success'    => true,
+            'bytes'      => $bytes,
+            'plugin'     => $plugin_file,
+            'backup'     => $backup_file,
+            'timestamp'  => date('Y-m-d H:i:s'),
+            'message'    => 'Plugin updated. Reload WordPress to apply changes.',
+        ];
     }
 }
 
