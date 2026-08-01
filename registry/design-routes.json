@@ -1,0 +1,50 @@
+{
+  "version": "0.1.0",
+  "routes": {
+    "warm-clinic-modern": {
+      "summary": "Trust-focused, warm, clean, human, suitable for pet care, clinics, and wellness services.",
+      "typography": {
+        "heading_personality": "rounded, friendly, clear",
+        "body_personality": "neutral, readable"
+      },
+      "layout": {
+        "density": "balanced",
+        "section_rhythm": ["warm hero", "credibility band", "service cards", "human story", "clear CTA"],
+        "preferred_hero": "HeroSplit",
+        "card_radius": 12,
+        "image_treatment": "soft rounded photography"
+      },
+      "avoid": ["cold SaaS dashboards", "generic purple gradients", "overly dark corporate heroes"]
+    },
+    "editorial-premium": {
+      "summary": "Sophisticated editorial layout for high-end services, portfolios, and consultants.",
+      "typography": {
+        "heading_personality": "serif or high-contrast display",
+        "body_personality": "quiet, spacious"
+      },
+      "layout": {
+        "density": "spacious",
+        "section_rhythm": ["large editorial hero", "proof row", "asymmetric story", "curated services", "minimal CTA"],
+        "preferred_hero": "HeroSplit",
+        "card_radius": 6,
+        "image_treatment": "large image blocks"
+      },
+      "avoid": ["busy icon grids", "heavy shadows", "stock dashboard styling"]
+    },
+    "bold-local-service": {
+      "summary": "High-conversion service-business layout with direct CTAs and strong visual hierarchy.",
+      "typography": {
+        "heading_personality": "bold, practical, legible",
+        "body_personality": "direct, plain-spoken"
+      },
+      "layout": {
+        "density": "compact",
+        "section_rhythm": ["direct hero", "service proof", "pricing or services", "process", "FAQ", "CTA"],
+        "preferred_hero": "HeroSplit",
+        "card_radius": 8,
+        "image_treatment": "real work photos"
+      },
+      "avoid": ["abstract decorative visuals", "thin luxury typography", "vague CTAs"]
+    }
+  }
+}

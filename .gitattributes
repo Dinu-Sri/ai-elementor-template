@@ -1,0 +1,5 @@
+.codebase-memory/graph.db.zst merge=ours binary
+*.webp binary
+*.png binary
+*.jpg binary
+*.jpeg binary

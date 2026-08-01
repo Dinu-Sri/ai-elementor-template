@@ -1,0 +1,48 @@
+{
+  "site": "SMS Pet Grooming",
+  "slug": "sms-pet-grooming",
+  "site_url": "https://smspetgrooming.ae",
+  "menus": [],
+  "pages": [
+    {
+      "key": "design-system-review",
+      "title": "Native Review - SMS Pet Design System",
+      "slug": "native-review-sms-pet-design-system",
+      "path": "/native-review-sms-pet-design-system/",
+      "status": "publish",
+      "existingId": 1040,
+      "blueprint": "examples/sms-pet-design-system.blueprint.json"
+    },
+    {
+      "key": "landing-page-review",
+      "title": "Dog Grooming at Home in Dubai",
+      "slug": "native-review-sms-pet-landing-page",
+      "path": "/native-review-sms-pet-landing-page/",
+      "status": "publish",
+      "existingId": 1044,
+      "blueprint": "examples/sms-pet-landing-page.blueprint.json"
+    }
+  ],
+  "templates": [],
+  "smoke": [
+    {
+      "path": "/native-review-sms-pet-design-system/",
+      "contains": [
+        "SMS Pet design system review",
+        "Animal-specific accents on one shared page system",
+        "Approved foundation for the upcoming service-page redesigns"
+      ],
+      "markers": []
+    },
+    {
+      "path": "/native-review-sms-pet-landing-page/",
+      "contains": [
+        "Dog Grooming That Comes to Your Doorstep",
+        "Dog Grooming Packages and Prices",
+        "Schedule Your Dog's Grooming Visit",
+        "Explore All Mobile Grooming Services"
+      ],
+      "markers": []
+    }
+  ]
+}

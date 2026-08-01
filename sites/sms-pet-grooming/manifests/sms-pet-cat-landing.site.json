@@ -1,0 +1,32 @@
+{
+  "site": "SMS Pet Grooming - Cat Landing Page",
+  "slug": "sms-pet-cat-landing",
+  "site_url": "https://smspetgrooming.ae",
+  "menus": [],
+  "pages": [
+    {
+      "key": "cat-landing-page",
+      "title": "Cat Grooming at Home in Dubai",
+      "slug": "cat-grooming-at-home-dubai",
+      "path": "/cat-grooming-at-home-dubai/",
+      "status": "publish",
+      "existingId": 1204,
+      "nativePayload": "sites/sms-pet-grooming/content/elementor/landing-pages/cat-landing.payload.json"
+    }
+  ],
+  "templates": [],
+  "smoke": [
+    {
+      "path": "/cat-grooming-at-home-dubai/",
+      "contains": [
+        "Cat Grooming at Home in Dubai",
+        "Cat Grooming Packages and Prices",
+        "Cat Basic Grooming",
+        "AED 280",
+        "A Simple Cat Grooming Appointment Flow",
+        "Book Your Cat's Grooming Visit"
+      ],
+      "markers": []
+    }
+  ]
+}

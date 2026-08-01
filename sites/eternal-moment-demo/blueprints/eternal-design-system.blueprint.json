@@ -1,0 +1,110 @@
+{
+  "project": "eternal-moment-studio",
+  "page": {
+    "title": "Native Test - Design System",
+    "slug": "native-test-design-system",
+    "status": "publish"
+  },
+  "design": {
+    "route": "editorial-premium",
+    "colors": {
+      "primary": "#6F5A47",
+      "secondary": "#C9A46A",
+      "accent": "#8C6F5A",
+      "dark": "#171310",
+      "light": "#F6F1EA",
+      "white": "#FFFFFF",
+      "muted": "#6F6760"
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Inter"
+    }
+  },
+  "sections": [
+    {
+      "component": "DesignFoundation",
+      "content": {
+        "eyebrow": "Foundation",
+        "title": "Eternal Moment design system",
+        "body": "A reusable native Elementor system for typography, color, buttons, cards, imagery, and section rhythm before production pages are built.",
+        "typeTitle": "Typography and Actions",
+        "colorTitle": "Color Tokens",
+        "headingSample": "Quietly cinematic stories with editorial restraint",
+        "bodySample": "Body copy uses measured spacing, readable contrast, and calm line heights so pages feel premium without becoming fragile.",
+        "primaryButton": "Book a Session",
+        "secondaryButton": "View Portfolio",
+        "primaryUrl": "{{page:contact}}",
+        "secondaryUrl": "{{page:portfolio}}"
+      }
+    },
+    {
+      "component": "FeatureGrid",
+      "content": {
+        "eyebrow": "Cards and Icon Boxes",
+        "title": "Service and feature card pattern",
+        "body": "Reusable icon-card sections for services, benefits, process steps, and value propositions.",
+        "items": [
+          {
+            "icon": "fas fa-camera",
+            "title": "Photography",
+            "body": "Balanced card spacing with native icon, heading, and text widgets."
+          },
+          {
+            "icon": "fas fa-film",
+            "title": "Films",
+            "body": "A repeatable structure for short service descriptions and package highlights."
+          },
+          {
+            "icon": "fas fa-images",
+            "title": "Albums",
+            "body": "Editable card content that preserves rhythm across breakpoints."
+          }
+        ]
+      }
+    },
+    {
+      "component": "ContentSplit",
+      "variant": "image-left",
+      "content": {
+        "eyebrow": "Image and Text",
+        "title": "Split section pattern",
+        "body": "A controlled image/text layout for about sections, service explanations, and narrative proof blocks.",
+        "button": { "text": "Contact", "url": "{{page:contact}}" },
+        "image": {
+          "url": "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80"
+        }
+      }
+    },
+    {
+      "component": "GalleryGrid",
+      "content": {
+        "eyebrow": "Gallery",
+        "title": "Portfolio gallery pattern",
+        "body": "A native image grid for albums, projects, venues, and story collections.",
+        "images": [
+          {
+            "url": "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=900&q=80",
+            "caption": "Editorial moments"
+          },
+          {
+            "url": "https://images.unsplash.com/photo-1502635385003-ee1e6a1a742d?auto=format&fit=crop&w=900&q=80",
+            "caption": "Celebration details"
+          },
+          {
+            "url": "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80",
+            "caption": "Quiet portraits"
+          }
+        ]
+      }
+    },
+    {
+      "component": "CtaBand",
+      "content": {
+        "title": "CTA band pattern",
+        "body": "A reusable conversion section for page endings and campaign moments.",
+        "button": { "text": "Start a Conversation", "url": "{{page:contact}}" }
+      }
+    }
+  ]
+}

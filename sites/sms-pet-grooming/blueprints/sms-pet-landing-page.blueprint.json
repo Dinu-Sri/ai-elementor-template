@@ -1,0 +1,652 @@
+{
+  "project": "sms-pet-grooming",
+  "page": {
+    "title": "Dog Grooming at Home in Dubai",
+    "slug": "native-review-sms-pet-landing-page",
+    "template": "elementor_header_footer",
+    "status": "publish"
+  },
+  "design": {
+    "route": "warm-clinic-modern",
+    "colors": {
+      "primary": "#FF9807",
+      "secondary": "#FFEACD",
+      "accent": "#00D828",
+      "dark": "#1F1E1E",
+      "light": "#FFF8F1",
+      "muted": "#565656",
+      "white": "#FFFFFF",
+      "cat": "#3382EA",
+      "bird": "#00D8B4",
+      "rabbit": "#FF474A"
+    },
+    "fonts": {
+      "heading": "Inter",
+      "body": "Inter"
+    }
+  },
+  "sections": [
+    {
+      "component": "OfferHero",
+      "content": {
+        "eyebrow": "Dog Grooming at Home in Dubai",
+        "title": "Dog Grooming That Comes to Your Doorstep",
+        "body": "Give your dog a cleaner coat, trimmed nails, fresh ears, and a calmer grooming experience without travelling to a salon. SMS Pet Grooming brings trained mobile groomers to your home, hotel, or office anywhere in Dubai.",
+        "price": "Dog grooming starts from AED 200",
+        "offer": "Basic and full grooming packages for small, medium, and large dogs",
+        "primaryButton": {
+          "text": "Book Dog Grooming",
+          "url": "https://smspetgrooming.ae/contact-us/"
+        },
+        "secondaryButton": {
+          "text": "View Packages",
+          "url": "#dog-packages"
+        },
+        "trustImage": {
+          "url": "https://smspetgrooming.ae/wp-content/uploads/2026/07/Google-5-Star-1024x160-1.webp",
+          "alt": "Google five star review rating",
+          "width": 270
+        },
+        "backgroundImage": {
+          "url": "https://smspetgrooming.ae/wp-content/uploads/2026/03/foot.png",
+          "position": "bottom right",
+          "size": "360px auto",
+          "opacity": 0.18
+        },
+        "image": {
+          "url": "https://smspetgrooming.ae/wp-content/uploads/2026/03/Group-60.png",
+          "alt": "Dog grooming service illustration"
+        }
+      }
+    },
+    {
+      "component": "IconHighlights",
+      "content": {
+        "background": "#FFFFFF",
+        "items": [
+          {
+            "icon": "fas fa-house",
+            "title": "At-Home Grooming",
+            "body": "Your dog stays in a familiar environment while the grooming setup comes to you.",
+            "color": "#FF9807"
+          },
+          {
+            "icon": "fas fa-dog",
+            "title": "Size-Based Packages",
+            "body": "Clear small, medium, and large dog options make choosing the right package easier.",
+            "color": "#00D828"
+          },
+          {
+            "icon": "fas fa-soap",
+            "title": "Coat and Hygiene Care",
+            "body": "Bathing, brushing, trimming, nail clipping, ear cleaning, and coat support in one visit.",
+            "color": "#9A81CE"
+          },
+          {
+            "icon": "fas fa-calendar-check",
+            "title": "Easy Booking",
+            "body": "Book online, call, or send the team your preferred time and location.",
+            "color": "#3382EA"
+          },
+          {
+            "icon": "fas fa-shield-heart",
+            "title": "Pet-Safe Products",
+            "body": "A clean mobile setup with products chosen for safe everyday grooming.",
+            "color": "#00D8B4"
+          }
+        ]
+      }
+    },
+    {
+      "component": "InfoColumns",
+      "content": {
+        "background": "#F8EFE7",
+        "innerBackground": "#FFF8F1",
+        "eyebrow": "Service Snapshot",
+        "title": "When Dog Grooming at Home Makes Sense",
+        "body": "This page is built for dog owners who want a practical, reassuring grooming appointment without salon travel, long waiting times, or extra stress for their pet.",
+        "columns": [
+          {
+            "title": "Best For",
+            "items": [
+              {
+                "title": "Routine Coat Care",
+                "body": "Regular grooming keeps your dog's coat cleaner, easier to manage, and more comfortable between visits."
+              },
+              {
+                "title": "Dogs Who Dislike Travel",
+                "body": "A mobile appointment helps dogs avoid car rides, crowded salons, and unfamiliar waiting areas."
+              },
+              {
+                "title": "Busy Dubai Households",
+                "body": "The groomer comes to your location, so you can plan the service around your day."
+              }
+            ]
+          },
+          {
+            "title": "When to Book",
+            "items": [
+              {
+                "title": "Every 4-6 Weeks",
+                "body": "Most dogs benefit from a regular coat, nail, and hygiene routine."
+              },
+              {
+                "title": "Before Guests or Travel",
+                "body": "Book ahead of holidays, visitors, boarding, or photo-ready family moments."
+              },
+              {
+                "title": "When Coat Issues Start",
+                "body": "Dematting, deshedding, ticks, and hygiene trims are easier to handle before they become uncomfortable."
+              }
+            ]
+          },
+          {
+            "title": "What You Get",
+            "items": [
+              {
+                "title": "Clear Package Choice",
+                "body": "Choose basic or full grooming based on your dog's size and coat needs."
+              },
+              {
+                "title": "Helpful Add-Ons",
+                "body": "Add targeted services such as deshedding, teeth brushing, medicated bath, or ear cleaning."
+              },
+              {
+                "title": "Simple Aftercare",
+                "body": "Your groomer can share practical next steps for coat, nail, and hygiene maintenance."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "component": "ContentSplit",
+      "variant": "image-left",
+      "content": {
+        "background": "#F6EDE4",
+        "eyebrow": "What's Included",
+        "title": "A complete mobile grooming setup for your dog",
+        "body": "Your groomer arrives with the tools needed for the selected package, confirms your dog's size and grooming needs, prepares the service area, and completes the appointment with care. Choose Basic Grooming for essential hygiene and coat refresh, or Full Grooming when your dog needs a more complete tidy-up.",
+        "button": {
+          "text": "Book an Appointment",
+          "url": "https://smspetgrooming.ae/contact-us/"
+        },
+        "image": {
+          "url": "https://smspetgrooming.ae/wp-content/uploads/2026/03/sms-vehicle.png",
+          "alt": "SMS Pet mobile grooming vehicle"
+        }
+      }
+    },
+    {
+      "component": "PricingCards",
+      "content": {
+        "background": "#FFFFFF",
+        "columns": 3,
+        "width": 1120,
+        "eyebrow": "Dog Packages",
+        "title": "Dog Grooming Packages and Prices",
+        "body": "Prices are in AED and are based on your dog's size. The team confirms timing, availability, and any special coat needs before the appointment.",
+        "cards": [
+          {
+            "badge": "Basic Grooming",
+            "title": "Small Dog",
+            "body": "For dogs less than 9kg that need a clean, simple grooming refresh.",
+            "priceLabel": "Dog Basic Grooming",
+            "price": "AED 200",
+            "color": "#00D828",
+            "highlight": true,
+            "features": [
+              "Less than 9kg",
+              "Bath and basic coat refresh",
+              "Good for regular maintenance"
+            ],
+            "button": {
+              "text": "Select Small Basic",
+              "url": "https://smspetgrooming.ae/contact-us/"
+            }
+          },
+          {
+            "badge": "Basic Grooming",
+            "title": "Medium Dog",
+            "body": "For medium dogs that need routine grooming and hygiene care at home.",
+            "priceLabel": "Dog Basic Grooming",
+            "price": "AED 220",
+            "color": "#00D828",
+            "features": [
+              "10kg - 19kg",
+              "Routine bath and coat care",
+              "Convenient doorstep service"
+            ],
+            "button": {
+              "text": "Select Medium Basic",
+              "url": "https://smspetgrooming.ae/contact-us/"
+            }
+          },
+          {
+            "badge": "Basic Grooming",
+            "title": "Large Dog",
+            "body": "For larger dogs that need essential grooming support without a salon trip.",
+            "priceLabel": "Dog Basic Grooming",
+            "price": "AED 240",
+            "color": "#00D828",
+            "features": [
+              "Above 20kg",
+              "Essential coat and hygiene care",
+              "At-home appointment convenience"
+            ],
+            "button": {
+              "text": "Select Large Basic",
+              "url": "https://smspetgrooming.ae/contact-us/"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "component": "PricingCards",
+      "content": {
+        "background": "#FFFFFF",
+        "columns": 3,
+        "width": 1120,
+        "eyebrow": "Full Grooming",
+        "title": "Full Grooming for a More Complete Tidy-Up",
+        "body": "Choose full grooming when your dog needs more than a light refresh. These packages are also size-based for easier pricing.",
+        "cards": [
+          {
+            "badge": "Full Grooming",
+            "title": "Small Dog",
+            "body": "A fuller grooming session for small dogs less than 9kg.",
+            "priceLabel": "Dog Full Grooming",
+            "price": "AED 260",
+            "color": "#FF9807",
+            "highlight": true,
+            "features": [
+              "Less than 9kg",
+              "More complete coat and hygiene care",
+              "Ideal when your dog needs extra attention"
+            ],
+            "button": {
+              "text": "Select Small Full",
+              "url": "https://smspetgrooming.ae/contact-us/"
+            }
+          },
+          {
+            "badge": "Full Grooming",
+            "title": "Medium Dog",
+            "body": "A complete mobile grooming option for medium dogs between 10kg and 19kg.",
+            "priceLabel": "Dog Full Grooming",
+            "price": "AED 290",
+            "color": "#FF9807",
+            "features": [
+              "10kg - 19kg",
+              "Full grooming appointment",
+              "Good for coat, hygiene, and tidy-up needs"
+            ],
+            "button": {
+              "text": "Select Medium Full",
+              "url": "https://smspetgrooming.ae/contact-us/"
+            }
+          },
+          {
+            "badge": "Full Grooming",
+            "title": "Large Dog",
+            "body": "A fuller grooming session for large dogs above 20kg.",
+            "priceLabel": "Dog Full Grooming",
+            "price": "AED 310",
+            "color": "#FF9807",
+            "features": [
+              "Above 20kg",
+              "Full grooming support at your location",
+              "Best for dogs needing a more complete refresh"
+            ],
+            "button": {
+              "text": "Select Large Full",
+              "url": "https://smspetgrooming.ae/contact-us/"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "component": "PricingCards",
+      "content": {
+        "background": "#F8EFE7",
+        "columns": 3,
+        "width": 1120,
+        "compact": true,
+        "eyebrow": "Dog Grooming Add-Ons",
+        "title": "Add Extra Care Where Your Dog Needs It",
+        "body": "Add-ons help solve specific grooming needs during the same visit. Final recommendations can be confirmed by the team before your booking is completed.",
+        "cards": [
+          {
+            "title": "Dematting or Detangling",
+            "body": "Support for matted or tangled coat areas.",
+            "priceLabel": "Add-on",
+            "price": "AED 50",
+            "color": "#9A81CE",
+            "features": ["Useful for knots", "Helps improve coat comfort"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          },
+          {
+            "title": "Removing the Ticks",
+            "body": "Tick removal support during the grooming visit.",
+            "priceLabel": "Add-on",
+            "price": "AED 55",
+            "color": "#9A81CE",
+            "features": ["Targeted tick removal", "Pairs well with bath care"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          },
+          {
+            "title": "Flea and Ticks Bath",
+            "body": "A focused bath option for flea and tick concerns.",
+            "priceLabel": "Add-on",
+            "price": "AED 55",
+            "color": "#9A81CE",
+            "features": ["Bath-focused support", "Good for targeted hygiene"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          },
+          {
+            "title": "Deshedding",
+            "body": "Helps reduce loose hair and improve coat manageability.",
+            "priceLabel": "Add-on",
+            "price": "AED 90",
+            "color": "#9A81CE",
+            "features": ["Useful for shedding coats", "Great before travel or guests"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          },
+          {
+            "title": "Medicated Bath",
+            "body": "Bath support when a medicated wash has been recommended.",
+            "priceLabel": "Add-on",
+            "price": "AED 55",
+            "color": "#9A81CE",
+            "features": ["Special bath option", "Confirm product needs before booking"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          },
+          {
+            "title": "Teeth Brushing",
+            "body": "Simple oral hygiene support during the visit.",
+            "priceLabel": "Add-on",
+            "price": "AED 55",
+            "color": "#9A81CE",
+            "features": ["Freshness support", "Easy to combine with grooming"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          },
+          {
+            "title": "Eyes Cleaning and Trimming",
+            "body": "Care around the eye area for cleaner, tidier presentation.",
+            "priceLabel": "Add-on",
+            "price": "AED 55",
+            "color": "#9A81CE",
+            "features": ["Helpful for facial hair", "Supports a tidy finish"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          },
+          {
+            "title": "Anal Glands Expression",
+            "body": "A focused hygiene add-on when needed.",
+            "priceLabel": "Add-on",
+            "price": "AED 55",
+            "color": "#9A81CE",
+            "features": ["Specific hygiene support", "Confirm suitability before service"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          },
+          {
+            "title": "Shave or Trim Bum Area",
+            "body": "A tidy hygiene trim for the bum area.",
+            "priceLabel": "Add-on",
+            "price": "AED 55",
+            "color": "#9A81CE",
+            "features": ["Keeps hygiene areas cleaner", "Useful for longer coats"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          },
+          {
+            "title": "Nail Clipping",
+            "body": "Quick nail trimming support during the appointment.",
+            "priceLabel": "Add-on",
+            "price": "AED 55",
+            "color": "#9A81CE",
+            "features": ["Keeps nails manageable", "Common routine add-on"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          },
+          {
+            "title": "Ear Cleaning",
+            "body": "Ear cleaning support for a fresher grooming finish.",
+            "priceLabel": "Add-on",
+            "price": "AED 55",
+            "color": "#9A81CE",
+            "features": ["Good hygiene add-on", "Pairs well with full grooming"],
+            "button": { "text": "Add to Booking", "url": "https://smspetgrooming.ae/contact-us/" }
+          }
+        ]
+      }
+    },
+    {
+      "component": "ProcessSteps",
+      "content": {
+        "background": "#FFFFFF",
+        "width": 1120,
+        "eyebrow": "How It Works",
+        "title": "A Simple Dog Grooming Appointment Flow",
+        "body": "From package choice to aftercare, the appointment is designed to feel easy for you and calmer for your dog.",
+        "steps": [
+          {
+            "number": "01",
+            "title": "Choose Basic or Full",
+            "body": "Select your dog's size and the package that best matches their coat and hygiene needs."
+          },
+          {
+            "number": "02",
+            "title": "Confirm Time and Location",
+            "body": "Share your preferred appointment time, address, and any special grooming notes."
+          },
+          {
+            "number": "03",
+            "title": "Grooming at Your Doorstep",
+            "body": "The groomer arrives with the setup, prepares the area, and completes the selected service."
+          },
+          {
+            "number": "04",
+            "title": "Aftercare and Next Visit",
+            "body": "Get practical guidance and plan the next visit based on your dog's grooming cycle."
+          }
+        ]
+      }
+    },
+    {
+      "component": "ContentSplit",
+      "variant": "image-right",
+      "content": {
+        "background": "#F6EDE4",
+        "eyebrow": "Service Video",
+        "title": "Show the full mobile grooming experience",
+        "body": "Use this section for a short service video showing arrival, setup, grooming care, and the final fresh-dog moment. A real clip here will help visitors quickly understand what happens during an at-home appointment.",
+        "button": {
+          "text": "Book Dog Grooming",
+          "url": "https://smspetgrooming.ae/contact-us/"
+        },
+        "image": {
+          "url": "https://smspetgrooming.ae/wp-content/uploads/2026/03/download-2026-03-10T122006.352-2-1.png",
+          "alt": "Dog grooming service media area"
+        }
+      }
+    },
+    {
+      "component": "InfoColumns",
+      "content": {
+        "background": "#FFFFFF",
+        "innerBackground": "#FFF8F1",
+        "eyebrow": "Package Guide",
+        "title": "Which Dog Grooming Package Should You Choose?",
+        "body": "Choose by size first, then decide whether your dog needs a simple refresh or a more complete grooming appointment.",
+        "columns": [
+          {
+            "title": "Basic Grooming",
+            "items": [
+              {
+                "title": "Best for maintenance",
+                "body": "Choose Basic Grooming when your dog needs a routine refresh, bath, and tidy hygiene support."
+              },
+              {
+                "title": "Good for regular visits",
+                "body": "A practical choice for dogs who stay on a consistent grooming schedule."
+              }
+            ]
+          },
+          {
+            "title": "Full Grooming",
+            "items": [
+              {
+                "title": "Best for a deeper tidy-up",
+                "body": "Choose Full Grooming when your dog needs a more complete coat and hygiene session."
+              },
+              {
+                "title": "Useful before events",
+                "body": "A stronger option before travel, guests, photos, or when your dog needs extra attention."
+              }
+            ]
+          },
+          {
+            "title": "Add-Ons",
+            "items": [
+              {
+                "title": "Target specific needs",
+                "body": "Use add-ons for dematting, ticks, deshedding, teeth brushing, ear cleaning, nails, and hygiene trims."
+              },
+              {
+                "title": "Confirm before booking",
+                "body": "The team can help choose the right extras based on your dog's coat and comfort needs."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "component": "FaqList",
+      "content": {
+        "eyebrow": "FAQ",
+        "title": "Dog Grooming Booking Questions",
+        "items": [
+          {
+            "question": "How do I know whether to choose Basic or Full Grooming?",
+            "answer": "Basic Grooming is best for regular maintenance. Full Grooming is better when your dog needs a more complete tidy-up or extra coat and hygiene attention."
+          },
+          {
+            "question": "How is the price decided?",
+            "answer": "Dog package prices are based on size: small dogs are less than 9kg, medium dogs are 10kg - 19kg, and large dogs are above 20kg."
+          },
+          {
+            "question": "Can I add extra services to my booking?",
+            "answer": "Yes. Add-ons include dematting, tick removal, flea and ticks bath, deshedding, medicated bath, teeth brushing, eye cleaning and trimming, hygiene trim, nail clipping, and ear cleaning."
+          },
+          {
+            "question": "Where can the grooming appointment happen?",
+            "answer": "SMS Pet Grooming can come to your home, hotel, or office in Dubai, depending on availability and appointment confirmation."
+          }
+        ]
+      }
+    },
+    {
+      "component": "ShortcodeSection",
+      "content": {
+        "fullWidth": true,
+        "background": "#FFFFFF",
+        "minHeight": 250,
+        "eyebrow": "Customer Feedback",
+        "title": "Loved by Pet Parents Across Dubai",
+        "body": "See what customers say about the SMS Pet Grooming experience, from doorstep convenience to careful handling and fresh results.",
+        "cardTitle": "Google Reviews",
+        "cardBody": "Recent customer feedback can be shown here through the site review widget.",
+        "shortcode": "[trustindex no-registration=google]"
+      }
+    },
+    {
+      "component": "PricingCards",
+      "content": {
+        "background": "#F8EFE7",
+        "columns": 4,
+        "width": 1120,
+        "compact": true,
+        "eyebrow": "Other Pet Services",
+        "title": "Explore All Mobile Grooming Services",
+        "body": "SMS Pet Grooming supports dogs, cats, birds, and rabbits with dedicated mobile grooming pages. This section helps visitors move to the right service page for every pet at home.",
+        "cards": [
+          {
+            "title": "Dog Grooming",
+            "body": "Mobile dog grooming with basic, full, and add-on care for small, medium, and large dogs.",
+            "priceLabel": "Starting from",
+            "price": "AED 200",
+            "color": "#00D828",
+            "highlight": true,
+            "features": ["Basic grooming", "Full grooming", "Dog-specific add-ons"],
+            "button": { "text": "View Dog Grooming", "url": "https://smspetgrooming.ae/dog-grooming/" }
+          },
+          {
+            "title": "Cat Grooming",
+            "body": "Mobile grooming for cats who need coat care, hygiene support, and a calmer at-home visit.",
+            "priceLabel": "Starting from",
+            "price": "AED 200",
+            "color": "#3382EA",
+            "features": ["Basic and full grooming", "At-home comfort", "Coat and hygiene support"],
+            "button": { "text": "View Cat Grooming", "url": "https://smspetgrooming.ae/cat-grooming/" }
+          },
+          {
+            "title": "Bird Grooming",
+            "body": "Convenient grooming support for birds, including service add-ons where needed.",
+            "priceLabel": "Starting from",
+            "price": "AED 200",
+            "color": "#00D8B4",
+            "features": ["Basic and full grooming", "Beak trim add-on", "Wing clipping add-on"],
+            "button": { "text": "View Bird Grooming", "url": "https://smspetgrooming.ae/bird-grooming/" }
+          },
+          {
+            "title": "Rabbit Grooming",
+            "body": "At-home grooming support for rabbits needing hygiene, coat care, and regular upkeep.",
+            "priceLabel": "Starting from",
+            "price": "AED 200",
+            "color": "#FF474A",
+            "features": ["Basic and full grooming", "Hygiene support", "Gentle mobile service"],
+            "button": { "text": "View Rabbit Grooming", "url": "https://smspetgrooming.ae/rabbit-grooming/" }
+          }
+        ]
+      }
+    },
+    {
+      "component": "ShortcodeSection",
+      "content": {
+        "background": "#42172A",
+        "dark": true,
+        "minHeight": 360,
+        "eyebrow": "Book Dog Grooming",
+        "title": "Schedule Your Dog's Grooming Visit",
+        "body": "Send your service choice, dog size, preferred time, and location. The team will confirm availability and package details before your appointment.",
+        "points": [
+          "Choose Basic or Full Grooming",
+          "Add any extra care your dog needs",
+          "Confirm your Dubai location and preferred time"
+        ],
+        "cardTitle": "Dog Grooming Booking Form",
+        "cardBody": "Use the form to request an appointment and the team will confirm your booking details.",
+        "shortcode": "<div class=\"custom-fluent-form\">[fluentform id=\"3\"]</div>"
+      }
+    },
+    {
+      "component": "CtaBand",
+      "content": {
+        "title": "Ready to book mobile dog grooming in Dubai?",
+        "body": "Choose your dog's size, select the right grooming package, and let SMS Pet Grooming bring a cleaner, calmer appointment to your doorstep.",
+        "backgroundImage": {
+          "url": "https://smspetgrooming.ae/wp-content/uploads/2026/03/foot.png",
+          "position": "bottom right",
+          "size": "260px auto",
+          "opacity": 0.16
+        },
+        "button": {
+          "text": "Book Dog Grooming Now",
+          "url": "https://smspetgrooming.ae/contact-us/"
+        }
+      }
+    }
+  ]
+}

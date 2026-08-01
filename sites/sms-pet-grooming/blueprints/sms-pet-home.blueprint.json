@@ -1,0 +1,100 @@
+{
+  "project": "sms-pet",
+  "page": {
+    "title": "SMS Pet Clinic - Home",
+    "slug": "home",
+    "template": "elementor_header_footer",
+    "status": "draft"
+  },
+  "design": {
+    "route": "warm-clinic-modern",
+    "colors": {
+      "primary": "#256D5A",
+      "secondary": "#E8A35A",
+      "accent": "#5B8DEF",
+      "dark": "#15221F",
+      "light": "#F7F3EC",
+      "white": "#FFFFFF",
+      "muted": "#66736F"
+    },
+    "fonts": {
+      "heading": "Nunito Sans",
+      "body": "Inter"
+    }
+  },
+  "sections": [
+    {
+      "component": "HeroSplit",
+      "variant": "warm-clinic",
+      "content": {
+        "eyebrow": "Veterinary care with a calmer touch",
+        "title": "Thoughtful care for pets and the people who love them",
+        "body": "SMS Pet Clinic helps families keep pets healthy with preventive care, diagnostics, surgery support, and clear guidance at every visit.",
+        "primaryButton": { "text": "Book a Visit", "url": "/contact/" },
+        "secondaryButton": { "text": "Our Services", "url": "/services/" },
+        "image": {
+          "url": "https://picsum.photos/seed/sms-pet-care/900/720",
+          "alt": "Veterinarian gently checking a calm dog"
+        }
+      }
+    },
+    {
+      "component": "StatsBand",
+      "content": {
+        "items": [
+          { "number": "12", "suffix": "+", "label": "Years caring for pets" },
+          { "number": "8", "suffix": "k+", "label": "Clinic visits supported" },
+          { "number": "24", "suffix": "h", "label": "Response guidance" },
+          { "number": "4.9", "suffix": "/5", "label": "Client satisfaction" }
+        ]
+      }
+    },
+    {
+      "component": "FeatureGrid",
+      "content": {
+        "eyebrow": "Services",
+        "title": "Everyday care, urgent help, and long-term health plans",
+        "body": "A practical set of veterinary services built around prevention, early detection, and kind treatment.",
+        "items": [
+          { "icon": "fas fa-stethoscope", "title": "Health Checks", "body": "Routine exams, vaccination plans, weight checks, and preventive care." },
+          { "icon": "fas fa-heartbeat", "title": "Diagnostics", "body": "Clear next steps through lab work, imaging referrals, and clinical review." },
+          { "icon": "fas fa-paw", "title": "Surgery Support", "body": "Planned procedures, wound care, recovery guidance, and follow-up visits." }
+        ]
+      }
+    },
+    {
+      "component": "ContentSplit",
+      "variant": "image-left",
+      "content": {
+        "eyebrow": "Our approach",
+        "title": "A clinic experience designed to feel less stressful",
+        "body": "We keep visits calm, explain options clearly, and help pet owners make decisions with confidence. The result is care that feels personal without losing clinical precision.",
+        "button": { "text": "Meet the Team", "url": "/about/" },
+        "image": {
+          "url": "https://picsum.photos/seed/sms-pet-team/850/650",
+          "alt": "Clinic team with a pet owner"
+        }
+      }
+    },
+    {
+      "component": "FaqList",
+      "content": {
+        "eyebrow": "Questions",
+        "title": "Helpful answers before your visit",
+        "items": [
+          { "question": "Do I need an appointment?", "answer": "Appointments help us reduce waiting time and prepare for your pet's needs. Urgent cases can be discussed by phone first." },
+          { "question": "What should I bring?", "answer": "Bring vaccination records, recent medication details, previous test reports, and a note of symptoms or behavior changes." },
+          { "question": "Can you help with long-term care plans?", "answer": "Yes. We can plan vaccination, nutrition, parasite control, dental care, and checkup schedules based on age and health." }
+        ]
+      }
+    },
+    {
+      "component": "CtaBand",
+      "content": {
+        "title": "Ready to plan your pet's next visit?",
+        "body": "Tell us what is happening and we will guide you to the right appointment.",
+        "button": { "text": "Contact the Clinic", "url": "/contact/" }
+      }
+    }
+  ]
+}

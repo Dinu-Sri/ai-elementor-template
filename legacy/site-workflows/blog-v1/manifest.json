@@ -1,0 +1,57 @@
+{
+  "site": "SMS Pet Grooming Blog",
+  "slug": "sms-pet-blog",
+  "site_url": "https://smspetgrooming.ae",
+  "menus": [],
+  "pages": [
+    {
+      "key": "blog-archive",
+      "title": "Blog",
+      "slug": "blog",
+      "path": "/blog/",
+      "status": "publish",
+      "existingId": 474,
+      "nativePayload": "build/native-sources/sms-pet-blog-archive.payload.json"
+    }
+  ],
+  "templates": [
+    {
+      "key": "blog-loop",
+      "title": "Blog Loop",
+      "existingId": 480,
+      "type": "loop-item",
+      "conditions": [],
+      "nativePayload": "build/native-sources/sms-pet-blog-loop.payload.json"
+    },
+    {
+      "key": "blog-single",
+      "title": "Blog Single Page",
+      "existingId": 521,
+      "type": "single-post",
+      "conditions": [
+        "include/singular/post"
+      ],
+      "nativePayload": "build/native-sources/sms-pet-blog-single.payload.json"
+    }
+  ],
+  "smoke": [
+    {
+      "path": "/blog/",
+      "contains": [
+        "The Pet Care Journal",
+        "Clear Advice for Better Grooming Days",
+        "How to Prepare Your Pet for Mobile Grooming at Home in Dubai"
+      ],
+      "markers": []
+    },
+    {
+      "path": "/prepare-pet-mobile-grooming-dubai/",
+      "contains": [
+        "How to Prepare Your Pet for Mobile Grooming at Home in Dubai",
+        "Create a calm space before the groomer arrives",
+        "What to have ready before the appointment"
+      ],
+      "markers": []
+    }
+  ]
+}

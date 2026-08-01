@@ -1,0 +1,32 @@
+{
+  "site": "SMS Pet Grooming - Bird Landing Page",
+  "slug": "sms-pet-bird-landing",
+  "site_url": "https://smspetgrooming.ae",
+  "menus": [],
+  "pages": [
+    {
+      "key": "bird-landing-page",
+      "title": "Bird Grooming at Home in Dubai",
+      "slug": "bird-grooming-at-home-dubai",
+      "path": "/bird-grooming-at-home-dubai/",
+      "status": "publish",
+      "existingId": 1208,
+      "nativePayload": "sites/sms-pet-grooming/content/elementor/landing-pages/bird-landing.payload.json"
+    }
+  ],
+  "templates": [],
+  "smoke": [
+    {
+      "path": "/bird-grooming-at-home-dubai/",
+      "contains": [
+        "Bird Grooming at Home in Dubai",
+        "Bird Grooming Packages and Prices",
+        "Bird Basic Grooming",
+        "AED 260",
+        "A Simple Bird Grooming Appointment Flow",
+        "Book Your Bird's Grooming Visit"
+      ],
+      "markers": []
+    }
+  ]
+}

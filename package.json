@@ -1,0 +1,41 @@
+{
+  "name": "native-elementor-master-suite",
+  "version": "0.6.0",
+  "private": true,
+  "description": "Reusable native Elementor compiler, WordPress bridge, site workflow, and SEO publishing toolkit.",
+  "scripts": {
+    "check": "pnpm run seo:audit:sms && pnpm run site:eternal:compile && pnpm run site:eternal:lint && pnpm run site:sms:compile && pnpm run site:sms:lint",
+    "seo:audit:sms": "node ./tools/audit-seo-package.js ./sites/sms-pet-grooming/content/seo-50-package",
+    "seo:publish": "node ./tools/publish-seo-pilot.js",
+    "seo:tag-ai-images": "node ./tools/tag-ai-image-metadata.js",
+    "seo:validate:sms": "node ./sites/sms-pet-grooming/tools/validate-seo-batch.js",
+    "seo:apply-site": "node ./tools/apply-site-seo-media.js",
+    "seo:validate-site": "node ./tools/validate-site-seo-media.js",
+    "seo:fix-media:sms": "node ./sites/sms-pet-grooming/tools/fix-elementor-image-attachment-ids.js",
+    "build:landing:sms:cat": "node ./sites/sms-pet-grooming/tools/build-cat-landing-page.js",
+    "build:landing:sms:bird-rabbit": "node ./sites/sms-pet-grooming/tools/build-bird-rabbit-landings.js",
+    "site:sms:compile": "node ./tools/site-workflow.js ./sites/sms-pet-grooming/manifests/sms-pet-cat-landing.site.json compile && node ./tools/site-workflow.js ./sites/sms-pet-grooming/manifests/sms-pet-bird-landing.site.json compile && node ./tools/site-workflow.js ./sites/sms-pet-grooming/manifests/sms-pet-rabbit-landing.site.json compile && node ./tools/site-workflow.js ./sites/sms-pet-grooming/manifests/sms-pet-blog-theme-builder.site.json compile",
+    "site:sms:lint": "node ./tools/site-workflow.js ./sites/sms-pet-grooming/manifests/sms-pet-cat-landing.site.json lint && node ./tools/site-workflow.js ./sites/sms-pet-grooming/manifests/sms-pet-bird-landing.site.json lint && node ./tools/site-workflow.js ./sites/sms-pet-grooming/manifests/sms-pet-rabbit-landing.site.json lint && node ./tools/site-workflow.js ./sites/sms-pet-grooming/manifests/sms-pet-blog-theme-builder.site.json lint",
+    "compile:eternal": "node ./src/compiler/native-elementor-compiler.js ./sites/eternal-moment-demo/blueprints/eternal-moment-home.blueprint.json ./build/eternal-moment-home.elementor.json",
+    "lint:eternal": "node ./src/validator/elementor-native-lint.js ./build/eternal-moment-home.elementor.json",
+    "compile:eternal:pages": "node ./src/compiler/native-elementor-compiler.js ./sites/eternal-moment-demo/blueprints/eternal-about.blueprint.json ./build/eternal-about.elementor.json && node ./src/compiler/native-elementor-compiler.js ./sites/eternal-moment-demo/blueprints/eternal-portfolio.blueprint.json ./build/eternal-portfolio.elementor.json && node ./src/compiler/native-elementor-compiler.js ./sites/eternal-moment-demo/blueprints/eternal-services.blueprint.json ./build/eternal-services.elementor.json && node ./src/compiler/native-elementor-compiler.js ./sites/eternal-moment-demo/blueprints/eternal-contact.blueprint.json ./build/eternal-contact.elementor.json",
+    "compile:eternal:templates": "node ./src/compiler/native-elementor-compiler.js ./sites/eternal-moment-demo/blueprints/eternal-header.blueprint.json ./build/eternal-header.elementor.json && node ./src/compiler/native-elementor-compiler.js ./sites/eternal-moment-demo/blueprints/eternal-footer.blueprint.json ./build/eternal-footer.elementor.json",
+    "lint:eternal:pages": "node ./src/validator/elementor-native-lint.js ./build/eternal-about.elementor.json && node ./src/validator/elementor-native-lint.js ./build/eternal-portfolio.elementor.json && node ./src/validator/elementor-native-lint.js ./build/eternal-services.elementor.json && node ./src/validator/elementor-native-lint.js ./build/eternal-contact.elementor.json",
+    "lint:eternal:templates": "node ./src/validator/elementor-native-lint.js ./build/eternal-header.elementor.json && node ./src/validator/elementor-native-lint.js ./build/eternal-footer.elementor.json",
+    "site:eternal:compile": "node ./tools/site-workflow.js ./sites/eternal-moment-demo/manifests/eternal-moment-demo.site.json compile",
+    "site:eternal:lint": "node ./tools/site-workflow.js ./sites/eternal-moment-demo/manifests/eternal-moment-demo.site.json lint",
+    "site:eternal:deploy": "node ./tools/site-workflow.js ./sites/eternal-moment-demo/manifests/eternal-moment-demo.site.json deploy",
+    "site:eternal:smoke": "node ./tools/site-workflow.js ./sites/eternal-moment-demo/manifests/eternal-moment-demo.site.json smoke",
+    "site:eternal:snapshot": "node ./tools/site-workflow.js ./sites/eternal-moment-demo/manifests/eternal-moment-demo.site.json snapshot",
+    "site:eternal:all": "node ./tools/site-workflow.js ./sites/eternal-moment-demo/manifests/eternal-moment-demo.site.json all"
+  },
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
+  "dependencies": {
+    "csv-parse": "^7.0.1",
+    "js-yaml": "^5.2.2",
+    "marked": "^18.0.7"
+  },
+  "devDependencies": {
+    "exiftool-vendored": "^37.0.0"
+  }
+}

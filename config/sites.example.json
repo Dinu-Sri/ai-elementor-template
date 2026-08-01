@@ -1,0 +1,8 @@
+{
+  "sites": {
+    "demo": {
+      "url": "https://example.com",
+      "api_key": "PASTE_NATIVE_BRIDGE_API_KEY"
+    }
+  }
+}

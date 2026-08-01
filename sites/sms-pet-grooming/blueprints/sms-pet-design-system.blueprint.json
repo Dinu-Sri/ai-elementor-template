@@ -1,0 +1,148 @@
+{
+  "project": "sms-pet-grooming",
+  "page": {
+    "title": "Native Review - SMS Pet Design System",
+    "slug": "native-review-sms-pet-design-system",
+    "template": "elementor_header_footer",
+    "status": "publish"
+  },
+  "design": {
+    "route": "warm-clinic-modern",
+    "colors": {
+      "primary": "#FF9807",
+      "secondary": "#FFEACD",
+      "accent": "#9A81CE",
+      "dog": "#00D828",
+      "cat": "#3382EA",
+      "bird": "#00D8B4",
+      "rabbit": "#FF474A",
+      "dark": "#1F1E1E",
+      "light": "#FFF8F1",
+      "muted": "#565656",
+      "white": "#FFFFFF"
+    },
+    "fonts": {
+      "heading": "Inter",
+      "body": "Inter"
+    }
+  },
+  "sections": [
+    {
+      "component": "DesignFoundation",
+      "content": {
+        "eyebrow": "Existing Site Intake",
+        "title": "SMS Pet design system review",
+        "body": "This review page turns the current website into a reusable native Elementor foundation before we redesign the dedicated service pages. It keeps the warm orange-and-cream personality, playful pet energy, and animal-specific service accents already present on the live site.",
+        "typeTitle": "Typography and Actions",
+        "colorTitle": "Core and Service Tokens",
+        "headingSample": "Warm, mobile-first grooming pages with clearer structure",
+        "bodySample": "Inter is the dominant live-site typeface, so this draft centers it across headings, body copy, cards, and calls to action. The decorative script feeling from the current homepage can stay optional later as a small accent layer, not the structural system.",
+        "primaryButton": "View Home",
+        "secondaryButton": "View Dog Grooming",
+        "primaryUrl": "https://smspetgrooming.ae/",
+        "secondaryUrl": "https://smspetgrooming.ae/dog-grooming/"
+      }
+    },
+    {
+      "component": "FeatureGrid",
+      "content": {
+        "eyebrow": "Service Page Direction",
+        "title": "Animal-specific accents on one shared page system",
+        "body": "The live site already uses the same overall layout logic across grooming pages. This review keeps that consistency, then sharpens each page with a distinct but compatible accent color so the future service pages feel related without becoming repetitive.",
+        "items": [
+          {
+            "icon": "fas fa-dog",
+            "title": "Dog Grooming",
+            "body": "High-energy, confidence-led sections anchored by the orange CTA system and a bright green support accent for pricing, proof, and action moments."
+          },
+          {
+            "icon": "fas fa-cat",
+            "title": "Cat Grooming",
+            "body": "A calmer premium variation using the existing blue accent for pricing and card moments while staying inside the same typography and spacing system."
+          },
+          {
+            "icon": "fas fa-dove",
+            "title": "Bird Grooming",
+            "body": "A lighter mint-accent service direction that still shares the same hero, service-card, process, and booking structure as the other animal pages."
+          },
+          {
+            "icon": "fas fa-paw",
+            "title": "Rabbit Grooming",
+            "body": "A softer coral accent for gentle-care messaging, paired with the same reusable booking and package patterns so maintenance stays simple in Elementor."
+          }
+        ]
+      }
+    },
+    {
+      "component": "ContentSplit",
+      "variant": "image-left",
+      "content": {
+        "eyebrow": "Section Rhythm",
+        "title": "What the current site is already doing well",
+        "body": "The existing homepage sets a useful sequence for the redesign work ahead: playful hero, quick trust/process explanation, service discovery, testimonials, and a direct booking prompt. The next phase should preserve that conversion rhythm while cleaning up typography consistency, pricing-card clarity, and reusable section patterns across each service page.",
+        "button": {
+          "text": "View Services",
+          "url": "https://smspetgrooming.ae/services/"
+        },
+        "image": {
+          "url": "https://smspetgrooming.ae/wp-content/uploads/2026/03/sms-vehicle.png",
+          "alt": "SMS Pet mobile grooming vehicle"
+        }
+      }
+    },
+    {
+      "component": "GalleryGrid",
+      "content": {
+        "eyebrow": "Image Treatment",
+        "title": "Photography and illustration style to carry forward",
+        "body": "Rounded, cheerful pet imagery and service illustrations should keep supporting the warm, approachable tone. The redesign work should reuse this friendly visual language while simplifying the layouts around it.",
+        "images": [
+          {
+            "url": "https://smspetgrooming.ae/wp-content/uploads/2026/03/Home-Pets.png",
+            "caption": "Playful hero illustration and pet grouping"
+          },
+          {
+            "url": "https://smspetgrooming.ae/wp-content/uploads/2026/03/Group-58.png",
+            "caption": "Service-process visual support style"
+          },
+          {
+            "url": "https://smspetgrooming.ae/wp-content/uploads/2026/03/service1.png",
+            "caption": "Rounded service-card imagery direction"
+          }
+        ]
+      }
+    },
+    {
+      "component": "FaqList",
+      "content": {
+        "eyebrow": "Review Notes",
+        "title": "What carries forward before the new service pages",
+        "items": [
+          {
+            "question": "What should remain from the current website?",
+            "answer": "The orange primary actions, warm cream surfaces, approachable pet-focused tone, and simple booking-first flow are all worth preserving."
+          },
+          {
+            "question": "What should be tightened up in the redesign phase?",
+            "answer": "Typography should be normalized around Inter, service cards should feel more consistent, and each animal page should reuse one cleaner pricing and add-on structure."
+          },
+          {
+            "question": "Why make a design-system review page first?",
+            "answer": "It gives us one live reference point to approve before we redesign the individual dog, cat, bird, and rabbit service pages as separate conversion pages."
+          }
+        ]
+      }
+    },
+    {
+      "component": "CtaBand",
+      "content": {
+        "title": "Approved foundation for the upcoming service-page redesigns",
+        "body": "Once this review page feels right, we can use it as the live reference system for the separate Dog, Cat, Bird, and Rabbit redesigns you want to tackle next.",
+        "button": {
+          "text": "Open Contact Page",
+          "url": "https://smspetgrooming.ae/contact-us/"
+        }
+      }
+    }
+  ]
+}

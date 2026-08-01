@@ -1,23 +1,24 @@
-# Project-specific data (contains client content & API keys)
+# Dependencies and generated output
+node_modules/
+build/
 projects/
+coverage/
+*.log
+*.zip
 
-# Runtime data
-config/page-mapping.json
+# Local credentials and machine-specific configuration
+.env
+.env.*
+!.env.example
+config/sites.json
+config/sites.local.json
+config/*.local.json
 
-# Secrets — never commit real API keys
-# config/sites.json is committed with placeholder values only
-config/fireworks.json
+# Codebase Memory keeps only its portable team artifact in Git.
+.codebase-memory/*
+!.codebase-memory/graph.db.zst
 
-# Generated artifacts
-plugin/ai-elementor-sync.zip
-
-# OS files
+# Operating-system metadata
 Thumbs.db
 .DS_Store
 desktop.ini
-
-# Editor files
-.vscode/
-*.swp
-*.swo
-*~

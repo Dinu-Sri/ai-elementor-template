@@ -1,0 +1,39 @@
+{
+  "site": "SMS Pet Grooming Blog Theme Builder",
+  "slug": "sms-pet-blog-theme-builder",
+  "site_url": "https://smspetgrooming.ae",
+  "menus": [],
+  "pages": [],
+  "templates": [
+    {
+      "key": "blog-theme-archive",
+      "title": "SMS Pet Blog Archive - 2026",
+      "existingId": 1236,
+      "type": "archive",
+      "conditions": [
+        "include/archive"
+      ],
+      "nativePayload": "sites/sms-pet-grooming/content/elementor/blog/blog-theme-archive-1236.payload.json"
+    },
+    {
+      "key": "blog-theme-single",
+      "title": "SMS Pet Blog Single - 2026",
+      "existingId": 1237,
+      "type": "single-post",
+      "conditions": [
+        "include/singular/post"
+      ],
+      "lintMode": "approved-baseline",
+      "nativePayload": "sites/sms-pet-grooming/content/elementor/blog/blog-theme-single-live-1237.payload.json"
+    },
+    {
+      "key": "legacy-blog-single-inactive",
+      "title": "Legacy Blog Single - Inactive",
+      "existingId": 521,
+      "type": "single-post",
+      "conditions": [],
+      "nativePayload": "sites/sms-pet-grooming/content/elementor/blog/blog-single-legacy-521-inactive.payload.json"
+    }
+  ],
+  "smoke": []
+}

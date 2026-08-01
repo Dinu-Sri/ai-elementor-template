@@ -41,7 +41,7 @@ foreach ($pid in $data.products.PSObject.Properties.Name) {
         }
         
         # Use direct API call for reliability
-        $headers = @{ "X-API-Key" = "9AaR24DKzQMZK1vk29bTKR1xXAGHnwZ3mZwXxPDg"; "Content-Type" = "application/json" }
+        $headers = @{ "X-API-Key" = $env:WATERCOLOR_LK_API_KEY; "Content-Type" = "application/json" }
         $apiBody = @{
             product_id = [int]$pid
             author     = $review.author
@@ -103,7 +103,7 @@ $salesData = @{
     "2997" = @{ sales = 18; name = "Sicon Brush" }        # 3 reviews -> 18 sold
 }
 
-$headers = @{ "X-API-Key" = "9AaR24DKzQMZK1vk29bTKR1xXAGHnwZ3mZwXxPDg"; "Content-Type" = "application/json" }
+$headers = @{ "X-API-Key" = $env:WATERCOLOR_LK_API_KEY; "Content-Type" = "application/json" }
 
 foreach ($pid in $salesData.Keys) {
     $info = $salesData[$pid]

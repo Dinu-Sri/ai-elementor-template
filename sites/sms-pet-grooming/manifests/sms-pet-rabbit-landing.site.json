@@ -1,0 +1,32 @@
+{
+  "site": "SMS Pet Grooming - Rabbit Landing Page",
+  "slug": "sms-pet-rabbit-landing",
+  "site_url": "https://smspetgrooming.ae",
+  "menus": [],
+  "pages": [
+    {
+      "key": "rabbit-landing-page",
+      "title": "Rabbit Grooming at Home in Dubai",
+      "slug": "rabbit-grooming-at-home-dubai",
+      "path": "/rabbit-grooming-at-home-dubai/",
+      "status": "publish",
+      "existingId": 1209,
+      "nativePayload": "sites/sms-pet-grooming/content/elementor/landing-pages/rabbit-landing.payload.json"
+    }
+  ],
+  "templates": [],
+  "smoke": [
+    {
+      "path": "/rabbit-grooming-at-home-dubai/",
+      "contains": [
+        "Rabbit Grooming at Home in Dubai",
+        "Rabbit Grooming Packages and Prices",
+        "Rabbit Basic Grooming",
+        "AED 260",
+        "A Simple Rabbit Grooming Appointment Flow",
+        "Book Your Rabbit's Grooming Visit"
+      ],
+      "markers": []
+    }
+  ]
+}

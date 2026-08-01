@@ -1,0 +1,88 @@
+{
+  "project": "eternal-moment-studio",
+  "page": {
+    "title": "Native Test - Eternal Moment Studio",
+    "slug": "native-test-eternal-moment",
+    "template": "elementor_header_footer",
+    "status": "draft"
+  },
+  "design": {
+    "route": "editorial-premium",
+    "colors": {
+      "primary": "#6F5A47",
+      "secondary": "#C9A46A",
+      "accent": "#8C6F5A",
+      "dark": "#171310",
+      "light": "#F6F1EA",
+      "white": "#FFFFFF",
+      "muted": "#6F6760"
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Inter"
+    }
+  },
+  "sections": [
+    {
+      "component": "HeroSplit",
+      "variant": "editorial-premium",
+      "content": {
+        "eyebrow": "Eternal Moment Studio",
+        "title": "Quietly cinematic stories for meaningful days",
+        "body": "A refined photography and film experience for couples, families, and celebrations that deserve to be remembered with warmth, texture, and intention.",
+        "primaryButton": { "text": "Book a Session", "url": "/contact/" },
+        "secondaryButton": { "text": "View Portfolio", "url": "/portfolio/" },
+        "image": {
+          "url": "https://picsum.photos/seed/eternal-moment-editorial/900/720",
+          "alt": "Editorial wedding photography moment"
+        }
+      }
+    },
+    {
+      "component": "StatsBand",
+      "content": {
+        "items": [
+          { "number": "10", "suffix": "+", "label": "Years of visual storytelling" },
+          { "number": "450", "suffix": "+", "label": "Sessions and celebrations" },
+          { "number": "72", "suffix": "h", "label": "Preview delivery guidance" },
+          { "number": "4.9", "suffix": "/5", "label": "Client experience rating" }
+        ]
+      }
+    },
+    {
+      "component": "FeatureGrid",
+      "content": {
+        "eyebrow": "What we create",
+        "title": "Native Elementor sections with an editorial design direction",
+        "body": "This draft is generated through the new blueprint compiler using Elementor-native widgets and containers only.",
+        "items": [
+          { "icon": "fas fa-camera", "title": "Photography", "body": "Editable service cards using native icon, heading, and text widgets." },
+          { "icon": "fas fa-film", "title": "Films", "body": "Responsive card layouts without HTML widgets or custom code blocks." },
+          { "icon": "fas fa-images", "title": "Albums", "body": "A controlled layout system that can be manually refined in Elementor." }
+        ]
+      }
+    },
+    {
+      "component": "ContentSplit",
+      "variant": "image-left",
+      "content": {
+        "eyebrow": "Native-first test",
+        "title": "Built to be edited later, not locked inside code",
+        "body": "The page structure is compiled from a high-level blueprint into native Elementor containers, headings, text, buttons, images, icons, counters, and responsive settings.",
+        "button": { "text": "Discuss the Experience", "url": "/contact/" },
+        "image": {
+          "url": "https://picsum.photos/seed/eternal-moment-detail/850/650",
+          "alt": "Warm editorial photography detail"
+        }
+      }
+    },
+    {
+      "component": "CtaBand",
+      "content": {
+        "title": "This is a draft reliability test",
+        "body": "Review it in Elementor and tell me which controls feel editable and which sections need better native behavior.",
+        "button": { "text": "Open Contact", "url": "/contact/" }
+      }
+    }
+  ]
+}

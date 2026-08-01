@@ -1,0 +1,65 @@
+{
+  "version": "0.3.0",
+  "components": {
+    "HeroSplit": {
+      "purpose": "Above-the-fold split hero with editable heading, copy, buttons, and image.",
+      "native_widgets": ["heading", "text-editor", "button", "image"],
+      "layout": "full section -> boxed row -> text column + media column",
+      "responsive": "tablet and mobile stack columns to 100%"
+    },
+    "HeaderNavMenu": {
+      "purpose": "Responsive site header using a real WordPress nav menu and Elementor Pro nav-menu widget.",
+      "native_widgets": ["heading", "nav-menu"],
+      "layout": "full header section -> boxed nowrap row -> brand column + nav menu column",
+      "responsive": "nav-menu collapses at the configured Elementor breakpoint and uses native mobile toggle controls"
+    },
+    "DesignFoundation": {
+      "purpose": "Design-system foundation section for typography, colors, and button styles before site pages are built.",
+      "native_widgets": ["heading", "text-editor", "button"],
+      "layout": "full section -> boxed column -> heading group -> typography/actions column + color swatch grid",
+      "responsive": "split on desktop, stacked on tablet and mobile"
+    },
+    "GalleryGrid": {
+      "purpose": "Reusable native image gallery for portfolios, albums, and visual proof sections.",
+      "native_widgets": ["image", "heading"],
+      "layout": "full section -> boxed column -> heading group -> image grid",
+      "responsive": "3 columns desktop, 2 tablet, 1 mobile"
+    },
+    "FeatureGrid": {
+      "purpose": "Editable card grid for services, benefits, or features.",
+      "native_widgets": ["icon", "heading", "text-editor"],
+      "layout": "full section -> boxed column -> heading group -> wrapping row of cards",
+      "responsive": "3 columns desktop, 2 tablet, 1 mobile"
+    },
+    "ContentSplit": {
+      "purpose": "Story or about section with text and image.",
+      "native_widgets": ["heading", "text-editor", "button", "image"],
+      "layout": "full section -> boxed row -> media + content",
+      "responsive": "tablet and mobile stack columns"
+    },
+    "StatsBand": {
+      "purpose": "Proof band with native counter widgets.",
+      "native_widgets": ["counter"],
+      "layout": "full section -> boxed row -> counters",
+      "responsive": "4 columns desktop, 2 tablet, 1 mobile"
+    },
+    "CtaBand": {
+      "purpose": "Focused call-to-action band.",
+      "native_widgets": ["heading", "text-editor", "button"],
+      "layout": "full section -> narrow boxed column",
+      "responsive": "centered at all breakpoints"
+    },
+    "FaqList": {
+      "purpose": "Editable FAQ list using native toggle widget when supported, otherwise structured heading/text cards.",
+      "native_widgets": ["toggle", "heading", "text-editor"],
+      "layout": "full section -> narrow boxed column",
+      "responsive": "single column"
+    },
+    "ContactPanel": {
+      "purpose": "Contact information and Elementor Pro form split layout.",
+      "native_widgets": ["heading", "text-editor", "icon-list", "form"],
+      "layout": "full section -> boxed row -> contact column + form column",
+      "responsive": "tablet and mobile stack columns"
+    }
+  }
+}

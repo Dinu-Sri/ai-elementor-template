@@ -1,0 +1,58 @@
+{
+  "kind": "template",
+  "project": "eternal-moment-studio",
+  "template": {
+    "title": "Native Test Footer",
+    "type": "footer",
+    "status": "publish"
+  },
+  "design": {
+    "route": "editorial-premium",
+    "colors": {
+      "primary": "#6F5A47",
+      "secondary": "#C9A46A",
+      "accent": "#8C6F5A",
+      "dark": "#171310",
+      "light": "#F6F1EA",
+      "white": "#FFFFFF",
+      "muted": "#6F6760"
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Inter"
+    }
+  },
+  "sections": [
+    {
+      "component": "FooterMultiColumn",
+      "content": {
+        "brand": "Eternal Moment",
+        "description": "A native-first footer template generated through the blueprint compiler for Elementor Library testing.",
+        "columns": [
+          {
+            "title": "Studio",
+            "links": [
+              { "label": "About", "url": "{{page:about}}" },
+              { "label": "Portfolio", "url": "{{page:portfolio}}" }
+            ]
+          },
+          {
+            "title": "Services",
+            "links": [
+              { "label": "Photography", "url": "{{page:services}}" },
+              { "label": "Contact", "url": "{{page:contact}}" }
+            ]
+          },
+          {
+            "title": "Test Pages",
+            "links": [
+              { "label": "Home Draft", "url": "/?page_id=12" },
+              { "label": "Services", "url": "{{page:services}}" }
+            ]
+          }
+        ],
+        "copyright": "Native Elementor Bridge test footer. Generated for workflow validation."
+      }
+    }
+  ]
+}

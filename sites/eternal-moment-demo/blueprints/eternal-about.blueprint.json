@@ -1,0 +1,46 @@
+{
+  "project": "eternal-moment-studio",
+  "page": {
+    "title": "Native Test - About",
+    "slug": "native-test-about",
+    "template": "elementor_header_footer",
+    "status": "publish"
+  },
+  "design": {
+    "route": "editorial-premium",
+    "colors": {
+      "primary": "#6F5A47",
+      "secondary": "#C9A46A",
+      "accent": "#8C6F5A",
+      "dark": "#171310",
+      "light": "#F6F1EA",
+      "white": "#FFFFFF",
+      "muted": "#6F6760"
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Inter"
+    }
+  },
+  "sections": [
+    {
+      "component": "HeroSplit",
+      "content": {
+        "eyebrow": "About",
+        "title": "A studio built around calm, careful storytelling",
+        "body": "This native test page gives the generated header and footer real navigation targets while preserving editable Elementor structure.",
+        "primaryButton": { "text": "View Portfolio", "url": "/native-test-portfolio/" },
+        "secondaryButton": { "text": "Contact", "url": "/native-test-contact/" },
+        "image": { "url": "https://picsum.photos/seed/eternal-about/900/720", "alt": "Studio portrait session" }
+      }
+    },
+    {
+      "component": "CtaBand",
+      "content": {
+        "title": "Native page generated for menu testing",
+        "body": "This page can be edited in Elementor and used as a reliable menu target.",
+        "button": { "text": "Back to Test Home", "url": "/?page_id=12" }
+      }
+    }
+  ]
+}

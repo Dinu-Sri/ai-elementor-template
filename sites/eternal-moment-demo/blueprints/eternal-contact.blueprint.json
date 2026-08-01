@@ -1,0 +1,43 @@
+{
+  "project": "eternal-moment-studio",
+  "page": {
+    "title": "Native Test - Contact",
+    "slug": "native-test-contact",
+    "template": "elementor_header_footer",
+    "status": "publish"
+  },
+  "design": {
+    "route": "editorial-premium",
+    "colors": {
+      "primary": "#6F5A47",
+      "secondary": "#C9A46A",
+      "accent": "#8C6F5A",
+      "dark": "#171310",
+      "light": "#F6F1EA",
+      "white": "#FFFFFF",
+      "muted": "#6F6760"
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Inter"
+    }
+  },
+  "sections": [
+    {
+      "component": "ContactPanel",
+      "content": {
+        "eyebrow": "Contact",
+        "title": "Start a conversation about your date",
+        "body": "This native contact panel validates the Elementor Pro form widget path through the new compiler."
+      }
+    },
+    {
+      "component": "CtaBand",
+      "content": {
+        "title": "Contact test page",
+        "body": "Used by generated header and footer call-to-action links.",
+        "button": { "text": "View Services", "url": "/native-test-services/" }
+      }
+    }
+  ]
+}

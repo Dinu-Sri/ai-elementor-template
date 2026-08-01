@@ -1,0 +1,43 @@
+{
+  "version": "0.1.0",
+  "presets": {
+    "proof-band-4": {
+      "solver": "solveGrid",
+      "desktopColumns": 4,
+      "tabletColumns": 2,
+      "safetyPercent": 4,
+      "desktopGap": 0,
+      "tabletGap": 24,
+      "mobileGap": 16,
+      "justify": "space-between",
+      "align": "stretch"
+    },
+    "card-grid-3": {
+      "solver": "solveGrid",
+      "desktopColumns": 3,
+      "tabletColumns": 2,
+      "safetyPercent": 3,
+      "desktopGap": 24,
+      "tabletGap": 20,
+      "mobileGap": 16,
+      "distributeCompleteRows": true,
+      "align": "stretch"
+    },
+    "hero-split-55-40": {
+      "solver": "solveSplit",
+      "columns": [55, 40],
+      "maxTotal": 94,
+      "desktopGap": 56,
+      "tabletGap": 32,
+      "mobileGap": 28
+    },
+    "content-split-45-50": {
+      "solver": "solveSplit",
+      "columns": [45, 50],
+      "maxTotal": 94,
+      "desktopGap": 56,
+      "tabletGap": 32,
+      "mobileGap": 24
+    }
+  }
+}

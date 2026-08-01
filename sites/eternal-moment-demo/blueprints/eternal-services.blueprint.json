@@ -1,0 +1,49 @@
+{
+  "project": "eternal-moment-studio",
+  "page": {
+    "title": "Native Test - Services",
+    "slug": "native-test-services",
+    "template": "elementor_header_footer",
+    "status": "publish"
+  },
+  "design": {
+    "route": "editorial-premium",
+    "colors": {
+      "primary": "#6F5A47",
+      "secondary": "#C9A46A",
+      "accent": "#8C6F5A",
+      "dark": "#171310",
+      "light": "#F6F1EA",
+      "white": "#FFFFFF",
+      "muted": "#6F6760"
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Inter"
+    }
+  },
+  "sections": [
+    {
+      "component": "ContentSplit",
+      "variant": "image-left",
+      "content": {
+        "eyebrow": "Services",
+        "title": "Photography, films, and albums with a native layout baseline",
+        "body": "This service page validates split layouts and navigation behavior across generated site pages.",
+        "button": { "text": "View Portfolio", "url": "/native-test-portfolio/" },
+        "image": { "url": "https://picsum.photos/seed/eternal-services/850/650", "alt": "Camera and album on table" }
+      }
+    },
+    {
+      "component": "StatsBand",
+      "content": {
+        "items": [
+          { "number": "3", "suffix": "", "label": "Core services" },
+          { "number": "2", "suffix": "wk", "label": "Typical planning window" },
+          { "number": "1", "suffix": "", "label": "Calm process" },
+          { "number": "100", "suffix": "%", "label": "Native Elementor test" }
+        ]
+      }
+    }
+  ]
+}

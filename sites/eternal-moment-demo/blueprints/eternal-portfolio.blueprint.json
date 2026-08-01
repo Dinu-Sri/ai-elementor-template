@@ -1,0 +1,48 @@
+{
+  "project": "eternal-moment-studio",
+  "page": {
+    "title": "Native Test - Portfolio",
+    "slug": "native-test-portfolio",
+    "template": "elementor_header_footer",
+    "status": "publish"
+  },
+  "design": {
+    "route": "editorial-premium",
+    "colors": {
+      "primary": "#6F5A47",
+      "secondary": "#C9A46A",
+      "accent": "#8C6F5A",
+      "dark": "#171310",
+      "light": "#F6F1EA",
+      "white": "#FFFFFF",
+      "muted": "#6F6760"
+    },
+    "fonts": {
+      "heading": "Playfair Display",
+      "body": "Inter"
+    }
+  },
+  "sections": [
+    {
+      "component": "FeatureGrid",
+      "content": {
+        "eyebrow": "Portfolio",
+        "title": "Three editable portfolio pathways",
+        "body": "Cards are native Elementor containers with icon, heading, and text widgets.",
+        "items": [
+          { "icon": "fas fa-ring", "title": "Weddings", "body": "Editorial wedding moments and quiet celebration details." },
+          { "icon": "fas fa-user", "title": "Portraits", "body": "Warm personal sessions with considered light and composition." },
+          { "icon": "fas fa-camera-retro", "title": "Events", "body": "Visual storytelling for gatherings, launches, and milestones." }
+        ]
+      }
+    },
+    {
+      "component": "CtaBand",
+      "content": {
+        "title": "Portfolio test page",
+        "body": "This page exists so header and footer links can be tested end to end.",
+        "button": { "text": "Contact the Studio", "url": "/native-test-contact/" }
+      }
+    }
+  ]
+}

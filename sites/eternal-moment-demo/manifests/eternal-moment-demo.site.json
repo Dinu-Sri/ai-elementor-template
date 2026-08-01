@@ -1,0 +1,110 @@
+{
+  "site": "Eternal Moment Studio Demo",
+  "slug": "eternal-moment-demo",
+  "site_url": "https://eternalmomentstudio.com",
+  "menus": [
+    {
+      "key": "primary",
+      "name": "Native Test Primary",
+      "slug": "native-test-primary",
+      "items": [
+        { "label": "Design System", "url": "{{page:design-system}}" },
+        { "label": "About", "url": "{{page:about}}" },
+        { "label": "Portfolio", "url": "{{page:portfolio}}" },
+        { "label": "Services", "url": "{{page:services}}" },
+        { "label": "Contact", "url": "{{page:contact}}" },
+        { "label": "Book", "url": "{{page:contact}}" }
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "key": "design-system",
+      "title": "Native Test - Design System",
+      "slug": "native-test-design-system",
+      "path": "/native-test-design-system/",
+      "status": "publish",
+      "existingId": 52,
+      "blueprint": "sites/eternal-moment-demo/blueprints/eternal-design-system.blueprint.json"
+    },
+    {
+      "key": "about",
+      "title": "Native Test - About",
+      "slug": "native-test-about",
+      "path": "/native-test-about/",
+      "status": "publish",
+      "existingId": 14,
+      "blueprint": "sites/eternal-moment-demo/blueprints/eternal-about.blueprint.json"
+    },
+    {
+      "key": "portfolio",
+      "title": "Native Test - Portfolio",
+      "slug": "native-test-portfolio",
+      "path": "/native-test-portfolio/",
+      "status": "publish",
+      "existingId": 15,
+      "blueprint": "sites/eternal-moment-demo/blueprints/eternal-portfolio.blueprint.json"
+    },
+    {
+      "key": "services",
+      "title": "Native Test - Services",
+      "slug": "native-test-services",
+      "path": "/native-test-services/",
+      "status": "publish",
+      "existingId": 16,
+      "blueprint": "sites/eternal-moment-demo/blueprints/eternal-services.blueprint.json"
+    },
+    {
+      "key": "contact",
+      "title": "Native Test - Contact",
+      "slug": "native-test-contact",
+      "path": "/native-test-contact/",
+      "status": "publish",
+      "existingId": 17,
+      "blueprint": "sites/eternal-moment-demo/blueprints/eternal-contact.blueprint.json"
+    }
+  ],
+  "templates": [
+    {
+      "key": "header",
+      "type": "header",
+      "conditions": ["include/general"],
+      "existingId": 18,
+      "blueprint": "sites/eternal-moment-demo/blueprints/eternal-header.blueprint.json"
+    },
+    {
+      "key": "footer",
+      "type": "footer",
+      "conditions": ["include/general"],
+      "existingId": 19,
+      "blueprint": "sites/eternal-moment-demo/blueprints/eternal-footer.blueprint.json"
+    }
+  ],
+  "smoke": [
+    {
+      "path": "/native-test-design-system/",
+      "contains": ["Eternal Moment design system", "Color Tokens", "Portfolio gallery pattern"],
+      "markers": ["elementor-18", "elementor-19"]
+    },
+    {
+      "path": "/native-test-about/",
+      "contains": ["Eternal Moment", "Book", "Native Elementor Bridge test footer"],
+      "markers": ["elementor-18", "elementor-19"]
+    },
+    {
+      "path": "/native-test-portfolio/",
+      "contains": ["Eternal Moment", "Book", "Native Elementor Bridge test footer"],
+      "markers": ["elementor-18", "elementor-19"]
+    },
+    {
+      "path": "/native-test-services/",
+      "contains": ["Eternal Moment", "Book", "Native Elementor Bridge test footer"],
+      "markers": ["elementor-18", "elementor-19"]
+    },
+    {
+      "path": "/native-test-contact/",
+      "contains": ["Eternal Moment", "Book", "Native Elementor Bridge test footer"],
+      "markers": ["elementor-18", "elementor-19"]
+    }
+  ]
+}
