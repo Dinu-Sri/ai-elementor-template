@@ -128,6 +128,15 @@ function validateManifest(manifest) {
     if (item.lintMode && !["strict", "approved-baseline"].includes(item.lintMode)) {
       errors.push(`${item.key} has unsupported lintMode: ${item.lintMode}.`);
     }
+    if (item.approvedBaseline) {
+      if (item.lintMode !== "approved-baseline") {
+        errors.push(`${item.key} approvedBaseline requires lintMode approved-baseline.`);
+      }
+      const baselinePath = path.resolve(root, item.approvedBaseline);
+      if (!fs.existsSync(baselinePath)) {
+        errors.push(`${item.key} approved baseline not found: ${item.approvedBaseline}.`);
+      }
+    }
 
     if (item.kind === "page" && !item.path && !item.slug) {
       errors.push(`${item.key} page needs path or slug for link resolution.`);
@@ -189,14 +198,38 @@ function compileManifest(manifest, options = {}) {
   return results;
 }
 
-function applyLintPolicy(item, report) {
+function blockingIssueKey(issue) {
+  return `${issue.severity}\u0000${issue.path}\u0000${issue.message}`;
+}
+
+function approvedBaselineReport(item) {
+  if (!item.approvedBaseline) return null;
+  return validateTemplate(readJson(path.resolve(root, item.approvedBaseline)));
+}
+
+function applyLintPolicy(item, report, baselineReport = approvedBaselineReport(item)) {
   const lintMode = item.lintMode || "strict";
   const blockingIssues = report.issues.filter((issue) => issue.severity === "error");
+  const inheritedCounts = new Map();
+  for (const issue of (baselineReport?.issues || []).filter((entry) => entry.severity === "error")) {
+    const key = blockingIssueKey(issue);
+    inheritedCounts.set(key, (inheritedCounts.get(key) || 0) + 1);
+  }
+  const unapprovedBlockingIssues = blockingIssues.filter((issue) => {
+    const key = blockingIssueKey(issue);
+    const remaining = inheritedCounts.get(key) || 0;
+    if (remaining === 0) return true;
+    inheritedCounts.set(key, remaining - 1);
+    return false;
+  });
+  const inheritedBlockingIssueCount = blockingIssues.length - unapprovedBlockingIssues.length;
   return {
-    ok: lintMode === "approved-baseline" ? blockingIssues.length === 0 : report.ok,
+    ok: lintMode === "approved-baseline" ? unapprovedBlockingIssues.length === 0 : report.ok,
     strict_ok: report.ok,
     lint_mode: lintMode,
-    blocking_issue_count: blockingIssues.length
+    blocking_issue_count: unapprovedBlockingIssues.length,
+    inherited_blocking_issue_count: inheritedBlockingIssueCount,
+    total_blocking_issue_count: blockingIssues.length
   };
 }
 

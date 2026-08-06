@@ -19,9 +19,17 @@ Native Elementor Bridge v0.7.0 is active on `https://nice.lk`. Elementor, Elemen
 
 ## Product Import
 
-The normalized CCC catalog was imported on 2026-08-06 using stable bridge source keys. The operation created four product categories, mapped 120 product images, and staged 88 products as drafts: 54 simple products and 34 variable products with 119 WooCommerce child variations. All post-write count, type, status, and variation checks passed.
+The normalized CCC catalog was imported on 2026-08-06 using stable bridge source keys. The operation created four product categories, mapped 120 product images, and initially staged 88 products as drafts: 54 simple products and 34 variable products with 119 WooCommerce child variations. All post-write count, type, status, and variation checks passed. The 88 imported products were subsequently published by the owner.
 
-The 173 workbook source rows include the 54 rows represented by simple products, so they do not all become child variation posts. Missing prices, four products without mapped images, one blank stock quantity, and category or attribute decisions remain draft-review blockers. No imported product should be published until those fields are owner-approved.
+The 173 workbook source rows include the 54 rows represented by simple products, so they do not all become child variation posts. The original import audit recorded missing prices, four products without mapped images, one blank stock quantity, and category or attribute decisions for owner review; retain that audit when making later catalog edits.
+
+## Photobook Shop Archive
+
+The published catalog increased the main WooCommerce shop query from 31 photobooks to 119 products. Existing Theme Builder template `6567`, `Shop Photobooks Archive`, was updated in place on 2026-08-06 without changing its design or display conditions.
+
+The shop now resolves its unfiltered and `All` states to the four album-size categories: `10x15`, `12x17`, `6x12`, and `8x12`. The Personalized Gifts, Mini Me, T-Shirt Printing, and Corporate Gifts categories are omitted from the template's album-theme chips. WooCommerce performs the category query, so the result count and pagination remain correct: 31 albums across pages of 24 and 7 products.
+
+Template `6916`, `General Product Archive`, remains responsible for the published new-product category archives. Rebuild and deploy template `6567` only through `manifests/nice-lk-photobook-archive.site.json`; its isolated manifest prevents an archive update from touching the homepage.
 
 ## Homepage Preview
 

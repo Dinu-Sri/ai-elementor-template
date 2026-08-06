@@ -1,0 +1,34 @@
+{
+  "site": "Nice.lk Photobook Archive",
+  "slug": "nice-lk-photobook-archive",
+  "site_url": "https://nice.lk",
+  "menus": [],
+  "pages": [],
+  "templates": [
+    {
+      "key": "shop-photobooks-archive",
+      "title": "Shop Photobooks Archive",
+      "existingId": 6567,
+      "type": "product-archive",
+      "conditions": [
+        "include/woocommerce/shop_page",
+        "include/product_archive/product_cat",
+        "include/product_archive"
+      ],
+      "nativePayload": "sites/nice-lk/content/templates/shop-photobooks-archive-6567.elementor.json",
+      "lintMode": "approved-baseline",
+      "approvedBaseline": "sites/nice-lk/content/templates/shop-photobooks-archive-6567.live-baseline.json"
+    }
+  ],
+  "smoke": [
+    {
+      "path": "/shop/?product_cat=10x15%2C12x17%2C6x12%2C8x12",
+      "contains": [
+        "31 results"
+      ],
+      "markers": [
+        "snfThemeChips"
+      ]
+    }
+  ]
+}

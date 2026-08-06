@@ -7,6 +7,8 @@
 - Added nested variation upserts with stable source keys or SKUs, stock, prices, attribute values, descriptions, and images.
 - Added WooCommerce diagnostics to bridge status and the WordPress settings screen.
 - Added a resumable, draft-only nice.lk catalog importer with pre-write snapshots, media reuse, category creation, variation normalization, and post-write verification.
+- Added approved-live-baseline lint comparison so inherited blocking findings remain reported while new blocking regressions still stop deployment.
+- Added an isolated nice.lk photobook archive workflow that preserves the existing design while keeping the shop query, filters, result counts, and pagination limited to album products.
 
 ## 0.6.0 - 2026-08-01
 

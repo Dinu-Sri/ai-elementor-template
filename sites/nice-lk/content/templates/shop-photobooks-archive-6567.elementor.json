@@ -1,0 +1,441 @@
+{
+  "title": "Shop Photobooks Archive",
+  "type": "product-archive",
+  "status": "publish",
+  "conditions": [
+    "include/woocommerce/shop_page",
+    "include/product_archive/product_cat/186",
+    "include/product_archive/product_cat/187",
+    "include/product_archive/product_cat/188",
+    "include/product_archive/product_cat/189"
+  ],
+  "template": "default",
+  "page_settings": "",
+  "elementor_data": [
+    {
+      "id": "snshop01",
+      "elType": "container",
+      "settings": {
+        "content_width": "full",
+        "flex_direction": "column",
+        "background_background": "classic",
+        "background_color": "#F5F7FB",
+        "padding": {
+          "unit": "px",
+          "top": "12",
+          "right": "18",
+          "bottom": "12",
+          "left": "18",
+          "isLinked": false
+        },
+        "padding_tablet": {
+          "unit": "px",
+          "top": "10",
+          "right": "18",
+          "bottom": "10",
+          "left": "18",
+          "isLinked": false
+        },
+        "padding_mobile": {
+          "unit": "px",
+          "top": "8",
+          "right": "14",
+          "bottom": "8",
+          "left": "14",
+          "isLinked": false
+        },
+        "html_tag": "section",
+        "jedv_conditions": [
+          {
+            "_id": "575ea91"
+          }
+        ]
+      },
+      "elements": [
+        {
+          "id": "snshop02",
+          "elType": "container",
+          "settings": {
+            "boxed_width": {
+              "unit": "px",
+              "size": 1280,
+              "sizes": []
+            },
+            "flex_direction": "column",
+            "flex_gap": {
+              "column": "0",
+              "row": "14",
+              "unit": "px",
+              "isLinked": false
+            },
+            "jedv_conditions": [
+              {
+                "_id": "61b6132"
+              }
+            ]
+          },
+          "elements": [
+            {
+              "id": "snshop06",
+              "elType": "widget",
+              "settings": {
+                "html": "<style>\n.snf{font-family:Manrope,sans-serif}\n.snf-shell{display:flex;flex-direction:column;gap:12px}\n.snf-bar{display:flex;flex-direction:column;gap:12px;padding:16px;border:1px solid #E5E7EB;border-radius:20px;background:#fff;box-shadow:0 16px 40px rgba(17,24,39,.06)}\n.snf-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}\n.snf-chip-wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}\n.snf-lbl{font-weight:800;color:#111827;font-size:15px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;min-width:96px}\n.snf-chip{display:inline-flex;align-items:center;padding:9px 16px;border:1px solid #E5E7EB;border-radius:999px;background:#fff;color:#374151;text-decoration:none;font-size:15px;line-height:1;transition:all .16s ease;white-space:nowrap}\n.snf-chip:hover,.snf-chip.is-active{background:#6A4CFF;color:#fff!important;border-color:#6A4CFF;box-shadow:0 10px 22px rgba(106,76,255,.2)}\n.snf-main{display:flex;gap:12px;flex-wrap:wrap}\n.snf-panel{flex:1 1 320px;border:1px solid #E5E7EB;border-radius:16px;padding:12px 14px;background:#FAFBFF}\n.snf-panel h4{margin:0 0 10px;font-size:13px;color:#6B7280;font-weight:800;text-transform:uppercase;letter-spacing:.8px}\n.snf-rw{position:relative;height:28px}\n.snf-track{position:absolute;top:50%;left:0;right:0;height:4px;border-radius:2px;background:#E5E7EB;transform:translateY(-50%);pointer-events:none}\n.snf-fill{position:absolute;top:50%;left:0;height:4px;border-radius:2px;background:#6A4CFF;transform:translateY(-50%);pointer-events:none}\n.snf-rw input[type=range]{-webkit-appearance:none;appearance:none;position:absolute;top:0;left:0;width:100%;height:100%;background:transparent;outline:none;margin:0}#snfMin{z-index:3}#snfMax{z-index:4}\n.snf-rw input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#6A4CFF;border:2.5px solid #fff;box-shadow:0 1px 7px rgba(106,76,255,.42);cursor:grab}\n.snf-rw input[type=range]:active::-webkit-slider-thumb{cursor:grabbing;transform:scale(1.1)}\n.snf-rw input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#6A4CFF;border:2.5px solid #fff;box-shadow:0 1px 7px rgba(106,76,255,.42);cursor:grab}\n.snf-rw input[type=range]::-moz-range-track{background:transparent}\n.snf-vals{display:flex;justify-content:space-between;font-size:13px;color:#374151;font-weight:700;margin-top:4px}\n.snf-sg{display:flex;gap:7px;flex-wrap:wrap;align-items:center}\n.snf-sz{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border:1px solid #E5E7EB;border-radius:10px;padding:9px 12px;background:#fff;color:#111827;font-size:15px;font-weight:700;line-height:1;transition:all .16s}\n.snf-sz:hover,.snf-sz.is-active{border-color:#6A4CFF;color:#6A4CFF;background:#F5F3FF}\n.snf-ic{display:inline-block;border:2px solid currentColor;border-radius:2px;flex-shrink:0}\n.r10x15{width:10px;height:15px}.r12x17{width:12px;height:17px}.r6x12{width:17px;height:11px}.r8x12{width:14px;height:10px}\n.elementor-widget-wc-archive-products .woocommerce-result-count,.elementor-widget-wc-archive-products .woocommerce-ordering{margin:0 0 18px;color:#4B5563;font-family:Manrope,sans-serif;font-size:13px}\n.elementor-widget-wc-archive-products ul.products{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin:0!important;padding:0!important}\n.elementor-widget-wc-archive-products ul.products li.product{width:auto!important;float:none!important;margin:0!important;padding:12px 12px 16px!important;background:#fff;border:1px solid #E6EAF2;border-radius:18px;box-shadow:0 16px 36px rgba(17,24,39,.06);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;overflow:hidden}\n.elementor-widget-wc-archive-products ul.products li.product:hover{transform:translateY(-4px);border-color:#D6D9F6;box-shadow:0 22px 44px rgba(17,24,39,.1)}\n.elementor-widget-wc-archive-products ul.products li.product a img{margin-bottom:12px!important;border-radius:14px;aspect-ratio:4/5;object-fit:cover;background:#F8FAFC}\n.elementor-widget-wc-archive-products ul.products li.product .woocommerce-loop-product__title{font-family:Poppins,sans-serif!important;font-size:15px!important;font-weight:700!important;line-height:1.4!important;color:#111827!important;min-height:42px;margin:0 0 6px!important}\n.elementor-widget-wc-archive-products ul.products li.product .price{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-family:Manrope,sans-serif!important;font-size:15px!important;font-weight:800!important;color:#6A4CFF!important;margin:0 0 12px!important}\n.elementor-widget-wc-archive-products ul.products li.product .price del{color:#94A3B8!important;font-weight:600}\n.elementor-widget-wc-archive-products ul.products li.product .price ins{text-decoration:none}\n.elementor-widget-wc-archive-products ul.products li.product .button{display:inline-flex!important;align-items:center;justify-content:center;min-height:42px;padding:10px 16px!important;border-radius:12px!important;border:1px solid #111827!important;background:#111827!important;color:#fff!important;font-family:Manrope,sans-serif!important;font-size:12px!important;font-weight:800!important;letter-spacing:.4px!important;text-transform:uppercase!important}\n.elementor-widget-wc-archive-products ul.products li.product .button:hover{background:#6A4CFF!important;border-color:#6A4CFF!important}\n.elementor-widget-wc-archive-products span.onsale{top:12px!important;left:12px!important;right:auto!important;min-height:auto!important;line-height:1!important;padding:7px 10px!important;border-radius:999px!important;background:#EF4444!important;color:#fff!important;font-size:11px!important;font-weight:800!important;text-transform:uppercase!important}\n.elementor-widget-wc-archive-products nav.woocommerce-pagination{margin-top:28px}\n.elementor-widget-wc-archive-products nav.woocommerce-pagination ul{border:0!important;display:flex;gap:8px;flex-wrap:wrap;padding:0}\n.elementor-widget-wc-archive-products nav.woocommerce-pagination ul li{border:0!important}\n.elementor-widget-wc-archive-products nav.woocommerce-pagination ul li a,.elementor-widget-wc-archive-products nav.woocommerce-pagination ul li span{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:42px;border-radius:12px;border:1px solid #D6DBE7;background:#fff;color:#111827;font-family:Manrope,sans-serif;font-size:13px;font-weight:700}\n.elementor-widget-wc-archive-products nav.woocommerce-pagination ul li span.current,.elementor-widget-wc-archive-products nav.woocommerce-pagination ul li a:hover{background:#6A4CFF;color:#fff;border-color:#6A4CFF}\n@media(max-width:1024px){.elementor-widget-wc-archive-products ul.products{grid-template-columns:repeat(2,minmax(0,1fr))}}\n@media(max-width:767px){.snf-bar{padding:12px}.snf-lbl{min-width:100%}.snf-chip,.snf-sz{font-size:14px}.elementor-widget-wc-archive-products ul.products{grid-template-columns:minmax(0,1fr)}.elementor-widget-wc-archive-products ul.products li.product{padding:10px 10px 14px!important}}\n</style>\n<div class='snf'>\n  <div class='snf-shell'>\n    <div class='snf-bar'>\n      <div class='snf-row'>\n        <span class='snf-lbl'>Album Theme</span>\n        <div id='snfThemeChips' class='snf-chip-wrap'>\n          <a class='snf-chip' href='/shop/?product_cat=10x15%2C12x17%2C6x12%2C8x12'>All</a>\n        </div>\n      </div>\n      <div class='snf-row snf-main'>\n        <div class='snf-panel'>\n          <h4>Price Range</h4>\n          <div class='snf-rw'>\n            <div class='snf-track'></div>\n            <div id='snfFill' class='snf-fill'></div>\n            <input id='snfMin' type='range' min='0' max='100000' step='500' value='0'>\n            <input id='snfMax' type='range' min='0' max='100000' step='500' value='100000'>\n          </div>\n          <div class='snf-vals'><span id='snfA'>Rs. 0</span><span id='snfB'>Rs. 100,000</span></div>\n        </div>\n        <div class='snf-panel'>\n          <h4>Album Size</h4>\n          <div class='snf-sg'>\n            <a class='snf-sz' href='/product-category/10x15/'><span class='snf-ic r10x15'></span>10 x 15</a>\n            <a class='snf-sz' href='/product-category/12x17/'><span class='snf-ic r12x17'></span>12 x 17</a>\n            <a class='snf-sz' href='/product-category/6x12/'><span class='snf-ic r6x12'></span>6 x 12</a>\n            <a class='snf-sz' href='/product-category/8x12/'><span class='snf-ic r8x12'></span>8 x 12</a>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<script>\n(function(){\n  var ALBUM_CATEGORY_FILTER='10x15,12x17,6x12,8x12';\n  var EXCLUDED_CATEGORY_SLUGS={'personalized-gifts':true,'mini-me':true,'t-shirt-printing':true,'corporate-gifts':true};\n  var initialUrl=new URL(window.location.href);\n  var initialPath=String(initialUrl.pathname||'').replace(/\\/$/,'');\n  if(/^\\/shop(?:\\/page\\/\\d+)?$/.test(initialPath)&&!initialUrl.searchParams.has('product_cat')){\n    initialUrl.searchParams.set('product_cat',ALBUM_CATEGORY_FILTER);\n    window.location.replace(initialUrl.toString());\n    return;\n  }\n  var MX=100000,STEP=500;\n  var mn=document.getElementById('snfMin'),mx=document.getElementById('snfMax'),fl=document.getElementById('snfFill'),la=document.getElementById('snfA'),lb=document.getElementById('snfB');\n  var chipsHost=document.getElementById('snfThemeChips');\n  if(!mn||!mx||!fl){return;}\n\n  function normalizePath(path){return String(path||'').replace(/\\/$/,'');}\n  function applyActiveState(){\n    var current=normalizePath(window.location.pathname);\n    document.querySelectorAll('.snf-chip,.snf-sz').forEach(function(link){\n      var target=new URL(link.href,window.location.origin);\n      if(normalizePath(target.pathname)===current){\n        link.classList.add('is-active');\n      } else {\n        link.classList.remove('is-active');\n      }\n    });\n  }\n\n  function renderThemeChips(cats){\n    if(!chipsHost){return;}\n    var html=\"<a class='snf-chip' href='/shop/?product_cat=10x15%2C12x17%2C6x12%2C8x12'>All</a>\";\n    cats.forEach(function(cat){\n      if(!cat||!cat.slug||!cat.name){return;}\n      var slugLc=String(cat.slug).toLowerCase();\n      if(EXCLUDED_CATEGORY_SLUGS[slugLc]||slugLc==='10x15'||slugLc==='12x17'||slugLc==='6x12'||slugLc==='8x12'||slugLc==='uncategorized'){return;}\n      var href=cat.link?cat.link:('/product-category/'+encodeURIComponent(cat.slug)+'/');\n      html += \"<a class='snf-chip' href='\"+href+\"'>\"+String(cat.name).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+\"</a>\";\n    });\n    chipsHost.innerHTML=html;\n    applyActiveState();\n  }\n\n  function loadThemeChips(){\n    fetch('/wp-json/wp/v2/product_cat?per_page=100&hide_empty=false&_fields=name,slug,link')\n      .then(function(r){ if(!r.ok){ throw new Error('wp/v2 failed'); } return r.json(); })\n      .then(function(cats){\n        if(Array.isArray(cats)&&cats.length){\n          cats.sort(function(a,b){ return String(a.name).localeCompare(String(b.name)); });\n          renderThemeChips(cats);\n          return;\n        }\n        throw new Error('no categories');\n      })\n      .catch(function(){\n        fetch('/wp-json/wc/store/v1/products/categories?per_page=100')\n          .then(function(r){ return r.ok ? r.json() : []; })\n          .then(function(cats){\n            if(Array.isArray(cats)&&cats.length){\n              cats.sort(function(a,b){ return String(a.name).localeCompare(String(b.name)); });\n              renderThemeChips(cats);\n            } else {\n              applyActiveState();\n            }\n          })\n          .catch(function(){ applyActiveState(); });\n      });\n  }\n\n  var params=new URL(window.location.href).searchParams;\n  var minQ=parseInt(params.get('min_price')||'0',10);\n  var maxQ=parseInt(params.get('max_price')||String(MX),10);\n\n  mn.value=isNaN(minQ)?0:Math.max(0,Math.min(MX-STEP,minQ));\n  mx.value=isNaN(maxQ)?MX:Math.max(STEP,Math.min(MX,maxQ));\n  if(parseInt(mx.value,10)<=parseInt(mn.value,10)){\n    mx.value=Math.min(MX,parseInt(mn.value,10)+STEP);\n  }\n\n  function fmt(n){return 'Rs. '+Number(n).toLocaleString('en-US');}\n  function draw(){\n    var a=parseInt(mn.value,10),b=parseInt(mx.value,10);\n    if(mn===document.activeElement&&a>=b){mn.value=b-STEP;a=b-STEP;}\n    if(mx===document.activeElement&&b<=a){mx.value=a+STEP;b=a+STEP;}\n    fl.style.left=(a/MX*100)+'%';\n    fl.style.width=((b-a)/MX*100)+'%';\n    la.textContent=fmt(a);\n    lb.textContent=fmt(b);\n    mn.style.zIndex=a>(MX/2)?5:3;\n    mx.style.zIndex=b<(MX/2)?5:4;\n  }\n  function go(){\n    var next=new URL(window.location.href);\n    next.searchParams.set('min_price',mn.value);\n    next.searchParams.set('max_price',mx.value);\n    next.searchParams.delete('paged');\n    window.location.href=next.toString();\n  }\n\n  mn.addEventListener('input',draw);\n  mx.addEventListener('input',draw);\n  mn.addEventListener('change',go);\n  mx.addEventListener('change',go);\n\n  loadThemeChips();\n  draw();\n})();\n</script>",
+                "jedv_conditions": [
+                  {
+                    "_id": "77dbf2c"
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "html"
+            }
+          ],
+          "isInner": true
+        }
+      ],
+      "isInner": false
+    },
+    {
+      "id": "snshop07",
+      "elType": "container",
+      "settings": {
+        "content_width": "full",
+        "flex_direction": "column",
+        "background_background": "classic",
+        "background_color": "#F5F7FB",
+        "padding": {
+          "unit": "px",
+          "top": "0",
+          "right": "18",
+          "bottom": "46",
+          "left": "18",
+          "isLinked": false
+        },
+        "padding_tablet": {
+          "unit": "px",
+          "top": "0",
+          "right": "18",
+          "bottom": "34",
+          "left": "18",
+          "isLinked": false
+        },
+        "padding_mobile": {
+          "unit": "px",
+          "top": "0",
+          "right": "14",
+          "bottom": "26",
+          "left": "14",
+          "isLinked": false
+        },
+        "html_tag": "section",
+        "jedv_conditions": [
+          {
+            "_id": "f445f92"
+          }
+        ]
+      },
+      "elements": [
+        {
+          "id": "snshop08",
+          "elType": "container",
+          "settings": {
+            "boxed_width": {
+              "unit": "px",
+              "size": 1280,
+              "sizes": []
+            },
+            "flex_direction": "column",
+            "background_background": "classic",
+            "background_color": "#FFFFFF",
+            "border_border": "solid",
+            "border_color": "#E5E7EB",
+            "border_radius": {
+              "unit": "px",
+              "top": "20",
+              "right": "20",
+              "bottom": "20",
+              "left": "20",
+              "isLinked": true
+            },
+            "box_shadow_box_shadow_type": "yes",
+            "box_shadow_box_shadow": {
+              "horizontal": 0,
+              "vertical": 16,
+              "blur": 40,
+              "spread": 0,
+              "color": "rgba(17, 24, 39, 0.06)"
+            },
+            "padding": {
+              "unit": "px",
+              "top": "8",
+              "right": "22",
+              "bottom": "22",
+              "left": "22",
+              "isLinked": false
+            },
+            "padding_mobile": {
+              "unit": "px",
+              "top": "14",
+              "right": "14",
+              "bottom": "14",
+              "left": "14",
+              "isLinked": false
+            },
+            "jedv_conditions": [
+              {
+                "_id": "4ee11a6"
+              }
+            ]
+          },
+          "elements": [
+            {
+              "id": "snshop09",
+              "elType": "widget",
+              "settings": {
+                "products_related_products_title_text": "Related Products",
+                "products_upsells_title_text": "You may also like...",
+                "products_cross_sells_title_text": "You may be interested in...",
+                "nothing_found_message": "No photobooks match this filter yet.",
+                "column_gap": {
+                  "unit": "px",
+                  "size": 18
+                },
+                "column_gap_mobile": {
+                  "unit": "px",
+                  "size": 12,
+                  "sizes": []
+                },
+                "row_gap": {
+                  "unit": "px",
+                  "size": 18
+                },
+                "row_gap_mobile": {
+                  "unit": "px",
+                  "size": 12,
+                  "sizes": []
+                },
+                "align": "left",
+                "image_border_width": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": true
+                },
+                "image_border_radius": {
+                  "unit": "px",
+                  "top": "14",
+                  "right": "14",
+                  "bottom": "14",
+                  "left": "14",
+                  "isLinked": true
+                },
+                "image_spacing": {
+                  "unit": "px",
+                  "size": 12
+                },
+                "title_color": "#111827",
+                "title_spacing": {
+                  "unit": "px",
+                  "size": 6
+                },
+                "star_color": "#F59E0B",
+                "star_size": {
+                  "unit": "em",
+                  "size": 0.8
+                },
+                "rating_spacing": {
+                  "unit": "px",
+                  "size": 0,
+                  "sizes": []
+                },
+                "price_color": "#6A4CFF",
+                "old_price_color": "#94A3B8",
+                "button_hover_background_color": "#6A4CFF",
+                "button_border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "button_border_radius": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "button_spacing": {
+                  "unit": "px",
+                  "size": 10
+                },
+                "view_cart_color": "#6A4CFF",
+                "box_border_radius": {
+                  "unit": "px",
+                  "size": 18,
+                  "sizes": []
+                },
+                "box_padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "pagination_spacing": {
+                  "unit": "px",
+                  "size": 28,
+                  "sizes": []
+                },
+                "show_pagination_border": "",
+                "pagination_padding": {
+                  "unit": "px",
+                  "size": 12,
+                  "sizes": []
+                },
+                "pagination_link_bg_color": "#FFFFFF",
+                "pagination_link_color_hover": "#FFFFFF",
+                "pagination_link_color_active": "#FFFFFF",
+                "onsale_border_radius": {
+                  "unit": "px",
+                  "size": 20,
+                  "sizes": []
+                },
+                "onsale_width": {
+                  "unit": "px",
+                  "size": 0,
+                  "sizes": []
+                },
+                "onsale_height": {
+                  "unit": "px",
+                  "size": 0,
+                  "sizes": []
+                },
+                "onsale_horizontal_position": "left",
+                "onsale_distance": {
+                  "unit": "px",
+                  "size": 12,
+                  "sizes": []
+                },
+                "nothing_found_color": "#6B7280",
+                "title_typography_typography": "custom",
+                "title_typography_font_family": "Poppins",
+                "title_typography_font_size": {
+                  "unit": "px",
+                  "size": 15,
+                  "sizes": []
+                },
+                "title_typography_font_size_mobile": {
+                  "unit": "px",
+                  "size": 14,
+                  "sizes": []
+                },
+                "title_typography_font_weight": "700",
+                "title_typography_line_height": {
+                  "unit": "em",
+                  "size": 1.4,
+                  "sizes": []
+                },
+                "price_typography_typography": "custom",
+                "price_typography_font_family": "Manrope",
+                "price_typography_font_size": {
+                  "unit": "px",
+                  "size": 15,
+                  "sizes": []
+                },
+                "price_typography_font_size_mobile": {
+                  "unit": "px",
+                  "size": 14,
+                  "sizes": []
+                },
+                "price_typography_font_weight": "800",
+                "price_typography_line_height": {
+                  "unit": "em",
+                  "size": 1.2,
+                  "sizes": []
+                },
+                "old_price_typography_typography": "custom",
+                "old_price_typography_font_family": "Manrope",
+                "old_price_typography_font_size": {
+                  "unit": "px",
+                  "size": 14,
+                  "sizes": []
+                },
+                "old_price_typography_font_weight": "600",
+                "button_typography_typography": "custom",
+                "button_typography_font_family": "Manrope",
+                "button_typography_font_size": {
+                  "unit": "px",
+                  "size": 12,
+                  "sizes": []
+                },
+                "button_typography_font_weight": "800",
+                "button_typography_letter_spacing": {
+                  "unit": "px",
+                  "size": 0.4,
+                  "sizes": []
+                },
+                "button_typography_text_transform": "uppercase",
+                "button_text_padding": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "16",
+                  "bottom": "10",
+                  "left": "16",
+                  "isLinked": false
+                },
+                "button_border_border": "solid",
+                "button_text_color": "#FFFFFF",
+                "button_background_color": "#111827",
+                "button_hover_color": "#FFFFFF",
+                "button_hover_border_color": "#6A4CFF",
+                "button_border_color": "#111827",
+                "onsale_text_background_color": "#EF4444",
+                "onsale_typography_typography": "custom",
+                "onsale_typography_font_family": "Manrope",
+                "onsale_typography_font_size": {
+                  "unit": "px",
+                  "size": 11,
+                  "sizes": []
+                },
+                "onsale_typography_font_weight": "800",
+                "pagination_typography_typography": "custom",
+                "pagination_typography_font_family": "Manrope",
+                "pagination_typography_font_size": {
+                  "unit": "px",
+                  "size": 13,
+                  "sizes": []
+                },
+                "pagination_typography_font_weight": "700",
+                "pagination_link_color": "#111827",
+                "pagination_link_bg_color_hover": "#6A4CFF",
+                "pagination_link_bg_color_active": "#6A4CFF",
+                "nothing_found_typography_typography": "custom",
+                "nothing_found_typography_font_family": "Manrope",
+                "nothing_found_typography_font_size": {
+                  "unit": "px",
+                  "size": 15,
+                  "sizes": []
+                },
+                "jedv_conditions": [
+                  {
+                    "_id": "c96b9a9"
+                  }
+                ]
+              },
+              "elements": [],
+              "widgetType": "wc-archive-products"
+            }
+          ],
+          "isInner": true
+        }
+      ],
+      "isInner": false
+    }
+  ]
+}
