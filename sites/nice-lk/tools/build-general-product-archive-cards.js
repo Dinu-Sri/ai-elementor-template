@@ -8,6 +8,7 @@ const baselineFile = path.join(templateDir, "general-product-archive-6916.live-b
 const outputFile = path.join(templateDir, "general-product-archive-6916.elementor.json");
 const templateId = 6916;
 const widgetId = "455e1c3";
+const giftsCondition = "include/product_archive/product_cat/197";
 
 const cardCss = `selector .woocommerce-result-count,
 selector .woocommerce-ordering {
@@ -69,17 +70,19 @@ selector ul.products li.product img {
 
 selector ul.products li.product .woocommerce-loop-product__title {
   display: -webkit-box;
-  min-height: 63px;
-  max-height: 63px;
-  margin: 0 0 8px !important;
+  min-height: 126px;
+  max-height: 126px;
+  flex: 0 0 126px;
+  margin: 0 0 12px !important;
   overflow: hidden;
+  overflow-wrap: anywhere;
   color: #111827 !important;
   font-family: Poppins, sans-serif !important;
   font-size: 15px !important;
   font-weight: 700 !important;
   line-height: 1.4 !important;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 6;
 }
 
 selector ul.products li.product .price {
@@ -261,6 +264,7 @@ function buildCandidate() {
   widget.settings.columns_mobile = 1;
   widget.settings.nothing_found_message = "No products match this filter yet.";
   widget.settings.custom_css = cardCss;
+  payload.conditions = [...new Set([...(payload.conditions || []), giftsCondition])];
 
   writeJson(outputFile, payload);
   return {

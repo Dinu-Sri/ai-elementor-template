@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Native Elementor Bridge
  * Description: REST bridge for native-first AI Elementor generation. Pushes editable Elementor container/widget JSON and exports saved templates for feedback learning.
- * Version: 0.7.0
+ * Version: 0.8.0
  * Author: Deshtech Global Pvt Ltd
  * License: GPL v2 or later
  * Requires PHP: 7.4
@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('NEB_VERSION', '0.7.0');
+define('NEB_VERSION', '0.8.0');
 
 class Native_Elementor_Bridge {
     private static $instance = null;
@@ -30,6 +30,7 @@ class Native_Elementor_Bridge {
         add_action('rest_api_init', [$this, 'register_routes']);
         add_action('admin_menu', [$this, 'add_settings_page']);
         add_action('wp_head', [$this, 'render_faq_schema'], 30);
+        add_filter('jet-woo-builder/custom-single-template', [$this, 'resolve_jetwoo_single_template'], 20, 1);
         register_activation_hook(__FILE__, [$this, 'activate']);
     }
 
@@ -269,6 +270,42 @@ class Native_Elementor_Bridge {
             'callback' => [$this, 'update_woo_product'],
             'permission_callback' => [$this, 'permission_check'],
         ]);
+
+        register_rest_route($this->namespace, '/jetwoo/templates', [
+            'methods' => 'GET',
+            'callback' => [$this, 'list_jetwoo_templates'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        register_rest_route($this->namespace, '/jetwoo/templates', [
+            'methods' => 'POST',
+            'callback' => [$this, 'create_jetwoo_template'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        register_rest_route($this->namespace, '/jetwoo/templates/(?P<id>\d+)', [
+            'methods' => 'GET',
+            'callback' => [$this, 'get_jetwoo_template'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        register_rest_route($this->namespace, '/jetwoo/templates/(?P<id>\d+)', [
+            'methods' => 'PUT',
+            'callback' => [$this, 'update_jetwoo_template'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        register_rest_route($this->namespace, '/jetwoo/single-rules', [
+            'methods' => 'GET',
+            'callback' => [$this, 'get_jetwoo_single_rules'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        register_rest_route($this->namespace, '/jetwoo/single-rules', [
+            'methods' => 'PUT',
+            'callback' => [$this, 'update_jetwoo_single_rules'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
     }
 
     public function permission_check($request) {
@@ -296,6 +333,8 @@ class Native_Elementor_Bridge {
             'elementor_pro_version' => defined('ELEMENTOR_PRO_VERSION') ? ELEMENTOR_PRO_VERSION : null,
             'woocommerce' => class_exists('WooCommerce') && class_exists('WC_Product'),
             'woocommerce_version' => defined('WC_VERSION') ? WC_VERSION : null,
+            'jetwoo_builder' => post_type_exists('jet-woo-builder'),
+            'jetwoo_single_rules' => count($this->read_jetwoo_single_rules()),
         ];
     }
 
@@ -2012,6 +2051,227 @@ class Native_Elementor_Bridge {
                 return $this->woo_product_response($post->ID, $include_variations);
             }, $query->posts))),
         ];
+    }
+
+    private function require_jetwoo_builder() {
+        if (!post_type_exists('jet-woo-builder')) {
+            return new WP_Error(
+                'neb_jetwoo_unavailable',
+                'JetWooBuilder must be active to use this endpoint.',
+                ['status' => 503]
+            );
+        }
+        return true;
+    }
+
+    private function jetwoo_template_response($post_id, $include_data = true) {
+        $post = get_post($post_id);
+        if (!$post || $post->post_type !== 'jet-woo-builder') {
+            return null;
+        }
+
+        $response = [
+            'id' => (int) $post_id,
+            'title' => get_the_title($post_id),
+            'slug' => $post->post_name,
+            'status' => $post->post_status,
+            'template_type' => get_post_meta($post_id, '_jet_woo_builder_template_type', true) ?: '',
+            'elementor_template_type' => get_post_meta($post_id, '_elementor_template_type', true) ?: '',
+            'edit_url' => admin_url('post.php?post=' . $post_id . '&action=elementor'),
+        ];
+        if ($include_data) {
+            $response['elementor_data'] = $this->get_elementor_data($post_id);
+            $response['page_settings'] = get_post_meta($post_id, '_elementor_page_settings', true);
+        }
+        return $response;
+    }
+
+    private function copy_jetwoo_template_state($source_id, $target_id) {
+        foreach (get_post_meta($source_id) as $key => $values) {
+            if (in_array($key, ['_edit_lock', '_edit_last'], true)) {
+                continue;
+            }
+            delete_post_meta($target_id, $key);
+            foreach ($values as $value) {
+                add_post_meta($target_id, $key, maybe_unserialize($value));
+            }
+        }
+
+        foreach (get_object_taxonomies('jet-woo-builder') as $taxonomy) {
+            $term_ids = wp_get_object_terms($source_id, $taxonomy, ['fields' => 'ids']);
+            if (!is_wp_error($term_ids)) {
+                wp_set_object_terms($target_id, array_map('intval', $term_ids), $taxonomy);
+            }
+        }
+    }
+
+    public function list_jetwoo_templates($request) {
+        $available = $this->require_jetwoo_builder();
+        if (is_wp_error($available)) {
+            return $available;
+        }
+        $include_data = filter_var($request->get_param('include_data'), FILTER_VALIDATE_BOOLEAN);
+        $posts = get_posts([
+            'post_type' => 'jet-woo-builder',
+            'post_status' => ['publish', 'draft', 'pending', 'private'],
+            'posts_per_page' => min(absint($request->get_param('per_page') ?: 100), 250),
+            'orderby' => 'ID',
+            'order' => 'DESC',
+        ]);
+        return [
+            'ok' => true,
+            'templates' => array_values(array_filter(array_map(function ($post) use ($include_data) {
+                return $this->jetwoo_template_response($post->ID, $include_data);
+            }, $posts))),
+        ];
+    }
+
+    public function get_jetwoo_template($request) {
+        $available = $this->require_jetwoo_builder();
+        if (is_wp_error($available)) {
+            return $available;
+        }
+        $template = $this->jetwoo_template_response(absint($request['id']), true);
+        return $template ?: new WP_Error('neb_jetwoo_template_not_found', 'JetWooBuilder template not found.', ['status' => 404]);
+    }
+
+    public function create_jetwoo_template($request) {
+        $available = $this->require_jetwoo_builder();
+        if (is_wp_error($available)) {
+            return $available;
+        }
+        $body = $this->get_json_params($request);
+        $source_id = absint($body['source_id'] ?? 0);
+        if ($source_id) {
+            $source = get_post($source_id);
+            if (!$source || $source->post_type !== 'jet-woo-builder') {
+                return new WP_Error('neb_jetwoo_source_not_found', 'JetWooBuilder source template not found.', ['status' => 404]);
+            }
+        }
+
+        $status = sanitize_key($body['status'] ?? 'draft');
+        if (!in_array($status, ['publish', 'draft', 'pending', 'private'], true)) {
+            $status = 'draft';
+        }
+        $post_id = wp_insert_post([
+            'post_title' => sanitize_text_field($body['title'] ?? 'Native JetWoo Single Product'),
+            'post_status' => $status,
+            'post_type' => 'jet-woo-builder',
+        ], true);
+        if (is_wp_error($post_id)) {
+            return $post_id;
+        }
+
+        if ($source_id) {
+            $this->copy_jetwoo_template_state($source_id, $post_id);
+        }
+        update_post_meta($post_id, '_elementor_edit_mode', 'builder');
+        update_post_meta($post_id, '_elementor_version', defined('ELEMENTOR_VERSION') ? ELEMENTOR_VERSION : '3.0.0');
+        update_post_meta($post_id, '_jet_woo_builder_template_type', sanitize_key($body['template_type'] ?? 'single'));
+        if (array_key_exists('elementor_data', $body)) {
+            $saved_data = $this->normalize_elementor_data($body['elementor_data']);
+            update_post_meta($post_id, '_elementor_data', wp_slash(wp_json_encode($saved_data)));
+        }
+        $this->clear_elementor_cache($post_id);
+        return [
+            'ok' => true,
+            'action' => 'created',
+            'template' => $this->jetwoo_template_response($post_id, true),
+        ];
+    }
+
+    public function update_jetwoo_template($request) {
+        $post_id = absint($request['id']);
+        $post = get_post($post_id);
+        if (!$post || $post->post_type !== 'jet-woo-builder') {
+            return new WP_Error('neb_jetwoo_template_not_found', 'JetWooBuilder template not found.', ['status' => 404]);
+        }
+        $body = $this->get_json_params($request);
+        $post_update = ['ID' => $post_id];
+        if (array_key_exists('title', $body)) {
+            $post_update['post_title'] = sanitize_text_field($body['title']);
+        }
+        if (array_key_exists('status', $body)) {
+            $status = sanitize_key($body['status']);
+            if (!in_array($status, ['publish', 'draft', 'pending', 'private'], true)) {
+                return new WP_Error('neb_invalid_jetwoo_status', 'Unsupported template status.', ['status' => 400]);
+            }
+            $post_update['post_status'] = $status;
+        }
+        if (count($post_update) > 1) {
+            $updated = wp_update_post($post_update, true);
+            if (is_wp_error($updated)) {
+                return $updated;
+            }
+        }
+        if (array_key_exists('template_type', $body)) {
+            update_post_meta($post_id, '_jet_woo_builder_template_type', sanitize_key($body['template_type']));
+        }
+        if (array_key_exists('elementor_data', $body)) {
+            $saved_data = $this->normalize_elementor_data($body['elementor_data']);
+            update_post_meta($post_id, '_elementor_data', wp_slash(wp_json_encode($saved_data)));
+        }
+        if (array_key_exists('page_settings', $body)) {
+            update_post_meta($post_id, '_elementor_page_settings', $body['page_settings']);
+        }
+        $this->clear_elementor_cache($post_id);
+        return [
+            'ok' => true,
+            'action' => 'updated',
+            'template' => $this->jetwoo_template_response($post_id, true),
+        ];
+    }
+
+    private function read_jetwoo_single_rules() {
+        $rules = get_option('native_elementor_bridge_jetwoo_single_rules', []);
+        return is_array($rules) ? $rules : [];
+    }
+
+    public function get_jetwoo_single_rules() {
+        return ['ok' => true, 'rules' => $this->read_jetwoo_single_rules()];
+    }
+
+    public function update_jetwoo_single_rules($request) {
+        $available = $this->require_jetwoo_builder();
+        if (is_wp_error($available)) {
+            return $available;
+        }
+        $body = $this->get_json_params($request);
+        if (!is_array($body['rules'] ?? null)) {
+            return new WP_Error('neb_invalid_jetwoo_rules', 'Rules must be an array.', ['status' => 400]);
+        }
+        $rules = [];
+        foreach ($body['rules'] as $rule) {
+            $category_id = absint($rule['category_id'] ?? 0);
+            $template_id = absint($rule['template_id'] ?? 0);
+            $term = $category_id ? get_term($category_id, 'product_cat') : null;
+            $template = $template_id ? get_post($template_id) : null;
+            if (!$term || is_wp_error($term) || !$template || $template->post_type !== 'jet-woo-builder') {
+                return new WP_Error('neb_invalid_jetwoo_rule_target', 'Every rule needs an existing product category and JetWooBuilder template.', ['status' => 400]);
+            }
+            $rules[$category_id] = ['category_id' => $category_id, 'template_id' => $template_id];
+        }
+        $rules = array_values($rules);
+        update_option('native_elementor_bridge_jetwoo_single_rules', $rules, false);
+        return ['ok' => true, 'rules' => $rules];
+    }
+
+    public function resolve_jetwoo_single_template($template_id) {
+        if (!function_exists('is_product') || !is_product()) {
+            return $template_id;
+        }
+        $product_id = get_queried_object_id();
+        if (!$product_id) {
+            return $template_id;
+        }
+        foreach ($this->read_jetwoo_single_rules() as $rule) {
+            $category_id = absint($rule['category_id'] ?? 0);
+            $candidate_id = absint($rule['template_id'] ?? 0);
+            if ($category_id && $candidate_id && get_post_status($candidate_id) === 'publish' && has_term($category_id, 'product_cat', $product_id)) {
+                return $candidate_id;
+            }
+        }
+        return $template_id;
     }
 
     public function list_blog_authors() {

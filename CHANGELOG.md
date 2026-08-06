@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.0 - 2026-08-06
+
+- Added authenticated JetWooBuilder template listing, export, cloning, and update operations.
+- Added reusable product-category routing rules for JetWooBuilder single-product templates while preserving the configured default template.
+- Added a guarded nice.lk Gifts category assignment workflow that preserves every imported product's original category.
+- Added the Gifts category to the general product archive and expanded equal-height title slots for the longest imported product names.
+
 ## 0.7.0 - 2026-08-06
 
 - Added authenticated WooCommerce product-category listing and idempotent category upserts.

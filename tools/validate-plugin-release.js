@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "..");
-const expectedVersion = process.argv[2] || "0.7.0";
+const expectedVersion = process.argv[2] || "0.8.0";
 const phpPath = path.join(root, "plugin", "native-elementor-bridge", "native-elementor-bridge.php");
 const packageScriptPath = path.join(root, "tools", "package-plugin.ps1");
 const packageJsonPath = path.join(root, "package.json");
@@ -36,7 +36,10 @@ for (const [label, version] of Object.entries(versions)) {
 const requiredRoutes = [
   "/woocommerce/categories",
   "/woocommerce/products",
-  "/woocommerce/products/(?P<id>\\d+)"
+  "/woocommerce/products/(?P<id>\\d+)",
+  "/jetwoo/templates",
+  "/jetwoo/templates/(?P<id>\\d+)",
+  "/jetwoo/single-rules"
 ];
 for (const route of requiredRoutes) {
   if (!php.includes(`'${route}'`)) errors.push(`Missing route ${route}.`);
@@ -55,7 +58,14 @@ for (const requiredMethod of [
   "upsert_woo_product",
   "get_woo_product",
   "update_woo_product",
-  "upsert_woo_variations"
+  "upsert_woo_variations",
+  "list_jetwoo_templates",
+  "create_jetwoo_template",
+  "get_jetwoo_template",
+  "update_jetwoo_template",
+  "get_jetwoo_single_rules",
+  "update_jetwoo_single_rules",
+  "resolve_jetwoo_single_template"
 ]) {
   if (!methodNames.has(requiredMethod)) errors.push(`Missing WooCommerce method ${requiredMethod}.`);
 }

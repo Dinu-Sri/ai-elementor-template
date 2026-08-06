@@ -13,7 +13,8 @@
       "conditions": [
         "include/product_archive/product_cat/196",
         "include/product_archive/product_cat/194",
-        "include/product_archive/product_cat/193"
+        "include/product_archive/product_cat/193",
+        "include/product_archive/product_cat/197"
       ],
       "nativePayload": "sites/nice-lk/content/templates/general-product-archive-6916.elementor.json",
       "lintMode": "approved-baseline",
@@ -25,6 +26,15 @@
       "path": "/product-category/personalized-gifts/",
       "contains": [
         "76 results"
+      ],
+      "markers": [
+        "elementor-element-455e1c3"
+      ]
+    },
+    {
+      "path": "/product-category/gifts/",
+      "contains": [
+        "88 results"
       ],
       "markers": [
         "elementor-element-455e1c3"

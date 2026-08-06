@@ -1,0 +1,17 @@
+{
+  "site": "Nice.lk Gifts Product Template",
+  "slug": "nice-lk-gift-product",
+  "site_url": "https://nice.lk",
+  "menus": [],
+  "pages": [],
+  "templates": [
+    {
+      "key": "gift-product",
+      "title": "Gifts Product",
+      "type": "product",
+      "nativePayload": "sites/nice-lk/content/templates/gift-product.elementor.json",
+      "lintMode": "approved-baseline",
+      "approvedBaseline": "sites/nice-lk/content/templates/photobook-product-246.live-baseline.json"
+    }
+  ]
+}

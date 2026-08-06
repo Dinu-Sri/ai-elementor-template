@@ -26,7 +26,13 @@ const allowedWidgets = new Set([
   "theme-post-content",
   "post-info",
   "post-navigation",
-  "share-buttons"
+  "share-buttons",
+  "woocommerce-product-images",
+  "woocommerce-product-title",
+  "woocommerce-product-price",
+  "woocommerce-product-short-description",
+  "woocommerce-product-add-to-cart",
+  "wc-archive-products"
 ]);
 
 function createState() {
