@@ -9,6 +9,7 @@
 - Added a resumable, draft-only nice.lk catalog importer with pre-write snapshots, media reuse, category creation, variation normalization, and post-write verification.
 - Added approved-live-baseline lint comparison so inherited blocking findings remain reported while new blocking regressions still stop deployment.
 - Added an isolated nice.lk photobook archive workflow that preserves the existing design while keeping the shop query, filters, result counts, and pagination limited to album products.
+- Added an isolated nice.lk general-product archive workflow with balanced 4/2/1 responsive cards, equal title and action alignment, uncropped product media, and guarded deployment to the owner-created template.
 
 ## 0.6.0 - 2026-08-01
 

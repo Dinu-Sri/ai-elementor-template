@@ -31,6 +31,14 @@ The shop now resolves its unfiltered and `All` states to the four album-size cat
 
 Template `6916`, `General Product Archive`, remains responsible for the published new-product category archives. Rebuild and deploy template `6567` only through `manifests/nice-lk-photobook-archive.site.json`; its isolated manifest prevents an archive update from touching the homepage.
 
+## General Product Archive
+
+The owner-created Theme Builder template `6916`, `General Product Archive`, was captured and updated in place on 2026-08-06. Its existing display conditions for Corporate Gifts, Mini Me, and Personalized Gifts were preserved exactly.
+
+The archive now uses a 4-column desktop, 2-column tablet, and 1-column mobile grid. Product cards have consistent white surfaces, borders, shadows, square uncropped media, three-line title areas, and bottom-aligned full-width actions. Desktop sampling confirmed identical 436px card heights and action positions across short and long product names. Responsive Chrome checks found no page-level horizontal overflow.
+
+Use `manifests/nice-lk-general-product-archive.site.json` for all later template `6916` updates. This dedicated manifest cannot modify the photobook archive, homepage, products, or category data.
+
 ## Homepage Preview
 
 A separate draft homepage page was created for review. The first replacement-style concept was rejected in favor of a conservative extension of the current design.

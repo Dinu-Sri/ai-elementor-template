@@ -1,0 +1,34 @@
+{
+  "site": "Nice.lk General Product Archive",
+  "slug": "nice-lk-general-product-archive",
+  "site_url": "https://nice.lk",
+  "menus": [],
+  "pages": [],
+  "templates": [
+    {
+      "key": "general-product-archive",
+      "title": "General Product Archive",
+      "existingId": 6916,
+      "type": "product-archive",
+      "conditions": [
+        "include/product_archive/product_cat/196",
+        "include/product_archive/product_cat/194",
+        "include/product_archive/product_cat/193"
+      ],
+      "nativePayload": "sites/nice-lk/content/templates/general-product-archive-6916.elementor.json",
+      "lintMode": "approved-baseline",
+      "approvedBaseline": "sites/nice-lk/content/templates/general-product-archive-6916.live-baseline.json"
+    }
+  ],
+  "smoke": [
+    {
+      "path": "/product-category/personalized-gifts/",
+      "contains": [
+        "76 results"
+      ],
+      "markers": [
+        "elementor-element-455e1c3"
+      ]
+    }
+  ]
+}

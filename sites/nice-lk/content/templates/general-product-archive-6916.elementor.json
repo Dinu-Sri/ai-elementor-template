@@ -1,0 +1,360 @@
+{
+  "title": "General Product Archive",
+  "type": "product-archive",
+  "status": "publish",
+  "conditions": [
+    "include/product_archive/product_cat/196",
+    "include/product_archive/product_cat/194",
+    "include/product_archive/product_cat/193"
+  ],
+  "template": "default",
+  "page_settings": "",
+  "elementor_data": [
+    {
+      "id": "73ffedeb",
+      "elType": "container",
+      "settings": {
+        "content_width": "full",
+        "flex_direction": "column",
+        "background_background": "classic",
+        "background_color": "#F5F7FB",
+        "padding": {
+          "unit": "px",
+          "top": "18",
+          "right": "18",
+          "bottom": "46",
+          "left": "18",
+          "isLinked": false
+        },
+        "padding_tablet": {
+          "unit": "px",
+          "top": "0",
+          "right": "18",
+          "bottom": "34",
+          "left": "18",
+          "isLinked": false
+        },
+        "padding_mobile": {
+          "unit": "px",
+          "top": "0",
+          "right": "14",
+          "bottom": "26",
+          "left": "14",
+          "isLinked": false
+        },
+        "html_tag": "section",
+        "jedv_conditions": [
+          {
+            "_id": "f445f92"
+          }
+        ]
+      },
+      "elements": [
+        {
+          "id": "11b8417b",
+          "elType": "container",
+          "settings": {
+            "boxed_width": {
+              "unit": "px",
+              "size": 1280,
+              "sizes": []
+            },
+            "flex_direction": "column",
+            "background_background": "classic",
+            "background_color": "#FFFFFF",
+            "border_border": "solid",
+            "border_color": "#E5E7EB",
+            "border_radius": {
+              "unit": "px",
+              "top": "20",
+              "right": "20",
+              "bottom": "20",
+              "left": "20",
+              "isLinked": true
+            },
+            "box_shadow_box_shadow_type": "yes",
+            "box_shadow_box_shadow": {
+              "horizontal": 0,
+              "vertical": 16,
+              "blur": 40,
+              "spread": 0,
+              "color": "rgba(17, 24, 39, 0.06)"
+            },
+            "padding": {
+              "unit": "px",
+              "top": "8",
+              "right": "22",
+              "bottom": "22",
+              "left": "22",
+              "isLinked": false
+            },
+            "padding_mobile": {
+              "unit": "px",
+              "top": "14",
+              "right": "14",
+              "bottom": "14",
+              "left": "14",
+              "isLinked": false
+            },
+            "jedv_conditions": [
+              {
+                "_id": "4ee11a6"
+              }
+            ]
+          },
+          "elements": [
+            {
+              "id": "455e1c3",
+              "elType": "widget",
+              "settings": {
+                "products_related_products_title_text": "Related Products",
+                "products_upsells_title_text": "You may also like...",
+                "products_cross_sells_title_text": "You may be interested in...",
+                "nothing_found_message": "No products match this filter yet.",
+                "column_gap": {
+                  "unit": "px",
+                  "size": 18
+                },
+                "column_gap_mobile": {
+                  "unit": "px",
+                  "size": 12,
+                  "sizes": []
+                },
+                "row_gap": {
+                  "unit": "px",
+                  "size": 18
+                },
+                "row_gap_mobile": {
+                  "unit": "px",
+                  "size": 12,
+                  "sizes": []
+                },
+                "align": "left",
+                "image_border_width": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": true
+                },
+                "image_border_radius": {
+                  "unit": "px",
+                  "top": "14",
+                  "right": "14",
+                  "bottom": "14",
+                  "left": "14",
+                  "isLinked": true
+                },
+                "image_spacing": {
+                  "unit": "px",
+                  "size": 12
+                },
+                "title_color": "#111827",
+                "title_spacing": {
+                  "unit": "px",
+                  "size": 6
+                },
+                "star_color": "#F59E0B",
+                "star_size": {
+                  "unit": "em",
+                  "size": 0.8
+                },
+                "rating_spacing": {
+                  "unit": "px",
+                  "size": 0,
+                  "sizes": []
+                },
+                "price_color": "#6A4CFF",
+                "old_price_color": "#94A3B8",
+                "button_hover_background_color": "#6A4CFF",
+                "button_border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "button_border_radius": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "button_spacing": {
+                  "unit": "px",
+                  "size": 10
+                },
+                "view_cart_color": "#6A4CFF",
+                "box_border_radius": {
+                  "unit": "px",
+                  "size": 18,
+                  "sizes": []
+                },
+                "box_padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "pagination_spacing": {
+                  "unit": "px",
+                  "size": 28,
+                  "sizes": []
+                },
+                "show_pagination_border": "",
+                "pagination_padding": {
+                  "unit": "px",
+                  "size": 12,
+                  "sizes": []
+                },
+                "pagination_link_bg_color": "#FFFFFF",
+                "pagination_link_color_hover": "#FFFFFF",
+                "pagination_link_color_active": "#FFFFFF",
+                "onsale_border_radius": {
+                  "unit": "px",
+                  "size": 20,
+                  "sizes": []
+                },
+                "onsale_width": {
+                  "unit": "px",
+                  "size": 0,
+                  "sizes": []
+                },
+                "onsale_height": {
+                  "unit": "px",
+                  "size": 0,
+                  "sizes": []
+                },
+                "onsale_horizontal_position": "left",
+                "onsale_distance": {
+                  "unit": "px",
+                  "size": 12,
+                  "sizes": []
+                },
+                "nothing_found_color": "#6B7280",
+                "title_typography_typography": "custom",
+                "title_typography_font_family": "Poppins",
+                "title_typography_font_size": {
+                  "unit": "px",
+                  "size": 15,
+                  "sizes": []
+                },
+                "title_typography_font_size_mobile": {
+                  "unit": "px",
+                  "size": 14,
+                  "sizes": []
+                },
+                "title_typography_font_weight": "700",
+                "title_typography_line_height": {
+                  "unit": "em",
+                  "size": 1.4,
+                  "sizes": []
+                },
+                "price_typography_typography": "custom",
+                "price_typography_font_family": "Manrope",
+                "price_typography_font_size": {
+                  "unit": "px",
+                  "size": 15,
+                  "sizes": []
+                },
+                "price_typography_font_size_mobile": {
+                  "unit": "px",
+                  "size": 14,
+                  "sizes": []
+                },
+                "price_typography_font_weight": "800",
+                "price_typography_line_height": {
+                  "unit": "em",
+                  "size": 1.2,
+                  "sizes": []
+                },
+                "old_price_typography_typography": "custom",
+                "old_price_typography_font_family": "Manrope",
+                "old_price_typography_font_size": {
+                  "unit": "px",
+                  "size": 14,
+                  "sizes": []
+                },
+                "old_price_typography_font_weight": "600",
+                "button_typography_typography": "custom",
+                "button_typography_font_family": "Manrope",
+                "button_typography_font_size": {
+                  "unit": "px",
+                  "size": 12,
+                  "sizes": []
+                },
+                "button_typography_font_weight": "800",
+                "button_typography_letter_spacing": {
+                  "unit": "px",
+                  "size": 0.4,
+                  "sizes": []
+                },
+                "button_typography_text_transform": "uppercase",
+                "button_text_padding": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "16",
+                  "bottom": "10",
+                  "left": "16",
+                  "isLinked": false
+                },
+                "button_border_border": "solid",
+                "button_text_color": "#FFFFFF",
+                "button_background_color": "#111827",
+                "button_hover_color": "#FFFFFF",
+                "button_hover_border_color": "#6A4CFF",
+                "button_border_color": "#111827",
+                "onsale_text_background_color": "#EF4444",
+                "onsale_typography_typography": "custom",
+                "onsale_typography_font_family": "Manrope",
+                "onsale_typography_font_size": {
+                  "unit": "px",
+                  "size": 11,
+                  "sizes": []
+                },
+                "onsale_typography_font_weight": "800",
+                "pagination_typography_typography": "custom",
+                "pagination_typography_font_family": "Manrope",
+                "pagination_typography_font_size": {
+                  "unit": "px",
+                  "size": 13,
+                  "sizes": []
+                },
+                "pagination_typography_font_weight": "700",
+                "pagination_link_color": "#111827",
+                "pagination_link_bg_color_hover": "#6A4CFF",
+                "pagination_link_bg_color_active": "#6A4CFF",
+                "nothing_found_typography_typography": "custom",
+                "nothing_found_typography_font_family": "Manrope",
+                "nothing_found_typography_font_size": {
+                  "unit": "px",
+                  "size": 15,
+                  "sizes": []
+                },
+                "jedv_conditions": [
+                  {
+                    "_id": "c96b9a9"
+                  }
+                ],
+                "columns": 4,
+                "columns_tablet": 2,
+                "columns_mobile": 1,
+                "custom_css": "selector .woocommerce-result-count,\nselector .woocommerce-ordering {\n  margin-bottom: 18px;\n  color: #4B5563;\n  font-family: Manrope, sans-serif;\n  font-size: 13px;\n}\n\nselector ul.products {\n  display: grid !important;\n  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;\n  gap: 20px !important;\n  align-items: stretch;\n  margin: 0 !important;\n  padding: 0 !important;\n}\n\nselector ul.products li.product {\n  position: relative;\n  display: flex !important;\n  flex-direction: column;\n  width: auto !important;\n  min-width: 0;\n  height: 100%;\n  float: none !important;\n  margin: 0 !important;\n  padding: 12px 12px 16px !important;\n  overflow: hidden;\n  border: 1px solid #E6EAF2;\n  border-radius: 18px;\n  background: #FFFFFF;\n  box-shadow: 0 16px 36px rgba(17, 24, 39, 0.06);\n  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;\n}\n\nselector ul.products li.product:hover {\n  transform: translateY(-4px);\n  border-color: #D6D9F6;\n  box-shadow: 0 22px 44px rgba(17, 24, 39, 0.10);\n}\n\nselector ul.products li.product > .woocommerce-LoopProduct-link {\n  display: flex;\n  flex: 1 1 auto;\n  flex-direction: column;\n  min-width: 0;\n  color: inherit;\n}\n\nselector ul.products li.product img {\n  width: 100%;\n  aspect-ratio: 1 / 1;\n  margin-bottom: 14px !important;\n  border-radius: 14px;\n  background: #F8FAFC;\n  object-fit: contain;\n}\n\nselector ul.products li.product .woocommerce-loop-product__title {\n  display: -webkit-box;\n  min-height: 63px;\n  max-height: 63px;\n  margin: 0 0 8px !important;\n  overflow: hidden;\n  color: #111827 !important;\n  font-family: Poppins, sans-serif !important;\n  font-size: 15px !important;\n  font-weight: 700 !important;\n  line-height: 1.4 !important;\n  -webkit-box-orient: vertical;\n  -webkit-line-clamp: 3;\n}\n\nselector ul.products li.product .price {\n  display: flex;\n  min-height: 24px;\n  align-items: center;\n  gap: 8px;\n  margin: 0 0 12px !important;\n  color: #6A4CFF !important;\n  font-family: Manrope, sans-serif !important;\n  font-size: 15px !important;\n  font-weight: 800 !important;\n  line-height: 1.2 !important;\n}\n\nselector ul.products li.product .price del {\n  color: #94A3B8 !important;\n  font-weight: 600;\n}\n\nselector ul.products li.product .price ins {\n  text-decoration: none;\n}\n\nselector ul.products li.product .button {\n  display: inline-flex !important;\n  width: 100%;\n  min-height: 42px;\n  align-items: center;\n  justify-content: center;\n  margin-top: auto !important;\n  padding: 10px 16px !important;\n  border: 1px solid #111827 !important;\n  border-radius: 12px !important;\n  background: #111827 !important;\n  color: #FFFFFF !important;\n  font-family: Manrope, sans-serif !important;\n  font-size: 12px !important;\n  font-weight: 800 !important;\n  letter-spacing: 0 !important;\n  line-height: 1.2 !important;\n  text-align: center;\n  text-transform: uppercase !important;\n}\n\nselector ul.products li.product .button:hover {\n  border-color: #6A4CFF !important;\n  background: #6A4CFF !important;\n}\n\nselector span.onsale {\n  top: 12px !important;\n  right: auto !important;\n  left: 12px !important;\n  min-height: auto !important;\n  padding: 7px 10px !important;\n  border-radius: 999px !important;\n  background: #EF4444 !important;\n  color: #FFFFFF !important;\n  font-family: Manrope, sans-serif !important;\n  font-size: 11px !important;\n  font-weight: 800 !important;\n  line-height: 1 !important;\n  text-transform: uppercase !important;\n}\n\nselector nav.woocommerce-pagination {\n  margin-top: 28px;\n}\n\nselector nav.woocommerce-pagination ul {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 8px;\n  padding: 0;\n  border: 0 !important;\n}\n\nselector nav.woocommerce-pagination ul li {\n  border: 0 !important;\n}\n\nselector nav.woocommerce-pagination ul li a,\nselector nav.woocommerce-pagination ul li span {\n  display: inline-flex;\n  min-width: 42px;\n  height: 42px;\n  align-items: center;\n  justify-content: center;\n  border: 1px solid #D6DBE7;\n  border-radius: 12px;\n  background: #FFFFFF;\n  color: #111827;\n  font-family: Manrope, sans-serif;\n  font-size: 13px;\n  font-weight: 700;\n}\n\nselector nav.woocommerce-pagination ul li span.current,\nselector nav.woocommerce-pagination ul li a:hover {\n  border-color: #6A4CFF;\n  background: #6A4CFF;\n  color: #FFFFFF;\n}\n\n@media (max-width: 1024px) {\n  selector ul.products {\n    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;\n  }\n}\n\n@media (max-width: 767px) {\n  selector ul.products {\n    grid-template-columns: minmax(0, 1fr) !important;\n    gap: 14px !important;\n  }\n\n  selector ul.products li.product {\n    padding: 10px 10px 14px !important;\n  }\n\n  selector ul.products li.product .woocommerce-loop-product__title {\n    font-size: 14px !important;\n  }\n}"
+              },
+              "elements": [],
+              "widgetType": "wc-archive-products"
+            }
+          ],
+          "isInner": true
+        }
+      ],
+      "isInner": false
+    }
+  ]
+}
