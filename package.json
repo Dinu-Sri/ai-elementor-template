@@ -1,9 +1,12 @@
 {
   "name": "native-elementor-master-suite",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "description": "Reusable native Elementor compiler, WordPress bridge, site workflow, and SEO publishing toolkit.",
   "scripts": {
+    "bridge:validate": "node ./tools/validate-plugin-release.js 0.7.0",
+    "site:nice:products:check": "node ./sites/nice-lk/tools/import-ccc-products.js",
+    "site:nice:products:import": "node ./sites/nice-lk/tools/import-ccc-products.js --apply",
     "check": "pnpm run seo:audit:sms && pnpm run site:eternal:compile && pnpm run site:eternal:lint && pnpm run site:sms:compile && pnpm run site:sms:lint",
     "seo:audit:sms": "node ./tools/audit-seo-package.js ./sites/sms-pet-grooming/content/seo-50-package",
     "seo:publish": "node ./tools/publish-seo-pilot.js",

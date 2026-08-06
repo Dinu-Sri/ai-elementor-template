@@ -3,8 +3,12 @@ node_modules/
 build/
 projects/
 coverage/
+outputs/
 *.log
 *.zip
+
+# Local client intake sources stay outside version control after normalization.
+/CCC Items.xlsx
 
 # Local credentials and machine-specific configuration
 .env

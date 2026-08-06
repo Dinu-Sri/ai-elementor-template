@@ -1,0 +1,46 @@
+{
+  "source_file": "CCC Items.xlsx",
+  "sheet": "Sheet1",
+  "row_count": 173,
+  "product_count": 88,
+  "unique_extracted_image_count": 120,
+  "image_anchor_count": 165,
+  "rows_without_images": [
+    32,
+    33,
+    37,
+    38,
+    51,
+    62,
+    91,
+    92,
+    93,
+    119,
+    124,
+    139
+  ],
+  "categories_to_create": [
+    {
+      "name": "Personalized Gifts",
+      "slug": "personalized-gifts"
+    },
+    {
+      "name": "Mini Me",
+      "slug": "mini-me"
+    },
+    {
+      "name": "T-Shirt Printing",
+      "slug": "t-shirt-printing"
+    },
+    {
+      "name": "Corporate Gifts",
+      "slug": "corporate-gifts"
+    }
+  ],
+  "category_assignment_note": "Workbook has no explicit product-category column. category_guess uses conservative keyword rules and must be reviewed before WooCommerce import.",
+  "category_guess_distribution": {
+    "Personalized Gifts": 76,
+    "Corporate Gifts": 9,
+    "Mini Me": 3
+  }
+}

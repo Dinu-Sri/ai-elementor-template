@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Native Elementor Bridge
  * Description: REST bridge for native-first AI Elementor generation. Pushes editable Elementor container/widget JSON and exports saved templates for feedback learning.
- * Version: 0.6.0
+ * Version: 0.7.0
  * Author: Deshtech Global Pvt Ltd
  * License: GPL v2 or later
  * Requires PHP: 7.4
@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('NEB_VERSION', '0.6.0');
+define('NEB_VERSION', '0.7.0');
 
 class Native_Elementor_Bridge {
     private static $instance = null;
@@ -75,6 +75,10 @@ class Native_Elementor_Bridge {
                 <tr>
                     <th>Elementor</th>
                     <td><?php echo class_exists('\Elementor\Plugin') ? 'Active' : 'Not active'; ?></td>
+                </tr>
+                <tr>
+                    <th>WooCommerce</th>
+                    <td><?php echo class_exists('WooCommerce') ? 'Active' : 'Not active'; ?></td>
                 </tr>
             </table>
             <form method="post">
@@ -229,6 +233,42 @@ class Native_Elementor_Bridge {
             'callback' => [$this, 'list_blog_authors'],
             'permission_callback' => [$this, 'permission_check'],
         ]);
+
+        register_rest_route($this->namespace, '/woocommerce/categories', [
+            'methods' => 'GET',
+            'callback' => [$this, 'list_woo_categories'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        register_rest_route($this->namespace, '/woocommerce/categories', [
+            'methods' => 'POST',
+            'callback' => [$this, 'upsert_woo_category'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        register_rest_route($this->namespace, '/woocommerce/products', [
+            'methods' => 'GET',
+            'callback' => [$this, 'list_woo_products'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        register_rest_route($this->namespace, '/woocommerce/products', [
+            'methods' => 'POST',
+            'callback' => [$this, 'upsert_woo_product'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        register_rest_route($this->namespace, '/woocommerce/products/(?P<id>\d+)', [
+            'methods' => 'GET',
+            'callback' => [$this, 'get_woo_product'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
+
+        register_rest_route($this->namespace, '/woocommerce/products/(?P<id>\d+)', [
+            'methods' => 'PUT',
+            'callback' => [$this, 'update_woo_product'],
+            'permission_callback' => [$this, 'permission_check'],
+        ]);
     }
 
     public function permission_check($request) {
@@ -254,6 +294,8 @@ class Native_Elementor_Bridge {
             'elementor_version' => defined('ELEMENTOR_VERSION') ? ELEMENTOR_VERSION : null,
             'elementor_pro' => defined('ELEMENTOR_PRO_VERSION'),
             'elementor_pro_version' => defined('ELEMENTOR_PRO_VERSION') ? ELEMENTOR_PRO_VERSION : null,
+            'woocommerce' => class_exists('WooCommerce') && class_exists('WC_Product'),
+            'woocommerce_version' => defined('WC_VERSION') ? WC_VERSION : null,
         ];
     }
 
@@ -1270,6 +1312,705 @@ class Native_Elementor_Bridge {
             'ok' => true,
             'action' => $existing ? 'updated' : 'created',
             'category' => $this->blog_category_response(get_term($term_id, 'category')),
+        ];
+    }
+
+    private function require_woocommerce() {
+        if (!class_exists('WooCommerce') || !class_exists('WC_Product')) {
+            return new WP_Error(
+                'neb_woocommerce_unavailable',
+                'WooCommerce must be active to use this endpoint.',
+                ['status' => 503]
+            );
+        }
+
+        return true;
+    }
+
+    private function woo_bool($value, $default = false) {
+        if ($value === null) {
+            return $default;
+        }
+
+        return filter_var($value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? $default;
+    }
+
+    private function woo_category_response($term) {
+        if (!$term || is_wp_error($term)) {
+            return null;
+        }
+
+        $thumbnail_id = (int) get_term_meta($term->term_id, 'thumbnail_id', true);
+        $link = get_term_link($term);
+        return [
+            'id' => (int) $term->term_id,
+            'name' => $term->name,
+            'slug' => $term->slug,
+            'parent_id' => (int) $term->parent,
+            'count' => (int) $term->count,
+            'description' => $term->description,
+            'thumbnail_id' => $thumbnail_id,
+            'thumbnail_url' => $thumbnail_id ? (wp_get_attachment_url($thumbnail_id) ?: '') : '',
+            'url' => is_wp_error($link) ? '' : $link,
+        ];
+    }
+
+    public function list_woo_categories() {
+        $available = $this->require_woocommerce();
+        if (is_wp_error($available)) {
+            return $available;
+        }
+
+        $terms = get_terms([
+            'taxonomy' => 'product_cat',
+            'hide_empty' => false,
+            'orderby' => 'name',
+            'order' => 'ASC',
+        ]);
+        if (is_wp_error($terms)) {
+            return $terms;
+        }
+
+        return [
+            'ok' => true,
+            'categories' => array_values(array_filter(array_map([$this, 'woo_category_response'], $terms))),
+        ];
+    }
+
+    public function upsert_woo_category($request) {
+        $available = $this->require_woocommerce();
+        if (is_wp_error($available)) {
+            return $available;
+        }
+
+        $body = $this->get_json_params($request);
+        $name = sanitize_text_field($body['name'] ?? '');
+        $slug = sanitize_title($body['slug'] ?? $name);
+        if (!$name || !$slug) {
+            return new WP_Error('neb_invalid_product_category', 'Category name and slug are required.', ['status' => 400]);
+        }
+
+        $parent_id = absint($body['parent_id'] ?? 0);
+        if ($parent_id && !term_exists($parent_id, 'product_cat')) {
+            return new WP_Error('neb_invalid_product_category_parent', 'Parent product category was not found.', ['status' => 400]);
+        }
+
+        $existing = get_term_by('slug', $slug, 'product_cat');
+        $args = [
+            'name' => $name,
+            'slug' => $slug,
+            'description' => wp_kses_post($body['description'] ?? ''),
+            'parent' => $parent_id,
+        ];
+        $result = $existing
+            ? wp_update_term($existing->term_id, 'product_cat', $args)
+            : wp_insert_term($name, 'product_cat', $args);
+        if (is_wp_error($result)) {
+            return $result;
+        }
+
+        $term_id = (int) ($existing ? $existing->term_id : $result['term_id']);
+        if (array_key_exists('thumbnail_id', $body)) {
+            $thumbnail_id = absint($body['thumbnail_id']);
+            if ($thumbnail_id && !wp_attachment_is_image($thumbnail_id)) {
+                return new WP_Error('neb_invalid_product_category_image', 'Category thumbnail must be an image attachment.', ['status' => 400]);
+            }
+            update_term_meta($term_id, 'thumbnail_id', $thumbnail_id);
+        }
+
+        clean_term_cache($term_id, 'product_cat');
+        return [
+            'ok' => true,
+            'action' => $existing ? 'updated' : 'created',
+            'category' => $this->woo_category_response(get_term($term_id, 'product_cat')),
+        ];
+    }
+
+    private function resolve_woo_category_ids($categories) {
+        if (!is_array($categories)) {
+            return [];
+        }
+
+        $ids = [];
+        foreach ($categories as $category) {
+            $term = null;
+            if (is_numeric($category)) {
+                $term = get_term(absint($category), 'product_cat');
+            } elseif (is_string($category)) {
+                $term = get_term_by('slug', sanitize_title($category), 'product_cat');
+                if (!$term) {
+                    $term = get_term_by('name', sanitize_text_field($category), 'product_cat');
+                }
+            } elseif (is_array($category)) {
+                if (!empty($category['id'])) {
+                    $term = get_term(absint($category['id']), 'product_cat');
+                } elseif (!empty($category['slug'])) {
+                    $term = get_term_by('slug', sanitize_title($category['slug']), 'product_cat');
+                } elseif (!empty($category['name'])) {
+                    $term = get_term_by('name', sanitize_text_field($category['name']), 'product_cat');
+                }
+            }
+
+            if (!$term || is_wp_error($term)) {
+                return new WP_Error('neb_product_category_not_found', 'A requested product category was not found.', ['status' => 400]);
+            }
+            $ids[] = (int) $term->term_id;
+        }
+
+        return array_values(array_unique($ids));
+    }
+
+    private function normalize_woo_image_ids($images) {
+        if (!is_array($images)) {
+            return [];
+        }
+
+        $ids = [];
+        foreach ($images as $image) {
+            $id = is_array($image) ? absint($image['id'] ?? 0) : absint($image);
+            if (!$id || !wp_attachment_is_image($id)) {
+                return new WP_Error('neb_invalid_product_image', 'Every product image must be a valid image attachment.', ['status' => 400]);
+            }
+            $ids[] = $id;
+        }
+
+        return array_values(array_unique($ids));
+    }
+
+    private function find_woo_object_by_source_key($source_key, $post_type, $parent_id = 0) {
+        if (!$source_key) {
+            return 0;
+        }
+
+        $args = [
+            'post_type' => $post_type,
+            'post_status' => ['publish', 'draft', 'pending', 'private'],
+            'posts_per_page' => 1,
+            'fields' => 'ids',
+            'meta_key' => '_neb_source_key',
+            'meta_value' => sanitize_text_field($source_key),
+            'no_found_rows' => true,
+        ];
+        if ($parent_id) {
+            $args['post_parent'] = absint($parent_id);
+        }
+
+        $ids = get_posts($args);
+        return $ids ? (int) $ids[0] : 0;
+    }
+
+    private function woo_attribute_response($attribute) {
+        return [
+            'id' => (int) $attribute->get_id(),
+            'name' => $attribute->get_name(),
+            'slug' => sanitize_title($attribute->get_name()),
+            'options' => array_values($attribute->get_options()),
+            'position' => (int) $attribute->get_position(),
+            'visible' => (bool) $attribute->get_visible(),
+            'variation' => (bool) $attribute->get_variation(),
+        ];
+    }
+
+    private function woo_variation_response($variation) {
+        if (!$variation || !is_a($variation, 'WC_Product_Variation')) {
+            return null;
+        }
+
+        return [
+            'id' => (int) $variation->get_id(),
+            'source_key' => get_post_meta($variation->get_id(), '_neb_source_key', true) ?: '',
+            'parent_id' => (int) $variation->get_parent_id(),
+            'status' => $variation->get_status(),
+            'sku' => $variation->get_sku(),
+            'regular_price' => $variation->get_regular_price(),
+            'sale_price' => $variation->get_sale_price(),
+            'price' => $variation->get_price(),
+            'manage_stock' => (bool) $variation->get_manage_stock(),
+            'stock_quantity' => $variation->get_stock_quantity(),
+            'stock_status' => $variation->get_stock_status(),
+            'attributes' => $variation->get_attributes(),
+            'image_id' => (int) $variation->get_image_id(),
+            'image_url' => $variation->get_image_id() ? (wp_get_attachment_url($variation->get_image_id()) ?: '') : '',
+            'description' => $variation->get_description(),
+        ];
+    }
+
+    private function woo_product_response($product_id, $include_variations = true) {
+        $product = wc_get_product(absint($product_id));
+        if (!$product || $product->get_parent_id()) {
+            return null;
+        }
+
+        $categories = [];
+        foreach ($product->get_category_ids() as $term_id) {
+            $category = $this->woo_category_response(get_term($term_id, 'product_cat'));
+            if ($category) {
+                $categories[] = $category;
+            }
+        }
+
+        $response = [
+            'id' => (int) $product->get_id(),
+            'source_key' => get_post_meta($product->get_id(), '_neb_source_key', true) ?: '',
+            'name' => $product->get_name(),
+            'slug' => $product->get_slug(),
+            'status' => $product->get_status(),
+            'type' => $product->get_type(),
+            'sku' => $product->get_sku(),
+            'permalink' => get_permalink($product->get_id()) ?: '',
+            'regular_price' => $product->get_regular_price(),
+            'sale_price' => $product->get_sale_price(),
+            'price' => $product->get_price(),
+            'manage_stock' => (bool) $product->get_manage_stock(),
+            'stock_quantity' => $product->get_stock_quantity(),
+            'stock_status' => $product->get_stock_status(),
+            'description' => $product->get_description(),
+            'short_description' => $product->get_short_description(),
+            'category_ids' => array_map('intval', $product->get_category_ids()),
+            'categories' => $categories,
+            'image_id' => (int) $product->get_image_id(),
+            'image_url' => $product->get_image_id() ? (wp_get_attachment_url($product->get_image_id()) ?: '') : '',
+            'gallery_image_ids' => array_map('intval', $product->get_gallery_image_ids()),
+            'attributes' => array_values(array_map([$this, 'woo_attribute_response'], $product->get_attributes())),
+            'variation_ids' => $product->is_type('variable') ? array_map('intval', $product->get_children()) : [],
+        ];
+
+        if ($include_variations && $product->is_type('variable')) {
+            $response['variations'] = array_values(array_filter(array_map(function ($variation_id) {
+                return $this->woo_variation_response(wc_get_product($variation_id));
+            }, $product->get_children())));
+        }
+
+        return $response;
+    }
+
+    private function sanitize_woo_product_status($status, $default = 'draft') {
+        return in_array($status, ['draft', 'pending', 'private', 'publish'], true) ? $status : $default;
+    }
+
+    private function ensure_unique_woo_sku($sku, $object_id = 0) {
+        $sku = wc_clean($sku);
+        if ($sku === '') {
+            return true;
+        }
+
+        $existing_id = (int) wc_get_product_id_by_sku($sku);
+        if ($existing_id && $existing_id !== (int) $object_id) {
+            return new WP_Error('neb_duplicate_product_sku', sprintf('SKU "%s" is already in use.', $sku), ['status' => 409]);
+        }
+
+        return true;
+    }
+
+    private function build_woo_attributes($attributes) {
+        if (!is_array($attributes)) {
+            return [];
+        }
+
+        $result = [];
+        foreach (array_values($attributes) as $position => $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+            $name = sanitize_text_field($item['name'] ?? '');
+            $options = is_array($item['options'] ?? null)
+                ? array_values(array_unique(array_filter(array_map('sanitize_text_field', $item['options']))))
+                : [];
+            if ($name === '' || !$options) {
+                continue;
+            }
+
+            $attribute = new WC_Product_Attribute();
+            $attribute->set_id(0);
+            $attribute->set_name($name);
+            $attribute->set_options($options);
+            $attribute->set_position(absint($item['position'] ?? $position));
+            $attribute->set_visible($this->woo_bool($item['visible'] ?? null, true));
+            $attribute->set_variation($this->woo_bool($item['variation'] ?? null, false));
+            $result[sanitize_title($name)] = $attribute;
+        }
+
+        return $result;
+    }
+
+    private function apply_woo_product_fields($product, $body, $is_new = false) {
+        try {
+            if (array_key_exists('name', $body)) {
+                $product->set_name(sanitize_text_field($body['name']));
+            }
+            if (array_key_exists('slug', $body)) {
+                $product->set_slug(sanitize_title($body['slug']));
+            }
+            if (array_key_exists('status', $body) || $is_new) {
+                $product->set_status($this->sanitize_woo_product_status($body['status'] ?? 'draft'));
+            }
+            if (array_key_exists('description', $body)) {
+                $product->set_description(wp_kses_post($body['description']));
+            }
+            if (array_key_exists('short_description', $body)) {
+                $product->set_short_description(wp_kses_post($body['short_description']));
+            }
+            if (array_key_exists('sku', $body)) {
+                $sku = wc_clean($body['sku']);
+                $unique = $this->ensure_unique_woo_sku($sku, $product->get_id());
+                if (is_wp_error($unique)) {
+                    return $unique;
+                }
+                $product->set_sku($sku);
+            }
+            if (array_key_exists('regular_price', $body)) {
+                $product->set_regular_price($body['regular_price'] === '' ? '' : wc_format_decimal($body['regular_price']));
+            }
+            if (array_key_exists('sale_price', $body)) {
+                $product->set_sale_price($body['sale_price'] === '' ? '' : wc_format_decimal($body['sale_price']));
+            }
+
+            if (array_key_exists('manage_stock', $body)) {
+                $product->set_manage_stock($this->woo_bool($body['manage_stock']));
+            } elseif (array_key_exists('stock_quantity', $body)) {
+                $product->set_manage_stock(true);
+            }
+            if (array_key_exists('stock_quantity', $body) && $body['stock_quantity'] !== '') {
+                $product->set_stock_quantity(wc_stock_amount($body['stock_quantity']));
+            }
+            if (!empty($body['stock_status']) && in_array($body['stock_status'], ['instock', 'outofstock', 'onbackorder'], true)) {
+                $product->set_stock_status($body['stock_status']);
+            }
+            if (!empty($body['backorders']) && in_array($body['backorders'], ['no', 'notify', 'yes'], true)) {
+                $product->set_backorders($body['backorders']);
+            }
+            if (array_key_exists('sold_individually', $body)) {
+                $product->set_sold_individually($this->woo_bool($body['sold_individually']));
+            }
+            if (array_key_exists('virtual', $body)) {
+                $product->set_virtual($this->woo_bool($body['virtual']));
+            }
+
+            foreach (['weight', 'length', 'width', 'height'] as $dimension) {
+                if (array_key_exists($dimension, $body)) {
+                    $setter = 'set_' . $dimension;
+                    $product->{$setter}($body[$dimension] === '' ? '' : wc_format_decimal($body[$dimension]));
+                }
+            }
+            if (!empty($body['tax_status']) && in_array($body['tax_status'], ['taxable', 'shipping', 'none'], true)) {
+                $product->set_tax_status($body['tax_status']);
+            }
+            if (array_key_exists('tax_class', $body)) {
+                $product->set_tax_class(sanitize_title($body['tax_class']));
+            }
+
+            if (array_key_exists('categories', $body) || array_key_exists('category_ids', $body)) {
+                $category_ids = $this->resolve_woo_category_ids($body['categories'] ?? $body['category_ids']);
+                if (is_wp_error($category_ids)) {
+                    return $category_ids;
+                }
+                $product->set_category_ids($category_ids);
+            }
+            if (array_key_exists('attributes', $body)) {
+                $product->set_attributes($this->build_woo_attributes($body['attributes']));
+            }
+
+            if (array_key_exists('images', $body)) {
+                $image_ids = $this->normalize_woo_image_ids($body['images']);
+                if (is_wp_error($image_ids)) {
+                    return $image_ids;
+                }
+                $product->set_image_id($image_ids ? array_shift($image_ids) : 0);
+                $product->set_gallery_image_ids($image_ids);
+            } else {
+                if (array_key_exists('image_id', $body)) {
+                    $image_id = absint($body['image_id']);
+                    if ($image_id && !wp_attachment_is_image($image_id)) {
+                        return new WP_Error('neb_invalid_product_image', 'Featured image must be an image attachment.', ['status' => 400]);
+                    }
+                    $product->set_image_id($image_id);
+                }
+                if (array_key_exists('gallery_image_ids', $body)) {
+                    $gallery_ids = $this->normalize_woo_image_ids($body['gallery_image_ids']);
+                    if (is_wp_error($gallery_ids)) {
+                        return $gallery_ids;
+                    }
+                    $product->set_gallery_image_ids($gallery_ids);
+                }
+            }
+
+            if (array_key_exists('menu_order', $body)) {
+                $product->set_menu_order((int) $body['menu_order']);
+            }
+        } catch (Throwable $error) {
+            return new WP_Error('neb_invalid_product_data', $error->getMessage(), ['status' => 400]);
+        }
+
+        return true;
+    }
+
+    private function normalize_woo_variation_attributes($attributes) {
+        $normalized = [];
+        if (!is_array($attributes)) {
+            return $normalized;
+        }
+
+        foreach ($attributes as $key => $value) {
+            if (is_array($value) && isset($value['name'])) {
+                $name = $value['name'];
+                $option = $value['option'] ?? $value['value'] ?? '';
+            } else {
+                $name = is_string($key) ? $key : '';
+                $option = $value;
+            }
+            $name = sanitize_title($name);
+            if ($name !== '') {
+                $normalized[$name] = sanitize_text_field($option);
+            }
+        }
+
+        return $normalized;
+    }
+
+    private function upsert_woo_variations($product_id, $variations) {
+        if (!is_array($variations)) {
+            return [];
+        }
+
+        $results = [];
+        foreach ($variations as $index => $body) {
+            if (!is_array($body)) {
+                continue;
+            }
+            $source_key = sanitize_text_field($body['source_key'] ?? '');
+            $sku = wc_clean($body['sku'] ?? '');
+            if (!$source_key && !$sku) {
+                return new WP_Error(
+                    'neb_invalid_variation_identity',
+                    sprintf('Variation %d needs a source_key or SKU.', $index + 1),
+                    ['status' => 400]
+                );
+            }
+
+            $variation_id = $source_key
+                ? $this->find_woo_object_by_source_key($source_key, 'product_variation', $product_id)
+                : 0;
+            if (!$variation_id && $sku) {
+                $sku_id = (int) wc_get_product_id_by_sku($sku);
+                if ($sku_id) {
+                    $sku_product = wc_get_product($sku_id);
+                    if (!$sku_product || !$sku_product->is_type('variation') || (int) $sku_product->get_parent_id() !== (int) $product_id) {
+                        return new WP_Error('neb_duplicate_product_sku', sprintf('SKU "%s" is already in use.', $sku), ['status' => 409]);
+                    }
+                    $variation_id = $sku_id;
+                }
+            }
+
+            $is_new = !$variation_id;
+            $variation = $variation_id ? wc_get_product($variation_id) : new WC_Product_Variation();
+            if (!$variation || !is_a($variation, 'WC_Product_Variation')) {
+                return new WP_Error('neb_invalid_variation', 'Existing variation could not be loaded.', ['status' => 500]);
+            }
+
+            try {
+                $variation->set_parent_id($product_id);
+                $variation_status = $body['status'] ?? 'publish';
+                $variation->set_status(in_array($variation_status, ['publish', 'private'], true) ? $variation_status : 'publish');
+                if (array_key_exists('sku', $body)) {
+                    $unique = $this->ensure_unique_woo_sku($sku, $variation->get_id());
+                    if (is_wp_error($unique)) {
+                        return $unique;
+                    }
+                    $variation->set_sku($sku);
+                }
+                if (array_key_exists('regular_price', $body)) {
+                    $variation->set_regular_price($body['regular_price'] === '' ? '' : wc_format_decimal($body['regular_price']));
+                }
+                if (array_key_exists('sale_price', $body)) {
+                    $variation->set_sale_price($body['sale_price'] === '' ? '' : wc_format_decimal($body['sale_price']));
+                }
+                if (array_key_exists('manage_stock', $body)) {
+                    $variation->set_manage_stock($this->woo_bool($body['manage_stock']));
+                } elseif (array_key_exists('stock_quantity', $body)) {
+                    $variation->set_manage_stock(true);
+                }
+                if (array_key_exists('stock_quantity', $body) && $body['stock_quantity'] !== '') {
+                    $variation->set_stock_quantity(wc_stock_amount($body['stock_quantity']));
+                }
+                if (!empty($body['stock_status']) && in_array($body['stock_status'], ['instock', 'outofstock', 'onbackorder'], true)) {
+                    $variation->set_stock_status($body['stock_status']);
+                }
+                if (array_key_exists('attributes', $body)) {
+                    $variation->set_attributes($this->normalize_woo_variation_attributes($body['attributes']));
+                }
+                if (array_key_exists('description', $body)) {
+                    $variation->set_description(wp_kses_post($body['description']));
+                }
+                if (array_key_exists('image_id', $body)) {
+                    $image_id = absint($body['image_id']);
+                    if ($image_id && !wp_attachment_is_image($image_id)) {
+                        return new WP_Error('neb_invalid_variation_image', 'Variation image must be an image attachment.', ['status' => 400]);
+                    }
+                    $variation->set_image_id($image_id);
+                }
+                $variation_id = $variation->save();
+            } catch (Throwable $error) {
+                return new WP_Error('neb_invalid_variation_data', $error->getMessage(), ['status' => 400]);
+            }
+
+            if ($source_key) {
+                update_post_meta($variation_id, '_neb_source_key', $source_key);
+            }
+            $results[] = [
+                'action' => $is_new ? 'created' : 'updated',
+                'variation' => $this->woo_variation_response(wc_get_product($variation_id)),
+            ];
+        }
+
+        WC_Product_Variable::sync($product_id);
+        wc_delete_product_transients($product_id);
+        return $results;
+    }
+
+    private function save_woo_product($body, $forced_id = 0) {
+        $available = $this->require_woocommerce();
+        if (is_wp_error($available)) {
+            return $available;
+        }
+
+        $source_key = sanitize_text_field($body['source_key'] ?? '');
+        $product_id = absint($forced_id);
+        if (!$product_id && $source_key) {
+            $product_id = $this->find_woo_object_by_source_key($source_key, 'product');
+        }
+        if (!$product_id && !empty($body['sku'])) {
+            $sku_id = (int) wc_get_product_id_by_sku(wc_clean($body['sku']));
+            if ($sku_id) {
+                $sku_product = wc_get_product($sku_id);
+                if ($sku_product && !$sku_product->get_parent_id()) {
+                    $product_id = $sku_id;
+                }
+            }
+        }
+
+        $is_new = !$product_id;
+        $existing_product = $product_id ? wc_get_product($product_id) : null;
+        $requested_type = sanitize_key($body['type'] ?? ($existing_product ? $existing_product->get_type() : 'simple'));
+        if (!in_array($requested_type, ['simple', 'variable'], true)) {
+            return new WP_Error('neb_invalid_product_type', 'Product type must be simple or variable.', ['status' => 400]);
+        }
+        if ($is_new && !$source_key) {
+            return new WP_Error('neb_product_source_key_required', 'New products require a stable source_key.', ['status' => 400]);
+        }
+        if ($is_new && empty($body['name'])) {
+            return new WP_Error('neb_product_name_required', 'New products require a name.', ['status' => 400]);
+        }
+
+        if ($is_new) {
+            $product = $requested_type === 'variable' ? new WC_Product_Variable() : new WC_Product_Simple();
+        } else {
+            $product = $existing_product;
+            if (!$product || $product->get_parent_id()) {
+                return new WP_Error('neb_product_not_found', 'WooCommerce product not found.', ['status' => 404]);
+            }
+            if ($product->get_type() !== $requested_type) {
+                return new WP_Error(
+                    'neb_product_type_conflict',
+                    sprintf('Existing product type is %s; type changes are not applied automatically.', $product->get_type()),
+                    ['status' => 409]
+                );
+            }
+        }
+
+        if ($requested_type !== 'variable' && !empty($body['variations'])) {
+            return new WP_Error('neb_variations_require_variable_product', 'Variations require a variable product.', ['status' => 400]);
+        }
+
+        $applied = $this->apply_woo_product_fields($product, $body, $is_new);
+        if (is_wp_error($applied)) {
+            return $applied;
+        }
+
+        try {
+            $product_id = $product->save();
+        } catch (Throwable $error) {
+            return new WP_Error('neb_product_save_failed', $error->getMessage(), ['status' => 500]);
+        }
+        if ($source_key) {
+            update_post_meta($product_id, '_neb_source_key', $source_key);
+        }
+
+        $variation_results = [];
+        if ($requested_type === 'variable' && array_key_exists('variations', $body)) {
+            $variation_results = $this->upsert_woo_variations($product_id, $body['variations']);
+            if (is_wp_error($variation_results)) {
+                return $variation_results;
+            }
+        }
+
+        clean_post_cache($product_id);
+        wc_delete_product_transients($product_id);
+        return [
+            'ok' => true,
+            'action' => $is_new ? 'created' : 'updated',
+            'product' => $this->woo_product_response($product_id, true),
+            'variation_results' => $variation_results,
+        ];
+    }
+
+    public function upsert_woo_product($request) {
+        return $this->save_woo_product($this->get_json_params($request));
+    }
+
+    public function update_woo_product($request) {
+        return $this->save_woo_product($this->get_json_params($request), absint($request['id']));
+    }
+
+    public function get_woo_product($request) {
+        $available = $this->require_woocommerce();
+        if (is_wp_error($available)) {
+            return $available;
+        }
+
+        $product = $this->woo_product_response(absint($request['id']), true);
+        return $product ?: new WP_Error('neb_product_not_found', 'WooCommerce product not found.', ['status' => 404]);
+    }
+
+    public function list_woo_products($request) {
+        $available = $this->require_woocommerce();
+        if (is_wp_error($available)) {
+            return $available;
+        }
+
+        $page = max(1, absint($request->get_param('page') ?: 1));
+        $per_page = min(max(1, absint($request->get_param('per_page') ?: 50)), 100);
+        $status = sanitize_key($request->get_param('status') ?: '');
+        $query_args = [
+            'post_type' => 'product',
+            'post_status' => $status && in_array($status, ['draft', 'pending', 'private', 'publish'], true)
+                ? $status
+                : ['draft', 'pending', 'private', 'publish'],
+            'posts_per_page' => $per_page,
+            'paged' => $page,
+            'orderby' => 'ID',
+            'order' => 'DESC',
+        ];
+        $search = sanitize_text_field($request->get_param('search') ?: '');
+        if ($search !== '') {
+            $query_args['s'] = $search;
+        }
+        $source_key = sanitize_text_field($request->get_param('source_key') ?: '');
+        if ($source_key !== '') {
+            $query_args['meta_key'] = '_neb_source_key';
+            $query_args['meta_value'] = $source_key;
+        }
+
+        $query = new WP_Query($query_args);
+        $include_variations = $this->woo_bool($request->get_param('include_variations'), false);
+        return [
+            'ok' => true,
+            'page' => $page,
+            'per_page' => $per_page,
+            'total' => (int) $query->found_posts,
+            'total_pages' => (int) $query->max_num_pages,
+            'products' => array_values(array_filter(array_map(function ($post) use ($include_variations) {
+                return $this->woo_product_response($post->ID, $include_variations);
+            }, $query->posts))),
         ];
     }
 

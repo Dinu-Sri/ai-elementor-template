@@ -1,0 +1,2977 @@
+[
+  {
+    "source_product_index": 1,
+    "name": "10pcs nail clipper set",
+    "slug": "10pcs-nail-clipper-set",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 210,
+    "images": [
+      "sites/nice-lk/assets/products/image1-da0713d3.jpeg",
+      "sites/nice-lk/assets/products/image2-e73376f8.jpeg",
+      "sites/nice-lk/assets/products/image3-d95bf1d2.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 2,
+        "name": "Gray",
+        "sku": "CCC-0002",
+        "stock_quantity": 55,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image1-da0713d3.jpeg"
+        ]
+      },
+      {
+        "source_row": 3,
+        "name": "Dark Green",
+        "sku": "CCC-0003",
+        "stock_quantity": 55,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image2-e73376f8.jpeg"
+        ]
+      },
+      {
+        "source_row": 4,
+        "name": "Pink",
+        "sku": "CCC-0004",
+        "stock_quantity": 100,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image3-d95bf1d2.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 2,
+    "name": "Woven Neck-Hanging Coin Purse & Niche Mini Crossbody Bag",
+    "slug": "woven-neck-hanging-coin-purse-niche-mini-crossbody-bag",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 30,
+    "images": [
+      "sites/nice-lk/assets/products/image4-73088dfb.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 5,
+        "name": "Silver",
+        "sku": "CCC-0005",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image4-73088dfb.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 3,
+    "name": "Iron Handmade Hanging Cup Holder - Gold",
+    "slug": "iron-handmade-hanging-cup-holder-gold",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image5-99b61e85.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 6,
+        "name": "Gold",
+        "sku": "CCC-0006",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image5-99b61e85.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 4,
+    "name": "Whiskey Set Gifts for Men, 6 Stainless Steel Whisky Stones 2 Crystal Whisky Glasses 1 Blessing Card in a Exquisite Wooden Box",
+    "slug": "whiskey-set-gifts-for-men-6-stainless-steel-whisky-stones-2-crystal-whisky-glasses-1-bless",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image6-3ba84228.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 7,
+        "name": "Wood",
+        "sku": "CCC-0007",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image6-3ba84228.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 5,
+    "name": "Silver  Bullet-Shaped Reusable SS Whiskey Stone",
+    "slug": "silver-bullet-shaped-reusable-ss-whiskey-stone",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 5,
+    "images": [
+      "sites/nice-lk/assets/products/image7-b33b56f4.png"
+    ],
+    "variations": [
+      {
+        "source_row": 8,
+        "name": "Silver",
+        "sku": "CCC-0008",
+        "stock_quantity": 5,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image7-b33b56f4.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 6,
+    "name": "Stainless Steel Ice Cubes Spherical Reusable",
+    "slug": "stainless-steel-ice-cubes-spherical-reusable",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 5,
+    "images": [
+      "sites/nice-lk/assets/products/image8-965366c0.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 9,
+        "name": "Silver",
+        "sku": "CCC-0009",
+        "stock_quantity": 5,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image8-965366c0.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 7,
+    "name": "Western Cowboy Style Mini Coin Purse/Keychain",
+    "slug": "western-cowboy-style-mini-coin-purse-keychain",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 30,
+    "images": [
+      "sites/nice-lk/assets/products/image9-b60cc27c.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 10,
+        "name": "Default",
+        "sku": "CCC-0010",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image9-b60cc27c.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 8,
+    "name": "High-grade Business French Montagut Orb Pen",
+    "slug": "high-grade-business-french-montagut-orb-pen",
+    "type": "simple",
+    "category_guess": "Corporate Gifts",
+    "category_review_required": true,
+    "total_qty": 25,
+    "images": [
+      "sites/nice-lk/assets/products/image10-c883a475.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 11,
+        "name": "Default",
+        "sku": "CCC-0011",
+        "stock_quantity": 25,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image10-c883a475.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 9,
+    "name": "Cocktail Shaker Set Bartender Kit with Stand, 12 Piece Bar Set Drink Mixer",
+    "slug": "cocktail-shaker-set-bartender-kit-with-stand-12-piece-bar-set-drink-mixer",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 6,
+    "images": [
+      "sites/nice-lk/assets/products/image11-e0d447d1.png"
+    ],
+    "variations": [
+      {
+        "source_row": 12,
+        "name": "Black",
+        "sku": "CCC-0012",
+        "stock_quantity": 6,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image11-e0d447d1.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 10,
+    "name": "bear keychain plush toy doll",
+    "slug": "bear-keychain-plush-toy-doll",
+    "type": "variable",
+    "category_guess": "Mini Me",
+    "category_review_required": true,
+    "total_qty": 45,
+    "images": [
+      "sites/nice-lk/assets/products/image12-fc82b50f.jpeg",
+      "sites/nice-lk/assets/products/image13-72a29e33.jpeg",
+      "sites/nice-lk/assets/products/image14-702c13b5.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 13,
+        "name": "White",
+        "sku": "CCC-0013",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image12-fc82b50f.jpeg"
+        ]
+      },
+      {
+        "source_row": 15,
+        "name": "Peach",
+        "sku": "CCC-0015",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image13-72a29e33.jpeg"
+        ]
+      },
+      {
+        "source_row": 16,
+        "name": "Brown",
+        "sku": "CCC-0016",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image14-702c13b5.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 11,
+    "name": "bear keychain plush toy doll with hat",
+    "slug": "bear-keychain-plush-toy-doll-with-hat",
+    "type": "simple",
+    "category_guess": "Mini Me",
+    "category_review_required": true,
+    "total_qty": 58,
+    "images": [
+      "sites/nice-lk/assets/products/image73-f365a20d.jpeg",
+      "sites/nice-lk/assets/products/image15-43f14d7d.jpeg",
+      "sites/nice-lk/assets/products/image16-1293d3a8.jpeg",
+      "sites/nice-lk/assets/products/image17-653f3c01.jpeg",
+      "sites/nice-lk/assets/products/image18-571750c1.jpeg",
+      "sites/nice-lk/assets/products/image19-444fe8a8.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 14,
+        "name": "Default",
+        "sku": "CCC-0014",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image73-f365a20d.jpeg"
+        ]
+      },
+      {
+        "source_row": 17,
+        "name": "Default",
+        "sku": "CCC-0017",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image15-43f14d7d.jpeg"
+        ]
+      },
+      {
+        "source_row": 18,
+        "name": "Default",
+        "sku": "CCC-0018",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image16-1293d3a8.jpeg"
+        ]
+      },
+      {
+        "source_row": 19,
+        "name": "Default",
+        "sku": "CCC-0019",
+        "stock_quantity": 9,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image17-653f3c01.jpeg"
+        ]
+      },
+      {
+        "source_row": 20,
+        "name": "Default",
+        "sku": "CCC-0020",
+        "stock_quantity": 9,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image18-571750c1.jpeg"
+        ]
+      },
+      {
+        "source_row": 21,
+        "name": "Default",
+        "sku": "CCC-0021",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image19-444fe8a8.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 12,
+    "name": "A5 Hardcover Leather Business Notebook Set with Card Holder and Keychain Four-Piece",
+    "slug": "a5-hardcover-leather-business-notebook-set-with-card-holder-and-keychain-four-piece",
+    "type": "simple",
+    "category_guess": "Corporate Gifts",
+    "category_review_required": true,
+    "total_qty": 15,
+    "images": [
+      "sites/nice-lk/assets/products/image20-f402aa7b.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 22,
+        "name": "Black",
+        "sku": "CCC-0022",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image20-f402aa7b.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 13,
+    "name": "Personalized 0.5mm Stainless Steel Sports Ballpoint Pen",
+    "slug": "personalized-0-5mm-stainless-steel-sports-ballpoint-pen",
+    "type": "variable",
+    "category_guess": "Corporate Gifts",
+    "category_review_required": true,
+    "total_qty": 90,
+    "images": [
+      "sites/nice-lk/assets/products/image21-1684028a.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 23,
+        "name": "Black",
+        "sku": "CCC-0023",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image21-1684028a.jpeg"
+        ]
+      },
+      {
+        "source_row": 24,
+        "name": "Purple",
+        "sku": "CCC-0024",
+        "stock_quantity": 15,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image21-1684028a.jpeg"
+        ]
+      },
+      {
+        "source_row": 25,
+        "name": "Gold",
+        "sku": "CCC-0025",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image21-1684028a.jpeg"
+        ]
+      },
+      {
+        "source_row": 26,
+        "name": "Blue",
+        "sku": "CCC-0026",
+        "stock_quantity": 10,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image21-1684028a.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 14,
+    "name": "Vintage Wood Gift Set Birch Smoke Design Metal Bamboo Plastic Jigger",
+    "slug": "vintage-wood-gift-set-birch-smoke-design-metal-bamboo-plastic-jigger",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 16,
+    "images": [
+      "sites/nice-lk/assets/products/image108-20b5a270.jpeg",
+      "sites/nice-lk/assets/products/image22-d48cf9c3.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 27,
+        "name": "Black",
+        "sku": "CCC-0027",
+        "stock_quantity": 8,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image108-20b5a270.jpeg"
+        ]
+      },
+      {
+        "source_row": 28,
+        "name": "Black",
+        "sku": "CCC-0028",
+        "stock_quantity": 8,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image22-d48cf9c3.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 15,
+    "name": "48-Piece Luxurious Stainless Steel Manicure & Pedicure Set",
+    "slug": "48-piece-luxurious-stainless-steel-manicure-pedicure-set",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 19,
+    "images": [
+      "sites/nice-lk/assets/products/image23-d31ecb16.jpeg",
+      "sites/nice-lk/assets/products/image24-1660fdfd.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 29,
+        "name": "Black",
+        "sku": "CCC-0029",
+        "stock_quantity": 9,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image23-d31ecb16.jpeg"
+        ]
+      },
+      {
+        "source_row": 30,
+        "name": "Brown",
+        "sku": "CCC-0030",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image24-1660fdfd.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 16,
+    "name": "PU Leather Men's Short Wallet with 15 Card Slots & Zipper Coin Pocket",
+    "slug": "pu-leather-men-s-short-wallet-with-15-card-slots-zipper-coin-pocket",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 23,
+    "images": [
+      "sites/nice-lk/assets/products/image25-2fbdc06f.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 31,
+        "name": "Brown",
+        "sku": "CCC-0031",
+        "stock_quantity": 12,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image25-2fbdc06f.jpeg"
+        ]
+      },
+      {
+        "source_row": 32,
+        "name": "Black",
+        "sku": "CCC-0032",
+        "stock_quantity": 5,
+        "sample": "1",
+        "images": []
+      },
+      {
+        "source_row": 33,
+        "name": "Blue",
+        "sku": "CCC-0033",
+        "stock_quantity": 6,
+        "sample": "1",
+        "images": []
+      }
+    ]
+  },
+  {
+    "source_product_index": 17,
+    "name": "Crystal glass for engraving - 80",
+    "slug": "crystal-glass-for-engraving-80",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image26-afca4f76.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 34,
+        "name": "80mm",
+        "sku": "CCC-0034",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image26-afca4f76.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 18,
+    "name": "Crystal glass for engraving - 100",
+    "slug": "crystal-glass-for-engraving-100",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 5,
+    "images": [
+      "sites/nice-lk/assets/products/image26-afca4f76.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 35,
+        "name": "100mm",
+        "sku": "CCC-0035",
+        "stock_quantity": 5,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image26-afca4f76.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 19,
+    "name": "Crystal glass for engraving - squar",
+    "slug": "crystal-glass-for-engraving-squar",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image74-25b057f9.png"
+    ],
+    "variations": [
+      {
+        "source_row": 36,
+        "name": "50*50*50",
+        "sku": "CCC-0036",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image74-25b057f9.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 20,
+    "name": "Crystal glass for engraving - Rectangle",
+    "slug": "crystal-glass-for-engraving-rectangle",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 15,
+    "images": [],
+    "variations": [
+      {
+        "source_row": 37,
+        "name": "50*50*80",
+        "sku": "CCC-0037",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": []
+      }
+    ]
+  },
+  {
+    "source_product_index": 21,
+    "name": "Crystal glass for engraving",
+    "slug": "crystal-glass-for-engraving",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 15,
+    "images": [],
+    "variations": [
+      {
+        "source_row": 38,
+        "name": "50*50*80",
+        "sku": "CCC-0038",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": []
+      }
+    ]
+  },
+  {
+    "source_product_index": 22,
+    "name": "6pcs drinkware glass/cup/clear glassware",
+    "slug": "6pcs-drinkware-glass-cup-clear-glassware",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image27-3450bff6.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 39,
+        "name": "255ml",
+        "sku": "CCC-0039",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image27-3450bff6.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 23,
+    "name": "Large Luxury Burgundy Wine Glass Set",
+    "slug": "large-luxury-burgundy-wine-glass-set",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 20,
+    "images": [
+      "sites/nice-lk/assets/products/image28-e35e3949.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 40,
+        "name": "6pc set",
+        "sku": "CCC-0040",
+        "stock_quantity": 20,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image28-e35e3949.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 24,
+    "name": "Premium Whiskey Glasses Set",
+    "slug": "premium-whiskey-glasses-set",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 24,
+    "images": [
+      "sites/nice-lk/assets/products/image29-2247d2f2.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 41,
+        "name": "Clear",
+        "sku": "CCC-0041",
+        "stock_quantity": 12,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image29-2247d2f2.jpeg"
+        ]
+      },
+      {
+        "source_row": 42,
+        "name": "Gold",
+        "sku": "CCC-0042",
+        "stock_quantity": 12,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image29-2247d2f2.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 25,
+    "name": "Crystal Glass Wine Decanter Set",
+    "slug": "crystal-glass-wine-decanter-set",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image30-55e1e7cc.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 43,
+        "name": "Default",
+        "sku": "CCC-0043",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image30-55e1e7cc.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 26,
+    "name": "Glass Wine Decanter Handle",
+    "slug": "glass-wine-decanter-handle",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image31-5302e722.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 44,
+        "name": "Default",
+        "sku": "CCC-0044",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image31-5302e722.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 27,
+    "name": "MicFlip Smart Anti-Loss Keychain Tracker",
+    "slug": "micflip-smart-anti-loss-keychain-tracker",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 30,
+    "images": [
+      "sites/nice-lk/assets/products/image32-1f0144ce.png"
+    ],
+    "variations": [
+      {
+        "source_row": 45,
+        "name": "Apple",
+        "sku": "CCC-0045",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image32-1f0144ce.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 28,
+    "name": "Micflip Custom Digital Luggage Lock Mini Suitcase – GPS",
+    "slug": "micflip-custom-digital-luggage-lock-mini-suitcase-gps",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 30,
+    "images": [
+      "sites/nice-lk/assets/products/image33-c6afa7e3.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 46,
+        "name": "Apple",
+        "sku": "CCC-0046",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image33-c6afa7e3.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 29,
+    "name": "The Ultimate 1.7mm Wallet Tracker",
+    "slug": "the-ultimate-1-7mm-wallet-tracker",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 49,
+    "images": [
+      "sites/nice-lk/assets/products/image34-4152976f.png"
+    ],
+    "variations": [
+      {
+        "source_row": 47,
+        "name": "Apple",
+        "sku": "CCC-0047",
+        "stock_quantity": 49,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image34-4152976f.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 30,
+    "name": "Microfiber Leather Wallet with FindMy",
+    "slug": "microfiber-leather-wallet-with-findmy",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image35-f6440045.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 48,
+        "name": "Default",
+        "sku": "CCC-0048",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image35-f6440045.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 31,
+    "name": "Mens Wallet  B7603-04Y",
+    "slug": "mens-wallet-b7603-04y",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image36-e1d84bb6.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 49,
+        "name": "Black",
+        "sku": "CCC-0049",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image36-e1d84bb6.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 32,
+    "name": "Mens Wallet BJ8513-01Y",
+    "slug": "mens-wallet-bj8513-01y",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image37-a3c14a5c.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 50,
+        "name": "Black",
+        "sku": "CCC-0050",
+        "stock_quantity": 10,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image37-a3c14a5c.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 33,
+    "name": "Mens Wallet black box",
+    "slug": "mens-wallet-black-box",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [],
+    "variations": [
+      {
+        "source_row": 51,
+        "name": "Black",
+        "sku": "CCC-0051",
+        "stock_quantity": 10,
+        "sample": "",
+        "images": []
+      }
+    ]
+  },
+  {
+    "source_product_index": 34,
+    "name": "Gift Box Set LCD Insulated Cup Sunscreen Umbrella Enterprise Customization LOGO",
+    "slug": "gift-box-set-lcd-insulated-cup-sunscreen-umbrella-enterprise-customization-logo",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image38-6621d903.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 52,
+        "name": "Blue",
+        "sku": "CCC-0052",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image38-6621d903.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 35,
+    "name": "Ghost Pendant Bracelets for Couple",
+    "slug": "ghost-pendant-bracelets-for-couple",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 300,
+    "images": [
+      "sites/nice-lk/assets/products/image39-b6d1ba3f.jpg"
+    ],
+    "variations": [
+      {
+        "source_row": 53,
+        "name": "Black & Hwite",
+        "sku": "CCC-0053",
+        "stock_quantity": 100,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image39-b6d1ba3f.jpg"
+        ]
+      },
+      {
+        "source_row": 54,
+        "name": "Blue and Pink",
+        "sku": "CCC-0054",
+        "stock_quantity": 100,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image39-b6d1ba3f.jpg"
+        ]
+      },
+      {
+        "source_row": 55,
+        "name": "Purple",
+        "sku": "CCC-0055",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image39-b6d1ba3f.jpg"
+        ]
+      },
+      {
+        "source_row": 56,
+        "name": "Pink",
+        "sku": "CCC-0056",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image39-b6d1ba3f.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 36,
+    "name": "Stainless Steel Leather Bracelet Engraved",
+    "slug": "stainless-steel-leather-bracelet-engraved",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 300,
+    "images": [
+      "sites/nice-lk/assets/products/image40-cb606f4d.jpg"
+    ],
+    "variations": [
+      {
+        "source_row": 57,
+        "name": "Black",
+        "sku": "CCC-0057",
+        "stock_quantity": 300,
+        "sample": "2",
+        "images": [
+          "sites/nice-lk/assets/products/image40-cb606f4d.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 37,
+    "name": "Sublimation Blanks Adhesive Phone Ring",
+    "slug": "sublimation-blanks-adhesive-phone-ring",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 150,
+    "images": [
+      "sites/nice-lk/assets/products/image41-498d7a9b.png",
+      "sites/nice-lk/assets/products/image42-1cc9d43a.png",
+      "sites/nice-lk/assets/products/image43-5d1d4e1e.png"
+    ],
+    "variations": [
+      {
+        "source_row": 58,
+        "name": "Gold",
+        "sku": "CCC-0058",
+        "stock_quantity": 50,
+        "sample": "0",
+        "images": [
+          "sites/nice-lk/assets/products/image41-498d7a9b.png"
+        ]
+      },
+      {
+        "source_row": 59,
+        "name": "Gray",
+        "sku": "CCC-0059",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image42-1cc9d43a.png"
+        ]
+      },
+      {
+        "source_row": 60,
+        "name": "Rose Gold",
+        "sku": "CCC-0060",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image43-5d1d4e1e.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 38,
+    "name": "Sunflower Photo Keychain",
+    "slug": "sunflower-photo-keychain",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 60,
+    "images": [
+      "sites/nice-lk/assets/products/image44-f33fb7f4.png"
+    ],
+    "variations": [
+      {
+        "source_row": 61,
+        "name": "Silver",
+        "sku": "CCC-0061",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image44-f33fb7f4.png"
+        ]
+      },
+      {
+        "source_row": 62,
+        "name": "Gold",
+        "sku": "CCC-0062",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": []
+      }
+    ]
+  },
+  {
+    "source_product_index": 39,
+    "name": "Photo Locket Keychain",
+    "slug": "photo-locket-keychain",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 30,
+    "images": [
+      "sites/nice-lk/assets/products/image45-a65b8716.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 63,
+        "name": "Silver",
+        "sku": "CCC-0063",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image45-a65b8716.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 40,
+    "name": "Wings Cabochon Pendant Base",
+    "slug": "wings-cabochon-pendant-base",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 30,
+    "images": [
+      "sites/nice-lk/assets/products/image46-74e84030.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 64,
+        "name": "Silver",
+        "sku": "CCC-0064",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image46-74e84030.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 41,
+    "name": "Thermal Printing Spray Customized DIY Gift Round Pendant Bird Cage",
+    "slug": "thermal-printing-spray-customized-diy-gift-round-pendant-bird-cage",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 30,
+    "images": [
+      "sites/nice-lk/assets/products/image47-c5996e98.png"
+    ],
+    "variations": [
+      {
+        "source_row": 65,
+        "name": "Silver",
+        "sku": "CCC-0065",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image47-c5996e98.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 42,
+    "name": "Cocktail Shaker 550ML Stainless Steel Cocktail Shaker Mixer",
+    "slug": "cocktail-shaker-550ml-stainless-steel-cocktail-shaker-mixer",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 24,
+    "images": [
+      "sites/nice-lk/assets/products/image48-fd1de476.jpeg",
+      "sites/nice-lk/assets/products/image67-8222e5f4.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 66,
+        "name": "Black",
+        "sku": "CCC-0066",
+        "stock_quantity": 14,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image48-fd1de476.jpeg"
+        ]
+      },
+      {
+        "source_row": 67,
+        "name": "Gold",
+        "sku": "CCC-0067",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image67-8222e5f4.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 43,
+    "name": "35pcs 24oz Cocktail Shaker Set Cocktail Kit",
+    "slug": "35pcs-24oz-cocktail-shaker-set-cocktail-kit",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 6,
+    "images": [
+      "sites/nice-lk/assets/products/image49-5877cf5f.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 68,
+        "name": "Silver",
+        "sku": "CCC-0068",
+        "stock_quantity": 6,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image49-5877cf5f.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 44,
+    "name": "Mug Organizer Easy to Clean 6 Hooks",
+    "slug": "mug-organizer-easy-to-clean-6-hooks",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 8,
+    "images": [
+      "sites/nice-lk/assets/products/image50-b3440ace.jpg"
+    ],
+    "variations": [
+      {
+        "source_row": 69,
+        "name": "Gold",
+        "sku": "CCC-0069",
+        "stock_quantity": 8,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image50-b3440ace.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 45,
+    "name": "Royal Reserve Whiskey Decanter Gift Set",
+    "slug": "royal-reserve-whiskey-decanter-gift-set",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 5,
+    "images": [
+      "sites/nice-lk/assets/products/image51-98584e33.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 70,
+        "name": "Default",
+        "sku": "CCC-0070",
+        "stock_quantity": 5,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image51-98584e33.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 46,
+    "name": "Crystal Square Whiskey Decanter Set with 4 Coasters",
+    "slug": "crystal-square-whiskey-decanter-set-with-4-coasters",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 5,
+    "images": [
+      "sites/nice-lk/assets/products/image52-d09fc91f.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 71,
+        "name": "Default",
+        "sku": "CCC-0071",
+        "stock_quantity": 5,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image52-d09fc91f.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 47,
+    "name": "Craft Sublimation Compact Mirror-JB12",
+    "slug": "craft-sublimation-compact-mirror-jb12",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 50,
+    "images": [
+      "sites/nice-lk/assets/products/image53-33773c40.png"
+    ],
+    "variations": [
+      {
+        "source_row": 72,
+        "name": "Around",
+        "sku": "CCC-0072",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image53-33773c40.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 48,
+    "name": "Craft Sublimation Compact Mirror-JB08",
+    "slug": "craft-sublimation-compact-mirror-jb08",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 50,
+    "images": [
+      "sites/nice-lk/assets/products/image54-b192f8c9.png"
+    ],
+    "variations": [
+      {
+        "source_row": 73,
+        "name": "Square",
+        "sku": "CCC-0073",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image54-b192f8c9.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 49,
+    "name": "UV Printed A5 Paper Notebook Pen Executive Set",
+    "slug": "uv-printed-a5-paper-notebook-pen-executive-set",
+    "type": "simple",
+    "category_guess": "Corporate Gifts",
+    "category_review_required": true,
+    "total_qty": 15,
+    "images": [
+      "sites/nice-lk/assets/products/image55-01f8821e.png"
+    ],
+    "variations": [
+      {
+        "source_row": 74,
+        "name": "Black",
+        "sku": "CCC-0074",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image55-01f8821e.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 50,
+    "name": "Leather Mini Photo Frame Creative Keychain",
+    "slug": "leather-mini-photo-frame-creative-keychain",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 1000,
+    "images": [
+      "sites/nice-lk/assets/products/image56-eebe94bc.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 75,
+        "name": "Black",
+        "sku": "CCC-0075",
+        "stock_quantity": 200,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image56-eebe94bc.jpeg"
+        ]
+      },
+      {
+        "source_row": 76,
+        "name": "Brown",
+        "sku": "CCC-0076",
+        "stock_quantity": 200,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image56-eebe94bc.jpeg"
+        ]
+      },
+      {
+        "source_row": 77,
+        "name": "Pink",
+        "sku": "CCC-0077",
+        "stock_quantity": 200,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image56-eebe94bc.jpeg"
+        ]
+      },
+      {
+        "source_row": 78,
+        "name": "Green",
+        "sku": "CCC-0078",
+        "stock_quantity": 200,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image56-eebe94bc.jpeg"
+        ]
+      },
+      {
+        "source_row": 79,
+        "name": "Navy Blue",
+        "sku": "CCC-0079",
+        "stock_quantity": 200,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image56-eebe94bc.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 51,
+    "name": "Metal Cufflinks Clip Rectangle Box",
+    "slug": "metal-cufflinks-clip-rectangle-box",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 90,
+    "images": [
+      "sites/nice-lk/assets/products/image57-5c193dba.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 80,
+        "name": "Default",
+        "sku": "CCC-0080",
+        "stock_quantity": 90,
+        "sample": "3",
+        "images": [
+          "sites/nice-lk/assets/products/image57-5c193dba.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 52,
+    "name": "Iridium Ballpoint Pen Arrow Clip - Black",
+    "slug": "iridium-ballpoint-pen-arrow-clip-black",
+    "type": "simple",
+    "category_guess": "Corporate Gifts",
+    "category_review_required": true,
+    "total_qty": 20,
+    "images": [
+      "sites/nice-lk/assets/products/image58-72a6ec86.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 81,
+        "name": "Black",
+        "sku": "CCC-0081",
+        "stock_quantity": 20,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image58-72a6ec86.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 53,
+    "name": "Anti-lost Passport Holder, Personalized Passport Card Holder",
+    "slug": "anti-lost-passport-holder-personalized-passport-card-holder",
+    "type": "simple",
+    "category_guess": "Corporate Gifts",
+    "category_review_required": true,
+    "total_qty": 0,
+    "images": [
+      "sites/nice-lk/assets/products/image59-3e4e992d.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 82,
+        "name": "Default",
+        "sku": "CCC-0082",
+        "stock_quantity": null,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image59-3e4e992d.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 54,
+    "name": "Luxury Black Gift Box Set with 2 Glass Tumblers & 8 -Eco-friendly Corporate Branding Promotional Gifts",
+    "slug": "luxury-black-gift-box-set-with-2-glass-tumblers-8-eco-friendly-corporate-branding-promotio",
+    "type": "simple",
+    "category_guess": "Corporate Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image60-d98d3f26.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 83,
+        "name": "Default",
+        "sku": "CCC-0083",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image60-d98d3f26.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 55,
+    "name": "Wine Bottle Opener Set 4-piece Household Manual Wine Bottle Opener",
+    "slug": "wine-bottle-opener-set-4-piece-household-manual-wine-bottle-opener",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image61-fb94c0af.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 84,
+        "name": "Default",
+        "sku": "CCC-0084",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image61-fb94c0af.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 56,
+    "name": "Leather Notebook USB Flash Drive and Pen Set for Enterprise Business Gift Box",
+    "slug": "leather-notebook-usb-flash-drive-and-pen-set-for-enterprise-business-gift-box",
+    "type": "simple",
+    "category_guess": "Corporate Gifts",
+    "category_review_required": true,
+    "total_qty": 10,
+    "images": [
+      "sites/nice-lk/assets/products/image62-e0262de7.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 85,
+        "name": "Black",
+        "sku": "CCC-0085",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image62-e0262de7.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 57,
+    "name": "Super Soft Cute 25cm Baby Elephant Plush Toy",
+    "slug": "super-soft-cute-25cm-baby-elephant-plush-toy",
+    "type": "variable",
+    "category_guess": "Mini Me",
+    "category_review_required": true,
+    "total_qty": 107,
+    "images": [
+      "sites/nice-lk/assets/products/image117-0918bb7b.jpeg",
+      "sites/nice-lk/assets/products/image64-80d45420.jpeg",
+      "sites/nice-lk/assets/products/image63-58ce03ff.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 86,
+        "name": "Pink",
+        "sku": "CCC-0086",
+        "stock_quantity": 39,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image117-0918bb7b.jpeg"
+        ]
+      },
+      {
+        "source_row": 87,
+        "name": "Gray",
+        "sku": "CCC-0087",
+        "stock_quantity": 30,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image64-80d45420.jpeg"
+        ]
+      },
+      {
+        "source_row": 88,
+        "name": "Blue",
+        "sku": "CCC-0088",
+        "stock_quantity": 38,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image63-58ce03ff.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 58,
+    "name": "Rectangle Solid Handmade Fashionable Huicheng Eyeglass Case",
+    "slug": "rectangle-solid-handmade-fashionable-huicheng-eyeglass-case",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 1301,
+    "images": [
+      "sites/nice-lk/assets/products/image65-eb8ff037.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 89,
+        "name": "Black",
+        "sku": "CCC-0089",
+        "stock_quantity": 207,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image65-eb8ff037.jpeg"
+        ]
+      },
+      {
+        "source_row": 90,
+        "name": "Green",
+        "sku": "CCC-0090",
+        "stock_quantity": 187,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image65-eb8ff037.jpeg"
+        ]
+      },
+      {
+        "source_row": 91,
+        "name": "Light Green",
+        "sku": "CCC-0091",
+        "stock_quantity": 18,
+        "sample": "",
+        "images": []
+      },
+      {
+        "source_row": 92,
+        "name": "Pink",
+        "sku": "CCC-0092",
+        "stock_quantity": 184,
+        "sample": "",
+        "images": []
+      },
+      {
+        "source_row": 93,
+        "name": "Blue",
+        "sku": "CCC-0093",
+        "stock_quantity": 186,
+        "sample": "",
+        "images": []
+      },
+      {
+        "source_row": 94,
+        "name": "Gray",
+        "sku": "CCC-0094",
+        "stock_quantity": 115,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image65-eb8ff037.jpeg"
+        ]
+      },
+      {
+        "source_row": 95,
+        "name": "Purple",
+        "sku": "CCC-0095",
+        "stock_quantity": 99,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image65-eb8ff037.jpeg"
+        ]
+      },
+      {
+        "source_row": 96,
+        "name": "Purple",
+        "sku": "CCC-0096",
+        "stock_quantity": 212,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image65-eb8ff037.jpeg"
+        ]
+      },
+      {
+        "source_row": 97,
+        "name": "Purple",
+        "sku": "CCC-0097",
+        "stock_quantity": 93,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image65-eb8ff037.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 59,
+    "name": "Stainless Steel Cuff Links Round Personalized - Rose Gold",
+    "slug": "stainless-steel-cuff-links-round-personalized-rose-gold",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 30,
+    "images": [
+      "sites/nice-lk/assets/products/image68-b46d9e74.png"
+    ],
+    "variations": [
+      {
+        "source_row": 98,
+        "name": "2PCS Set",
+        "sku": "CCC-0098",
+        "stock_quantity": 30,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image68-b46d9e74.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 60,
+    "name": "Stainless Steel Cuff Links Round Personalized- Gold",
+    "slug": "stainless-steel-cuff-links-round-personalized-gold",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 30,
+    "images": [
+      "sites/nice-lk/assets/products/image69-dcbaf789.png"
+    ],
+    "variations": [
+      {
+        "source_row": 99,
+        "name": "2PCS Set",
+        "sku": "CCC-0099",
+        "stock_quantity": 30,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image69-dcbaf789.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 61,
+    "name": "Stainless Steel Cuff Links Round Personalized- Silver",
+    "slug": "stainless-steel-cuff-links-round-personalized-silver",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 30,
+    "images": [
+      "sites/nice-lk/assets/products/image65-eb8ff037.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 100,
+        "name": "2PCS Set",
+        "sku": "CCC-0100",
+        "stock_quantity": 30,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image65-eb8ff037.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 62,
+    "name": "Stainless Steel Cuff Links Round Personalized- Black",
+    "slug": "stainless-steel-cuff-links-round-personalized-black",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 27,
+    "images": [
+      "sites/nice-lk/assets/products/image65-eb8ff037.jpeg",
+      "sites/nice-lk/assets/products/image66-bf9709ba.jpeg",
+      "sites/nice-lk/assets/products/image70-0304bffe.png"
+    ],
+    "variations": [
+      {
+        "source_row": 101,
+        "name": "2PCS Set",
+        "sku": "CCC-0101",
+        "stock_quantity": 27,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image65-eb8ff037.jpeg",
+          "sites/nice-lk/assets/products/image66-bf9709ba.jpeg",
+          "sites/nice-lk/assets/products/image70-0304bffe.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 63,
+    "name": "Mens Cufflinks Tie Clips",
+    "slug": "mens-cufflinks-tie-clips",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 110,
+    "images": [
+      "sites/nice-lk/assets/products/image71-ffc80f2b.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 102,
+        "name": "Black",
+        "sku": "CCC-0102",
+        "stock_quantity": 20,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image71-ffc80f2b.jpeg"
+        ]
+      },
+      {
+        "source_row": 103,
+        "name": "Silver",
+        "sku": "CCC-0103",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image71-ffc80f2b.jpeg"
+        ]
+      },
+      {
+        "source_row": 104,
+        "name": "Gold",
+        "sku": "CCC-0104",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image71-ffc80f2b.jpeg"
+        ]
+      },
+      {
+        "source_row": 105,
+        "name": "Rose Gold",
+        "sku": "CCC-0105",
+        "stock_quantity": 30,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image71-ffc80f2b.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 64,
+    "name": "Leather Pocket Mirror Custom Logo Portable",
+    "slug": "leather-pocket-mirror-custom-logo-portable",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 361,
+    "images": [
+      "sites/nice-lk/assets/products/image72-d299cf76.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 106,
+        "name": "Black",
+        "sku": "CCC-0106",
+        "stock_quantity": 121,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image72-d299cf76.jpeg"
+        ]
+      },
+      {
+        "source_row": 107,
+        "name": "Pink",
+        "sku": "CCC-0107",
+        "stock_quantity": 118,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image72-d299cf76.jpeg"
+        ]
+      },
+      {
+        "source_row": 108,
+        "name": "Whie",
+        "sku": "CCC-0108",
+        "stock_quantity": 122,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image72-d299cf76.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 65,
+    "name": "Corporate Gift Sets Bank Note book with pen",
+    "slug": "corporate-gift-sets-bank-note-book-with-pen",
+    "type": "simple",
+    "category_guess": "Corporate Gifts",
+    "category_review_required": true,
+    "total_qty": 15,
+    "images": [
+      "sites/nice-lk/assets/products/image75-ebb29de9.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 109,
+        "name": "Blue",
+        "sku": "CCC-0109",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image75-ebb29de9.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 66,
+    "name": "6pcs Water Goblet Refresher Pattern",
+    "slug": "6pcs-water-goblet-refresher-pattern",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 8,
+    "images": [
+      "sites/nice-lk/assets/products/image76-44aa4713.png"
+    ],
+    "variations": [
+      {
+        "source_row": 110,
+        "name": "410ml",
+        "sku": "CCC-0110",
+        "stock_quantity": 5,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image76-44aa4713.png"
+        ]
+      },
+      {
+        "source_row": 111,
+        "name": "170ml",
+        "sku": "CCC-0111",
+        "stock_quantity": 3,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image76-44aa4713.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 67,
+    "name": "Glass Holder with 6 Holes Cocktail Holder and Shot Glass Stand Desktop",
+    "slug": "glass-holder-with-6-holes-cocktail-holder-and-shot-glass-stand-desktop",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 5,
+    "images": [
+      "sites/nice-lk/assets/products/image77-85e7466a.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 112,
+        "name": "Default",
+        "sku": "CCC-0112",
+        "stock_quantity": 5,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image77-85e7466a.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 68,
+    "name": "15x9cm - Nail Clipper Set Nail Scissors Clippers Eagle Beak Pliers Universal Use Portable Manicure Tool",
+    "slug": "15x9cm-nail-clipper-set-nail-scissors-clippers-eagle-beak-pliers-universal-use-portable-ma",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 16,
+    "images": [
+      "sites/nice-lk/assets/products/image79-cdc317e1.jpeg",
+      "sites/nice-lk/assets/products/image78-e23971da.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 113,
+        "name": "Black",
+        "sku": "CCC-0113",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image79-cdc317e1.jpeg"
+        ]
+      },
+      {
+        "source_row": 114,
+        "name": "pink",
+        "sku": "CCC-0114",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image78-e23971da.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 69,
+    "name": "13x9cm - Nail Clipper Set Nail Scissors Clippers Eagle Beak Pliers Universal Use Portable Manicure Tool",
+    "slug": "13x9cm-nail-clipper-set-nail-scissors-clippers-eagle-beak-pliers-universal-use-portable-ma",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 89,
+    "images": [
+      "sites/nice-lk/assets/products/image80-18b61eda.jpeg",
+      "sites/nice-lk/assets/products/image82-1597a528.jpeg",
+      "sites/nice-lk/assets/products/image84-2a427df5.jpeg",
+      "sites/nice-lk/assets/products/image81-2a944e12.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 115,
+        "name": "Ligh Green",
+        "sku": "CCC-0115",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image80-18b61eda.jpeg"
+        ]
+      },
+      {
+        "source_row": 116,
+        "name": "Green",
+        "sku": "CCC-0116",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image82-1597a528.jpeg"
+        ]
+      },
+      {
+        "source_row": 117,
+        "name": "Off White",
+        "sku": "CCC-0117",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image84-2a427df5.jpeg"
+        ]
+      },
+      {
+        "source_row": 118,
+        "name": "Gray",
+        "sku": "CCC-0118",
+        "stock_quantity": 29,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image81-2a944e12.jpeg"
+        ]
+      },
+      {
+        "source_row": 119,
+        "name": "Orange",
+        "sku": "CCC-0119",
+        "stock_quantity": 15,
+        "sample": "",
+        "images": []
+      }
+    ]
+  },
+  {
+    "source_product_index": 70,
+    "name": "17x10 Nail Clipper Set Nail Scissors Clippers",
+    "slug": "17x10-nail-clipper-set-nail-scissors-clippers",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 45,
+    "images": [
+      "sites/nice-lk/assets/products/image83-7b12e8c9.jpeg",
+      "sites/nice-lk/assets/products/image79-cdc317e1.jpeg",
+      "sites/nice-lk/assets/products/image78-e23971da.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 120,
+        "name": "Black",
+        "sku": "CCC-0120",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image83-7b12e8c9.jpeg",
+          "sites/nice-lk/assets/products/image79-cdc317e1.jpeg"
+        ]
+      },
+      {
+        "source_row": 121,
+        "name": "Pink",
+        "sku": "CCC-0121",
+        "stock_quantity": 15,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image78-e23971da.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 71,
+    "name": "15cm x 9cm' Pedicure and Nail Manicure Tool Set Suitcase",
+    "slug": "15cm-x-9cm-pedicure-and-nail-manicure-tool-set-suitcase",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 16,
+    "images": [
+      "sites/nice-lk/assets/products/image85-0b288b7e.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 122,
+        "name": "Pink",
+        "sku": "CCC-0122",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image85-0b288b7e.jpeg"
+        ]
+      },
+      {
+        "source_row": 123,
+        "name": "Orange",
+        "sku": "CCC-0123",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image85-0b288b7e.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 72,
+    "name": "10cm x 6cm' Pedicure and Nail Manicure Tool Set Suitcase",
+    "slug": "10cm-x-6cm-pedicure-and-nail-manicure-tool-set-suitcase",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 15,
+    "images": [],
+    "variations": [
+      {
+        "source_row": 124,
+        "name": "Orange",
+        "sku": "CCC-0124",
+        "stock_quantity": 15,
+        "sample": "1",
+        "images": []
+      }
+    ]
+  },
+  {
+    "source_product_index": 73,
+    "name": "22x15 Pedicure and Nail Manicure Tool Set",
+    "slug": "22x15-pedicure-and-nail-manicure-tool-set",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 4,
+    "images": [
+      "sites/nice-lk/assets/products/image86-25c02a19.jpeg",
+      "sites/nice-lk/assets/products/image87-68b2708b.png"
+    ],
+    "variations": [
+      {
+        "source_row": 125,
+        "name": "Black",
+        "sku": "CCC-0125",
+        "stock_quantity": 2,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image86-25c02a19.jpeg"
+        ]
+      },
+      {
+        "source_row": 126,
+        "name": "Pink",
+        "sku": "CCC-0126",
+        "stock_quantity": 2,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image87-68b2708b.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 74,
+    "name": "Passport Wallet with Zipper closer",
+    "slug": "passport-wallet-with-zipper-closer",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 5,
+    "images": [
+      "sites/nice-lk/assets/products/image91-90eacb4b.jpeg",
+      "sites/nice-lk/assets/products/image90-fe87b0db.jpeg",
+      "sites/nice-lk/assets/products/image88-0cfc2a93.jpeg",
+      "sites/nice-lk/assets/products/image89-6e17efef.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 127,
+        "name": "Blue",
+        "sku": "CCC-0127",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image91-90eacb4b.jpeg"
+        ]
+      },
+      {
+        "source_row": 128,
+        "name": "Pink",
+        "sku": "CCC-0128",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image90-fe87b0db.jpeg"
+        ]
+      },
+      {
+        "source_row": 129,
+        "name": "White",
+        "sku": "CCC-0129",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image88-0cfc2a93.jpeg"
+        ]
+      },
+      {
+        "source_row": 130,
+        "name": "Black",
+        "sku": "CCC-0130",
+        "stock_quantity": 2,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image89-6e17efef.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 75,
+    "name": "Passport Wallet",
+    "slug": "passport-wallet",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 11,
+    "images": [
+      "sites/nice-lk/assets/products/image92-340a5c9e.jpeg",
+      "sites/nice-lk/assets/products/image93-b8c1bda7.jpeg",
+      "sites/nice-lk/assets/products/image94-cf1b1d2f.jpeg",
+      "sites/nice-lk/assets/products/image97-23e65fab.jpeg",
+      "sites/nice-lk/assets/products/image100-46452838.jpeg",
+      "sites/nice-lk/assets/products/image98-17ccc061.jpeg",
+      "sites/nice-lk/assets/products/image99-02ed6958.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 131,
+        "name": "Green",
+        "sku": "CCC-0131",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image92-340a5c9e.jpeg"
+        ]
+      },
+      {
+        "source_row": 132,
+        "name": "Black",
+        "sku": "CCC-0132",
+        "stock_quantity": 2,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image93-b8c1bda7.jpeg"
+        ]
+      },
+      {
+        "source_row": 135,
+        "name": "Coffee",
+        "sku": "CCC-0135",
+        "stock_quantity": 3,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image94-cf1b1d2f.jpeg"
+        ]
+      },
+      {
+        "source_row": 136,
+        "name": "Gray",
+        "sku": "CCC-0136",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image97-23e65fab.jpeg"
+        ]
+      },
+      {
+        "source_row": 137,
+        "name": "Wine Red",
+        "sku": "CCC-0137",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image100-46452838.jpeg"
+        ]
+      },
+      {
+        "source_row": 138,
+        "name": "Pink",
+        "sku": "CCC-0138",
+        "stock_quantity": 2,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image98-17ccc061.jpeg",
+          "sites/nice-lk/assets/products/image99-02ed6958.jpeg"
+        ]
+      },
+      {
+        "source_row": 139,
+        "name": "Brown",
+        "sku": "CCC-0139",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": []
+      }
+    ]
+  },
+  {
+    "source_product_index": 76,
+    "name": "Passport Wallet - Pink",
+    "slug": "passport-wallet-pink",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 2,
+    "images": [
+      "sites/nice-lk/assets/products/image96-dab3c035.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 133,
+        "name": "Dusy Pink",
+        "sku": "CCC-0133",
+        "stock_quantity": 2,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image96-dab3c035.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 77,
+    "name": "Passport Wallet - Black",
+    "slug": "passport-wallet-black",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 2,
+    "images": [
+      "sites/nice-lk/assets/products/image95-03af3904.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 134,
+        "name": "Black",
+        "sku": "CCC-0134",
+        "stock_quantity": 2,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image95-03af3904.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 78,
+    "name": "Men Zipper Wallet",
+    "slug": "men-zipper-wallet",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 5,
+    "images": [
+      "sites/nice-lk/assets/products/image105-75a3cb0e.jpeg",
+      "sites/nice-lk/assets/products/image104-00cc7e90.jpeg",
+      "sites/nice-lk/assets/products/image101-fc98c650.jpeg",
+      "sites/nice-lk/assets/products/image102-91aaaf22.jpeg",
+      "sites/nice-lk/assets/products/image103-96454785.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 140,
+        "name": "Brown",
+        "sku": "CCC-0140",
+        "stock_quantity": 1,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image105-75a3cb0e.jpeg"
+        ]
+      },
+      {
+        "source_row": 141,
+        "name": "Gray",
+        "sku": "CCC-0141",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image104-00cc7e90.jpeg"
+        ]
+      },
+      {
+        "source_row": 142,
+        "name": "Black",
+        "sku": "CCC-0142",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image101-fc98c650.jpeg"
+        ]
+      },
+      {
+        "source_row": 143,
+        "name": "Brown",
+        "sku": "CCC-0143",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image102-91aaaf22.jpeg"
+        ]
+      },
+      {
+        "source_row": 144,
+        "name": "Pink",
+        "sku": "CCC-0144",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image103-96454785.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 79,
+    "name": "Men Zipper Wallet with button",
+    "slug": "men-zipper-wallet-with-button",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 3,
+    "images": [
+      "sites/nice-lk/assets/products/image106-123a6111.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 145,
+        "name": "Brown",
+        "sku": "CCC-0145",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image106-123a6111.jpeg"
+        ]
+      },
+      {
+        "source_row": 146,
+        "name": "Black",
+        "sku": "CCC-0146",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image106-123a6111.jpeg"
+        ]
+      },
+      {
+        "source_row": 147,
+        "name": "Coffee",
+        "sku": "CCC-0147",
+        "stock_quantity": 1,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image106-123a6111.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 80,
+    "name": "3D Crystal and , 7-Color LED Lights, Wooden Base,",
+    "slug": "3d-crystal-and-7-color-led-lights-wooden-base",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 8,
+    "images": [
+      "sites/nice-lk/assets/products/image107-d52053ab.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 148,
+        "name": "40*100*130",
+        "sku": "CCC-0148",
+        "stock_quantity": 4,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image107-d52053ab.jpeg"
+        ]
+      },
+      {
+        "source_row": 149,
+        "name": "40*115*175",
+        "sku": "CCC-0149",
+        "stock_quantity": 2,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image107-d52053ab.jpeg"
+        ]
+      },
+      {
+        "source_row": 150,
+        "name": "40*115*175",
+        "sku": "CCC-0150",
+        "stock_quantity": 2,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image107-d52053ab.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 81,
+    "name": "Custom Makeup Mirror DIY Photo",
+    "slug": "custom-makeup-mirror-diy-photo",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 400,
+    "images": [
+      "sites/nice-lk/assets/products/image109-fa224b34.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 151,
+        "name": "Gold",
+        "sku": "CCC-0151",
+        "stock_quantity": 200,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image109-fa224b34.jpeg"
+        ]
+      },
+      {
+        "source_row": 152,
+        "name": "Silver",
+        "sku": "CCC-0152",
+        "stock_quantity": 100,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image109-fa224b34.jpeg"
+        ]
+      },
+      {
+        "source_row": 153,
+        "name": "Black",
+        "sku": "CCC-0153",
+        "stock_quantity": 100,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image109-fa224b34.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 82,
+    "name": "Magic Pillow- Heart",
+    "slug": "magic-pillow-heart",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 291,
+    "images": [
+      "sites/nice-lk/assets/products/image115-786447d0.png"
+    ],
+    "variations": [
+      {
+        "source_row": 154,
+        "name": "Dark Pink",
+        "sku": "CCC-0154",
+        "stock_quantity": 97,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image115-786447d0.png"
+        ]
+      },
+      {
+        "source_row": 155,
+        "name": "pink",
+        "sku": "CCC-0155",
+        "stock_quantity": 97,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image115-786447d0.png"
+        ]
+      },
+      {
+        "source_row": 156,
+        "name": "Blue",
+        "sku": "CCC-0156",
+        "stock_quantity": 97,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image115-786447d0.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 83,
+    "name": "Magic Pillow- squer",
+    "slug": "magic-pillow-squer",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 291,
+    "images": [
+      "sites/nice-lk/assets/products/image116-0b925ba6.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 157,
+        "name": "Dark Pink",
+        "sku": "CCC-0157",
+        "stock_quantity": 97,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image116-0b925ba6.jpeg"
+        ]
+      },
+      {
+        "source_row": 158,
+        "name": "pink",
+        "sku": "CCC-0158",
+        "stock_quantity": 97,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image116-0b925ba6.jpeg"
+        ]
+      },
+      {
+        "source_row": 159,
+        "name": "Blue",
+        "sku": "CCC-0159",
+        "stock_quantity": 97,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image116-0b925ba6.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 84,
+    "name": "Kay Chain Bear",
+    "slug": "kay-chain-bear",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 220,
+    "images": [
+      "sites/nice-lk/assets/products/image113-3f81f077.jpeg",
+      "sites/nice-lk/assets/products/image112-27e4eaeb.jpeg",
+      "sites/nice-lk/assets/products/image110-a81d7b76.jpeg",
+      "sites/nice-lk/assets/products/image111-ab6b2374.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 160,
+        "name": "White",
+        "sku": "CCC-0160",
+        "stock_quantity": 60,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image113-3f81f077.jpeg"
+        ]
+      },
+      {
+        "source_row": 161,
+        "name": "Dark Brown",
+        "sku": "CCC-0161",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image112-27e4eaeb.jpeg"
+        ]
+      },
+      {
+        "source_row": 162,
+        "name": "Brown",
+        "sku": "CCC-0162",
+        "stock_quantity": 30,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image110-a81d7b76.jpeg"
+        ]
+      },
+      {
+        "source_row": 163,
+        "name": "Gray",
+        "sku": "CCC-0163",
+        "stock_quantity": 100,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image111-ab6b2374.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 85,
+    "name": "Vintage Plum Blossom Coaster Set",
+    "slug": "vintage-plum-blossom-coaster-set",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 50,
+    "images": [
+      "sites/nice-lk/assets/products/image114-909d4bc3.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 164,
+        "name": "Default",
+        "sku": "CCC-0164",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image114-909d4bc3.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 86,
+    "name": "Leather Wine / Bottle Carrier bag",
+    "slug": "leather-wine-bottle-carrier-bag",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 29,
+    "images": [
+      "sites/nice-lk/assets/products/image118-eccddaad.png"
+    ],
+    "variations": [
+      {
+        "source_row": 165,
+        "name": "Brown",
+        "sku": "CCC-0165",
+        "stock_quantity": 9,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image118-eccddaad.png"
+        ]
+      },
+      {
+        "source_row": 166,
+        "name": "Wine Red",
+        "sku": "CCC-0166",
+        "stock_quantity": 10,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image118-eccddaad.png"
+        ]
+      },
+      {
+        "source_row": 167,
+        "name": "Black",
+        "sku": "CCC-0167",
+        "stock_quantity": 10,
+        "sample": "",
+        "images": [
+          "sites/nice-lk/assets/products/image118-eccddaad.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 87,
+    "name": "Whiskey Gift Set, Whisky Glasses Set with chess board",
+    "slug": "whiskey-gift-set-whisky-glasses-set-with-chess-board",
+    "type": "simple",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 12,
+    "images": [
+      "sites/nice-lk/assets/products/image119-d7c0c537.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 168,
+        "name": "Default",
+        "sku": "CCC-0168",
+        "stock_quantity": 12,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image119-d7c0c537.jpeg"
+        ]
+      }
+    ]
+  },
+  {
+    "source_product_index": 88,
+    "name": "Lipstick Holder Keychain",
+    "slug": "lipstick-holder-keychain",
+    "type": "variable",
+    "category_guess": "Personalized Gifts",
+    "category_review_required": true,
+    "total_qty": 300,
+    "images": [
+      "sites/nice-lk/assets/products/image120-95472811.jpeg"
+    ],
+    "variations": [
+      {
+        "source_row": 169,
+        "name": "Black",
+        "sku": "CCC-0169",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image120-95472811.jpeg"
+        ]
+      },
+      {
+        "source_row": 170,
+        "name": "Blue",
+        "sku": "CCC-0170",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image120-95472811.jpeg"
+        ]
+      },
+      {
+        "source_row": 171,
+        "name": "Pink",
+        "sku": "CCC-0171",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image120-95472811.jpeg"
+        ]
+      },
+      {
+        "source_row": 172,
+        "name": "Red",
+        "sku": "CCC-0172",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image120-95472811.jpeg"
+        ]
+      },
+      {
+        "source_row": 173,
+        "name": "White",
+        "sku": "CCC-0173",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image120-95472811.jpeg"
+        ]
+      },
+      {
+        "source_row": 174,
+        "name": "Green",
+        "sku": "CCC-0174",
+        "stock_quantity": 50,
+        "sample": "1",
+        "images": [
+          "sites/nice-lk/assets/products/image120-95472811.jpeg"
+        ]
+      }
+    ]
+  }
+]

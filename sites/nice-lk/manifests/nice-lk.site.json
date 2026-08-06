@@ -1,0 +1,25 @@
+{
+  "site": "nice-lk",
+  "site_url": "https://nice.lk",
+  "pages": [
+    {
+      "key": "home",
+      "title": "Home - Current Design Upgrade Preview",
+      "slug": "home-gift-print-preview",
+      "path": "/",
+      "status": "publish",
+      "existingId": 6580,
+      "nativePayload": "sites/nice-lk/content/pages/home-live-6580.elementor.json",
+      "lintMode": "approved-baseline"
+    }
+  ],
+  "templates": [],
+  "smoke": [
+    {
+      "path": "/",
+      "contains": [
+        "nice.lk"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "project": "nice-lk",
+  "page": {
+    "title": "Nice.lk Homepage Additions",
+    "slug": "nice-lk-homepage-additions",
+    "template": "elementor_header_footer",
+    "status": "draft"
+  },
+  "design": {
+    "route": "current-site-extension",
+    "colors": {
+      "primary": "#5B16C5",
+      "secondary": "#4267C7",
+      "accent": "#F05A2B",
+      "dark": "#46109A",
+      "light": "#F7F5FC",
+      "white": "#FFFFFF",
+      "muted": "#5F6370"
+    },
+    "fonts": {
+      "heading": "Roboto",
+      "body": "Roboto"
+    }
+  },
+  "sections": [
+    {
+      "component": "FeatureGrid",
+      "content": {
+        "eyebrow": "More ways to make it personal",
+        "title": "Explore our new gift and print categories",
+        "body": "From one-off keepsakes to branded team orders, Nice.lk now brings more personalized ideas together with the photobooks you already love.",
+        "items": [
+          {
+            "icon": "fas fa-gift",
+            "title": "Personalized Gifts",
+            "body": "Engraved keepsakes, custom accessories, gift sets, glassware, and thoughtful pieces made for the recipient."
+          },
+          {
+            "icon": "fas fa-user",
+            "title": "Mini Me",
+            "body": "Fun character-style plush keepsakes and mini gifts for birthdays, celebrations, and surprise moments."
+          },
+          {
+            "icon": "fas fa-shirt",
+            "title": "T-Shirt Printing",
+            "body": "Custom apparel for events, teams, businesses, family occasions, and creative one-off designs."
+          },
+          {
+            "icon": "fas fa-briefcase",
+            "title": "Corporate Gifts",
+            "body": "Pens, notebooks, gift sets, branded accessories, and flexible bulk options for teams and clients."
+          }
+        ]
+      }
+    },
+    {
+      "component": "GalleryGrid",
+      "content": {
+        "eyebrow": "New arrivals",
+        "title": "Fresh ideas for gifting, branding, and everyday moments",
+        "body": "A first look at selected products from our expanding collection. Contact our team to personalize an item or plan a larger order.",
+        "images": [
+          {
+            "url": "https://nice.lk/wp-content/uploads/2026/08/image6-3ba84228.jpeg",
+            "alt": "Personalized whiskey gift set",
+            "caption": "Personalized gift sets"
+          },
+          {
+            "url": "https://nice.lk/wp-content/uploads/2026/08/image10-c883a475.jpeg",
+            "alt": "Premium business pen in a gift box",
+            "caption": "Premium business pens"
+          },
+          {
+            "url": "https://nice.lk/wp-content/uploads/2026/08/image12-fc82b50f.jpeg",
+            "alt": "Mini Me bear keychain plush",
+            "caption": "Mini Me keepsakes"
+          },
+          {
+            "url": "https://nice.lk/wp-content/uploads/2026/08/image20-f402aa7b.jpeg",
+            "alt": "Hardcover business notebook gift set",
+            "caption": "Corporate notebook sets"
+          },
+          {
+            "url": "https://nice.lk/wp-content/uploads/2026/08/image26-afca4f76.jpeg",
+            "alt": "Crystal glass suitable for engraving",
+            "caption": "Engraved crystal gifts"
+          },
+          {
+            "url": "https://nice.lk/wp-content/uploads/2026/08/image32-1f0144ce.png",
+            "alt": "Smart anti-loss keychain tracker",
+            "caption": "Smart accessories"
+          }
+        ]
+      }
+    },
+    {
+      "component": "CtaBand",
+      "content": {
+        "title": "Planning gifts for a team, event, or special occasion?",
+        "body": "Tell us what you need, your quantity, and your timeline. We will help you choose the right product and personalization method.",
+        "button": {
+          "text": "Request a Quote",
+          "url": "/contact-us/"
+        }
+      }
+    }
+  ]
+}
