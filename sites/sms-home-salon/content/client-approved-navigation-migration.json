@@ -7,7 +7,7 @@
     "keep_nails_hub_published_outside_header": true,
     "hand_paraffin_target": "/manicure/hand-paraffin/",
     "keep_henna_standalone": true,
-    "category_only_header_menu": true,
+    "category_only_header_menu": false,
     "callus_label_check_required": true
   },
   "counts": {
@@ -866,7 +866,10 @@
     }
   ],
   "menu": {
-    "strategy": "category-only",
+    "strategy": "full-service-tree",
+    "item_count": 88,
+    "detail_item_count": 73,
+    "depth": 3,
     "top_level": [
       "Home",
       "Services",
@@ -886,6 +889,18 @@
       "Waxing",
       "Threading"
     ],
+    "service_detail_counts": {
+      "Massage": 14,
+      "Facial": 7,
+      "Bleach": 3,
+      "Scrub": 5,
+      "Hair": 8,
+      "Manicure": 11,
+      "Pedicure": 6,
+      "Kids": 0,
+      "Waxing": 11,
+      "Threading": 8
+    },
     "footer_legal": [
       "Privacy Policy",
       "Terms of Use"

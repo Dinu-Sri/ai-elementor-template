@@ -14,6 +14,8 @@ Bridge: Native Elementor Bridge `0.9.0`
 5. Replaced redirecting `/blog/` article links with canonical root permalinks, removed date-archive links from Blog metadata, and reconciled the 242-link SEO plan with the 50 published posts.
 7. Promoted the final sitemap, migration manifest, reusable tools, article-link contract, and bridge release into the repository.
 
+Post-closeout navigation expansion: Main Menu ID `12` now includes every approved published sub-service beneath its service category, producing an 88-item, three-level tree while preserving the `menu-1` assignment.
+
 The previously listed Blog Theme Builder configuration and browser visual-review tasks were intentionally outside this approved closeout scope.
 
 ## Final Live Counts
@@ -21,7 +23,7 @@ The previously listed Blog Theme Builder configuration and browser visual-review
 - Published pages: 91
 - Published SEO posts: 50
 - Rank Math redirects: 45
-- Main Menu items: 15
+- Main Menu items: 88 (5 top-level, 10 service categories, 73 service details)
 - Media attachments: 224
 - Published navigation targets checked: 44
 - Legacy redirect sources checked: 44
@@ -30,6 +32,8 @@ The previously listed Blog Theme Builder configuration and browser visual-review
 ## Verification
 
 - Navigation migration: zero failures.
+- Main Menu bridge read-back: 88 expected items, 88 present, zero deletions.
+- Public menu render: all 88 menu URLs present in cache-busted homepage HTML.
 - Category hubs: zero missing published child links.
 - Services page: all ten approved service categories linked.
 - Visible hours: approved value found on all audited pages and the site header.

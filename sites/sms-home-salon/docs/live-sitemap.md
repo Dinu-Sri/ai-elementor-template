@@ -7,27 +7,27 @@ Published pages: 91 (28 legacy, 63 newly added)
 
 ## Approved Main Menu
 
-The active `Main Menu` is ID `12`, assigned to `menu-1`, with category-only service navigation.
+The active `Main Menu` is ID `12`, assigned to `menu-1`, with 88 items in a three-level service hierarchy. Every published service detail listed in the page hierarchy below is included beneath its category.
 
 ```text
 - Home -> /
 - Services -> /services/
-  - Massage -> /massage/
-  - Facial -> /facial/
-  - Bleach -> /bleach/
-  - Scrub -> /scrub/
-  - Hair -> /hair/
-  - Manicure -> /manicure/
-  - Pedicure -> /pedicure/
+  - Massage -> /massage/ (14 detail links)
+  - Facial -> /facial/ (7 detail links)
+  - Bleach -> /bleach/ (3 detail links)
+  - Scrub -> /scrub/ (5 detail links)
+  - Hair -> /hair/ (8 detail links)
+  - Manicure -> /manicure/ (11 detail links)
+  - Pedicure -> /pedicure/ (6 detail links)
   - Kids -> /kids/
-  - Waxing -> /waxing/
-  - Threading -> /threading/
+  - Waxing -> /waxing/ (11 detail links)
+  - Threading -> /threading/ (8 detail links)
 - About Us -> /about/
 - Blog -> /blog/
 - Contact Us -> /contact/
 ```
 
-The published `/nails/` legacy umbrella page remains available but is intentionally excluded from the header.
+The published `/nails/` legacy umbrella page remains available but is intentionally excluded from the header. The tracked deployment hierarchy is defined in `sites/sms-home-salon/tools/apply-client-menu.cjs`.
 
 ## Published Page Hierarchy
 

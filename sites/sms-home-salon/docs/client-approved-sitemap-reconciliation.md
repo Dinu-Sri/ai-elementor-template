@@ -12,7 +12,7 @@ Live source: fresh Native Elementor Bridge 0.8.8 inventory and export-back check
 - Moved or renamed 36 existing pages while preserving their WordPress IDs and Elementor data.
 - Drafted the five absorbed pages and three omitted Threading package pages after their redirects were active.
 - Created and verified 44 direct Rank Math 301 redirects with no chains or duplicate sources.
-- Rebuilt Main Menu ID `12` as a 15-item category-only hierarchy while preserving its `menu-1` assignment.
+- Rebuilt Main Menu ID `12` as an 88-item three-level hierarchy containing all 73 approved service-detail links while preserving its `menu-1` assignment.
 - Replaced 12 retired internal links across two pages and five SEO posts; the final scan found zero remaining retired links.
 - Resolved the approved Callus mapping as Callus Treatment `AED 160` and Callus Treatment With Polish `AED 180`.
 - Final acceptance audit passed with 91 published pages, 50 posts, 44 targets returning HTTP 200, and 44 old sources returning the expected direct 301.
@@ -200,9 +200,9 @@ Also confirm the Callus labels. The client inventory says `AED160 · With Polish
 5. **Plural display names:** keep readable titles `Full Arms Bleaching` and `Full Arms Scrub` while retaining singular slugs. This is technically safe and recommended.
 6. **Callus labels:** confirm which service is AED160 and which is AED180.
 7. **Pricing:** approve the eight detected live-content corrections listed above.
-8. **Header depth:** approve a full three-level mega menu or category-only dropdowns.
+8. **Header depth:** resolved on 2026-08-13; the full three-level service tree was approved and deployed.
 
-## Recommended Final Menu
+## Approved Final Menu
 
 ### Header
 
@@ -238,9 +238,7 @@ Blog
 Contact Us
 ```
 
-This produces five top-level header items. If every service detail is included, the menu contains 88 total items and should use a desktop mega menu with grouped columns plus a mobile accordion. A normal narrow dropdown is not suitable for this volume.
-
-The leaner alternative is 15 header items total: five top-level entries plus ten service category entries, with detail links kept on category hubs. This is the recommended option unless the client explicitly requires every detail page in the header.
+This produces five top-level header items and 88 total menu items. The full detail hierarchy is deployed through the existing recursive Elementor desktop dropdown and mobile accordion behavior.
 
 ### Footer
 
