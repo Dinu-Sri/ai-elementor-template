@@ -1,0 +1,44 @@
+{
+  "site": "SMS Home Salon Blog Theme Builder",
+  "slug": "sms-home-salon-blog-theme-builder",
+  "site_url": "https://homesalon.ae",
+  "menus": [],
+  "pages": [
+    {
+      "key": "blog-page",
+      "title": "Blog",
+      "slug": "blog",
+      "path": "/blog/",
+      "status": "publish",
+      "existingId": 1327,
+      "nativePayload": "sites/sms-home-salon/content/pages/sms-home-salon-blog-page-2026.payload.json"
+    }
+  ],
+  "templates": [
+    {
+      "key": "blog-loop",
+      "title": "SMS Home Salon Blog Loop - 2026",
+      "existingId": 1318,
+      "type": "loop-item",
+      "conditions": [],
+      "nativePayload": "sites/sms-home-salon/content/templates/sms-home-salon-blog-loop-2026.payload.json"
+    },
+    {
+      "key": "blog-archive",
+      "title": "SMS Home Salon Blog Archive - 2026",
+      "existingId": 1316,
+      "type": "archive",
+      "conditions": [],
+      "nativePayload": "sites/sms-home-salon/content/templates/sms-home-salon-blog-archive-2026.payload.json"
+    },
+    {
+      "key": "blog-single",
+      "title": "SMS Home Salon Blog Single - 2026",
+      "existingId": 1317,
+      "type": "single-post",
+      "conditions": [],
+      "nativePayload": "sites/sms-home-salon/content/templates/sms-home-salon-blog-single-2026.payload.json"
+    }
+  ],
+  "smoke": []
+}
