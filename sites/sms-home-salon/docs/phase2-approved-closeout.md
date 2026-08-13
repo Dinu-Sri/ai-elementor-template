@@ -16,6 +16,8 @@ Bridge: Native Elementor Bridge `0.9.0`
 
 Post-closeout navigation expansion: Main Menu ID `12` now includes every approved published sub-service beneath its service category, producing an 88-item, three-level tree while preserving the `menu-1` assignment.
 
+Post-closeout homepage repair: replaced 38 non-rendering Iconify HTML placeholders on page `124` with native Elementor icon widgets. Public markup now contains native inline SVGs, and all 9 referenced homepage media URLs pass.
+
 The previously listed Blog Theme Builder configuration and browser visual-review tasks were intentionally outside this approved closeout scope.
 
 ## Final Live Counts
