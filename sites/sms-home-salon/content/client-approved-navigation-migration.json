@@ -1,0 +1,912 @@
+{
+  "schema_version": 1,
+  "prepared_at": "2026-08-12T08:58:18.314Z",
+  "site": "https://homesalon.ae",
+  "assumptions": {
+    "canonical_active_page_count": 91,
+    "keep_nails_hub_published_outside_header": true,
+    "hand_paraffin_target": "/manicure/hand-paraffin/",
+    "keep_henna_standalone": true,
+    "category_only_header_menu": false,
+    "callus_label_check_required": true
+  },
+  "counts": {
+    "new_pages": 5,
+    "page_moves_or_renames": 36,
+    "absorbed_merge_pages": 5,
+    "omitted_package_pages": 3,
+    "retired_pages": 8,
+    "redirects": 44,
+    "existing_pricing_pages": 7,
+    "total_pricing_targets_including_new_page": 8
+  },
+  "new_pages": [
+    {
+      "key": "bleach",
+      "title": "Bleach",
+      "slug": "bleach",
+      "route": "/bleach/",
+      "kind": "hub"
+    },
+    {
+      "key": "scrub",
+      "title": "Scrub",
+      "slug": "scrub",
+      "route": "/scrub/",
+      "kind": "hub"
+    },
+    {
+      "key": "manicure",
+      "title": "Manicure",
+      "slug": "manicure",
+      "route": "/manicure/",
+      "kind": "hub"
+    },
+    {
+      "key": "pedicure",
+      "title": "Pedicure",
+      "slug": "pedicure",
+      "route": "/pedicure/",
+      "kind": "hub"
+    },
+    {
+      "key": "french-gel-nail-extensions",
+      "title": "French Gel Nail Extensions at Home in Dubai",
+      "slug": "french-gel-nail-extensions",
+      "route": "/manicure/french-gel-nail-extensions/",
+      "kind": "detail",
+      "parent_key": "manicure",
+      "price_packages": [
+        {
+          "label": "French Gel Nail Extensions",
+          "price": "AED 320"
+        }
+      ]
+    }
+  ],
+  "page_moves": [
+    {
+      "page_id": 1150,
+      "source": "/facial/full-arm-bleaching/",
+      "target": "/bleach/full-arm-bleaching/",
+      "title": "Full Arms Bleaching at Home in Dubai",
+      "slug": "full-arm-bleaching",
+      "parent_key": "bleach",
+      "parent_id": null
+    },
+    {
+      "page_id": 1152,
+      "source": "/facial/full-legs-bleaching/",
+      "target": "/bleach/full-legs-bleaching/",
+      "title": "Full Legs Bleaching at Home in Dubai",
+      "slug": "full-legs-bleaching",
+      "parent_key": "bleach",
+      "parent_id": null
+    },
+    {
+      "page_id": 1154,
+      "source": "/facial/full-back-front-bleaching/",
+      "target": "/bleach/full-back-front-bleaching/",
+      "title": "Full Body Back and Full Body Front Bleaching at Home in Dubai",
+      "slug": "full-back-front-bleaching",
+      "parent_key": "bleach",
+      "parent_id": null
+    },
+    {
+      "page_id": 1156,
+      "source": "/facial/face-scrub/",
+      "target": "/scrub/face-scrub/",
+      "title": "Face Scrub at Home in Dubai",
+      "slug": "face-scrub",
+      "parent_key": "scrub",
+      "parent_id": null
+    },
+    {
+      "page_id": 1158,
+      "source": "/facial/full-arm-scrub/",
+      "target": "/scrub/full-arm-scrub/",
+      "title": "Full Arms Scrub at Home in Dubai",
+      "slug": "full-arm-scrub",
+      "parent_key": "scrub",
+      "parent_id": null
+    },
+    {
+      "page_id": 1160,
+      "source": "/facial/full-back-front-scrub/",
+      "target": "/scrub/full-back-front-scrub/",
+      "title": "Full Body Back and Full Body Front Scrub at Home in Dubai",
+      "slug": "full-back-front-scrub",
+      "parent_key": "scrub",
+      "parent_id": null
+    },
+    {
+      "page_id": 1162,
+      "source": "/facial/full-body-scrub/",
+      "target": "/scrub/full-body-scrub/",
+      "title": "Full Body Scrub at Home in Dubai",
+      "slug": "full-body-scrub",
+      "parent_key": "scrub",
+      "parent_id": null
+    },
+    {
+      "page_id": 1164,
+      "source": "/facial/full-body-scrub-with-mask/",
+      "target": "/scrub/full-body-scrub-with-mask/",
+      "title": "Full Body Scrub With Mask at Home in Dubai",
+      "slug": "full-body-scrub-with-mask",
+      "parent_key": "scrub",
+      "parent_id": null
+    },
+    {
+      "page_id": 1054,
+      "source": "/nails/hand-paraffin/",
+      "target": "/manicure/hand-paraffin/",
+      "title": "Hand Paraffin at Home in Dubai",
+      "slug": "hand-paraffin",
+      "parent_key": "manicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1056,
+      "source": "/nails/classic-manicure/",
+      "target": "/manicure/classic-manicure/",
+      "title": "Classic Manicure at Home in Dubai",
+      "slug": "classic-manicure",
+      "parent_key": "manicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1058,
+      "source": "/nails/spa-manicure/",
+      "target": "/manicure/spa-manicure/",
+      "title": "Spa Manicure at Home in Dubai",
+      "slug": "spa-manicure",
+      "parent_key": "manicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1060,
+      "source": "/nails/classic-nails-extension/",
+      "target": "/manicure/classic-nails-extension/",
+      "title": "Classic Nails Extension at Home in Dubai",
+      "slug": "classic-nails-extension",
+      "parent_key": "manicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1062,
+      "source": "/nails/gelish-manicure/",
+      "target": "/manicure/gelish-manicure/",
+      "title": "Gelish Manicure at Home in Dubai",
+      "slug": "gelish-manicure",
+      "parent_key": "manicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1064,
+      "source": "/nails/french-gel-manicure/",
+      "target": "/manicure/french-gel-manicure/",
+      "title": "French Gel Manicure at Home in Dubai",
+      "slug": "french-gel-manicure",
+      "parent_key": "manicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1066,
+      "source": "/nails/cat-eye-extensions/",
+      "target": "/manicure/cat-eye-extensions/",
+      "title": "Cat Eye Extensions at Home in Dubai",
+      "slug": "cat-eye-extensions",
+      "parent_key": "manicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 396,
+      "source": "/nails/acrylic-nail/",
+      "target": "/manicure/acrylic-nail/",
+      "title": "Acrylic Nail at Home in Dubai",
+      "slug": "acrylic-nail",
+      "parent_key": "manicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 395,
+      "source": "/nails/gel-nail-extensions/",
+      "target": "/manicure/gel-nail-extensions/",
+      "title": "Gel Nail Extensions at Home in Dubai",
+      "slug": "gel-nail-extensions",
+      "parent_key": "manicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1068,
+      "source": "/nails/builder-gel-nails/",
+      "target": "/manicure/builder-gel-nails/",
+      "title": "Builder Gel Nails at Home in Dubai",
+      "slug": "builder-gel-nails",
+      "parent_key": "manicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1082,
+      "source": "/nails/kids/",
+      "target": "/kids/",
+      "title": "Kids Nail Services at Home in Dubai",
+      "slug": "kids",
+      "parent_key": null,
+      "parent_id": 0
+    },
+    {
+      "page_id": 1070,
+      "source": "/nails/foot-paraffin/",
+      "target": "/pedicure/foot-paraffin/",
+      "title": "Foot Paraffin at Home in Dubai",
+      "slug": "foot-paraffin",
+      "parent_key": "pedicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1076,
+      "source": "/nails/classic-pedicure/",
+      "target": "/pedicure/classic-pedicure/",
+      "title": "Classic Pedicure at Home in Dubai",
+      "slug": "classic-pedicure",
+      "parent_key": "pedicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1078,
+      "source": "/nails/gel-pedicure/",
+      "target": "/pedicure/gel-pedicure/",
+      "title": "Gel Pedicure at Home in Dubai",
+      "slug": "gel-pedicure",
+      "parent_key": "pedicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1072,
+      "source": "/nails/spa-pedicure/",
+      "target": "/pedicure/spa-pedicure/",
+      "title": "Spa Pedicure at Home in Dubai",
+      "slug": "spa-pedicure",
+      "parent_key": "pedicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1080,
+      "source": "/nails/callus/",
+      "target": "/pedicure/callus-pedicure/",
+      "title": "Callus Treatment at Home in Dubai",
+      "slug": "callus-pedicure",
+      "parent_key": "pedicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1074,
+      "source": "/nails/foot-scrub/",
+      "target": "/pedicure/foot-scrub-pedicure/",
+      "title": "Foot Scrub at Home in Dubai",
+      "slug": "foot-scrub-pedicure",
+      "parent_key": "pedicure",
+      "parent_id": null
+    },
+    {
+      "page_id": 1096,
+      "source": "/waxing/upper-lip/",
+      "target": "/waxing/upper-lip-waxing/",
+      "title": "Upper Lip Waxing at Home in Dubai",
+      "slug": "upper-lip-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    },
+    {
+      "page_id": 1098,
+      "source": "/waxing/eyebrows/",
+      "target": "/waxing/eyebrows-waxing/",
+      "title": "Eyebrow Waxing at Home in Dubai",
+      "slug": "eyebrows-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    },
+    {
+      "page_id": 1100,
+      "source": "/waxing/chin/",
+      "target": "/waxing/chin-waxing/",
+      "title": "Chin Waxing at Home in Dubai",
+      "slug": "chin-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    },
+    {
+      "page_id": 1102,
+      "source": "/waxing/underarms/",
+      "target": "/waxing/underarms-waxing/",
+      "title": "Underarms Waxing at Home in Dubai",
+      "slug": "underarms-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    },
+    {
+      "page_id": 1104,
+      "source": "/waxing/chest/",
+      "target": "/waxing/chest-waxing/",
+      "title": "Chest Waxing at Home in Dubai",
+      "slug": "chest-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    },
+    {
+      "page_id": 1106,
+      "source": "/waxing/half-stomach/",
+      "target": "/waxing/stomach-waxing/",
+      "title": "Stomach Waxing at Home in Dubai",
+      "slug": "stomach-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    },
+    {
+      "page_id": 1116,
+      "source": "/waxing/half-legs/",
+      "target": "/waxing/legs-waxing/",
+      "title": "Legs Waxing at Home in Dubai",
+      "slug": "legs-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    },
+    {
+      "page_id": 1112,
+      "source": "/waxing/half-arms/",
+      "target": "/waxing/arms-waxing/",
+      "title": "Arms Waxing at Home in Dubai",
+      "slug": "arms-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    },
+    {
+      "page_id": 1120,
+      "source": "/waxing/bikini/",
+      "target": "/waxing/bikini-waxing/",
+      "title": "Bikini Waxing at Home in Dubai",
+      "slug": "bikini-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    },
+    {
+      "page_id": 1110,
+      "source": "/waxing/full-face/",
+      "target": "/waxing/face-waxing/",
+      "title": "Face Waxing at Home in Dubai",
+      "slug": "face-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    },
+    {
+      "page_id": 1122,
+      "source": "/waxing/full-body-without-bikini/",
+      "target": "/waxing/full-body-waxing/",
+      "title": "Full Body Waxing at Home in Dubai",
+      "slug": "full-body-waxing",
+      "parent_key": null,
+      "parent_id": 66
+    }
+  ],
+  "merges": [
+    {
+      "absorbed_page_id": 1108,
+      "absorbed_source": "/waxing/full-stomach/",
+      "keeper_page_id": 1106,
+      "keeper_source": "/waxing/half-stomach/",
+      "target": "/waxing/stomach-waxing/",
+      "purpose": "merge Full Stomach packages into Stomach Waxing",
+      "retire_status": "draft"
+    },
+    {
+      "absorbed_page_id": 1118,
+      "absorbed_source": "/waxing/full-legs/",
+      "keeper_page_id": 1116,
+      "keeper_source": "/waxing/half-legs/",
+      "target": "/waxing/legs-waxing/",
+      "purpose": "merge Full Legs packages into Legs Waxing",
+      "retire_status": "draft"
+    },
+    {
+      "absorbed_page_id": 1114,
+      "absorbed_source": "/waxing/full-arms/",
+      "keeper_page_id": 1112,
+      "keeper_source": "/waxing/half-arms/",
+      "target": "/waxing/arms-waxing/",
+      "purpose": "merge Full Arms packages into Arms Waxing",
+      "retire_status": "draft"
+    },
+    {
+      "absorbed_page_id": 1124,
+      "absorbed_source": "/waxing/full-body-with-bikini/",
+      "keeper_page_id": 1122,
+      "keeper_source": "/waxing/full-body-without-bikini/",
+      "target": "/waxing/full-body-waxing/",
+      "purpose": "merge With Bikini packages into Full Body Waxing",
+      "retire_status": "draft"
+    },
+    {
+      "absorbed_page_id": 1142,
+      "absorbed_source": "/threading/full-face-with-eyebrows/",
+      "keeper_page_id": 1140,
+      "keeper_source": "/threading/full-face-without-eyebrows/",
+      "target": "/threading/full-face-without-eyebrows/",
+      "purpose": "merge With Eyebrows package into Full Face Threading",
+      "retire_status": "draft"
+    }
+  ],
+  "removals": [
+    {
+      "page_id": 1144,
+      "source": "/threading/brows-upper-lip/",
+      "target": "/threading/",
+      "reason": "approved inventory omits this standalone package page",
+      "retire_status": "draft"
+    },
+    {
+      "page_id": 1146,
+      "source": "/threading/brows-chin/",
+      "target": "/threading/",
+      "reason": "approved inventory omits this standalone package page",
+      "retire_status": "draft"
+    },
+    {
+      "page_id": 1148,
+      "source": "/threading/custom-pack/",
+      "target": "/threading/",
+      "reason": "approved inventory omits this standalone package page",
+      "retire_status": "draft"
+    }
+  ],
+  "pricing_updates": [
+    {
+      "page_id": 1038,
+      "source": "/massage/full-body-massage/",
+      "packages": [
+        {
+          "label": "60-Minute Full Body Massage",
+          "price": "AED 240"
+        },
+        {
+          "label": "90-Minute Full Body Massage",
+          "price": "AED 380"
+        }
+      ]
+    },
+    {
+      "page_id": 1046,
+      "source": "/massage/head-massage/",
+      "packages": [
+        {
+          "label": "60-Minute Head Massage",
+          "price": "AED 216"
+        },
+        {
+          "label": "90-Minute Head Massage",
+          "price": "AED 264"
+        }
+      ]
+    },
+    {
+      "page_id": 1048,
+      "source": "/massage/head-neck-massage/",
+      "packages": [
+        {
+          "label": "60-Minute Head and Neck Massage",
+          "price": "AED 216"
+        },
+        {
+          "label": "90-Minute Head and Neck Massage",
+          "price": "AED 264"
+        }
+      ]
+    },
+    {
+      "page_id": 1044,
+      "source": "/massage/head-shoulder-massage/",
+      "packages": [
+        {
+          "label": "60-Minute Head and Shoulder Massage",
+          "price": "AED 216"
+        },
+        {
+          "label": "90-Minute Head and Shoulder Massage",
+          "price": "AED 264"
+        }
+      ]
+    },
+    {
+      "page_id": 1050,
+      "source": "/massage/shoulder-massage/",
+      "packages": [
+        {
+          "label": "60-Minute Shoulder Massage",
+          "price": "AED 216"
+        },
+        {
+          "label": "90-Minute Shoulder Massage",
+          "price": "AED 264"
+        }
+      ]
+    },
+    {
+      "page_id": 389,
+      "source": "/massage/pregnancy-massage/",
+      "packages": [
+        {
+          "label": "60-Minute Pregnancy Massage",
+          "price": "AED 280"
+        },
+        {
+          "label": "90-Minute Pregnancy Massage",
+          "price": "AED 380"
+        }
+      ]
+    },
+    {
+      "page_id": 396,
+      "source": "/nails/acrylic-nail/",
+      "packages": [
+        {
+          "label": "Acrylic Extensions",
+          "price": "AED 300"
+        },
+        {
+          "label": "French Acrylic Extensions",
+          "price": "AED 320"
+        },
+        {
+          "label": "Acrylic Overlay Natural",
+          "price": "AED 280"
+        },
+        {
+          "label": "Acrylic Refill Natural",
+          "price": "AED 250"
+        },
+        {
+          "label": "Acrylic Repair",
+          "price": "AED 25"
+        },
+        {
+          "label": "Acrylic Refill French",
+          "price": "AED 270"
+        },
+        {
+          "label": "Acrylic Refill Ombre",
+          "price": "AED 260"
+        },
+        {
+          "label": "Ombre Acrylic Extensions",
+          "price": "AED 400"
+        }
+      ]
+    }
+  ],
+  "callus_package_resolution": {
+    "page_id": 1080,
+    "target": "/pedicure/callus-pedicure/",
+    "packages": [
+      {
+        "label": "Callus Treatment",
+        "price": "AED 160"
+      },
+      {
+        "label": "Callus Treatment With Polish",
+        "price": "AED 180"
+      }
+    ],
+    "source": "Client-approved inventory: Callus Treatment AED160; With Polish AED180"
+  },
+  "redirects": [
+    {
+      "source": "/facial/full-arm-bleaching/",
+      "destination": "/bleach/full-arm-bleaching/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/facial/full-legs-bleaching/",
+      "destination": "/bleach/full-legs-bleaching/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/facial/full-back-front-bleaching/",
+      "destination": "/bleach/full-back-front-bleaching/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/facial/face-scrub/",
+      "destination": "/scrub/face-scrub/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/facial/full-arm-scrub/",
+      "destination": "/scrub/full-arm-scrub/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/facial/full-back-front-scrub/",
+      "destination": "/scrub/full-back-front-scrub/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/facial/full-body-scrub/",
+      "destination": "/scrub/full-body-scrub/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/facial/full-body-scrub-with-mask/",
+      "destination": "/scrub/full-body-scrub-with-mask/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/hand-paraffin/",
+      "destination": "/manicure/hand-paraffin/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/classic-manicure/",
+      "destination": "/manicure/classic-manicure/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/spa-manicure/",
+      "destination": "/manicure/spa-manicure/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/classic-nails-extension/",
+      "destination": "/manicure/classic-nails-extension/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/gelish-manicure/",
+      "destination": "/manicure/gelish-manicure/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/french-gel-manicure/",
+      "destination": "/manicure/french-gel-manicure/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/cat-eye-extensions/",
+      "destination": "/manicure/cat-eye-extensions/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/acrylic-nail/",
+      "destination": "/manicure/acrylic-nail/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/gel-nail-extensions/",
+      "destination": "/manicure/gel-nail-extensions/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/builder-gel-nails/",
+      "destination": "/manicure/builder-gel-nails/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/kids/",
+      "destination": "/kids/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/foot-paraffin/",
+      "destination": "/pedicure/foot-paraffin/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/classic-pedicure/",
+      "destination": "/pedicure/classic-pedicure/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/gel-pedicure/",
+      "destination": "/pedicure/gel-pedicure/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/spa-pedicure/",
+      "destination": "/pedicure/spa-pedicure/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/callus/",
+      "destination": "/pedicure/callus-pedicure/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/nails/foot-scrub/",
+      "destination": "/pedicure/foot-scrub-pedicure/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/upper-lip/",
+      "destination": "/waxing/upper-lip-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/eyebrows/",
+      "destination": "/waxing/eyebrows-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/chin/",
+      "destination": "/waxing/chin-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/underarms/",
+      "destination": "/waxing/underarms-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/chest/",
+      "destination": "/waxing/chest-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/half-stomach/",
+      "destination": "/waxing/stomach-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/half-legs/",
+      "destination": "/waxing/legs-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/half-arms/",
+      "destination": "/waxing/arms-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/bikini/",
+      "destination": "/waxing/bikini-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/full-face/",
+      "destination": "/waxing/face-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/full-body-without-bikini/",
+      "destination": "/waxing/full-body-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/full-stomach/",
+      "destination": "/waxing/stomach-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/full-legs/",
+      "destination": "/waxing/legs-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/full-arms/",
+      "destination": "/waxing/arms-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/waxing/full-body-with-bikini/",
+      "destination": "/waxing/full-body-waxing/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/threading/full-face-with-eyebrows/",
+      "destination": "/threading/full-face-without-eyebrows/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/threading/brows-upper-lip/",
+      "destination": "/threading/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/threading/brows-chin/",
+      "destination": "/threading/",
+      "type": 301,
+      "status": "active"
+    },
+    {
+      "source": "/threading/custom-pack/",
+      "destination": "/threading/",
+      "type": 301,
+      "status": "active"
+    }
+  ],
+  "menu": {
+    "strategy": "full-service-tree",
+    "item_count": 88,
+    "detail_item_count": 73,
+    "depth": 3,
+    "top_level": [
+      "Home",
+      "Services",
+      "About Us",
+      "Blog",
+      "Contact Us"
+    ],
+    "service_categories": [
+      "Massage",
+      "Facial",
+      "Bleach",
+      "Scrub",
+      "Hair",
+      "Manicure",
+      "Pedicure",
+      "Kids",
+      "Waxing",
+      "Threading"
+    ],
+    "service_detail_counts": {
+      "Massage": 14,
+      "Facial": 7,
+      "Bleach": 3,
+      "Scrub": 5,
+      "Hair": 8,
+      "Manicure": 11,
+      "Pedicure": 6,
+      "Kids": 0,
+      "Waxing": 11,
+      "Threading": 8
+    },
+    "footer_legal": [
+      "Privacy Policy",
+      "Terms of Use"
+    ],
+    "excluded_from_header": [
+      "Nails"
+    ]
+  }
+}

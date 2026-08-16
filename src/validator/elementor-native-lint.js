@@ -20,6 +20,7 @@ const allowedWidgets = new Set([
   "nav-menu",
   "social-icons",
   "loop-grid",
+  "archive-posts",
   "posts",
   "theme-post-title",
   "theme-post-featured-image",

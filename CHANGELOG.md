@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.9.0 - 2026-08-13
+
+- Add authenticated GET and guarded PUT operations for Rank Math Local Business opening hours.
+- Validate weekday names and 24-hour ranges, support dry-run planning, preserve unrelated Rank Math settings, clear caches, and verify the saved option.
+
+## 0.8.9 - 2026-08-12
+
+- Invalidate Rank Math XML sitemap files and transients through its supported cache API whenever the authenticated bridge cache endpoint runs.
+
+## 0.8.8 - 2026-08-12
+
+- Allow the authenticated media update endpoint to update video and other attachment records, not only images.
+- Add sanitized attachment slug updates so media permalink collisions can be resolved without changing the physical media file URL.
+
+## 0.8.7 - 2026-08-12
+
+- Added mandatory PHP CLI syntax validation to the bridge release check.
+- Added an explicit Rank Math Redirections module check before exposing redirect operations.
+- Matched Rank Math's two-argument redirection saved hook contract.
+- Included case-sensitivity settings in redirect update and post-save verification.
+
+## 0.8.6 - 2026-08-12
+
+- Fixed PHP namespace separators in the Rank Math redirection integration introduced in 0.8.5.
+
+## 0.8.5 - 2026-08-12
+
+- Added authenticated Rank Math redirection listing and batch upsert endpoints.
+- Added dry-run planning and guards against homepage redirects, external targets, duplicate sources, loops, chains, and unsafe shared-rule updates.
+- Added transactional writes and post-save verification through Rank Math's native redirection model.
+- Exposed Rank Math and redirection-module availability in bridge status.
+
+## 0.8.4 - 2026-08-10
+
+- Fixed scheduled draft updates by explicitly setting WordPress's `edit_date` flag when `date` or `date_gmt` is supplied.
+- Added scheduler response validation so an unexpected immediate publication is reverted and the batch stops.
+
+## 0.8.3 - 2026-08-09
+
+- Added Native Elementor Bridge support for scheduling blog posts with `future` status plus `date` and `date_gmt` fields.
+- Included scheduled posts in bridge blog post listings and post responses so SEO rollout schedules can be verified.
+
+## 0.8.2 - 2026-08-07
+
+- Expanded Native Elementor Bridge menu operations for nested WordPress navigation trees.
+- Added menu dry-run planning, append/replace modes, richer menu item exports, source-key matching, page-object menu items, and parent/child menu item updates.
+- Preserved existing menu identity when targeting an existing menu by ID without passing a replacement name or slug.
+
 ## 0.8.0 - 2026-08-06
 
 - Added authenticated JetWooBuilder template listing, export, cloning, and update operations.

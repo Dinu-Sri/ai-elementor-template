@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "0.8.0"
+    [string]$Version = "0.9.0"
 )
 
 $ErrorActionPreference = "Stop"
@@ -7,9 +7,19 @@ $root = Split-Path -Parent $PSScriptRoot
 $pluginPath = Join-Path $root "plugin\native-elementor-bridge"
 $buildPath = Join-Path $root "build"
 $zipPath = Join-Path $buildPath "native-elementor-bridge-$Version.zip"
+$validatorPath = Join-Path $root "tools\validate-plugin-release.js"
 
 if (-not (Test-Path -LiteralPath $pluginPath)) {
     throw "Plugin folder not found: $pluginPath"
+}
+
+$node = Get-Command node -ErrorAction SilentlyContinue
+if (-not $node) {
+    throw "Node.js is required to validate the plugin release before packaging."
+}
+& $node.Source $validatorPath $Version
+if ($LASTEXITCODE -ne 0) {
+    throw "Plugin release validation failed; ZIP was not rebuilt."
 }
 
 New-Item -ItemType Directory -Force -Path $buildPath | Out-Null

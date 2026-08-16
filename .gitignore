@@ -1,5 +1,7 @@
 # Dependencies and generated output
 node_modules/
+.pnpm-store/
+.vscode/
 build/
 projects/
 coverage/
@@ -9,6 +11,10 @@ outputs/
 
 # Local client intake sources stay outside version control after normalization.
 /CCC Items.xlsx
+/HOME_SALON_CMS_READY_FINAL_50/
+/SMS_Home_Salon_Phase2_Developer_Brief.docx
+/Service descriptions for the website.xlsx
+~$*
 
 # Local credentials and machine-specific configuration
 .env

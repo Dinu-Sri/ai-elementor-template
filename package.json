@@ -1,10 +1,10 @@
 {
   "name": "native-elementor-master-suite",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "private": true,
   "description": "Reusable native Elementor compiler, WordPress bridge, site workflow, and SEO publishing toolkit.",
   "scripts": {
-    "bridge:validate": "node ./tools/validate-plugin-release.js 0.8.0",
+    "bridge:validate": "node ./tools/validate-plugin-release.js 0.9.0",
     "site:nice:products:check": "node ./sites/nice-lk/tools/import-ccc-products.js",
     "site:nice:products:import": "node ./sites/nice-lk/tools/import-ccc-products.js --apply",
     "site:nice:gifts:check": "node ./sites/nice-lk/tools/assign-gifts-category.js",
