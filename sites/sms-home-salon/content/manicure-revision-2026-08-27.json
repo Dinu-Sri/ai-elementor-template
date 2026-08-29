@@ -1,0 +1,58 @@
+{
+  "revision": "2026-08-27-manicure-services",
+  "site": "https://homesalon.ae",
+  "menu_id": 12,
+  "hub": { "id": 1379, "path": "/manicure/" },
+  "services": [
+    { "id": 1054, "name": "Hand Paraffin", "path": "/manicure/hand-paraffin/", "packages": [
+      { "name": "Hand Paraffin", "duration": 30, "price": "AED 60", "most_popular": true }
+    ] },
+    { "id": 1056, "name": "Classic Manicure", "path": "/manicure/classic-manicure/", "packages": [
+      { "name": "With Color", "duration": 45, "price": "AED 78", "most_popular": true },
+      { "name": "Without Color", "duration": 40, "price": "AED 72" },
+      { "name": "French Tip", "duration": 60, "price": "AED 84" }
+    ] },
+    { "id": 1058, "name": "Spa Manicure", "path": "/manicure/spa-manicure/", "packages": [
+      { "name": "Spa Manicure", "duration": 60, "price": "AED 96", "most_popular": true }
+    ] },
+    { "id": 1060, "name": "Classic Nails Extension", "menu_name": "Classic Nail Extensions", "path": "/manicure/classic-nails-extension/", "packages": [
+      { "name": "Classic Nails Extension", "duration": 90, "price": "AED 120", "most_popular": true }
+    ] },
+    { "id": 1062, "name": "Gelish Manicure", "path": "/manicure/gelish-manicure/", "packages": [
+      { "name": "Gelish Manicure", "duration": 90, "price": "AED 120", "most_popular": true }
+    ] },
+    { "id": 1064, "name": "French Gel Manicure", "path": "/manicure/french-gel-manicure/", "packages": [
+      { "name": "French Gel Manicure", "duration": 90, "price": "AED 144", "most_popular": true }
+    ] },
+    { "id": 395, "name": "Gel Nail Extensions", "path": "/manicure/gel-nail-extensions/", "packages": [
+      { "name": "Gel Nail Extensions", "duration": 120, "price": "AED 300", "most_popular": true }
+    ] },
+    { "id": 1381, "name": "French Gel Nail Extensions", "path": "/manicure/french-gel-nail-extensions/", "packages": [
+      { "name": "French Gel Nail Extensions", "duration": 120, "price": "AED 320", "most_popular": true }
+    ] },
+    { "id": 1066, "name": "Cat Eye Extensions", "path": "/manicure/cat-eye-extensions/", "packages": [
+      { "name": "Cat Eye Extensions", "duration": 120, "price": "AED 350", "most_popular": true }
+    ] },
+    { "id": 396, "name": "Acrylic Nail", "path": "/manicure/acrylic-nail/", "packages": [
+      { "name": "Acrylic Nail Extensions", "duration": 120, "price": "AED 300", "most_popular": true },
+      { "name": "French Acrylic Nail Extensions", "duration": 120, "price": "AED 320" },
+      { "name": "Acrylic Overlay Natural", "duration": 120, "price": "AED 280" },
+      { "name": "Acrylic Refill Natural", "duration": 120, "price": "AED 250" },
+      { "name": "Acrylic Repair", "duration": 30, "price": "AED 15" },
+      { "name": "Acrylic Refill French", "duration": 120, "price": "AED 270" },
+      { "name": "Acrylic Refill Ombre", "duration": 120, "price": "AED 260" },
+      { "name": "Ombre Acrylic Extensions", "duration": 120, "price": "AED 400" }
+    ] },
+    { "id": 1068, "name": "Builder Gel Nails", "path": "/manicure/builder-gel-nails/", "packages": [
+      { "name": "Builder Gel (BIAB)", "duration": 120, "price": "AED 280", "most_popular": true },
+      { "name": "Builder Gel Overlay (BIAB)", "duration": 120, "price": "AED 300" },
+      { "name": "Builder Gel Extensions (BIAB)", "duration": 120, "price": "AED 350" }
+    ] }
+  ],
+  "notes": [
+    "The existing published page IDs and routes are preserved.",
+    "The hub and detail pages display Duration and Price for every package.",
+    "Placeholder Package, From, and From AED fields are removed.",
+    "The service and menu order follows the approved screenshots."
+  ]
+}

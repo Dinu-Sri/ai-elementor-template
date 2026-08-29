@@ -1,0 +1,31 @@
+{
+  "revision": "2026-08-28-services-master-catalog",
+  "site": "https://homesalon.ae",
+  "page": { "id": 61, "title": "Our Services", "path": "/services/" },
+  "source_files": [
+    "massage-revision-2026-08-26.json",
+    "facial-revision-2026-08-27.json",
+    "bleach-scrub-revision-2026-08-27.json",
+    "hair-revision-2026-08-27.json",
+    "manicure-revision-2026-08-27.json",
+    "pedicure-revision-2026-08-27.json",
+    "kids-mani-pedi-revision-2026-08-27.json",
+    "waxing-revision-2026-08-27.json",
+    "threading-revision-2026-08-27.json"
+  ],
+  "section_contract": [
+    { "name": "Massage", "packages": 32 },
+    { "name": "Nails", "packages": 40 },
+    { "name": "Hair", "packages": 18 },
+    { "name": "Facial & Skin Care", "packages": 15 },
+    { "name": "Waxing", "packages": 45 },
+    { "name": "Threading", "packages": 9 }
+  ],
+  "total_packages": 159,
+  "notes": [
+    "Every approved variant is represented as an individual Services-page card.",
+    "Massage, Facial, Bleach, Scrub, Manicure, Pedicure and Kids cards display duration and price.",
+    "Hair, Waxing and Threading cards display price only.",
+    "All card titles link to their canonical category or subservice page."
+  ]
+}

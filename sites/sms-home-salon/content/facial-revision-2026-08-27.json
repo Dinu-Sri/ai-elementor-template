@@ -1,0 +1,35 @@
+{
+  "revision": "2026-08-27-facial-services",
+  "site": "https://homesalon.ae",
+  "facial": {
+    "hub_id": 65,
+    "path": "/facial/",
+    "services": [
+      { "id": 400, "name": "Diamond Facial", "path": "/facial/diamond-facial/", "duration": 60, "price": "AED 360", "description": "Advanced premium glow facial." },
+      { "id": 403, "name": "Dr. Renaud Facial", "path": "/facial/dr-renaud-facial/", "duration": 60, "price": "AED 204", "description": "Professional facial protocol selected around your skin goals." },
+      { "id": 404, "name": "Fruit Facial", "path": "/facial/fruit-facial/", "duration": 60, "price": "AED 180", "description": "Hydrating, brightening facial care." },
+      { "id": 402, "name": "Gold Facial", "path": "/facial/gold-facial/", "duration": 60, "price": "AED 240", "description": "Glow-focused premium facial.", "most_popular": true },
+      { "id": 399, "name": "Hydra Facial", "path": "/facial/hydra-facial/", "duration": 60, "price": "AED 300", "description": "A hydration-focused 60-minute facial session.", "note": "Optimum course: 10 sessions." },
+      { "id": 401, "name": "Pearl Facial", "path": "/facial/pearl-facial/", "duration": 60, "price": "AED 300", "description": "Radiance and smoothness support." },
+      { "id": 1052, "name": "Face Clean Up", "old_name": "Clean Up Facial", "page_title": "Face Clean Up at Home in Dubai", "path": "/facial/clean-up-facial/", "duration": 45, "price": "AED 120", "description": "Deep cleansing and refreshment for a cleaner skin feel." }
+    ]
+  },
+  "bleach": {
+    "hub_id": 1377,
+    "path": "/bleach/",
+    "services": [
+      { "id": 1150, "name": "Full Arm Bleaching", "path": "/bleach/full-arm-bleaching/", "price": "AED 96", "description": "Even-looking arm bleaching with careful application." },
+      { "id": 1152, "name": "Full Legs Bleaching", "path": "/bleach/full-legs-bleaching/", "price": "AED 120", "description": "Professional bleaching care for the full legs." },
+      { "id": 1154, "name": "Full Back and Front Bleaching", "path": "/bleach/full-back-front-bleaching/", "price": "AED 240", "description": "A complete back and front body bleaching package." },
+      { "id": 1156, "name": "Face Scrub", "path": "/scrub/face-scrub/", "price": "AED 60", "description": "Gentle face exfoliation for softer, refreshed-looking skin." },
+      { "id": 1162, "name": "Full Body Scrub", "path": "/scrub/full-body-scrub/", "price": "AED 300", "description": "Complete body exfoliation delivered in a private home setup." }
+    ]
+  },
+  "scrub_menu_remaining_ids": [1158, 1160, 1164],
+  "menu_id": 12,
+  "notes": [
+    "The existing Facial, Bleach, Scrub and detail-page URLs are preserved.",
+    "Face Scrub and Full Body Scrub move beneath the Bleach menu item but retain their /scrub/ routes.",
+    "The separate Scrub hub remains published and its other three menu children remain unchanged."
+  ]
+}

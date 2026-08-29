@@ -1,0 +1,50 @@
+{
+  "revision": "2026-08-27-waxing-services",
+  "site": "https://homesalon.ae",
+  "menu_id": 12,
+  "hub_id": 66,
+  "hub_path": "/waxing/",
+  "hub_minimum_cards": 11,
+  "hub_package_prefix": true,
+  "featured_package": "Upper Lip Waxing - Normal",
+  "services": [
+    { "id": 1096, "name": "Upper Lip Waxing", "path": "/waxing/upper-lip-waxing/", "packages": [
+      { "name": "Normal", "price": "AED 24", "most_popular": true }, { "name": "Rica", "price": "AED 36" }, { "name": "Hard", "price": "AED 48" }
+    ] },
+    { "id": 1098, "name": "Eyebrow Waxing", "path": "/waxing/eyebrows-waxing/", "packages": [
+      { "name": "Normal", "price": "AED 30" }, { "name": "Rica", "price": "AED 42" }, { "name": "Hard", "price": "AED 54" }
+    ] },
+    { "id": 1100, "name": "Chin Waxing", "path": "/waxing/chin-waxing/", "packages": [
+      { "name": "Normal", "price": "AED 30" }, { "name": "Rica", "price": "AED 42" }, { "name": "Hard", "price": "AED 54" }
+    ] },
+    { "id": 1102, "name": "Underarms Waxing", "path": "/waxing/underarms-waxing/", "packages": [
+      { "name": "Normal", "price": "AED 48" }, { "name": "Rica", "price": "AED 60" }, { "name": "Hard", "price": "AED 72" }
+    ] },
+    { "id": 1116, "name": "Legs Waxing", "path": "/waxing/legs-waxing/", "packages": [
+      { "name": "Half Legs (Normal)", "price": "AED 48" }, { "name": "Half Legs (Rica)", "price": "AED 60" }, { "name": "Half Legs (Hard)", "price": "AED 72" },
+      { "name": "Full Legs (Normal)", "price": "AED 96" }, { "name": "Full Legs (Rica)", "price": "AED 108" }, { "name": "Full Legs (Hard)", "price": "AED 120" }
+    ] },
+    { "id": 1112, "name": "Arms Waxing", "path": "/waxing/arms-waxing/", "packages": [
+      { "name": "Half Arms (Normal)", "price": "AED 48" }, { "name": "Half Arms (Rica)", "price": "AED 60" }, { "name": "Half Arms (Hard)", "price": "AED 72" },
+      { "name": "Full Arms (Normal)", "price": "AED 72" }, { "name": "Full Arms (Rica)", "price": "AED 84" }, { "name": "Full Arms (Hard)", "price": "AED 96" }
+    ] },
+    { "id": 1106, "name": "Stomach Waxing", "path": "/waxing/stomach-waxing/", "packages": [
+      { "name": "Half Stomach (Normal)", "price": "AED 60" }, { "name": "Half Stomach (Rica)", "price": "AED 72" }, { "name": "Half Stomach (Hard)", "price": "AED 84" },
+      { "name": "Full Stomach (Normal)", "price": "AED 72" }, { "name": "Full Stomach (Rica)", "price": "AED 84" }, { "name": "Full Stomach (Hard)", "price": "AED 96" }
+    ] },
+    { "id": 1104, "name": "Chest Waxing", "path": "/waxing/chest-waxing/", "packages": [
+      { "name": "Normal", "price": "AED 96" }, { "name": "Rica", "price": "AED 108" }, { "name": "Hard", "price": "AED 120" }
+    ] },
+    { "id": 1120, "name": "Bikini Waxing", "path": "/waxing/bikini-waxing/", "packages": [
+      { "name": "Normal", "price": "AED 108" }, { "name": "Rica", "price": "AED 120" }, { "name": "Hard", "price": "AED 132" }
+    ] },
+    { "id": 1110, "name": "Face Waxing", "path": "/waxing/face-waxing/", "packages": [
+      { "name": "Normal", "price": "AED 120" }, { "name": "Rica", "price": "AED 132" }, { "name": "Hard", "price": "AED 144" }
+    ] },
+    { "id": 1122, "name": "Full Body Waxing", "path": "/waxing/full-body-waxing/", "packages": [
+      { "name": "Full Body Waxing Without Bikini (Normal)", "price": "AED 300" }, { "name": "Full Body Waxing Without Bikini (Rica)", "price": "AED 312" }, { "name": "Full Body Waxing Without Bikini (Hard)", "price": "AED 324" },
+      { "name": "Full Body Waxing With Bikini (Normal)", "price": "AED 420" }, { "name": "Full Body Waxing With Bikini (Rica)", "price": "AED 432" }, { "name": "Full Body Waxing With Bikini (Hard)", "price": "AED 444" }
+    ] }
+  ],
+  "notes": ["All 11 approved pages already exist.", "Waxing package cards display Price only.", "Duration, Package, From, and From AED fields are removed.", "The service and menu order follows the approved screenshots."]
+}

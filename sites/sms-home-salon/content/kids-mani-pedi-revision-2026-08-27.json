@@ -1,0 +1,28 @@
+{
+  "revision": "2026-08-27-kids-mani-pedi",
+  "site": "https://homesalon.ae",
+  "menu_id": 12,
+  "page": {
+    "id": 1082,
+    "old_title": "Kids Nail Services at Home in Dubai",
+    "title": "Kids Mani Pedi",
+    "old_path": "/kids/",
+    "path": "/kids-mani-pedi/",
+    "slug": "kids-mani-pedi",
+    "seo_title": "Kids Mani Pedi at Home in Dubai | SMS Home Ladies Salon",
+    "seo_description": "Book kids mani pedi at home in Dubai with trained female professionals. Packages start from AED 24 with SMS Home Ladies Salon.",
+    "focus_keyword": "kids mani pedi at home in Dubai"
+  },
+  "packages": [
+    { "name": "Kids Nail & Polish Application", "duration": 10, "price": "AED 24", "most_popular": true },
+    { "name": "Kids Manicure & Pedicure", "duration": 60, "price": "AED 84" },
+    { "name": "Gel Manicure Kids", "duration": 45, "price": "AED 60" },
+    { "name": "Gel Pedicure Kids", "duration": 45, "price": "AED 84" }
+  ],
+  "redirect": { "source": "/kids/", "destination": "/kids-mani-pedi/", "type": 301, "status": "active" },
+  "notes": [
+    "Page ID 1082 and its existing parent are preserved.",
+    "The WordPress title, visible Elementor naming, slug, canonical URL, menu label, and internal links are updated together.",
+    "The old /kids/ route receives a direct one-hop 301 redirect."
+  ]
+}

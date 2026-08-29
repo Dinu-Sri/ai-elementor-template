@@ -1,0 +1,160 @@
+{
+  "revision": "2026-08-26-massage-services",
+  "site": "https://homesalon.ae",
+  "parent": {
+    "id": 62,
+    "path": "/massage/"
+  },
+  "source": {
+    "type": "client-diagram-revision",
+    "received": "2026-08-26",
+    "notes": "Duplicate diagram boxes were collapsed. The brief resolves to 16 distinct massage sub-services."
+  },
+  "services": [
+    { "id": 392, "service": "Deep Tissue Massage", "hub_title": "Deep Tissue Massage", "path": "/massage/deep-tissue-massage/", "description": "Firm, slow pressure for persistent muscle tightness and focused tension areas.", "variants": [{ "minutes": 60, "price": "AED 300" }, { "minutes": 90, "price": "AED 380" }] },
+    { "id": 394, "service": "Hot Stone Massage", "hub_title": "Hot Stone Massage", "path": "/massage/hot-stone-massage/", "description": "Heated stones add soothing warmth to a relaxing massage session.", "variants": [{ "minutes": 60, "price": "AED 300" }, { "minutes": 90, "price": "AED 380" }] },
+    { "id": 390, "service": "Lymphatic Drainage Massage", "hub_title": "Lymphatic Drainage Massage", "path": "/massage/lymphatic-drainage-massage/", "description": "Gentle rhythmic strokes for a light, calm and focused massage experience.", "variants": [{ "minutes": 60, "price": "AED 300" }, { "minutes": 90, "price": "AED 380" }] },
+    { "id": 391, "service": "Madero Massage", "hub_title": "Madero Massage", "path": "/massage/madero-massage/", "description": "Wood-tool bodywork for a firm, targeted massage experience.", "variants": [{ "minutes": 60, "price": "AED 300" }, { "minutes": 90, "price": "AED 380" }] },
+    { "id": 389, "service": "Pregnancy Massage", "hub_title": "Pregnancy Massage", "path": "/massage/pregnancy-massage/", "description": "Gentle maternity-focused relaxation with adapted positioning and comfort.", "variants": [{ "minutes": 60, "price": "AED 280" }, { "minutes": 90, "price": "AED 380" }] },
+    { "id": 393, "service": "Thai Massage", "hub_title": "Thai Massage", "path": "/massage/thai-massage/", "description": "Assisted stretching and pressure-point work for flexibility and mobility.", "variants": [{ "minutes": 60, "price": "AED 240" }, { "minutes": 90, "price": "AED 380" }] },
+    { "id": 1035, "service": "Reflexology Massage", "hub_title": "Reflexology Massage", "path": "/massage/reflexology-massage/", "description": "Focused pressure-point work on the feet, hands or ears.", "variants": [{ "minutes": 60, "price": "AED 240" }, { "minutes": 90, "price": "AED 380" }] },
+    { "id": 1038, "service": "Full Body Massage", "hub_title": "Full Body Massage", "path": "/massage/full-body-massage/", "description": "Balanced head-to-toe massage for general relaxation and tension release.", "variants": [{ "minutes": 60, "price": "AED 240" }, { "minutes": 90, "price": "AED 380" }] },
+    { "id": 1040, "service": "Full Back Massage", "hub_title": "Full Back Massage", "path": "/massage/full-back-massage/", "description": "Focused massage across the back, neck and shoulder areas.", "variants": [{ "minutes": 60, "price": "AED 216" }, { "minutes": 90, "price": "AED 264" }] },
+    { "id": 1042, "service": "Foot Massage", "hub_title": "Foot Massage", "path": "/massage/foot-massage/", "description": "Foot and lower-leg focused relaxation after standing, walking or travel.", "variants": [{ "minutes": 60, "price": "AED 216" }, { "minutes": 90, "price": "AED 264" }] },
+    { "id": 1046, "service": "Head Massage", "hub_title": "Head Massage", "path": "/massage/head-massage/", "description": "A calming scalp and head-focused service for relaxation.", "variants": [{ "minutes": 60, "price": "AED 216" }, { "minutes": 90, "price": "AED 264" }] },
+    { "id": 1050, "service": "Shoulder Massage", "hub_title": "Shoulder Massage", "path": "/massage/shoulder-massage/", "description": "Focused massage for shoulder and upper-back tension.", "variants": [{ "minutes": 60, "price": "AED 216" }, { "minutes": 90, "price": "AED 264" }] },
+    { "id": 1048, "service": "Head and Neck Massage", "hub_title": "Head and Neck Massage", "path": "/massage/head-neck-massage/", "description": "Focused relaxation around the scalp, neck and base of the head.", "variants": [{ "minutes": 60, "price": "AED 216" }, { "minutes": 90, "price": "AED 264" }] },
+    { "id": 1044, "service": "Head and Shoulder Massage", "hub_title": "Head and Shoulder Massage", "path": "/massage/head-shoulder-massage/", "description": "Scalp, neck-line and shoulder massage for upper-body relaxation.", "variants": [{ "minutes": 60, "price": "AED 216" }, { "minutes": 90, "price": "AED 264" }] },
+    { "id": 1602, "key": "head-neck-shoulder-massage", "service": "Head, Neck and Shoulder Massage", "hub_title": "Head, Neck and Shoulder Massage", "path": "/massage/head-neck-shoulder-massage/", "description": "A combined scalp-to-shoulder session for broad upper-body relaxation.", "variants": [{ "minutes": 60, "price": "AED 216" }, { "minutes": 90, "price": "AED 264" }] },
+    { "id": 1604, "key": "cupping-therapy", "service": "Cupping Therapy", "hub_title": "Cupping Therapy", "path": "/massage/cupping-therapy/", "description": "Dry, suction-based bodywork with focused cup placement after a suitability check.", "variants": [{ "minutes": 60, "price": "AED 300" }, { "minutes": 90, "price": "AED 380" }] }
+  ],
+  "new_pages": [
+    {
+      "id": 1602,
+      "key": "head-neck-shoulder-massage",
+      "service": "Head, Neck and Shoulder Massage",
+      "title": "Head, Neck and Shoulder Massage at Home in Dubai",
+      "slug": "head-neck-shoulder-massage",
+      "path": "/massage/head-neck-shoulder-massage/",
+      "menu_order": 15,
+      "image": {
+        "file": "sites/sms-home-salon/assets/generated/head-neck-shoulder-massage-hero.png",
+        "title": "Head, Neck and Shoulder Massage at Home in Dubai",
+        "alt": "Female therapist providing head, neck and shoulder massage at home in Dubai",
+        "source": "OpenAI image generation"
+      },
+      "seo_title": "Head, Neck and Shoulder Massage at Home in Dubai | SMS Home Salon",
+      "seo_description": "Book head, neck and shoulder massage at home in Dubai with trained female professionals. Choose 60 minutes for AED 216 or 90 minutes for AED 264.",
+      "focus_keyword": "head neck and shoulder massage at home in Dubai",
+      "hero_description": "Book head, neck and shoulder massage at home in Dubai with trained female professionals. We bring a clean setup to your home, hotel or office for a focused and comfortable appointment.",
+      "at_a_glance": {
+        "who": [
+          { "title": "Desk and Screen Routines", "text": "Office workers and clients whose head, neck and shoulders feel tense after long periods at a desk or screen." },
+          { "title": "Broad Upper-Body Tension", "text": "People who want one focused session across the scalp, neck line, shoulders and upper back." },
+          { "title": "Frequent Drivers", "text": "Clients who spend long periods driving and want a comfortable upper-body relaxation appointment." },
+          { "title": "Busy Lifestyles", "text": "Anyone who carries day-to-day stress through the head, neck and shoulder areas." },
+          { "title": "Focused Relaxation", "text": "Clients who prefer targeted upper-body care instead of a full-body massage." }
+        ],
+        "when": [
+          { "title": "After Long Workdays", "text": "Book after demanding desk or screen time when the upper body feels ready to unwind." },
+          { "title": "After Travel or Driving", "text": "Choose a session after extended travel or driving when the neck and shoulders feel restricted or tired." },
+          { "title": "When You Want to Reset", "text": "Book when you want calm, focused relaxation across the full scalp-to-shoulder area." }
+        ],
+        "benefits": [
+          { "title": "Three-Zone Coverage", "text": "Combines head, neck and shoulder work in one coordinated appointment." },
+          { "title": "Adjustable Pressure", "text": "Pressure and focus areas are adapted to your comfort throughout the session." },
+          { "title": "Focused Home Comfort", "text": "Enjoy a private upper-body relaxation service without travelling to a salon." }
+        ]
+      },
+      "included_description": "Your professional prepares the service area, confirms your comfort and completes the selected head, neck and shoulder massage package with a massage setup, fresh linens and treatment essentials.",
+      "preference_description": "We confirm pressure preference, the balance between head, neck and shoulder work, and any areas that need special care.",
+      "package_descriptions": [
+        "A focused 60-minute session covering the head, neck, shoulders and upper-back transition.",
+        "An extended 90-minute session with more time for each head, neck and shoulder focus area."
+      ],
+      "right_for_you": {
+        "intro": "Choose Head, Neck and Shoulder Massage when you want one focused session across the scalp, neck line, shoulders and upper back.",
+        "cards": [
+          { "title": "Best For", "text": "Desk-based, driving and screen-heavy routines that leave several upper-body areas feeling tense." },
+          { "title": "At-Home Comfort", "text": "A clean, private setup is brought to your home or preferred location in Dubai." },
+          { "title": "Easy Booking", "text": "Send your preferred time and our team will confirm the available slot." },
+          { "title": "Aftercare Support", "text": "You receive simple service-specific aftercare guidance before the appointment is complete." },
+          { "title": "Scalp-to-Shoulder Focus", "text": "The appointment connects head, neck, shoulder and upper-back work in one balanced session." },
+          { "title": "Comfort-Led Pressure", "text": "Your therapist checks pressure and adapts the time spent on each focus area." }
+        ]
+      },
+      "faqs": [
+        { "question": "Is head, neck and shoulder massage available at home in Dubai?", "answer": "Yes. SMS Home Ladies Salon provides head, neck and shoulder massage at homes and selected locations across Dubai." },
+        { "question": "How is this different from head and shoulder massage?", "answer": "This option explicitly gives focused time to all three areas: the head, neck and shoulders, with an upper-back transition where appropriate." },
+        { "question": "Can I choose the pressure level?", "answer": "Yes. Your therapist confirms pressure preference and any sensitive or avoided areas before starting." },
+        { "question": "Which duration should I choose?", "answer": "Choose 60 minutes for a focused appointment or 90 minutes when you want more time across all three areas." },
+        { "question": "What should I prepare before the appointment?", "answer": "Prepare a comfortable space and share any mobility, sensitivity or positioning needs when confirming the booking." },
+        { "question": "Can I combine this with another service?", "answer": "Yes, depending on timing and therapist availability. Send the services you want and our team will confirm the best booking option." }
+      ]
+    },
+    {
+      "id": 1604,
+      "key": "cupping-therapy",
+      "service": "Cupping Therapy",
+      "title": "Cupping Therapy at Home in Dubai",
+      "slug": "cupping-therapy",
+      "path": "/massage/cupping-therapy/",
+      "menu_order": 16,
+      "image": {
+        "file": "sites/sms-home-salon/assets/generated/cupping-therapy-hero.jpg",
+        "title": "Cupping Therapy at Home in Dubai",
+        "alt": "Female professional preparing dry cupping therapy equipment at home in Dubai",
+        "source": "Pexels photo 8312821 by RDNE Stock project",
+        "source_url": "https://www.pexels.com/photo/doctor-applying-cupping-therapy-8312821/"
+      },
+      "seo_title": "Cupping Therapy at Home in Dubai | SMS Home Salon",
+      "seo_description": "Book dry cupping therapy at home in Dubai with a trained female professional. Choose 60 minutes for AED 300 or 90 minutes for AED 380.",
+      "focus_keyword": "cupping therapy at home in Dubai",
+      "hero_description": "Book dry cupping therapy at home in Dubai with a trained female professional. We bring hygiene-checked cups and a clean setup for a focused, private appointment.",
+      "at_a_glance": {
+        "who": [
+          { "title": "Suction-Based Bodywork", "text": "Adults who prefer controlled dry-cupping suction on selected areas rather than a conventional hands-on massage." },
+          { "title": "Back and Shoulder Focus", "text": "Clients who want focused cup placement across suitable back or shoulder areas after a comfort check." },
+          { "title": "Comfort With Temporary Marks", "text": "Anyone who understands that dry cupping can leave temporary circular marks on the skin." },
+          { "title": "Intact-Skin Dry Cupping", "text": "Clients seeking dry cupping without skin piercing, blood removal or heated-cup application." },
+          { "title": "Suitability Confirmed", "text": "Anyone with pregnancy, skin, bleeding, medication or health concerns should seek medical clearance before booking." }
+        ],
+        "when": [
+          { "title": "After a Suitability Check", "text": "Book after confirming the service is suitable for your skin, health needs and current medications." },
+          { "title": "When Skin Is Healthy", "text": "Choose a date when the treatment area is free from broken, irritated or actively inflamed skin." },
+          { "title": "Away From Important Events", "text": "Allow for temporary circular marks when planning around events, travel or outfits." }
+        ],
+        "benefits": [
+          { "title": "Targeted Cup Placement", "text": "Cups are positioned on selected suitable areas rather than applied as a general full-body service." },
+          { "title": "Adjustable Suction", "text": "The professional checks comfort and adjusts the suction approach during the appointment." },
+          { "title": "Private Home Setup", "text": "Receive a focused dry-cupping service in a clean and private home environment." }
+        ]
+      },
+      "included_description": "Your professional prepares the treatment area, completes a suitability and comfort check, and provides the selected dry cupping package with hygiene-checked cups, clean materials and aftercare guidance.",
+      "preference_description": "We confirm suitable treatment areas, suction comfort, skin condition and any health or medication concerns before starting.",
+      "package_descriptions": [
+        "A focused 60-minute dry-cupping appointment with suitability, placement and comfort checks.",
+        "An extended 90-minute dry-cupping appointment with more time for selected suitable areas."
+      ],
+      "right_for_you": {
+        "intro": "Choose Cupping Therapy when you prefer dry, suction-based bodywork on selected areas and understand that temporary circular marks can occur.",
+        "cards": [
+          { "title": "Best For", "text": "Adults seeking a focused dry-cupping session after confirming skin and health suitability." },
+          { "title": "At-Home Comfort", "text": "A clean, private setup is brought to your home or preferred location in Dubai." },
+          { "title": "Easy Booking", "text": "Send your preferred time and our team will confirm the available slot." },
+          { "title": "Aftercare Support", "text": "You receive simple service-specific aftercare guidance before the appointment is complete." },
+          { "title": "Dry Cupping Method", "text": "This service uses controlled suction on intact skin without piercing or blood removal." },
+          { "title": "Temporary Marks", "text": "Circular marks can occur after cupping, so plan the appointment around events and clothing preferences." }
+        ]
+      },
+      "faqs": [
+        { "question": "Is dry cupping therapy available at home in Dubai?", "answer": "Yes. SMS Home Ladies Salon offers dry cupping appointments at homes and selected locations across Dubai, subject to suitability and availability." },
+        { "question": "Does this cupping service pierce the skin?", "answer": "No. This page is for dry cupping, which uses suction on intact skin without skin piercing or blood removal." },
+        { "question": "Can cupping leave marks?", "answer": "Yes. Temporary circular marks can occur. Tell the professional about skin concerns before treatment and seek medical advice for unexpected or persistent reactions." },
+        { "question": "Who should seek medical clearance before booking?", "answer": "Anyone who is pregnant or has skin, bleeding, clotting, medication or other health concerns should consult a qualified healthcare professional first." },
+        { "question": "How is hygiene handled?", "answer": "The professional prepares a clean service area and uses hygiene-checked cupping equipment and fresh materials for the appointment." },
+        { "question": "Does cupping replace medical treatment?", "answer": "No. Cupping is a complementary wellness service and is not a substitute for medical diagnosis, advice or treatment." }
+      ]
+    }
+  ]
+}

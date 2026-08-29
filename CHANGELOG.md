@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased
+
+- Synchronized the master-seed documentation with Native Elementor Bridge 0.9.0, including the current packaging command and a reusable authenticated endpoint catalogue for pages, templates, menus, publishing, media, WooCommerce, JetWooBuilder, Rank Math, snapshots, and cache operations.
+- Rebuilt the production Our Services master catalogue from the approved category sources with 159 package cards: 32 Massage, 40 Nails, 18 Hair, 15 Facial and Skin Care, 45 Waxing, and 9 Threading; removed stale package values and retained the ten category routes.
+- Reconciled all 8 Threading detail pages and the production hub with 9 approved price-only packages, retained the combined Full Face page, removed Duration/Package/From fields, and preserved the 89-item menu.
+- Extended the approved one-row package metric layout to all 17 Manicure and Pedicure subservice pages, covering 36 detail-page package cards without changing their prices or durations.
+- Kept all Manicure and Pedicure level-1 package Duration and Price boxes aligned on one responsive row, including three-digit prices on mobile.
+- Kept the Kids Mani Pedi package Duration and Price boxes on one responsive row by using native no-wrap metric containers with balanced 47% child widths.
+- Reconciled all 11 Waxing detail pages and the production hub with 45 approved price-only packages, confirmed no new pages were required, removed Duration/Package/From fields, made repeated hub labels service-specific, and aligned the menu without changing its item count.
+- Renamed page 1082 to Kids Mani Pedi, migrated it from `/kids/` to `/kids-mani-pedi/`, added four approved duration/price packages, updated menu and internal links, refreshed Rank Math metadata, and created a verified direct 301 redirect from the old URL.
+- Reconciled all 6 Pedicure detail pages and the production hub with 14 approved duration/price packages, added Nail Filing and Gel Polish Remove, removed placeholder Package/From fields, and aligned the menu and hub order without changing the menu count.
+- Reconciled all 11 Manicure detail pages and the production hub with 22 approved duration/price packages, corrected Acrylic Repair to AED 15 for 30 minutes, removed placeholder Package/From fields, and aligned the menu and hub order without changing the menu count.
+- Reconciled all eight Bleach and Scrub detail pages and both production hubs with the approved duration/price matrix, restored the three-Bleach/five-Scrub taxonomy, removed placeholder Package/From fields, and realigned the main menu without changing its item count.
+- Reconciled seven published Hair service pages and the Hair hub with 18 approved price-only packages, moved Henna Application into Hair Coloring, drafted the standalone Henna page, removed placeholder duration/from fields, and aligned the Hair menu with the approved service matrix.
+- Reconciled the Facial and Bleach production hubs with the approved service matrix: seven Facial packages with Gold Facial marked Most Popular, five Bleach-menu packages, corrected durations and prices, and the Face Clean Up rename while preserving published URLs.
+- Published Head, Neck and Shoulder Massage and Cupping Therapy as native Elementor pages, expanded the Massage hub and main menu to all 16 approved services, and reconciled the displayed 60/90-minute prices against the client revision.
+- Replaced cloned Right for You card content across all 74 SMS Home Salon sub-service pages with unique, service-relevant introductions and cards, retaining useful common booking cards and verifying every production save through export-back, public, and responsive checks.
+- Applied the client-approved, emoji-free At a Glance revisions to eight existing SMS Home Salon service pages through the authenticated production bridge, with fresh snapshot baselines, native lint, export-back contracts, cache refresh, public content checks, and responsive QA.
+
 ## 0.9.0 - 2026-08-13
 
 - Add authenticated GET and guarded PUT operations for Rank Math Local Business opening hours.

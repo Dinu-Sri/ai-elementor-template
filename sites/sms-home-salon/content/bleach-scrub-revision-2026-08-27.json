@@ -1,0 +1,35 @@
+{
+  "revision": "2026-08-27-bleach-scrub-services",
+  "site": "https://homesalon.ae",
+  "menu_id": 12,
+  "categories": [
+    {
+      "name": "Bleach",
+      "hub_id": 1377,
+      "path": "/bleach/",
+      "services": [
+        { "id": 1150, "name": "Full Arms Bleaching", "menu_name": "Full Arms Bleaching", "path": "/bleach/full-arm-bleaching/", "duration": 45, "price": "AED 96", "note": "Both arms" },
+        { "id": 1152, "name": "Full Legs Bleaching", "path": "/bleach/full-legs-bleaching/", "duration": 60, "price": "AED 120" },
+        { "id": 1154, "name": "Full Body Back and Full Body Front Bleaching", "menu_name": "Full Back and Front Bleaching", "path": "/bleach/full-back-front-bleaching/", "duration": 120, "price": "AED 240" }
+      ]
+    },
+    {
+      "name": "Scrub",
+      "hub_id": 1378,
+      "path": "/scrub/",
+      "services": [
+        { "id": 1156, "name": "Face Scrub", "path": "/scrub/face-scrub/", "duration": 30, "price": "AED 60" },
+        { "id": 1158, "name": "Full Arms Scrub", "menu_name": "Full Arms Scrub", "path": "/scrub/full-arm-scrub/", "duration": 45, "price": "AED 72", "note": "Both arms" },
+        { "id": 1160, "name": "Full Body Back and Full Body Front Scrub", "menu_name": "Full Back and Front Scrub", "path": "/scrub/full-back-front-scrub/", "duration": 90, "price": "AED 180" },
+        { "id": 1162, "name": "Full Body Scrub", "path": "/scrub/full-body-scrub/", "duration": 90, "price": "AED 300" },
+        { "id": 1164, "name": "Full Body Scrub With Mask", "path": "/scrub/full-body-scrub-with-mask/", "duration": 120, "price": "AED 480" }
+      ]
+    }
+  ],
+  "notes": [
+    "Bleach contains only the three approved bleaching services.",
+    "Scrub contains all five approved scrub services.",
+    "Every package card displays Duration and Price.",
+    "Existing page IDs and public routes are preserved."
+  ]
+}
