@@ -1,25 +1,25 @@
 # SMS Home Ladies Salon Live Sitemap
 
-Date captured: 2026-08-13
+Date captured: 2026-08-27
 Source of truth: fresh Native Elementor Bridge live inventory
 Bridge version: 0.9.0
-Published pages: 91 (28 legacy, 63 newly added)
+Published pages: 92 (27 legacy, 65 newly added)
 
 ## Approved Main Menu
 
-The active `Main Menu` is ID `12`, assigned to `menu-1`, with 88 items in a three-level service hierarchy. Every published service detail listed in the page hierarchy below is included beneath its category.
+The active `Main Menu` is ID `12`, assigned to `menu-1`, with 89 items in a three-level service hierarchy. Every published service detail listed in the page hierarchy below is included beneath its category.
 
 ```text
 - Home -> /
 - Services -> /services/
-  - Massage -> /massage/ (14 detail links)
+  - Massage -> /massage/ (16 detail links)
   - Facial -> /facial/ (7 detail links)
   - Bleach -> /bleach/ (3 detail links)
   - Scrub -> /scrub/ (5 detail links)
-  - Hair -> /hair/ (8 detail links)
+  - Hair -> /hair/ (7 detail links)
   - Manicure -> /manicure/ (11 detail links)
   - Pedicure -> /pedicure/ (6 detail links)
-  - Kids -> /kids/
+  - Kids Mani Pedi -> /kids-mani-pedi/
   - Waxing -> /waxing/ (11 detail links)
   - Threading -> /threading/ (8 detail links)
 - About Us -> /about/
@@ -54,6 +54,8 @@ The published `/nails/` legacy umbrella page remains available but is intentiona
 |   +-- head-massage/
 |   +-- head-neck-massage/
 |   +-- shoulder-massage/
+|   +-- head-neck-shoulder-massage/
+|   +-- cupping-therapy/
 +-- facial/
 |   +-- diamond-facial/
 |   +-- dr-renaud-facial/
@@ -73,7 +75,6 @@ The published `/nails/` legacy umbrella page remains available but is intentiona
 |   +-- full-body-scrub/
 |   +-- full-body-scrub-with-mask/
 +-- hair/
-|   +-- henna-application/
 |   +-- keratin-treatment/
 |   +-- hair-cut/
 |   +-- hair-coloring/
@@ -82,36 +83,36 @@ The published `/nails/` legacy umbrella page remains available but is intentiona
 |   +-- eyelash-lifting/
 |   +-- eyebrow-tint/
 +-- manicure/
-|   +-- acrylic-nail/
-|   +-- gel-nail-extensions/
-|   +-- french-gel-nail-extensions/
 |   +-- hand-paraffin/
 |   +-- classic-manicure/
 |   +-- spa-manicure/
 |   +-- classic-nails-extension/
 |   +-- gelish-manicure/
 |   +-- french-gel-manicure/
+|   +-- gel-nail-extensions/
+|   +-- french-gel-nail-extensions/
 |   +-- cat-eye-extensions/
+|   +-- acrylic-nail/
 |   +-- builder-gel-nails/
 +-- pedicure/
 |   +-- foot-paraffin/
-|   +-- spa-pedicure/
-|   +-- foot-scrub-pedicure/
 |   +-- classic-pedicure/
 |   +-- gel-pedicure/
+|   +-- spa-pedicure/
 |   +-- callus-pedicure/
-+-- kids/
+|   +-- foot-scrub-pedicure/
++-- kids-mani-pedi/
 +-- waxing/
 |   +-- upper-lip-waxing/
 |   +-- eyebrows-waxing/
 |   +-- chin-waxing/
 |   +-- underarms-waxing/
-|   +-- chest-waxing/
-|   +-- stomach-waxing/
-|   +-- face-waxing/
-|   +-- arms-waxing/
 |   +-- legs-waxing/
+|   +-- arms-waxing/
+|   +-- stomach-waxing/
+|   +-- chest-waxing/
 |   +-- bikini-waxing/
+|   +-- face-waxing/
 |   +-- full-body-waxing/
 +-- threading/
 |   +-- chin/
@@ -137,7 +138,7 @@ The published `/nails/` legacy umbrella page remains available but is intentiona
 | 1327 | Blog | /blog/ | New |
 | 69 | Contact Us | /contact/ | Legacy |
 | 65 | Facial & Skin | /facial/ | Legacy |
-| 1052 | Clean Up Facial | /facial/clean-up-facial/ | New |
+| 1052 | Face Clean Up | /facial/clean-up-facial/ | New |
 | 400 | Diamond Facial | /facial/diamond-facial/ | Legacy |
 | 403 | Dr. Renaud Facial | /facial/dr-renaud-facial/ | Legacy |
 | 404 | Fruit Facial | /facial/fruit-facial/ | Legacy |
@@ -151,9 +152,8 @@ The published `/nails/` legacy umbrella page remains available but is intentiona
 | 1092 | Eyelash Lifting | /hair/eyelash-lifting/ | New |
 | 1086 | Hair Coloring | /hair/hair-coloring/ | New |
 | 1084 | Hair Cut | /hair/hair-cut/ | New |
-| 397 | Henna Application | /hair/henna-application/ | Legacy |
 | 398 | Keratin Treatment | /hair/keratin-treatment/ | Legacy |
-| 1082 | Kids Nail Services | /kids/ | New |
+| 1082 | Kids Mani Pedi | /kids-mani-pedi/ | New |
 | 1379 | Manicure | /manicure/ | New |
 | 396 | Acrylic Nail | /manicure/acrylic-nail/ | Legacy |
 | 1068 | Builder Gel Nails | /manicure/builder-gel-nails/ | New |
@@ -181,6 +181,8 @@ The published `/nails/` legacy umbrella page remains available but is intentiona
 | 1035 | Reflexology Massage | /massage/reflexology-massage/ | New |
 | 1050 | Shoulder Massage | /massage/shoulder-massage/ | New |
 | 393 | Thai Massage | /massage/thai-massage/ | Legacy |
+| 1602 | Head, Neck and Shoulder Massage | /massage/head-neck-shoulder-massage/ | New |
+| 1604 | Cupping Therapy | /massage/cupping-therapy/ | New |
 | 63 | Nails | /nails/ | Legacy |
 | 1380 | Pedicure | /pedicure/ | New |
 | 1080 | Callus Treatment | /pedicure/callus-pedicure/ | New |
@@ -223,6 +225,7 @@ The published `/nails/` legacy umbrella page remains available but is intentiona
 ## Migration Verification
 
 - 44 approved old routes return direct one-hop 301 redirects.
+- `/kids/` returns a direct 301 to `/kids-mani-pedi/` as Rank Math redirect `46`.
 - All 44 canonical targets return HTTP 200.
 - Five approved new pages are published.
 - Eight absorbed or omitted pages are drafts with active redirects.

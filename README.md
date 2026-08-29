@@ -34,7 +34,7 @@ AI decides content, page intent, section rhythm, and component variants. The sui
 | Path | Responsibility |
 |---|---|
 | `src/` | Reusable compiler, validator, and layout solver |
-| `plugin/native-elementor-bridge/` | WordPress REST bridge, currently v0.8.0 |
+| `plugin/native-elementor-bridge/` | WordPress REST bridge, currently v0.9.0 |
 | `tools/` | Generic compile, deploy, snapshot, SEO, media, and verification tools |
 | `schemas/` | Blueprint contracts |
 | `registry/` | Native component and design-route definitions |
@@ -85,7 +85,7 @@ node .\tools\site-workflow.js .\sites\<site-slug>\manifests\site.json lint
 Build the installable plugin package:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\tools\package-plugin.ps1 -Version 0.8.0
+powershell -ExecutionPolicy Bypass -File .\tools\package-plugin.ps1 -Version 0.9.0
 ```
 
 Install the generated zip in WordPress, then keep credentials only in the current shell or an ignored local configuration:
@@ -95,9 +95,9 @@ $env:NEB_SITE_URL = "https://example.com"
 $env:NEB_API_KEY = "your-local-key"
 ```
 
-The REST base is `/wp-json/native-elementor/v1`. The bridge supports pages, templates, Theme Builder conditions, menus, site snapshots, posts, categories, authors, media, WooCommerce product categories, draft-safe simple and variable product upserts, JetWooBuilder template cloning and category-specific single-product rules, Rank Math metadata, cache refresh, and export-back inspection.
+The REST base is `/wp-json/native-elementor/v1`. The bridge supports pages, templates, Theme Builder conditions, nested menus, site snapshots, posts and scheduled publishing, categories, authors, media, WooCommerce product categories, draft-safe simple and variable product upserts, JetWooBuilder template cloning and category-specific single-product rules, Rank Math metadata, redirections and Local Business hours, cache refresh, and export-back inspection.
 
-See [`docs/woocommerce-bridge-api.md`](docs/woocommerce-bridge-api.md) for the WooCommerce request contract and draft-safety behavior.
+See [`docs/native-elementor-bridge-api.md`](docs/native-elementor-bridge-api.md) for the complete authenticated endpoint catalogue, prerequisites, and safe operating contract. WooCommerce-specific request details and draft-safety behavior are documented in [`docs/woocommerce-bridge-api.md`](docs/woocommerce-bridge-api.md).
 
 For an existing site, snapshot first:
 

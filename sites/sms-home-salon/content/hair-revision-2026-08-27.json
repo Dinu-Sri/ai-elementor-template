@@ -1,0 +1,86 @@
+{
+  "revision": "2026-08-27-hair-services",
+  "site": "https://homesalon.ae",
+  "hub_id": 64,
+  "path": "/hair/",
+  "draft_page": {
+    "id": 397,
+    "name": "Henna Application",
+    "path": "/hair/henna-application/"
+  },
+  "services": [
+    {
+      "id": 398,
+      "name": "Keratin Treatment",
+      "path": "/hair/keratin-treatment/",
+      "packages": [
+        { "name": "Short Hair", "price": "AED 600" },
+        { "name": "Medium Hair", "price": "AED 800" },
+        { "name": "Long Hair", "price": "AED 1000" }
+      ]
+    },
+    {
+      "id": 1084,
+      "name": "Hair Cut",
+      "path": "/hair/hair-cut/",
+      "packages": [
+        { "name": "Hair Trim", "price": "AED 60", "most_popular": true },
+        { "name": "Straight Hair Cut", "price": "AED 180" }
+      ]
+    },
+    {
+      "id": 1086,
+      "name": "Hair Coloring",
+      "path": "/hair/hair-coloring/",
+      "packages": [
+        { "name": "Only Color Application", "price": "AED 120" },
+        { "name": "Root Touch Up", "price": "AED 120" },
+        { "name": "Henna Application", "price": "AED 120" }
+      ]
+    },
+    {
+      "id": 1088,
+      "name": "Blow Dry Straight",
+      "path": "/hair/blow-dry-straight/",
+      "packages": [
+        { "name": "Blow Dry (Straight) Short", "price": "AED 144" },
+        { "name": "Blow Dry (Straight) Medium", "price": "AED 168" },
+        { "name": "Blow Dry (Straight) Long", "price": "AED 180" },
+        { "name": "Blow Dry (Straight) Extra Long", "price": "AED 204" }
+      ]
+    },
+    {
+      "id": 1090,
+      "name": "Blow Dry Curl",
+      "path": "/hair/blow-dry-curl/",
+      "packages": [
+        { "name": "Blow Dry (Curl) Short", "price": "AED 156" },
+        { "name": "Blow Dry (Curl) Medium", "price": "AED 180" },
+        { "name": "Blow Dry (Curl) Long", "price": "AED 192" },
+        { "name": "Blow Dry (Curl) Extra Long", "price": "AED 216" }
+      ]
+    },
+    {
+      "id": 1092,
+      "name": "Eyelash Lifting",
+      "path": "/hair/eyelash-lifting/",
+      "packages": [
+        { "name": "Eyelash Lifting", "price": "AED 150" }
+      ]
+    },
+    {
+      "id": 1094,
+      "name": "Eyebrow Tint",
+      "path": "/hair/eyebrow-tint/",
+      "packages": [
+        { "name": "Eyebrow Tint", "price": "AED 100" }
+      ]
+    }
+  ],
+  "menu_id": 12,
+  "notes": [
+    "Hair package cards display prices only; duration fields are removed.",
+    "Henna Application is a package on Hair Coloring; its standalone page is retained as a draft.",
+    "Existing published service routes and page IDs are preserved."
+  ]
+}

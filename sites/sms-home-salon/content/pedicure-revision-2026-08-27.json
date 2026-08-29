@@ -1,0 +1,40 @@
+{
+  "revision": "2026-08-27-pedicure-services",
+  "site": "https://homesalon.ae",
+  "menu_id": 12,
+  "hub": { "id": 1380, "path": "/pedicure/" },
+  "services": [
+    { "id": 1070, "name": "Foot Paraffin", "path": "/pedicure/foot-paraffin/", "packages": [
+      { "name": "Foot Paraffin", "duration": 30, "price": "AED 72", "most_popular": true }
+    ] },
+    { "id": 1076, "name": "Classic Pedicure", "path": "/pedicure/classic-pedicure/", "packages": [
+      { "name": "Pedicure Without Color", "duration": 40, "price": "AED 72", "most_popular": true },
+      { "name": "Pedicure With Color", "duration": 45, "price": "AED 78" },
+      { "name": "French Pedicure", "duration": 90, "price": "AED 84" },
+      { "name": "Polish Change", "duration": 30, "price": "AED 60" },
+      { "name": "Nail Filing", "duration": 30, "price": "AED 48" }
+    ] },
+    { "id": 1078, "name": "Gel Pedicure", "path": "/pedicure/gel-pedicure/", "packages": [
+      { "name": "Gel Color Apply Without Cleaning", "duration": 60, "price": "AED 96", "most_popular": true },
+      { "name": "Gelish Pedicure", "duration": 60, "price": "AED 144" },
+      { "name": "French Gel Pedicure", "duration": 60, "price": "AED 168" },
+      { "name": "Gel Polish Remove", "duration": 10, "price": "AED 48" }
+    ] },
+    { "id": 1072, "name": "Spa Pedicure", "path": "/pedicure/spa-pedicure/", "packages": [
+      { "name": "Spa Pedicure", "duration": 60, "price": "AED 144", "most_popular": true }
+    ] },
+    { "id": 1080, "name": "Callus Treatment", "path": "/pedicure/callus-pedicure/", "packages": [
+      { "name": "Callus Treatment", "duration": 90, "price": "AED 160", "most_popular": true },
+      { "name": "Callus Treatment With Polish", "duration": 90, "price": "AED 180" }
+    ] },
+    { "id": 1074, "name": "Foot Scrub", "path": "/pedicure/foot-scrub-pedicure/", "packages": [
+      { "name": "Foot Scrub", "duration": 90, "price": "AED 60", "most_popular": true }
+    ] }
+  ],
+  "notes": [
+    "The existing published page IDs and routes are preserved.",
+    "The hub and detail pages display Duration and Price for every package.",
+    "Placeholder Package, From, and From AED fields are removed.",
+    "The service and menu order follows the approved screenshot."
+  ]
+}

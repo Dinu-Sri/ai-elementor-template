@@ -1,0 +1,184 @@
+{
+  "site": "https://homesalon.ae",
+  "source_document": "SMS-Home-Salon-Service-Content-Review (1).docx",
+  "source_document_sha256": "B5F22D16F2071BB1634852B191D9862DB59A1179BFD4BA615541E4E03AC6E0A3",
+  "source_pdf": "SMS-Home-Salon-Service-Content-Review (1).pdf",
+  "source_pdf_sha256": "1BEAEDA486F09CD6C864A0FCED153550279292E0B018D94BF949685E9F660DE5",
+  "reviewed_at": "2026-08-20",
+  "editorial_policy": {
+    "ignore_emojis": true,
+    "normalize_terminal_punctuation": true,
+    "completed_fragment": "Relaxing Experience: Enjoy professional skincare treatment conveniently in the comfort of your home."
+  },
+  "pages": [
+    {
+      "id": 1040,
+      "title": "Full Back Massage at Home in Dubai",
+      "path": "/massage/full-back-massage/",
+      "sections": {
+        "who_its_for": [
+          { "title": "Back, Shoulder or Neck Tension", "text": "People experiencing back, shoulder, or neck muscle tension." },
+          { "title": "Desk-Based Work", "text": "Office workers who spend long hours sitting or using computers." },
+          { "title": "Everyday Stiffness", "text": "Anyone dealing with muscle stiffness or everyday body stress." },
+          { "title": "At-Home Relaxation", "text": "Clients looking for relaxation and a convenient massage at home. Massage may help reduce muscle tension, stress, and short-term discomfort." }
+        ]
+      }
+    },
+    {
+      "id": 1042,
+      "title": "Foot Massage at Home in Dubai",
+      "path": "/massage/foot-massage/",
+      "sections": {
+        "who_its_for": [
+          { "title": "Long Hours Standing", "text": "People who spend long hours standing or walking." },
+          { "title": "Tired or Tense Feet", "text": "Office workers who experience tired or tense feet." },
+          { "title": "After a Busy Day", "text": "Anyone looking for relaxation after a busy or stressful day." },
+          { "title": "Foot and Lower-Leg Tension", "text": "Clients experiencing general foot and lower-leg muscle tension. Foot massage may help with relaxation and short-term discomfort." }
+        ]
+      }
+    },
+    {
+      "id": 1044,
+      "title": "Head and Shoulder Massage at Home in Dubai",
+      "path": "/massage/head-shoulder-massage/",
+      "sections": {
+        "who_its_for": [
+          { "title": "Desk-Based Work", "text": "Office workers and professionals who spend long hours at a desk or computer." },
+          { "title": "Neck and Shoulder Tension", "text": "People experiencing neck and shoulder stiffness or muscle tension." },
+          { "title": "Stress and Mental Fatigue", "text": "Anyone dealing with stress, mental fatigue, or tension from a busy lifestyle." },
+          { "title": "Tension-Related Headaches", "text": "Clients who experience tension-related headaches." },
+          { "title": "Quick Targeted Relaxation", "text": "Anyone looking for a quick, relaxing treatment without needing a full-body massage." }
+        ]
+      }
+    },
+    {
+      "id": 1052,
+      "title": "Face Clean Up at Home in Dubai",
+      "path": "/facial/clean-up-facial/",
+      "sections": {
+        "who_its_for": [
+          { "title": "Dirt, Oil and Daily Buildup", "text": "Anyone looking to remove dirt, excess oil, and daily buildup from the skin." },
+          { "title": "Dull or Tired-Looking Skin", "text": "Clients with dull or tired-looking skin who want a fresh, clean appearance." },
+          { "title": "Makeup and Outdoor Exposure", "text": "People who regularly wear makeup or spend time outdoors." },
+          { "title": "Simple, Refreshing Facial", "text": "Suitable for those who want a simple, refreshing facial without intensive treatments. Gentle cleansing is recommended by dermatologists to help remove oil and debris without irritating the skin." }
+        ],
+        "when_to_book": [
+          { "title": "Oily, Congested or Dull Skin", "text": "When your skin feels oily, congested, or dull." },
+          { "title": "After Makeup or Sweating", "text": "After periods of heavy makeup use or increased sweating." },
+          { "title": "Before a Special Occasion", "text": "Before a special occasion when you want your skin to look fresh and clean." },
+          { "title": "Regular Skincare Routine", "text": "As part of your regular skincare routine for maintaining clean, healthy-looking skin." }
+        ],
+        "top_benefits": [
+          { "title": "Deep Cleansing", "text": "Helps remove dirt, excess oil, and impurities from the skin." },
+          { "title": "Fresh & Refreshed Skin", "text": "Leaves the face feeling clean, soft, and revitalised." },
+          { "title": "Improves Hydration", "text": "Helps the skin feel smoother and more moisturised." },
+          { "title": "Brighter-Looking Complexion", "text": "Helps reduce the appearance of dull, tired-looking skin." },
+          { "title": "Unclogs Pores", "text": "Helps remove surface buildup that can contribute to clogged pores." },
+          { "title": "Relaxing Experience", "text": "Enjoy professional skincare treatment conveniently in the comfort of your home." }
+        ]
+      }
+    },
+    {
+      "id": 1150,
+      "title": "Full Arms Bleaching at Home in Dubai",
+      "path": "/bleach/full-arm-bleaching/",
+      "legacy_paths": ["/facial/full-arm-bleaching/"],
+      "sections": {
+        "who_its_for": [
+          { "title": "Lighter-Looking Arm Hair", "text": "Clients who want to lighten the appearance of arm hair and create a more even-looking skin tone." },
+          { "title": "No Hair Removal", "text": "Those who prefer a smoother, brighter-looking appearance without hair removal." },
+          { "title": "Special Occasions", "text": "Clients preparing for special occasions and wanting their arms to look more polished." }
+        ],
+        "when_to_book": [
+          { "title": "Before Events or Holidays", "text": "Before weddings, parties, holidays, or other special occasions." },
+          { "title": "Refresh Arm Appearance", "text": "When you want to refresh the appearance of your arms and lighten visible hair." },
+          { "title": "Regular Grooming Routine", "text": "As part of your regular beauty and grooming routine." }
+        ],
+        "top_benefits": [
+          { "title": "Lightens Visible Arm Hair", "text": "Makes darker hair less noticeable." },
+          { "title": "More Even-Looking Appearance", "text": "Creates a cleaner, more uniform look." },
+          { "title": "Quick Beauty Treatment", "text": "A convenient alternative to hair removal for clients who only want to reduce hair visibility." },
+          { "title": "Convenient at Home", "text": "Enjoy the treatment without travelling to a salon." }
+        ]
+      }
+    },
+    {
+      "id": 1152,
+      "title": "Full Legs Bleaching at Home in Dubai",
+      "path": "/bleach/full-legs-bleaching/",
+      "legacy_paths": ["/facial/full-legs-bleaching/"],
+      "sections": {
+        "who_its_for": [
+          { "title": "Lighter-Looking Leg Hair", "text": "Clients who want to lighten the appearance of darker leg hair without removing the hair." },
+          { "title": "More Even-Looking Legs", "text": "Those who prefer a smoother, more even-looking appearance of the legs." },
+          { "title": "Special Occasions", "text": "Clients preparing for special occasions, holidays, or events." }
+        ],
+        "when_to_book": [
+          { "title": "Before Events or Holidays", "text": "Before weddings, parties, holidays, or special occasions." },
+          { "title": "Refresh Leg Appearance", "text": "When you want to refresh the appearance of your legs." },
+          { "title": "Regular Grooming Routine", "text": "As part of your regular beauty and grooming routine." }
+        ],
+        "top_benefits": [
+          { "title": "Lightens Visible Hair", "text": "Makes darker leg hair less noticeable." },
+          { "title": "More Even-Looking Appearance", "text": "Gives the legs a cleaner and more uniform look." },
+          { "title": "Quick Beauty Treatment", "text": "An alternative for clients who don't want to remove their hair." },
+          { "title": "Convenient at Home", "text": "Enjoy the treatment comfortably without visiting a salon." }
+        ]
+      }
+    },
+    {
+      "id": 1154,
+      "title": "Full Body Back and Full Body Front Bleaching at Home in Dubai",
+      "path": "/bleach/full-back-front-bleaching/",
+      "legacy_paths": ["/facial/full-back-front-bleaching/"],
+      "sections": {
+        "who_its_for": [
+          { "title": "Lighter-Looking Body Hair", "text": "Clients who want to lighten the appearance of visible body hair without removing it." },
+          { "title": "Even and Polished Appearance", "text": "Those looking for a more even and polished appearance across the front or back of the body." },
+          { "title": "Special Occasions", "text": "Clients preparing for holidays, weddings, parties, or special occasions." },
+          { "title": "Alternative to Hair Removal", "text": "Anyone who prefers bleaching as an alternative to waxing or other hair-removal methods." }
+        ],
+        "when_to_book": [
+          { "title": "Before Events or Holidays", "text": "Before a special occasion, holiday, wedding, or event." },
+          { "title": "Refresh Overall Appearance", "text": "When you want to refresh the overall appearance of your skin and body hair." },
+          { "title": "Regular Grooming Routine", "text": "As part of your regular beauty and grooming routine." },
+          { "title": "Convenient At-Home Treatment", "text": "When you want a convenient at-home treatment without visiting a salon." }
+        ],
+        "top_benefits": [
+          { "title": "Lightens Visible Body Hair", "text": "Makes darker body hair less noticeable." },
+          { "title": "Creates a More Even Look", "text": "Helps give the skin and hair a more uniform appearance." },
+          { "title": "No Hair Removal Required", "text": "A suitable option for clients who don't want waxing or shaving." },
+          { "title": "Quick & Convenient", "text": "A practical beauty treatment for busy clients." },
+          { "title": "Enjoy It at Home", "text": "Get professional service in the comfort and privacy of your home in Dubai." }
+        ]
+      }
+    },
+    {
+      "id": 1156,
+      "title": "Face Scrub at Home in Dubai",
+      "path": "/scrub/face-scrub/",
+      "legacy_paths": ["/facial/face-scrub/"],
+      "sections": {
+        "who_its_for": [
+          { "title": "Dull or Rough-Looking Skin", "text": "People with dull or rough-looking skin who want a fresher appearance." },
+          { "title": "Dead Skin and Surface Buildup", "text": "Clients looking to gently remove dead skin cells and surface buildup." },
+          { "title": "Before Makeup or an Occasion", "text": "Those who want smoother-looking skin before makeup or a special occasion." },
+          { "title": "Regular Gentle Exfoliation", "text": "Clients who enjoy adding gentle exfoliation to their regular skincare routine." }
+        ],
+        "when_to_book": [
+          { "title": "Before a Special Occasion", "text": "Before a special occasion, party, wedding, or event." },
+          { "title": "Rough, Dry or Dull Skin", "text": "When your skin feels rough, dry, or looks dull." },
+          { "title": "After Sweat or Pollution", "text": "When you want to refresh your skin after exposure to sweat, pollution, or daily buildup." },
+          { "title": "Regular Skincare Routine", "text": "As part of a regular skincare routine, depending on your skin type and the product used." }
+        ],
+        "top_benefits": [
+          { "title": "Removes Dead Skin Cells", "text": "Helps reveal fresher-looking skin." },
+          { "title": "Smoother Skin", "text": "Leaves the skin feeling softer and smoother." },
+          { "title": "Brighter-Looking Complexion", "text": "Helps reduce a dull appearance." },
+          { "title": "Helps Skincare Apply Better", "text": "Smoother skin can help skincare and makeup go on more evenly." },
+          { "title": "Convenient at Home", "text": "Enjoy a refreshing skincare treatment without visiting a salon." }
+        ]
+      }
+    }
+  ]
+}

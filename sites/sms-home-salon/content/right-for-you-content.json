@@ -1,0 +1,1624 @@
+{
+  "site": "https://homesalon.ae",
+  "reviewed_at": "2026-08-20",
+  "section": "Is [Service Name] Right for You?",
+  "common_cards": [
+    {
+      "title": "At-Home Comfort",
+      "text": "A clean, private setup is brought to your home or preferred location in Dubai.",
+      "icon": "home"
+    },
+    {
+      "title": "Easy Booking",
+      "text": "Send your preferred time and our team will confirm the available slot.",
+      "icon": "calendar"
+    },
+    {
+      "title": "Aftercare Support",
+      "text": "You receive simple service-specific aftercare guidance before the appointment is complete.",
+      "icon": "aftercare"
+    }
+  ],
+  "pages": [
+    {
+      "id": 389,
+      "category": "Massage",
+      "service": "Pregnancy Massage",
+      "path": "/massage/pregnancy-massage/",
+      "intro": "Choose Pregnancy Massage when you want gentle maternity-focused relaxation with positioning adapted for an at-home appointment.",
+      "best_for": "Expecting mothers in the second or third trimester who have medical clearance and want gentle comfort.",
+      "best_icon": "heart",
+      "focus": [
+        {
+          "title": "Maternity-Aware Comfort",
+          "text": "Pressure and positioning are adapted around pregnancy comfort and personal preferences.",
+          "icon": "comfort"
+        },
+        {
+          "title": "Back and Leg Focus",
+          "text": "The session can focus on common tension areas such as the back, shoulders, and legs.",
+          "icon": "target"
+        }
+      ]
+    },
+    {
+      "id": 390,
+      "category": "Massage",
+      "service": "Lymphatic Drainage Massage",
+      "path": "/massage/lymphatic-drainage-massage/",
+      "intro": "Choose Lymphatic Drainage Massage when you prefer a light, rhythmic technique for temporary puffiness, heaviness, or post-travel comfort.",
+      "best_for": "Clients seeking gentle, low-pressure massage rather than firm muscle work.",
+      "best_icon": "flow",
+      "focus": [
+        {
+          "title": "Light Rhythmic Pressure",
+          "text": "Slow, gentle movements are used instead of deep or forceful pressure.",
+          "icon": "feather"
+        },
+        {
+          "title": "Targeted Puffiness Care",
+          "text": "The session can focus on areas that feel temporarily puffy, heavy, or uncomfortable.",
+          "icon": "flow"
+        }
+      ]
+    },
+    {
+      "id": 391,
+      "category": "Massage",
+      "service": "Madero Massage",
+      "path": "/massage/madero-massage/",
+      "intro": "Choose Madero Massage when you want firm wood-tool body work focused on contouring appearance and targeted massage at home.",
+      "best_for": "Clients comfortable with a more vigorous technique on selected body areas.",
+      "best_icon": "contour",
+      "focus": [
+        {
+          "title": "Wood-Therapy Technique",
+          "text": "Specially shaped wooden tools are used with controlled pressure across selected areas.",
+          "icon": "tools"
+        },
+        {
+          "title": "Targeted Body Focus",
+          "text": "Treatment areas can be selected around your contouring and massage preferences.",
+          "icon": "target"
+        }
+      ]
+    },
+    {
+      "id": 392,
+      "category": "Massage",
+      "service": "Deep Tissue Massage",
+      "path": "/massage/deep-tissue-massage/",
+      "intro": "Choose Deep Tissue Massage when you prefer firm, focused pressure for persistent muscle tightness in specific areas.",
+      "best_for": "Clients who are comfortable with stronger pressure and want focused muscle work.",
+      "best_icon": "strength",
+      "focus": [
+        {
+          "title": "Firm Focused Pressure",
+          "text": "The therapist works gradually into tight areas while checking your pressure preference.",
+          "icon": "pressure"
+        },
+        {
+          "title": "Persistent Tension Areas",
+          "text": "Useful for focused work around the back, shoulders, legs, or other tight muscle groups.",
+          "icon": "target"
+        }
+      ]
+    },
+    {
+      "id": 393,
+      "category": "Massage",
+      "service": "Thai Massage",
+      "path": "/massage/thai-massage/",
+      "intro": "Choose Thai Massage when you want pressure-point work and assisted stretching to support flexibility and full-body mobility.",
+      "best_for": "Clients who enjoy an active massage style with guided stretches and rhythmic pressure.",
+      "best_icon": "mobility",
+      "focus": [
+        {
+          "title": "Assisted Stretching",
+          "text": "Guided stretches are combined with pressure techniques across the body.",
+          "icon": "stretch"
+        },
+        {
+          "title": "Mobility-Focused Session",
+          "text": "The treatment is suited to clients who want to address stiffness and limited flexibility.",
+          "icon": "mobility"
+        }
+      ]
+    },
+    {
+      "id": 394,
+      "category": "Massage",
+      "service": "Hot Stone Massage",
+      "path": "/massage/hot-stone-massage/",
+      "intro": "Choose Hot Stone Massage when you want soothing warmth combined with massage for a deeply relaxing at-home session.",
+      "best_for": "Clients who enjoy gentle heat and a slower relaxation-focused massage experience.",
+      "best_icon": "fire",
+      "focus": [
+        {
+          "title": "Soothing Stone Warmth",
+          "text": "Smooth heated stones add controlled warmth to the massage experience.",
+          "icon": "fire"
+        },
+        {
+          "title": "Deep Relaxation",
+          "text": "Warmth and flowing massage movements create a calm, unhurried session.",
+          "icon": "relax"
+        }
+      ]
+    },
+    {
+      "id": 1035,
+      "category": "Massage",
+      "service": "Reflexology Massage",
+      "path": "/massage/reflexology-massage/",
+      "intro": "Choose Reflexology Massage when you want focused pressure-point work on the feet, hands, or ears rather than a full-body massage.",
+      "best_for": "Clients who prefer a targeted session centred on reflex points and relaxation.",
+      "best_icon": "foot",
+      "focus": [
+        {
+          "title": "Pressure-Point Focus",
+          "text": "Controlled pressure is applied to selected reflex areas according to your comfort.",
+          "icon": "pressure"
+        },
+        {
+          "title": "Targeted, Not Full Body",
+          "text": "The appointment concentrates on the selected feet, hand, or ear reflexology area.",
+          "icon": "target"
+        }
+      ]
+    },
+    {
+      "id": 1038,
+      "category": "Massage",
+      "service": "Full Body Massage",
+      "path": "/massage/full-body-massage/",
+      "intro": "Choose Full Body Massage when you want balanced relaxation across the major muscle groups in one complete session.",
+      "best_for": "Clients who want broad head-to-toe relaxation instead of one isolated focus area.",
+      "best_icon": "relax",
+      "focus": [
+        {
+          "title": "Head-to-Toe Coverage",
+          "text": "The session works across the main body areas within your selected appointment time.",
+          "icon": "full_body"
+        },
+        {
+          "title": "Balanced Pressure",
+          "text": "Pressure preferences can be adjusted for different areas throughout the massage.",
+          "icon": "balance"
+        }
+      ]
+    },
+    {
+      "id": 1040,
+      "category": "Massage",
+      "service": "Full Back Massage",
+      "path": "/massage/full-back-massage/",
+      "intro": "Choose Full Back Massage when your priority is focused work across the back, shoulders, and neck without a full-body session.",
+      "best_for": "Clients experiencing back, shoulder, or neck muscle tension from work or daily activity.",
+      "best_icon": "back",
+      "focus": [
+        {
+          "title": "Back-Wide Coverage",
+          "text": "The appointment focuses on the upper, middle, and lower back according to your needs.",
+          "icon": "back"
+        },
+        {
+          "title": "Shoulder and Neck Support",
+          "text": "Related shoulder and neck tension can be included within the focused session.",
+          "icon": "target"
+        }
+      ]
+    },
+    {
+      "id": 1042,
+      "category": "Massage",
+      "service": "Foot Massage",
+      "path": "/massage/foot-massage/",
+      "intro": "Choose Foot Massage when long hours of standing or walking leave your feet and lower legs feeling tired or tense.",
+      "best_for": "Clients who want focused relaxation for tired feet after work, travel, or a busy day.",
+      "best_icon": "foot",
+      "focus": [
+        {
+          "title": "Tired-Foot Comfort",
+          "text": "Massage focuses on the feet where standing and walking can create everyday tension.",
+          "icon": "foot"
+        },
+        {
+          "title": "Lower-Leg Focus",
+          "text": "The session can include the lower legs for a more complete foot-care experience.",
+          "icon": "target"
+        }
+      ]
+    },
+    {
+      "id": 1044,
+      "category": "Massage",
+      "service": "Head and Shoulder Massage",
+      "path": "/massage/head-shoulder-massage/",
+      "intro": "Choose Head and Shoulder Massage when desk work, screen time, or a busy routine leaves the upper body feeling tense.",
+      "best_for": "Office workers and busy clients who want focused relaxation without booking a full-body massage.",
+      "best_icon": "desk",
+      "focus": [
+        {
+          "title": "Upper-Body Focus",
+          "text": "The session concentrates on the head, neck line, shoulders, and related tension areas.",
+          "icon": "target"
+        },
+        {
+          "title": "Quick Relaxation Option",
+          "text": "A focused format suits clients who want useful relief within a shorter appointment.",
+          "icon": "clock"
+        }
+      ]
+    },
+    {
+      "id": 1046,
+      "category": "Massage",
+      "service": "Head Massage",
+      "path": "/massage/head-massage/",
+      "intro": "Choose Head Massage when you want a calming scalp-focused treatment to unwind from screen time, mental fatigue, or a busy day.",
+      "best_for": "Clients seeking focused scalp and head relaxation rather than body massage.",
+      "best_icon": "head",
+      "focus": [
+        {
+          "title": "Scalp-Focused Technique",
+          "text": "Massage movements concentrate on the scalp and surrounding head area.",
+          "icon": "head"
+        },
+        {
+          "title": "Quiet Wind-Down",
+          "text": "The focused format supports a calm pause without requiring a full-body treatment.",
+          "icon": "relax"
+        }
+      ]
+    },
+    {
+      "id": 1048,
+      "category": "Massage",
+      "service": "Head and Neck Massage",
+      "path": "/massage/head-neck-massage/",
+      "intro": "Choose Head and Neck Massage when you want focused relaxation around the scalp, neck, and base of the head.",
+      "best_for": "Clients whose tension is concentrated around the head and neck rather than the full body.",
+      "best_icon": "head",
+      "focus": [
+        {
+          "title": "Head-to-Neck Focus",
+          "text": "The session connects scalp work with careful massage around the neck area.",
+          "icon": "target"
+        },
+        {
+          "title": "Desk-Day Reset",
+          "text": "A focused option for tension linked to screens, posture, or long working hours.",
+          "icon": "desk"
+        }
+      ]
+    },
+    {
+      "id": 1050,
+      "category": "Massage",
+      "service": "Shoulder Massage",
+      "path": "/massage/shoulder-massage/",
+      "intro": "Choose Shoulder Massage when your main concern is tightness across the shoulders and upper back from posture or repetitive activity.",
+      "best_for": "Clients who want concentrated work on the shoulder area without a longer full-body session.",
+      "best_icon": "back",
+      "focus": [
+        {
+          "title": "Shoulder-Specific Work",
+          "text": "Massage is centred on the shoulder muscles and connected upper-back areas.",
+          "icon": "target"
+        },
+        {
+          "title": "Pressure to Preference",
+          "text": "Your therapist adjusts pressure around sensitive or particularly tight points.",
+          "icon": "pressure"
+        }
+      ]
+    },
+    {
+      "id": 1602,
+      "category": "Massage",
+      "service": "Head, Neck and Shoulder Massage",
+      "path": "/massage/head-neck-shoulder-massage/",
+      "intro": "Choose Head, Neck and Shoulder Massage when you want one focused session across the scalp, neck line, shoulders and upper back.",
+      "best_for": "Desk-based, driving and screen-heavy routines that leave several upper-body areas feeling tense.",
+      "best_icon": "target",
+      "focus": [
+        {
+          "title": "Scalp-to-Shoulder Focus",
+          "text": "The appointment connects head, neck, shoulder and upper-back work in one balanced session.",
+          "icon": "target"
+        },
+        {
+          "title": "Comfort-Led Pressure",
+          "text": "Your therapist checks pressure and adapts the time spent on each focus area.",
+          "icon": "pressure"
+        }
+      ]
+    },
+    {
+      "id": 1604,
+      "category": "Massage",
+      "service": "Cupping Therapy",
+      "path": "/massage/cupping-therapy/",
+      "intro": "Choose Cupping Therapy when you prefer targeted dry-cupping suction on suitable areas after a comfort and suitability check.",
+      "best_for": "Adults seeking focused dry cupping who understand that temporary circular skin marks may occur.",
+      "best_icon": "target",
+      "focus": [
+        {
+          "title": "Dry Cupping Method",
+          "text": "The service uses controlled suction without skin piercing, blood removal or heated-cup application.",
+          "icon": "target"
+        },
+        {
+          "title": "Temporary Marks",
+          "text": "Cup placement can leave temporary circular marks, so allow for this when planning events or outfits.",
+          "icon": "clock"
+        }
+      ]
+    },
+    {
+      "id": 1052,
+      "category": "Facial",
+      "service": "Face Clean Up",
+      "path": "/facial/clean-up-facial/",
+      "intro": "Choose Face Clean Up when you want straightforward cleansing and refreshment for oily, congested, or tired-looking skin.",
+      "best_for": "Clients who want a simple maintenance facial without an intensive treatment programme.",
+      "best_icon": "clean",
+      "focus": [
+        {
+          "title": "Surface Buildup Care",
+          "text": "The treatment focuses on removing everyday oil, dirt, and surface impurities.",
+          "icon": "clean"
+        },
+        {
+          "title": "Fresh Skin Finish",
+          "text": "Skin is left feeling cleaner, softer, and ready for your regular routine.",
+          "icon": "fresh"
+        }
+      ]
+    },
+    {
+      "id": 399,
+      "category": "Facial",
+      "service": "Hydra Facial",
+      "path": "/facial/hydra-facial/",
+      "intro": "Choose Hydra Facial when dehydration, congestion, or dullness calls for a cleansing and hydration-focused facial.",
+      "best_for": "Clients seeking a fresh, dewy finish with cleansing, exfoliation, and hydration in one service.",
+      "best_icon": "hydration",
+      "focus": [
+        {
+          "title": "Hydration-Focused Care",
+          "text": "The facial is designed to replenish moisture and leave skin feeling refreshed.",
+          "icon": "hydration"
+        },
+        {
+          "title": "Clean and Dewy Finish",
+          "text": "Cleansing and exfoliation support a smoother, brighter-looking result.",
+          "icon": "glow"
+        }
+      ]
+    },
+    {
+      "id": 400,
+      "category": "Facial",
+      "service": "Diamond Facial",
+      "path": "/facial/diamond-facial/",
+      "intro": "Choose Diamond Facial when dull or uneven-looking skin would benefit from focused exfoliation and a polished finish.",
+      "best_for": "Clients wanting to refresh tired-looking skin and improve the appearance of texture and brightness.",
+      "best_icon": "diamond",
+      "focus": [
+        {
+          "title": "Polishing Exfoliation",
+          "text": "The treatment focuses on lifting surface buildup and dead skin cells.",
+          "icon": "diamond"
+        },
+        {
+          "title": "Brighter-Looking Skin",
+          "text": "A polished surface helps the complexion look fresher and more even.",
+          "icon": "glow"
+        }
+      ]
+    },
+    {
+      "id": 401,
+      "category": "Facial",
+      "service": "Pearl Facial",
+      "path": "/facial/pearl-facial/",
+      "intro": "Choose Pearl Facial when you want gentle radiance-focused care for dull, tired, or uneven-looking skin.",
+      "best_for": "Clients seeking a softer, brighter-looking complexion with a pampering facial experience.",
+      "best_icon": "pearl",
+      "focus": [
+        {
+          "title": "Radiance-Focused Formula",
+          "text": "The facial is selected to support a fresh and luminous-looking finish.",
+          "icon": "glow"
+        },
+        {
+          "title": "Soft, Refreshed Feel",
+          "text": "Skin is left feeling cared for, smooth, and revitalised after the service.",
+          "icon": "soft"
+        }
+      ]
+    },
+    {
+      "id": 402,
+      "category": "Facial",
+      "service": "Gold Facial",
+      "path": "/facial/gold-facial/",
+      "intro": "Choose Gold Facial when you want a premium glow-focused treatment before an event or whenever skin looks tired.",
+      "best_for": "Clients seeking a radiant, polished complexion and a luxurious facial experience at home.",
+      "best_icon": "gold",
+      "focus": [
+        {
+          "title": "Event-Ready Glow",
+          "text": "The treatment is designed to leave the complexion looking fresh and radiant.",
+          "icon": "glow"
+        },
+        {
+          "title": "Premium Facial Ritual",
+          "text": "A gold-focused product routine creates a pampering, unhurried appointment.",
+          "icon": "gold"
+        }
+      ]
+    },
+    {
+      "id": 403,
+      "category": "Facial",
+      "service": "Dr. Renaud Facial",
+      "path": "/facial/dr-renaud-facial/",
+      "intro": "Choose Dr. Renaud Facial when you want a professional product-led facial selected around your current skin concerns.",
+      "best_for": "Clients seeking a more targeted facial for concerns such as dullness, uneven tone, congestion, or dryness.",
+      "best_icon": "target",
+      "focus": [
+        {
+          "title": "Concern-Led Selection",
+          "text": "Products and steps are chosen around the condition and priorities discussed at your appointment.",
+          "icon": "target"
+        },
+        {
+          "title": "Professional Product Care",
+          "text": "The service uses a structured Dr. Renaud facial routine delivered at home.",
+          "icon": "professional"
+        }
+      ]
+    },
+    {
+      "id": 404,
+      "category": "Facial",
+      "service": "Fruit Facial",
+      "path": "/facial/fruit-facial/",
+      "intro": "Choose Fruit Facial when you prefer a gentle, fruit-based facial for tired-looking skin and everyday freshness.",
+      "best_for": "Clients who enjoy a lighter, naturally inspired treatment focused on softness and glow.",
+      "best_icon": "natural",
+      "focus": [
+        {
+          "title": "Fruit-Based Care",
+          "text": "The facial uses a fruit-focused product routine for a fresh skincare experience.",
+          "icon": "natural"
+        },
+        {
+          "title": "Gentle Freshness",
+          "text": "A suitable choice when you want skin to feel cared for without an intensive treatment.",
+          "icon": "fresh"
+        }
+      ]
+    },
+    {
+      "id": 1150,
+      "category": "Bleach",
+      "service": "Full Arms Bleaching",
+      "path": "/bleach/full-arm-bleaching/",
+      "intro": "Choose Full Arms Bleaching when you want darker arm hair to look less visible without waxing or shaving.",
+      "best_for": "Clients seeking a more even-looking arm appearance while keeping the natural hair in place.",
+      "best_icon": "bright",
+      "focus": [
+        {
+          "title": "Lighter-Looking Arm Hair",
+          "text": "Bleaching changes the visible colour of darker arm hair rather than removing it.",
+          "icon": "bright"
+        },
+        {
+          "title": "Even Arm Appearance",
+          "text": "The full-arm application supports a cleaner, more uniform-looking finish.",
+          "icon": "even"
+        }
+      ]
+    },
+    {
+      "id": 1152,
+      "category": "Bleach",
+      "service": "Full Legs Bleaching",
+      "path": "/bleach/full-legs-bleaching/",
+      "intro": "Choose Full Legs Bleaching when you want visible leg hair to appear lighter without a hair-removal treatment.",
+      "best_for": "Clients preparing their legs for holidays or events who prefer bleaching to waxing or shaving.",
+      "best_icon": "bright",
+      "focus": [
+        {
+          "title": "Lighter-Looking Leg Hair",
+          "text": "The service makes darker leg hair appear less noticeable while leaving it in place.",
+          "icon": "bright"
+        },
+        {
+          "title": "Full-Leg Coverage",
+          "text": "Application across both legs supports a consistent and even-looking result.",
+          "icon": "even"
+        }
+      ]
+    },
+    {
+      "id": 1154,
+      "category": "Bleach",
+      "service": "Full Body Back and Full Body Front Bleaching",
+      "path": "/bleach/full-back-front-bleaching/",
+      "intro": "Choose Full Body Back and Front Bleaching when you want visible torso hair to look lighter across a larger area without removal.",
+      "best_for": "Clients seeking a more uniform-looking front or back before a holiday, wedding, or special occasion.",
+      "best_icon": "bright",
+      "focus": [
+        {
+          "title": "Broad-Area Hair Lightening",
+          "text": "The selected front or back area is treated for a more consistent visible hair colour.",
+          "icon": "bright"
+        },
+        {
+          "title": "Private Body Treatment",
+          "text": "A home appointment provides privacy and convenience for larger treatment areas.",
+          "icon": "privacy"
+        }
+      ],
+      "guide_name": "Full Back and Front Bleaching"
+    },
+    {
+      "id": 1156,
+      "category": "Scrub",
+      "service": "Face Scrub",
+      "path": "/scrub/face-scrub/",
+      "intro": "Choose Face Scrub when roughness, dullness, or surface buildup calls for gentle facial exfoliation and a fresher finish.",
+      "best_for": "Clients wanting smoother-looking skin before makeup, an occasion, or as occasional routine care.",
+      "best_icon": "exfoliate",
+      "focus": [
+        {
+          "title": "Gentle Surface Exfoliation",
+          "text": "The scrub helps lift dead skin cells and everyday buildup from the skin surface.",
+          "icon": "exfoliate"
+        },
+        {
+          "title": "Smoother-Looking Finish",
+          "text": "Freshly exfoliated skin can feel softer and help makeup apply more evenly.",
+          "icon": "smooth"
+        }
+      ]
+    },
+    {
+      "id": 1158,
+      "category": "Scrub",
+      "service": "Full Arms Scrub",
+      "path": "/scrub/full-arm-scrub/",
+      "intro": "Choose Full Arms Scrub when dry, rough, or dull-looking arms need focused exfoliation from shoulder to wrist.",
+      "best_for": "Clients who want smoother-feeling arms before an event, sleeveless outfit, or regular grooming appointment.",
+      "best_icon": "exfoliate",
+      "focus": [
+        {
+          "title": "Shoulder-to-Wrist Exfoliation",
+          "text": "The scrub is worked across the full arm area for consistent surface care.",
+          "icon": "exfoliate"
+        },
+        {
+          "title": "Softer Arm Texture",
+          "text": "Removing dry surface buildup helps the arms feel smoother and refreshed.",
+          "icon": "smooth"
+        }
+      ]
+    },
+    {
+      "id": 1160,
+      "category": "Scrub",
+      "service": "Full Body Back and Full Body Front Scrub",
+      "path": "/scrub/full-back-front-scrub/",
+      "intro": "Choose Full Body Back and Front Scrub when the torso needs targeted exfoliation for roughness, dryness, or uneven-looking texture.",
+      "best_for": "Clients wanting focused front or back exfoliation before holidays, events, or body-care treatments.",
+      "best_icon": "exfoliate",
+      "focus": [
+        {
+          "title": "Targeted Torso Exfoliation",
+          "text": "The selected front or back area receives consistent scrub coverage.",
+          "icon": "exfoliate"
+        },
+        {
+          "title": "Refreshed Body Texture",
+          "text": "Surface buildup is lifted to leave the treated area feeling smoother and cleaner.",
+          "icon": "smooth"
+        }
+      ],
+      "guide_name": "Full Back and Front Scrub"
+    },
+    {
+      "id": 1162,
+      "category": "Scrub",
+      "service": "Full Body Scrub",
+      "path": "/scrub/full-body-scrub/",
+      "intro": "Choose Full Body Scrub when you want comprehensive exfoliation for dry, rough, or dull-looking skin across the body.",
+      "best_for": "Clients seeking an all-over body refresh before a holiday, event, or seasonal skincare reset.",
+      "best_icon": "exfoliate",
+      "focus": [
+        {
+          "title": "All-Over Exfoliation",
+          "text": "The treatment covers the main body areas for balanced surface smoothing.",
+          "icon": "full_body"
+        },
+        {
+          "title": "Fresh, Smooth Feel",
+          "text": "Dry surface buildup is removed to leave skin feeling cleaner and softer.",
+          "icon": "smooth"
+        }
+      ]
+    },
+    {
+      "id": 1164,
+      "category": "Scrub",
+      "service": "Full Body Scrub With Mask",
+      "path": "/scrub/full-body-scrub-with-mask/",
+      "intro": "Choose Full Body Scrub With Mask when you want all-over exfoliation followed by an added conditioning body-care step.",
+      "best_for": "Clients wanting a more complete body treatment for rough, dry, or tired-looking skin.",
+      "best_icon": "exfoliate",
+      "focus": [
+        {
+          "title": "Scrub and Mask Pairing",
+          "text": "Exfoliation is followed by a body mask for a more complete treatment sequence.",
+          "icon": "mask"
+        },
+        {
+          "title": "Conditioned Skin Finish",
+          "text": "The additional mask step supports a softer, cared-for feel after exfoliation.",
+          "icon": "soft"
+        }
+      ]
+    },
+    {
+      "id": 1084,
+      "category": "Hair",
+      "service": "Hair Cut",
+      "path": "/hair/hair-cut/",
+      "intro": "Choose Hair Cut when you need a trim, cleaner shape, or straight cut completed conveniently at home.",
+      "best_for": "Clients maintaining their current style or removing length and damaged ends without a salon visit.",
+      "best_icon": "cut",
+      "focus": [
+        {
+          "title": "Trim or Shape Choice",
+          "text": "Select a maintenance trim or a straighter shape based on your preferred result.",
+          "icon": "cut"
+        },
+        {
+          "title": "Length Confirmed First",
+          "text": "Your desired length and finish are agreed before cutting begins.",
+          "icon": "measure"
+        }
+      ]
+    },
+    {
+      "id": 1086,
+      "category": "Hair",
+      "service": "Hair Coloring",
+      "path": "/hair/hair-coloring/",
+      "intro": "Choose Hair Coloring when you need professional colour application or a focused root touch-up at home.",
+      "best_for": "Clients refreshing regrowth or applying their selected colour with professional assistance.",
+      "best_icon": "color",
+      "focus": [
+        {
+          "title": "Application or Root Touch-Up",
+          "text": "Choose the service format that matches full application or visible regrowth needs.",
+          "icon": "color"
+        },
+        {
+          "title": "Controlled Sectioning",
+          "text": "Hair is sectioned carefully to support consistent colour placement.",
+          "icon": "professional"
+        }
+      ]
+    },
+    {
+      "id": 1088,
+      "category": "Hair",
+      "service": "Blow Dry Straight",
+      "path": "/hair/blow-dry-straight/",
+      "intro": "Choose Blow Dry Straight when you want a smooth, polished finish with pricing matched to your hair length.",
+      "best_for": "Clients preparing for work, an event, or everyday styling with a sleek blow-dried result.",
+      "best_icon": "style",
+      "focus": [
+        {
+          "title": "Smooth Straight Finish",
+          "text": "Brush and airflow techniques are used to create a polished, straighter look.",
+          "icon": "style"
+        },
+        {
+          "title": "Length-Based Package",
+          "text": "Choose the package that matches short, medium, long, or extra-long hair.",
+          "icon": "measure"
+        }
+      ]
+    },
+    {
+      "id": 1090,
+      "category": "Hair",
+      "service": "Blow Dry Curl",
+      "path": "/hair/blow-dry-curl/",
+      "intro": "Choose Blow Dry Curl when you want soft movement, shaped curls, or event-ready volume without a haircut.",
+      "best_for": "Clients seeking a styled curl finish for an occasion, photos, or a polished day out.",
+      "best_icon": "curl",
+      "focus": [
+        {
+          "title": "Curl and Volume Styling",
+          "text": "Brush and airflow techniques shape movement and volume through the hair.",
+          "icon": "curl"
+        },
+        {
+          "title": "Hair-Length Options",
+          "text": "The appropriate package is selected according to your hair length.",
+          "icon": "measure"
+        }
+      ]
+    },
+    {
+      "id": 1092,
+      "category": "Hair",
+      "service": "Eyelash Lifting",
+      "path": "/hair/eyelash-lifting/",
+      "intro": "Choose Eyelash Lifting when you want natural lashes to look more lifted and defined without extensions.",
+      "best_for": "Clients who prefer an enhanced natural-lash look with less daily curling.",
+      "best_icon": "eye",
+      "focus": [
+        {
+          "title": "Natural Lash Lift",
+          "text": "Your own lashes are shaped upward to create a more open, defined appearance.",
+          "icon": "eye"
+        },
+        {
+          "title": "No Added Extensions",
+          "text": "The treatment works with natural lashes rather than attaching extension fibres.",
+          "icon": "natural"
+        }
+      ]
+    },
+    {
+      "id": 1094,
+      "category": "Hair",
+      "service": "Eyebrow Tint",
+      "path": "/hair/eyebrow-tint/",
+      "intro": "Choose Eyebrow Tint when light or uneven-looking brows need temporary colour definition and a fuller appearance.",
+      "best_for": "Clients wanting more visible brow definition without applying brow makeup every day.",
+      "best_icon": "brow",
+      "focus": [
+        {
+          "title": "Temporary Colour Definition",
+          "text": "Tint adds visible depth to lighter brow hairs for a more defined look.",
+          "icon": "color"
+        },
+        {
+          "title": "Shape Looks Fuller",
+          "text": "Darkening fine hairs can make the overall brow shape appear more complete.",
+          "icon": "brow"
+        }
+      ]
+    },
+    {
+      "id": 397,
+      "category": "Hair",
+      "service": "Henna Application",
+      "path": "/hair/henna-application/",
+      "intro": "Choose Henna Application when you prefer a plant-based colour option for visible greys and richer-looking hair tone.",
+      "best_for": "Clients who prefer henna-based colour care instead of conventional permanent dye application.",
+      "best_icon": "natural",
+      "focus": [
+        {
+          "title": "Plant-Based Colour Option",
+          "text": "Henna is applied as a naturally derived alternative for colour and grey coverage.",
+          "icon": "natural"
+        },
+        {
+          "title": "Conditioned Hair Feel",
+          "text": "The application can leave hair feeling coated, fuller, and cared for.",
+          "icon": "hair"
+        }
+      ]
+    },
+    {
+      "id": 398,
+      "category": "Hair",
+      "service": "Keratin Treatment",
+      "path": "/hair/keratin-treatment/",
+      "intro": "Choose Keratin Treatment when frizz, dryness, or difficult styling calls for a longer-lasting smoothing service.",
+      "best_for": "Clients wanting smoother, shinier, easier-to-manage hair with the required aftercare commitment.",
+      "best_icon": "smooth",
+      "focus": [
+        {
+          "title": "Frizz-Smoothing Treatment",
+          "text": "The service is designed to create a smoother surface and more manageable finish.",
+          "icon": "smooth"
+        },
+        {
+          "title": "Aftercare Matters",
+          "text": "Following the recommended wash and product guidance helps maintain the result.",
+          "icon": "aftercare"
+        }
+      ]
+    },
+    {
+      "id": 1054,
+      "category": "Manicure",
+      "service": "Hand Paraffin",
+      "path": "/manicure/hand-paraffin/",
+      "intro": "Choose Hand Paraffin when dry, rough-feeling hands need a warm conditioning treatment as part of hand care.",
+      "best_for": "Clients wanting softer-feeling hands and a relaxing add-on without changing nail length or colour.",
+      "best_icon": "hand",
+      "focus": [
+        {
+          "title": "Warm Paraffin Wrap",
+          "text": "Hands are coated and wrapped so the paraffin can provide a comforting conditioning step.",
+          "icon": "warmth"
+        },
+        {
+          "title": "Soft Hand Finish",
+          "text": "The treatment is focused on improving the feel of dry, rough skin on the hands.",
+          "icon": "soft"
+        }
+      ]
+    },
+    {
+      "id": 1056,
+      "category": "Manicure",
+      "service": "Classic Manicure",
+      "path": "/manicure/classic-manicure/",
+      "intro": "Choose Classic Manicure when nails and cuticles need tidy maintenance with your choice of no colour, polish, or French tips.",
+      "best_for": "Clients who want clean, shaped natural nails and straightforward polish options.",
+      "best_icon": "hand",
+      "focus": [
+        {
+          "title": "Natural Nail Maintenance",
+          "text": "Nails are shaped and the surrounding cuticle area is tidied for a neat finish.",
+          "icon": "nails"
+        },
+        {
+          "title": "Flexible Finish Options",
+          "text": "Choose no colour, classic polish, or a French-tip finish for the appointment.",
+          "icon": "color"
+        }
+      ]
+    },
+    {
+      "id": 1058,
+      "category": "Manicure",
+      "service": "Spa Manicure",
+      "path": "/manicure/spa-manicure/",
+      "intro": "Choose Spa Manicure when you want nail grooming combined with extra hand-care and relaxation steps.",
+      "best_for": "Clients wanting more pampering than a classic manicure while keeping natural nails neat.",
+      "best_icon": "hand",
+      "focus": [
+        {
+          "title": "Extended Hand Care",
+          "text": "The service adds more hand-focused care to the core manicure routine.",
+          "icon": "care"
+        },
+        {
+          "title": "Relaxing Nail Appointment",
+          "text": "A slower, more pampering format supports both grooming and comfort.",
+          "icon": "relax"
+        }
+      ]
+    },
+    {
+      "id": 1060,
+      "category": "Manicure",
+      "service": "Classic Nails Extension",
+      "path": "/manicure/classic-nails-extension/",
+      "intro": "Choose Classic Nails Extension when you want added nail length and a straightforward extension finish at home.",
+      "best_for": "Clients seeking an accessible extension option for longer, more defined nails.",
+      "best_icon": "nails",
+      "focus": [
+        {
+          "title": "Added Length",
+          "text": "Extensions create immediate length beyond the natural nail edge.",
+          "icon": "measure"
+        },
+        {
+          "title": "Shape Selected Together",
+          "text": "Your preferred practical length and nail shape are confirmed before application.",
+          "icon": "shape"
+        }
+      ]
+    },
+    {
+      "id": 1062,
+      "category": "Manicure",
+      "service": "Gelish Manicure",
+      "path": "/manicure/gelish-manicure/",
+      "intro": "Choose Gelish Manicure when you want glossy gel colour with more wear resistance than regular polish.",
+      "best_for": "Clients seeking neat natural nails with a cured, longer-wearing colour finish.",
+      "best_icon": "color",
+      "focus": [
+        {
+          "title": "Cured Gel Colour",
+          "text": "Gelish colour is applied in layers and cured for a glossy, set finish.",
+          "icon": "color"
+        },
+        {
+          "title": "Longer-Wearing Shine",
+          "text": "The finish is designed to resist everyday wear better than standard polish.",
+          "icon": "durable"
+        }
+      ]
+    },
+    {
+      "id": 1064,
+      "category": "Manicure",
+      "service": "French Gel Manicure",
+      "path": "/manicure/french-gel-manicure/",
+      "intro": "Choose French Gel Manicure when you want a crisp French-tip look with the shine and wear of gel colour.",
+      "best_for": "Clients who prefer a clean, classic nail design with a durable cured finish.",
+      "best_icon": "french",
+      "focus": [
+        {
+          "title": "Defined French Tips",
+          "text": "A contrasting tip is created for the recognisable French manicure look.",
+          "icon": "french"
+        },
+        {
+          "title": "Gel Finish and Shine",
+          "text": "Cured gel layers support a glossy finish and longer wear.",
+          "icon": "durable"
+        }
+      ]
+    },
+    {
+      "id": 1066,
+      "category": "Manicure",
+      "service": "Cat Eye Extensions",
+      "path": "/manicure/cat-eye-extensions/",
+      "intro": "Choose Cat Eye Extensions when you want added length with a reflective magnetic-effect nail design.",
+      "best_for": "Clients seeking statement extensions with a shifting cat-eye highlight rather than a plain colour.",
+      "best_icon": "sparkle",
+      "focus": [
+        {
+          "title": "Magnetic Cat-Eye Effect",
+          "text": "Reflective pigment is shaped to create the signature moving light effect.",
+          "icon": "sparkle"
+        },
+        {
+          "title": "Length and Statement Style",
+          "text": "Extensions combine added length with an eye-catching finished design.",
+          "icon": "nails"
+        }
+      ]
+    },
+    {
+      "id": 1068,
+      "category": "Manicure",
+      "service": "Builder Gel Nails",
+      "path": "/manicure/builder-gel-nails/",
+      "intro": "Choose Builder Gel Nails when natural nails need added structure, an overlay, or supported extension length.",
+      "best_for": "Clients wanting reinforcement and shape with builder gel or BIAB options.",
+      "best_icon": "strength",
+      "focus": [
+        {
+          "title": "Structured Gel Support",
+          "text": "Builder gel adds a stronger layer that supports the natural nail shape.",
+          "icon": "strength"
+        },
+        {
+          "title": "Overlay or Extension",
+          "text": "Choose reinforcement over natural nails or added length with extensions.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 395,
+      "category": "Manicure",
+      "service": "Gel Nail Extensions",
+      "path": "/manicure/gel-nail-extensions/",
+      "intro": "Choose Gel Nail Extensions when you want added length with a lightweight, glossy gel-based enhancement.",
+      "best_for": "Clients seeking shaped extensions with a polished appearance and flexible design options.",
+      "best_icon": "nails",
+      "focus": [
+        {
+          "title": "Gel-Based Added Length",
+          "text": "Extensions build length and shape beyond the natural nails using a gel system.",
+          "icon": "measure"
+        },
+        {
+          "title": "Glossy Custom Finish",
+          "text": "Shape, length, and colour can be selected around your preferred style.",
+          "icon": "color"
+        }
+      ]
+    },
+    {
+      "id": 396,
+      "category": "Manicure",
+      "service": "Acrylic Nail",
+      "path": "/manicure/acrylic-nail/",
+      "intro": "Choose Acrylic Nail when you want strong extensions, defined length, or a bold custom nail shape.",
+      "best_for": "Clients seeking durable structure for longer or more dramatic nail styles.",
+      "best_icon": "strength",
+      "focus": [
+        {
+          "title": "Strong Acrylic Structure",
+          "text": "The acrylic system creates a firm enhancement over or beyond the natural nail.",
+          "icon": "durable"
+        },
+        {
+          "title": "Bold Length and Shape",
+          "text": "Choose from practical to dramatic lengths and shapes according to your style.",
+          "icon": "shape"
+        }
+      ],
+      "guide_name": "Acrylic Nail Extensions"
+    },
+    {
+      "id": 1381,
+      "category": "Manicure",
+      "service": "French Gel Nail Extensions",
+      "path": "/manicure/french-gel-nail-extensions/",
+      "intro": "Choose French Gel Nail Extensions when you want added gel length finished with a clean, defined French-tip design.",
+      "best_for": "Clients combining extension length with a classic French look and glossy gel finish.",
+      "best_icon": "french",
+      "focus": [
+        {
+          "title": "Extension Plus French Tips",
+          "text": "Added length is shaped first, then completed with the signature contrasting tips.",
+          "icon": "french"
+        },
+        {
+          "title": "Polished Gel Finish",
+          "text": "Cured gel layers create shine and help the detailed design wear well.",
+          "icon": "durable"
+        }
+      ]
+    },
+    {
+      "id": 1070,
+      "category": "Pedicure",
+      "service": "Foot Paraffin",
+      "path": "/pedicure/foot-paraffin/",
+      "intro": "Choose Foot Paraffin when dry, rough-feeling feet need a warm conditioning treatment without a full pedicure.",
+      "best_for": "Clients wanting softer-feeling feet as a focused treatment or pedicure add-on.",
+      "best_icon": "foot",
+      "focus": [
+        {
+          "title": "Warm Paraffin Wrap",
+          "text": "Feet are coated and wrapped for a comforting conditioning step.",
+          "icon": "warmth"
+        },
+        {
+          "title": "Soft Foot Finish",
+          "text": "The treatment focuses on improving the feel of dry, rough skin.",
+          "icon": "soft"
+        }
+      ]
+    },
+    {
+      "id": 1072,
+      "category": "Pedicure",
+      "service": "Spa Pedicure",
+      "path": "/pedicure/spa-pedicure/",
+      "intro": "Choose Spa Pedicure when you want nail grooming combined with extended foot care and relaxation.",
+      "best_for": "Clients seeking a more pampering foot-care appointment than a classic pedicure.",
+      "best_icon": "foot",
+      "focus": [
+        {
+          "title": "Extended Foot Care",
+          "text": "The service adds more skin and comfort-focused steps to core nail grooming.",
+          "icon": "care"
+        },
+        {
+          "title": "Relaxing Pedi Ritual",
+          "text": "A slower appointment supports neat nails, refreshed feet, and time to unwind.",
+          "icon": "relax"
+        }
+      ]
+    },
+    {
+      "id": 1074,
+      "category": "Pedicure",
+      "service": "Foot Scrub",
+      "path": "/pedicure/foot-scrub-pedicure/",
+      "intro": "Choose Foot Scrub when dry, rough-feeling feet need focused exfoliation and a smoother finish.",
+      "best_for": "Clients wanting surface smoothing without booking a complete pedicure service.",
+      "best_icon": "foot",
+      "focus": [
+        {
+          "title": "Targeted Foot Exfoliation",
+          "text": "Scrub is applied to areas with dry surface buildup and rough texture.",
+          "icon": "exfoliate"
+        },
+        {
+          "title": "Smoother-Feeling Feet",
+          "text": "Removing surface buildup leaves the feet feeling cleaner and refreshed.",
+          "icon": "smooth"
+        }
+      ]
+    },
+    {
+      "id": 1076,
+      "category": "Pedicure",
+      "service": "Classic Pedicure",
+      "path": "/pedicure/classic-pedicure/",
+      "intro": "Choose Classic Pedicure when toenails and cuticles need tidy maintenance with your preferred polish finish.",
+      "best_for": "Clients wanting clean, shaped natural toenails with no colour, regular colour, French tips, or polish change.",
+      "best_icon": "foot",
+      "focus": [
+        {
+          "title": "Essential Nail Grooming",
+          "text": "Toenails are shaped and the surrounding cuticle area is tidied for a neat result.",
+          "icon": "nails"
+        },
+        {
+          "title": "Choose Your Finish",
+          "text": "Select the colour, French, no-colour, or polish-change option that suits you.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 1078,
+      "category": "Pedicure",
+      "service": "Gel Pedicure",
+      "path": "/pedicure/gel-pedicure/",
+      "intro": "Choose Gel Pedicure when you want groomed toenails with glossy, cured gel colour or a French gel finish.",
+      "best_for": "Clients seeking a longer-wearing toenail colour with Gelish and French gel options.",
+      "best_icon": "color",
+      "focus": [
+        {
+          "title": "Cured Gel Colour",
+          "text": "Gel colour is applied and cured for a glossy, set toenail finish.",
+          "icon": "color"
+        },
+        {
+          "title": "Flexible Gel Options",
+          "text": "Choose colour-only application, Gelish pedicure, or French gel styling.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 1080,
+      "category": "Pedicure",
+      "service": "Callus Treatment",
+      "path": "/pedicure/callus-pedicure/",
+      "intro": "Choose Callus Treatment when hard, rough areas on the feet need more focused care than a standard pedicure.",
+      "best_for": "Clients with visible or uncomfortable dry callus buildup seeking professional foot smoothing.",
+      "best_icon": "foot",
+      "focus": [
+        {
+          "title": "Focused Callus Care",
+          "text": "The appointment concentrates on hardened, rough areas according to their condition.",
+          "icon": "target"
+        },
+        {
+          "title": "Treatment or Pedi Option",
+          "text": "Choose the dedicated treatment or the callus pedicure package with polish.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 1082,
+      "category": "Kids",
+      "service": "Kids Nail Services",
+      "path": "/kids/",
+      "intro": "Choose Kids Nail Services for age-appropriate nail grooming, polish, or gel options in a familiar home setting.",
+      "best_for": "Families wanting a simple, supervised manicure or pedicure experience for children.",
+      "best_icon": "kids",
+      "focus": [
+        {
+          "title": "Kid-Friendly Appointment",
+          "text": "The service is kept simple, comfortable, and suited to the selected child package.",
+          "icon": "kids"
+        },
+        {
+          "title": "Several Nail Options",
+          "text": "Choose polish application, kids mani-pedi, gel mani, or gel pedi.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 1096,
+      "category": "Waxing",
+      "service": "Upper Lip Waxing",
+      "path": "/waxing/upper-lip-waxing/",
+      "intro": "Choose Upper Lip Waxing when you want quick removal of visible hair above the lip with your preferred wax type.",
+      "best_for": "Clients wanting a clean upper-lip finish that lasts longer than surface shaving.",
+      "best_icon": "wax",
+      "focus": [
+        {
+          "title": "Small-Area Precision",
+          "text": "Wax is applied carefully around the upper-lip area for focused hair removal.",
+          "icon": "precision"
+        },
+        {
+          "title": "Three Wax Choices",
+          "text": "Select Normal, Rica, or Hard Wax according to preference and availability.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 1098,
+      "category": "Waxing",
+      "service": "Eyebrow Waxing",
+      "path": "/waxing/eyebrows-waxing/",
+      "intro": "Choose Eyebrow Waxing when you want fast cleanup around the brow shape using a wax option suited to the area.",
+      "best_for": "Clients who prefer waxing for visible stray hairs and a defined brow outline.",
+      "best_icon": "brow",
+      "focus": [
+        {
+          "title": "Brow-Area Cleanup",
+          "text": "Hair is removed around the agreed brow outline while preserving the main shape.",
+          "icon": "brow"
+        },
+        {
+          "title": "Wax Type Selection",
+          "text": "Normal, Rica, and Hard Wax packages provide a choice of product type.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 1100,
+      "category": "Waxing",
+      "service": "Chin Waxing",
+      "path": "/waxing/chin-waxing/",
+      "intro": "Choose Chin Waxing when visible chin hair needs focused removal and a smoother-looking finish.",
+      "best_for": "Clients wanting efficient hair removal across the chin without treating the full face.",
+      "best_icon": "wax",
+      "focus": [
+        {
+          "title": "Focused Chin Coverage",
+          "text": "The service concentrates on the chin area and its visible hair growth.",
+          "icon": "precision"
+        },
+        {
+          "title": "Normal, Rica or Hard Wax",
+          "text": "Choose the available wax type that best matches your preference.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 1102,
+      "category": "Waxing",
+      "service": "Underarms Waxing",
+      "path": "/waxing/underarms-waxing/",
+      "intro": "Choose Underarms Waxing when you want underarm hair removed from the root for a smoother result.",
+      "best_for": "Clients wanting longer-lasting underarm smoothness than shaving can provide.",
+      "best_icon": "wax",
+      "focus": [
+        {
+          "title": "Complete Underarm Coverage",
+          "text": "Both underarm areas are treated carefully for an even hair-removal result.",
+          "icon": "even"
+        },
+        {
+          "title": "Wax Options Available",
+          "text": "Select Normal, Rica, or Hard Wax for your appointment.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 1104,
+      "category": "Waxing",
+      "service": "Chest Waxing",
+      "path": "/waxing/chest-waxing/",
+      "intro": "Choose Chest Waxing when you want visible chest hair removed across a broader upper-body area.",
+      "best_for": "Clients seeking a cleaner, smoother-looking chest without frequent shaving.",
+      "best_icon": "wax",
+      "focus": [
+        {
+          "title": "Broad Chest Coverage",
+          "text": "The treatment is planned across the chest area for consistent hair removal.",
+          "icon": "full_body"
+        },
+        {
+          "title": "Choice of Wax Type",
+          "text": "Normal, Rica, and Hard Wax packages support different preferences.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 1106,
+      "category": "Waxing",
+      "service": "Stomach Waxing",
+      "path": "/waxing/stomach-waxing/",
+      "intro": "Choose Stomach Waxing when you want focused hair removal across the half or full stomach area.",
+      "best_for": "Clients seeking a smoother-looking midsection with a package matched to the required coverage.",
+      "best_icon": "wax",
+      "focus": [
+        {
+          "title": "Half or Full Stomach",
+          "text": "Select the coverage area that matches where you want hair removed.",
+          "icon": "options"
+        },
+        {
+          "title": "Three Wax Types",
+          "text": "Normal, Rica, and Hard Wax options are available for each coverage size.",
+          "icon": "wax"
+        }
+      ]
+    },
+    {
+      "id": 1110,
+      "category": "Waxing",
+      "service": "Face Waxing",
+      "path": "/waxing/face-waxing/",
+      "intro": "Choose Face Waxing when you want broader facial hair removal and a smooth surface for skincare or makeup.",
+      "best_for": "Clients treating several facial areas in one appointment rather than booking individual zones.",
+      "best_icon": "face",
+      "focus": [
+        {
+          "title": "Full-Face Coverage",
+          "text": "The service treats the agreed facial areas carefully within one appointment.",
+          "icon": "face"
+        },
+        {
+          "title": "Wax Choice for the Face",
+          "text": "Normal, Rica, and Hard Wax packages let you select the preferred product type.",
+          "icon": "options"
+        }
+      ],
+      "guide_name": "Full Face Waxing"
+    },
+    {
+      "id": 1112,
+      "category": "Waxing",
+      "service": "Arms Waxing",
+      "path": "/waxing/arms-waxing/",
+      "intro": "Choose Arms Waxing when you want half-arm or full-arm hair removal with consistent coverage.",
+      "best_for": "Clients wanting smoother arms with a package matched to the required treatment area.",
+      "best_icon": "wax",
+      "focus": [
+        {
+          "title": "Half or Full Arms",
+          "text": "Choose the coverage level that matches your grooming needs.",
+          "icon": "options"
+        },
+        {
+          "title": "Consistent Arm Finish",
+          "text": "Both selected arm areas are treated for a balanced, smoother-looking result.",
+          "icon": "even"
+        }
+      ]
+    },
+    {
+      "id": 1116,
+      "category": "Waxing",
+      "service": "Legs Waxing",
+      "path": "/waxing/legs-waxing/",
+      "intro": "Choose Legs Waxing when you want half-leg or full-leg hair removal with longer-lasting smoothness than shaving.",
+      "best_for": "Clients preparing for everyday grooming, holidays, or events with a package matched to coverage.",
+      "best_icon": "wax",
+      "focus": [
+        {
+          "title": "Half or Full Legs",
+          "text": "Select the lower-leg or full-leg package according to the area required.",
+          "icon": "options"
+        },
+        {
+          "title": "Even Leg Coverage",
+          "text": "The selected areas are treated consistently on both legs.",
+          "icon": "even"
+        }
+      ]
+    },
+    {
+      "id": 1120,
+      "category": "Waxing",
+      "service": "Bikini Waxing",
+      "path": "/waxing/bikini-waxing/",
+      "intro": "Choose Bikini Waxing when you want private, focused hair removal around the bikini line at home.",
+      "best_for": "Clients who value privacy and want a tidy bikini-line result with a selected wax type.",
+      "best_icon": "privacy",
+      "focus": [
+        {
+          "title": "Privacy-Focused Setup",
+          "text": "The appointment is handled discreetly in your preferred private space.",
+          "icon": "privacy"
+        },
+        {
+          "title": "Wax Type Choice",
+          "text": "Normal, Rica, and Hard Wax packages are available for the treatment.",
+          "icon": "options"
+        }
+      ]
+    },
+    {
+      "id": 1122,
+      "category": "Waxing",
+      "service": "Full Body Waxing",
+      "path": "/waxing/full-body-waxing/",
+      "intro": "Choose Full Body Waxing when you want several body areas completed in one appointment, with or without bikini coverage.",
+      "best_for": "Clients seeking comprehensive hair removal and the convenience of one private home booking.",
+      "best_icon": "full_body",
+      "focus": [
+        {
+          "title": "With or Without Bikini",
+          "text": "Choose the full-body package that matches your preferred coverage and privacy needs.",
+          "icon": "options"
+        },
+        {
+          "title": "One Complete Appointment",
+          "text": "Multiple body areas are organised into one coordinated treatment session.",
+          "icon": "full_body"
+        }
+      ]
+    },
+    {
+      "id": 1126,
+      "category": "Threading",
+      "service": "Chin Threading",
+      "path": "/threading/chin/",
+      "intro": "Choose Chin Threading when you want precise removal of visible chin hair without wax.",
+      "best_for": "Clients who prefer thread-based facial hair removal on one focused area.",
+      "best_icon": "thread",
+      "focus": [
+        {
+          "title": "Focused Chin Precision",
+          "text": "Threading targets individual rows of hair across the chin area.",
+          "icon": "precision"
+        },
+        {
+          "title": "No Wax Product",
+          "text": "Hair is removed with thread, without applying wax to the skin.",
+          "icon": "thread"
+        }
+      ]
+    },
+    {
+      "id": 1128,
+      "category": "Threading",
+      "service": "Upper Lip Threading",
+      "path": "/threading/upper-lip/",
+      "intro": "Choose Upper Lip Threading when you want precise removal of visible hair above the lip without wax.",
+      "best_for": "Clients who prefer a quick thread-based option for this small facial area.",
+      "best_icon": "thread",
+      "focus": [
+        {
+          "title": "Upper-Lip Precision",
+          "text": "Threading targets the narrow upper-lip area with controlled movements.",
+          "icon": "precision"
+        },
+        {
+          "title": "Clean Product-Free Method",
+          "text": "The technique uses thread rather than wax or depilatory products.",
+          "icon": "thread"
+        }
+      ]
+    },
+    {
+      "id": 1130,
+      "category": "Threading",
+      "service": "Lower Lip Threading",
+      "path": "/threading/lower-lip/",
+      "intro": "Choose Lower Lip Threading when fine visible hair below the lip needs precise, wax-free removal.",
+      "best_for": "Clients treating the small lower-lip area separately from a full-face service.",
+      "best_icon": "thread",
+      "focus": [
+        {
+          "title": "Small-Area Accuracy",
+          "text": "Threading gives controlled access to fine hair around the lower-lip area.",
+          "icon": "precision"
+        },
+        {
+          "title": "Thread-Only Technique",
+          "text": "No wax product is applied during the hair-removal process.",
+          "icon": "thread"
+        }
+      ]
+    },
+    {
+      "id": 1132,
+      "category": "Threading",
+      "service": "Neck Threading",
+      "path": "/threading/neck/",
+      "intro": "Choose Neck Threading when visible fine hair around the neck needs a clean, defined finish without wax.",
+      "best_for": "Clients wanting focused thread-based grooming below the jaw or around the neckline.",
+      "best_icon": "thread",
+      "focus": [
+        {
+          "title": "Defined Neckline",
+          "text": "Threading follows the agreed neck area for a tidier visible outline.",
+          "icon": "precision"
+        },
+        {
+          "title": "Wax-Free Hair Removal",
+          "text": "The service uses thread rather than applying wax across the neck.",
+          "icon": "thread"
+        }
+      ]
+    },
+    {
+      "id": 1134,
+      "category": "Threading",
+      "service": "Forehead Threading",
+      "path": "/threading/forehead/",
+      "intro": "Choose Forehead Threading when fine hair around the forehead or hairline needs precise cleanup.",
+      "best_for": "Clients wanting a cleaner forehead outline without booking a full-face threading service.",
+      "best_icon": "thread",
+      "focus": [
+        {
+          "title": "Hairline-Area Control",
+          "text": "Threading removes visible fine hair while respecting the agreed forehead outline.",
+          "icon": "precision"
+        },
+        {
+          "title": "Focused Single Area",
+          "text": "Only the forehead zone is treated for a quick, specific appointment.",
+          "icon": "target"
+        }
+      ]
+    },
+    {
+      "id": 1136,
+      "category": "Threading",
+      "service": "Side Locks Threading",
+      "path": "/threading/side-locks/",
+      "intro": "Choose Side Locks Threading when facial side areas need precise cleanup and a more defined outline.",
+      "best_for": "Clients wanting thread-based grooming along the side-lock area without full-face treatment.",
+      "best_icon": "thread",
+      "focus": [
+        {
+          "title": "Side-Area Definition",
+          "text": "Threading follows the agreed side-lock line for a tidy, balanced result.",
+          "icon": "precision"
+        },
+        {
+          "title": "Controlled Symmetry",
+          "text": "Both sides are checked together to support an even-looking outline.",
+          "icon": "even"
+        }
+      ]
+    },
+    {
+      "id": 1138,
+      "category": "Threading",
+      "service": "Eyebrows Threading",
+      "path": "/threading/eyebrows/",
+      "intro": "Choose Eyebrows Threading when brows need precise cleanup, definition, or reshaping without wax.",
+      "best_for": "Clients who prefer thread-based brow grooming with close control around the shape.",
+      "best_icon": "brow",
+      "focus": [
+        {
+          "title": "Shape Agreed First",
+          "text": "Your preferred brow thickness and outline are discussed before threading begins.",
+          "icon": "brow"
+        },
+        {
+          "title": "Precise Hair Removal",
+          "text": "Threading removes fine rows of hair for a clean, defined brow edge.",
+          "icon": "precision"
+        }
+      ]
+    },
+    {
+      "id": 1140,
+      "category": "Threading",
+      "service": "Full Face Threading",
+      "path": "/threading/full-face-without-eyebrows/",
+      "intro": "Choose Full Face Threading when several facial areas need thread-based hair removal in one appointment.",
+      "best_for": "Clients wanting broader facial coverage with the choice to include or exclude eyebrow shaping.",
+      "best_icon": "face",
+      "focus": [
+        {
+          "title": "With or Without Eyebrows",
+          "text": "Select the package that matches whether brow shaping is part of the service.",
+          "icon": "options"
+        },
+        {
+          "title": "Coordinated Face Coverage",
+          "text": "Multiple agreed facial areas are completed within one organised appointment.",
+          "icon": "face"
+        }
+      ]
+    }
+  ]
+}

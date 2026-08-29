@@ -1,0 +1,37 @@
+{
+  "revision": "2026-08-27-threading-services",
+  "site": "https://homesalon.ae",
+  "menu_id": 12,
+  "hub_id": 67,
+  "hub_path": "/threading/",
+  "hub_minimum_cards": 8,
+  "hub_package_prefix": true,
+  "featured_package": "Chin Threading",
+  "services": [
+    { "id": 1126, "name": "Chin Threading", "path": "/threading/chin/", "packages": [
+      { "name": "Chin Threading", "price": "AED 24", "most_popular": true }
+    ] },
+    { "id": 1128, "name": "Upper Lip Threading", "path": "/threading/upper-lip/", "packages": [
+      { "name": "Upper Lip Threading", "price": "AED 24" }
+    ] },
+    { "id": 1130, "name": "Lower Lip Threading", "path": "/threading/lower-lip/", "packages": [
+      { "name": "Lower Lip Threading", "price": "AED 24" }
+    ] },
+    { "id": 1132, "name": "Neck Threading", "path": "/threading/neck/", "packages": [
+      { "name": "Neck Threading", "price": "AED 30" }
+    ] },
+    { "id": 1134, "name": "Forehead Threading", "path": "/threading/forehead/", "packages": [
+      { "name": "Forehead Threading", "price": "AED 30" }
+    ] },
+    { "id": 1136, "name": "Side Locks Threading", "path": "/threading/side-locks/", "packages": [
+      { "name": "Side Locks Threading", "price": "AED 30" }
+    ] },
+    { "id": 1138, "name": "Eyebrows Threading", "path": "/threading/eyebrows/", "packages": [
+      { "name": "Eyebrows Threading", "price": "AED 30" }
+    ] },
+    { "id": 1140, "name": "Full Face Threading", "path": "/threading/full-face-without-eyebrows/", "packages": [
+      { "name": "Full Face Without Eyebrows", "price": "AED 96" },
+      { "name": "Full Face With Eyebrows", "price": "AED 120" }
+    ] }
+  ]
+}
